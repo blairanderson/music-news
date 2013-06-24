@@ -1,0 +1,8 @@
+%p#notice= notice
+
+%h4
+  = @submission.title
+%p
+  = @submission.body
+%p
+  = time_ago_in_words @submission.created_at

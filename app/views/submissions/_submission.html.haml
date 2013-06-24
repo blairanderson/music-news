@@ -1,0 +1,11 @@
+.row-fluid
+  .span12
+    .well
+      .div
+        %i.pull-left.icon-heart
+
+      .div
+        = "#{submission_counter + 1}. <b>#{link_to submission.title, submission}</b> #{submission.body}".html_safe
+        %br
+        = "0 points by seainhd, #{time_ago_in_words(submission.created_at)} ago 0 comments".html_safe
+%hr

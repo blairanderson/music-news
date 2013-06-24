@@ -1,0 +1,51 @@
+= simple_form_for @submission do |f|
+  - if @submission.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@submission.errors.count, "error")} prohibited this submission from being saved:"
+      %ul
+        - @submission.errors.full_messages.each do |msg|
+          %li= msg
+
+  = f.label "Band/Artist Name"
+  %br
+  = f.input_field :title
+  %br
+  = label_tag :youtube_url
+  = text_field_tag :youtube_url, nil, size: 50
+  %br
+  = label_tag :soundcloud_url
+  = text_field_tag :soundcloud_url, nil, size: 50
+  %br
+  = label_tag :bandcamp_url
+  = text_field_tag :bandcamp_url, nil, size: 50
+  %br
+  = f.label "BIO"
+  %br
+  = f.input_field :body, {cols: 70, rows: 10 }
+  %br
+  = f.button :submit
+
+:javascript
+  $.validator.addMethod("youtubeVideo", function(value, element) {
+    var p = /^(?:https?:\/\/)?(www\.youtube\.com|youtu\.be)\/(?=.*((\w|-){11}))(?:\S+)?$/;
+    return (value.match(p)) ? true : false;
+  }, "please match format http://www.youtube.com/watch?v=abcdefghijk");
+
+  $.validator.addMethod("soundcloudSong", function(value, element) {
+    var reg = /^(?:https?:\/\/)?(soundcloud\.com|snd\.sc)\/.*/;
+    return (value.match(reg)) ? true : false;
+  }, "please match format http://soundcloud.com/artist/song OR http://snd.sc/12TJhC8");
+
+  $.validator.addMethod("bandcampSong", function(value, element) {
+      var song = /^http:\/\/.*\.bandcamp.com\/track\/\S+\S*/;
+      return (value.match(song)) ? true : false;
+    }, "please match format http://artistname.bandcamp.com/track/track-name");
+
+  $("#new_submission").validate({
+    rules: {
+      submission_title: {required: true},
+      youtube_url: {required: true, youtubeVideo: true},
+      soundcloud_url: {required: true, soundcloudSong: true},
+      bandcamp_url: {required: true, bandcampSong: true}
+    }
+  });
