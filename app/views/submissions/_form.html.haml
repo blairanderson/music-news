@@ -11,13 +11,16 @@
   = f.input_field :title
   %br
   = label_tag :youtube_url
-  = text_field_tag :youtube_url, nil, size: 50
+  %br
+  = text_field_tag :youtube_url, nil, id: "youtube-video-1", class: "youtube-video" , size: 50
   %br
   = label_tag :soundcloud_url
-  = text_field_tag :soundcloud_url, nil, size: 50
+  %br
+  = text_field_tag :soundcloud_url, nil, id: "soundcloud-song-1", class: "soundcloud-song", size: 50
   %br
   = label_tag :bandcamp_url
-  = text_field_tag :bandcamp_url, nil, size: 50
+  %br
+  = text_field_tag :bandcamp_url, nil, id: "bandcamp-song-1", class: "bandcamp-song", size: 50
   %br
   = f.label "BIO"
   %br
@@ -26,6 +29,13 @@
   = f.button :submit
 
 :javascript
+  mybutton=document.createElement("BUTTON");
+
+  function myOnClick(e) {
+    alert('Hello');
+  }
+  mybutton.onclick=myOnClick;
+  
   $.validator.addMethod("youtubeVideo", function(value, element) {
     var p = /^(?:https?:\/\/)?(www\.youtube\.com|youtu\.be)\/(?=.*((\w|-){11}))(?:\S+)?$/;
     return (value.match(p)) ? true : false;
@@ -44,8 +54,20 @@
   $("#new_submission").validate({
     rules: {
       submission_title: {required: true},
-      youtube_url: {required: true, youtubeVideo: true},
-      soundcloud_url: {required: true, soundcloudSong: true},
-      bandcamp_url: {required: true, bandcampSong: true}
+      submission_body: {required: true}
     }
+  });
+  $(".youtube-video").rules("add", { 
+    required: false,  
+    youtubeVideo: true
+  });
+
+  $(".soundcloud-song").rules("add", { 
+    required: false,  
+    soundcloudSong: true
+  });
+
+  $(".bandcamp-song").rules("add", { 
+    required: false,  
+    bandcampSong: true
   });
