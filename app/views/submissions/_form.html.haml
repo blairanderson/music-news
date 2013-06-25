@@ -9,15 +9,18 @@
   = f.label "Band/Artist Name"
   %br
   = f.input_field :title
+
   %br
   = label_tag :youtube_url
   %br
   = text_field_tag :youtube_url, nil, id: "youtube-video-1", class: "youtube-video" , size: 50
   %br
+
   = label_tag :soundcloud_url
   %br
   = text_field_tag :soundcloud_url, nil, id: "soundcloud-song-1", class: "soundcloud-song", size: 50
   %br
+
   = label_tag :bandcamp_url
   %br
   = text_field_tag :bandcamp_url, nil, id: "bandcamp-song-1", class: "bandcamp-song", size: 50
