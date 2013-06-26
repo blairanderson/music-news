@@ -7,6 +7,7 @@ gem 'thin'
 gem 'simple_form'
 gem 'haml-rails'
 gem 'haml'
+gem 'newrelic_rpm'
 
 group :production do 
   gem 'pg'
