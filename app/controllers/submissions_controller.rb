@@ -22,11 +22,11 @@ class SubmissionsController < ApplicationController
   # POST /submissions
   # POST /submissions.json
   def create
-    fail
     @submission = Submission.new(submission_params)
 
     respond_to do |format|
       if @submission.save
+        # send these somewhere attachment_params
         format.html { redirect_to @submission, notice: 'Submission was successfully created.' }
         format.json { render action: 'show', status: :created, location: @submission }
       else
@@ -69,5 +69,13 @@ class SubmissionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def submission_params
       params.require(:submission).permit(:title, :body, :user_id)
+    end
+
+    def attachment_params
+      items = {}
+      items[:youtube]     = params[:youtube]
+      items[:soundcloud]  = params[:soundcloud]
+      items[:bandcamp]    = params[:bandcamp]
+      items
     end
 end

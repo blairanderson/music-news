@@ -37,12 +37,13 @@
   $(document).ready(function() {
     $('label.add').click(function() {
       var target = $(this).next('input')
-      var fieldClass = target.attr('class').replace(" error",'');
+      var fieldClass = target.attr('class').replace(" error",'').replace(" valid",'');
       console.log(fieldClass);
       var fieldCount = $('.' + fieldClass).length + 1;
       var fieldId = fieldClass + "-" + fieldCount;
       var fieldName = fieldClass + '[' + fieldCount + ']';
       var newField = target.clone().attr("class", fieldClass).attr("name", fieldName).attr("id", fieldId);
+      newField.val('');
       target.after(newField);
       // currently inserting in this location is broken if the validation error is showing
       target.after("<br>");
