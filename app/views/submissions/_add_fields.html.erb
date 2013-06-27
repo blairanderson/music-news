@@ -1,0 +1,51 @@
+<script type="text/javascript">
+  $.validator.addMethod("youtubeVideo", function(value, element) {
+    var p = /^(?:https?:\/\/)?(www\.youtube\.com|youtu\.be)\/(?=.*((\w|-){11}))(?:\S+)?$/;
+    return (value.match(p)) || value === "" ? true : false;
+  }, "please match format http://www.youtube.com/watch?v=abcdefghijk");
+
+  $.validator.addMethod("soundcloudSong", function(value, element) {
+    var reg = /^(?:https?:\/\/)?(soundcloud\.com|snd\.sc)\/.*/;
+    return (value.match(reg)) || value === ""  ? true : false;
+  }, "please match format http://soundcloud.com/artist/song OR http://snd.sc/12TJhC8");
+
+  $.validator.addMethod("bandcampSong", function(value, element) {
+      var song = /^http:\/\/.*\.bandcamp.com\/track\/\S+\S*/;
+      return (value.match(song)) || value === ""  ? true : false;
+    }, "please match format http://artistname.bandcamp.com/track/track-name");
+
+  $("#new_submission").validate({
+    rules: {
+      submission_title: {required: true},
+      submission_body: {required: true}
+    }
+  });
+  $(".youtube").rules("add", { 
+    required: false,  
+    youtubeVideo: true
+  });
+
+  $(".soundcloud").rules("add", { 
+    required: false,  
+    soundcloudSong: true
+  });
+
+  $(".bandcamp").rules("add", { 
+    required: false,  
+    bandcampSong: true
+  });
+  $(document).ready(function() {
+    $('label.add').click(function() {
+      var target = $(this).next('input')
+      var fieldClass = target.attr('class').replace(" error",'');
+      console.log(fieldClass);
+      var fieldCount = $('.' + fieldClass).length + 1;
+      var fieldId = fieldClass + "-" + fieldCount;
+      var fieldName = fieldClass + '[' + fieldCount + ']';
+      var newField = target.clone().attr("class", fieldClass).attr("name", fieldName).attr("id", fieldId);
+      target.after(newField);
+      // currently inserting in this location is broken if the validation error is showing
+      target.after("<br>");
+    });
+});
+</script>

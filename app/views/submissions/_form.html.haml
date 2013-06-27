@@ -10,67 +10,24 @@
   %br
   = f.input_field :title
 
-  %br
-  = label_tag :youtube_url
-  %br
-  = text_field_tag :youtube_url, nil, id: "youtube-video-1", class: "youtube-video" , size: 50
-  %br
-
-  = label_tag :soundcloud_url
-  %br
-  = text_field_tag :soundcloud_url, nil, id: "soundcloud-song-1", class: "soundcloud-song", size: 50
-  %br
-
-  = label_tag :bandcamp_url
-  %br
-  = text_field_tag :bandcamp_url, nil, id: "bandcamp-song-1", class: "bandcamp-song", size: 50
-  %br
-  = f.label "BIO"
-  %br
-  = f.input_field :body, {cols: 70, rows: 10 }
+  %p
+    = label_tag :youtube_url, nil,  class: "add"
+    = fields_for :youtube do |youtube|
+      = youtube.text_field 1, id: "youtube-1", class: "youtube" , size: 50
+  %p
+    = label_tag :soundcloud_url, nil,  class: "add"
+    = fields_for :soundcloud do |soundcloud|
+      = soundcloud.text_field 1, id: "soundcloud-1", class: "soundcloud", size: 50
+  %p
+    = label_tag :bandcamp_url, nil,  class: "add"
+    = fields_for :bandcamp do |bandcamp|
+      = bandcamp.text_field 1, id: "bandcamp-1", class: "bandcamp", size: 50
+  %p
+    = f.label "BIO"
+    %br
+    = f.input_field :body, {cols: 70, rows: 10 }
   %br
   = f.button :submit
 
-:javascript
-  mybutton=document.createElement("BUTTON");
 
-  function myOnClick(e) {
-    alert('Hello');
-  }
-  mybutton.onclick=myOnClick;
-  
-  $.validator.addMethod("youtubeVideo", function(value, element) {
-    var p = /^(?:https?:\/\/)?(www\.youtube\.com|youtu\.be)\/(?=.*((\w|-){11}))(?:\S+)?$/;
-    return (value.match(p)) ? true : false;
-  }, "please match format http://www.youtube.com/watch?v=abcdefghijk");
-
-  $.validator.addMethod("soundcloudSong", function(value, element) {
-    var reg = /^(?:https?:\/\/)?(soundcloud\.com|snd\.sc)\/.*/;
-    return (value.match(reg)) ? true : false;
-  }, "please match format http://soundcloud.com/artist/song OR http://snd.sc/12TJhC8");
-
-  $.validator.addMethod("bandcampSong", function(value, element) {
-      var song = /^http:\/\/.*\.bandcamp.com\/track\/\S+\S*/;
-      return (value.match(song)) ? true : false;
-    }, "please match format http://artistname.bandcamp.com/track/track-name");
-
-  $("#new_submission").validate({
-    rules: {
-      submission_title: {required: true},
-      submission_body: {required: true}
-    }
-  });
-  $(".youtube-video").rules("add", { 
-    required: false,  
-    youtubeVideo: true
-  });
-
-  $(".soundcloud-song").rules("add", { 
-    required: false,  
-    soundcloudSong: true
-  });
-
-  $(".bandcamp-song").rules("add", { 
-    required: false,  
-    bandcampSong: true
-  });
+= render partial: "add_fields"
