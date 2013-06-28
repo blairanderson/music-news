@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130622003532) do
+ActiveRecord::Schema.define(version: 20130628212754) do
 
   create_table "submissions", force: true do |t|
     t.string   "title"
@@ -22,5 +22,18 @@ ActiveRecord::Schema.define(version: 20130622003532) do
   end
 
   add_index "submissions", ["user_id"], name: "index_submissions_on_user_id"
+
+  create_table "videos", force: true do |t|
+    t.string   "type"
+    t.string   "title"
+    t.string   "url"
+    t.string   "embed"
+    t.string   "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "submission_id"
+  end
+
+  add_index "videos", ["submission_id"], name: "index_videos_on_submission_id"
 
 end
