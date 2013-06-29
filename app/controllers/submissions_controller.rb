@@ -26,7 +26,7 @@ class SubmissionsController < ApplicationController
 
     respond_to do |format|
       if @submission.save
-        # send these somewhere attachment_params
+        AttachmentBuilder.process(attachment_params, @submission)
         format.html { redirect_to @submission, notice: 'Submission was successfully created.' }
         format.json { render action: 'show', status: :created, location: @submission }
       else
