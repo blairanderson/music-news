@@ -1,11 +1,18 @@
-.row-fluid
-  .span12
-    .well
-      .div
-        %i.pull-left.icon-heart
+%blockquote
+  = link_to submission do
+    .h3
+      %i.pull-left.icon-heart
+      = submission_counter + 1
+      = submission.title
 
-      .div
-        = "#{submission_counter + 1}. <b>#{submission.title}</b> #{submission.body}".html_safe
-        %br
-        = "0 points by seainhd, #{time_ago_in_words(submission.created_at)} ago 0 comments".html_safe
-%hr
+  .div
+    %h5
+      = submission.body
+    = link_to "0 points", '#', class: "label"
+    by
+    = link_to "seainhd", '#', class: "label"
+    about
+    = link_to time_ago_in_words(submission.created_at), '#', class: "label"
+    ago 
+    = link_to "0 comments", '#', class: "label"
+    
