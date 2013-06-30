@@ -12,6 +12,9 @@
  *= require_tree .
  */
 
+#window{
+  min-height: 540px
+}
 .container-fluid {
   max-width: 940px;
   margin-left: auto;

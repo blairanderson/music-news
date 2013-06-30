@@ -3,6 +3,7 @@ MusicNews::Application.routes.draw do
   root 'submissions#index'
   get '/new', to: 'submissions#new', as: "new"
   get '/gtfo' => redirect("http://seainhd.com"), as: "gtfo"
+  get '/about', to: 'application#about', as: 'about'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
