@@ -6,10 +6,7 @@
         - @submission.errors.full_messages.each do |msg|
           %li= msg
 
-  = f.label "Band/Artist Name"
-  %br
-  = f.input_field :title
-
+  = f.input :title, label: "Band/Artist Name"
   %p
     = label_tag :youtube_url, nil,  class: "add"
     = fields_for :youtube do |youtube|
@@ -23,11 +20,8 @@
     = fields_for :bandcamp do |bandcamp|
       = bandcamp.text_field 1, id: "bandcamp-1", class: "bandcamp", size: 50
   %p
-    = f.label "BIO"
-    %br
-    = f.input_field :body, {cols: 70, rows: 10 }
-  %br
-  = f.button :submit
+    = f.input :body, label: "BIO"
+  = f.button :submit, class: "btn"
 
 
 = render partial: "add_fields"

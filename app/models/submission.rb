@@ -1,4 +1,6 @@
 class Submission < ActiveRecord::Base
+  validates :title, presence: true
+  validates :body, presence: true
   scope :popular, -> { where("created_at >= ?", 2.week.ago.utc).order("created_at DESC") }
 
     # Post.where("created_at >= ?", 1.week.ago.utc).order("votes_count DESC, created_at DESC")
