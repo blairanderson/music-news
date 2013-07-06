@@ -1,7 +1,7 @@
 MusicNews::Application.routes.draw do
   get '/gtfo' => redirect("http://seainhd.com"), as: "gtfo"
 
-  resources :submissions 
+  resources :submissions, path: "s"
   root 'submissions#index'
   
   get '/new', to: 'submissions#new', as: 'new'
