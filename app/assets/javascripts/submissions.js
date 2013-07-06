@@ -1,7 +1,4 @@
-$.ajaxSetup ({  
-    cache: false  
-}); 
-
+$.ajaxSetup ({ cache: true }); 
 $(document).ready(function(){
   $(".soundcloud").each(function( index ){
     var element = this;
@@ -17,7 +14,3 @@ $(document).ready(function(){
     });
   });
 });
-
-// .text().trim()
-
-
