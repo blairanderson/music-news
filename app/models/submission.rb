@@ -5,6 +5,7 @@ class Submission < ActiveRecord::Base
   validates :twitter, presence: true
   validates :email, presence: true
   scope :popular, -> { where("created_at >= ?", 2.week.ago.utc).order("created_at DESC") }
+  
 
   def songs
     Song.where(submission_id: self.id)
@@ -16,6 +17,14 @@ class Submission < ActiveRecord::Base
 
   def attachments
     songs.concat(videos)
+  end
+
+  def soundclouds
+    songs.where(:type == "Soundcloud".to_sym)
+  end
+
+  def bandcamps
+    songs.where(:type == "Bandcamp".to_sym)
   end
 
 end

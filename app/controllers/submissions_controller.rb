@@ -17,6 +17,11 @@ class SubmissionsController < ApplicationController
     end
   end
 
+  def twitter
+    @submissions = Submission.where(twitter: params[:twitter]).all
+    render 'submissions/index'
+  end
+
   def show
   end
 

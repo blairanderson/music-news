@@ -9,6 +9,7 @@ gem 'haml-rails'
 gem 'haml'
 gem 'newrelic_rpm'
 gem 'ruby-oembed'
+gem 'httparty'
 
 group :production do 
   gem 'pg'

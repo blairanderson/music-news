@@ -9,6 +9,7 @@ MusicNews::Application.routes.draw do
   get '/about', to: 'application#about', as: 'about'
   
   get '/feed', to: 'submissions#feed', as: 'feed'
+  get ':twitter', to: 'submissions#twitter', as: 'twitter_name'  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

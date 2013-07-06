@@ -1,17 +1,19 @@
-%blockquote
-  = link_to submission do
-    .h3
+.row 
+  %blockquote
+    = link_to submission do
       %i.pull-left.icon-heart
-      = submission_counter + 1
-      = submission.title
-
-  .div
-    %h5
-      = submission.body
-    = link_to "0 points", '#', class: "label"
-    by
-    = link_to "seainhd", '#', class: "label"
-    about
-    = link_to time_ago_in_words(submission.created_at), '#', class: "label"
-    ago 
-    = link_to "0 comments", '#', class: "label"
+      %h2
+        = submission_counter + 1
+        = submission.title
+      %h5
+        = submission.body
+      / = link_to "0 points", '#', class: "label"
+      / by
+      / = link_to "seainhd", '#', class: "label"
+      about
+      = link_to time_ago_in_words(submission.created_at), '#', class: "label"
+      ago 
+      / = link_to "0 comments", '#', class: "label"
+.row
+  - submission.soundclouds.each do |target|
+    %span{class: "#{target.type.downcase}", data: {soundcloud: target.url}}
