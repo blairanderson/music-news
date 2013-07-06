@@ -1,12 +1,11 @@
 %h1
   = link_to @submission.title, @submission
 .pull-right#votes
-  / .btn-group
-  %button.btn.btn-large.btn-info 
-    %i.icon-heart.icon-white
-  %button.btn.btn-large.btn-warning 
-    %i.icon-play-circle.icon-white
-  %button.btn.btn-large.btn-success 3
+  .btn-group
+    %button.btn.btn-inverse
+      %i.icon-volume-down.icon-white
+    %button.btn.btn-inverse
+      %i.icon-volume-up.icon-white
 %blockquote
   %h3
     = @submission.body
