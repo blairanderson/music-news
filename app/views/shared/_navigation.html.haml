@@ -10,11 +10,10 @@
         %li
           =link_to "GTFO", gtfo_path
         %li
-          %a{:href => "http://twitter.com/seainhd"}
-            %i.icon-heart{style: "color: red"}
+          =link_to "about", about_path
+        / %li
+        /   %a{:href => "http://twitter.com/seainhd"}
+        /     %i.icon-heart{style: "color: red"}
       / = form_tag '#', class: "navbar-search" 
       /   =search_tag
       /   / %input.search-query.span2{:placeholder => "Search", :type => "text"}/
-      %ul.nav.pull-right
-        %li
-          =link_to "about", about_path
