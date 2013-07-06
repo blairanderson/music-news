@@ -1,7 +1,12 @@
 %h1
-  = @submission.title
-.pull-right
-  %button.btn stuff!
+  = link_to @submission.title, @submission
+.pull-right#votes
+  / .btn-group
+  %button.btn.btn-large.btn-info 
+    %i.icon-heart.icon-white
+  %button.btn.btn-large.btn-warning 
+    %i.icon-play-circle.icon-white
+  %button.btn.btn-large.btn-success 3
 %blockquote
   %h3
     = @submission.body
