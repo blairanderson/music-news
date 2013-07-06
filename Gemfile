@@ -11,6 +11,9 @@ gem 'newrelic_rpm'
 gem 'ruby-oembed'
 gem 'httparty'
 
+### http://railscasts.com/episodes/364-active-record-reputation-system?view=asciicast
+gem 'activerecord-reputation-system', github: 'NARKOZ/activerecord-reputation-system', branch: 'rails4' 
+
 group :production do 
   gem 'pg'
   gem 'rails_12factor'

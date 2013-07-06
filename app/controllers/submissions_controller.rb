@@ -5,8 +5,12 @@ class SubmissionsController < ApplicationController
     @submissions = Submission.latest.limit(10)
   end
 
+  def pop
+    @submissions = Submission.all
+  end
+
   def feed
-    @submissions = Submission.popular
+    @submissions = Submission.latest
     respond_to do |format|
       format.rss { render :layout => false }
     end
