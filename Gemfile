@@ -16,6 +16,8 @@ group :production do
   gem 'rails_12factor'
 end
 
+gem 'simplecov', :require => false, :group => :test
+
 group :test, :development do 
   gem 'guard-rspec'
   gem 'sqlite3'

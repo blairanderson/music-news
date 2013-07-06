@@ -2,12 +2,7 @@ class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :edit, :update, :destroy]
 
   def index
-    @submissions = Submission.popular
-
-    respond_to do |format|
-      format.html {@submissions}
-      format.rss { render :layout => false }
-    end
+    @submissions = Submission.latest.limit(10)
   end
 
   def feed

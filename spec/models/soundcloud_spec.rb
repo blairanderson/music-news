@@ -8,9 +8,4 @@ describe Soundcloud do
     song.save
     song
   end
-  describe '#embed' do 
-    it 'should have embed url or create it' do 
-      expect(song.embed).to eq "<iframe id='sc-widget' width='100%' height='166' scrolling='no' frameborder='no' src='https://w.soundcloud.com/player/?url=https://soundcloud.com/mysteryskulls/ghost-2012&show_artwork=true'></iframe>"
-    end
-  end
 end

@@ -4,7 +4,7 @@ class Submission < ActiveRecord::Base
   validates :body, presence: true
   validates :twitter, presence: true
   validates :email, presence: true
-  scope :popular, -> { where("created_at >= ?", 2.week.ago.utc).order("created_at DESC") }
+  scope :latest, -> { where("created_at >= ?", 3.days.ago.utc).order("created_at DESC") }
   
 
   def songs
