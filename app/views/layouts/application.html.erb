@@ -3,12 +3,13 @@
 <head>
   <title>MusicNews</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <%= stylesheet_link_tag "application", media: "all", "//netdna.bootstrapcdn.com/bootswatch/2.3.2/journal/bootstrap.min.css" %>
+  <%= stylesheet_link_tag "//netdna.bootstrapcdn.com/bootswatch/2.3.2/journal/bootstrap.min.css" %>
+  <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application", "http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js", "//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js" %>
   <%= csrf_meta_tags %>
+  <%= auto_discovery_link_tag(:rss, "http://new.seainhd.com/feed.rss", {title: "Example RSS"}) %>
 </head>
 <body>
-
 
 <div class="navbar navbar-inverse">
   <%= render 'shared/navigation' %>
@@ -17,6 +18,5 @@
   <%= yield %>
 </div>
 <%= render 'shared/footer' %>
-
 </body>
 </html>

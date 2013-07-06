@@ -3,10 +3,20 @@ class SubmissionsController < ApplicationController
 
   def index
     @submissions = Submission.popular
+
+    respond_to do |format|
+      format.html {@submissions}
+      format.rss { render :layout => false }
+    end
   end
 
-  # GET /submissions/1
-  # GET /submissions/1.json
+  def feed
+    @submissions = Submission.popular
+    respond_to do |format|
+      format.rss { render :layout => false }
+    end
+  end
+
   def show
   end
 
@@ -68,7 +78,7 @@ class SubmissionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def submission_params
-      params.require(:submission).permit(:title, :body, :user_id)
+      params.require(:submission).permit(:title, :body, :user_id, :twitter, :email)
     end
 
     def attachment_params

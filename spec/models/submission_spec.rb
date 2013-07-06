@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Submission do
   describe '.attachments' do 
-    let!(:submission){Submission.create!}
+    let!(:subject){create_submission}
     let(:stuff) do 
        {
       :youtube=>{
@@ -22,13 +22,17 @@ describe Submission do
         "4"=>""}
       }.with_indifferent_access
     end
+    before :each do 
+      expect(subject.title).to eq "Valid Band Title"
+      expect(subject.body).to eq "Valid Band Bio"
+    end
 
     it 'should have many attachments' do 
-      expect(submission.attachments.count).to eq 0
-      AttachmentBuilder.process(stuff, submission) 
-      expect(submission.videos.to_a.count).to eq 2
-      expect(submission.songs.to_a.count).to eq 5
-      expect(submission.attachments.count).to eq 7
+      expect(subject.attachments.count).to eq 0
+      AttachmentBuilder.process(stuff, subject) 
+      expect(subject.videos.to_a.count).to eq 2
+      expect(subject.songs.to_a.count).to eq 5
+      expect(subject.attachments.count).to eq 7
     end
   end
 end

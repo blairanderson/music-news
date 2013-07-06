@@ -43,6 +43,7 @@ label.error{
 #window{
   min-height: 540px
 }
+
 .container-fluid {
   max-width: 940px;
   margin-left: auto;
@@ -70,8 +71,6 @@ background-color: #FF00CC;
 /*background-color: #953b39;*/
 }
 
-#github-repo { 
-   transform: rotate(180deg);
-   -moz-transform: rotate(180deg);
-   -webkit-transform: rotate(180deg);
-   }
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+color: #000;
+}

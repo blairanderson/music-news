@@ -18,7 +18,9 @@ end
 group :test, :development do 
   gem 'guard-rspec'
   gem 'sqlite3'
+  gem 'capybara'
   gem 'rspec-rails', '~> 2.0'
+  gem 'launchy'
 end
 
 group :development do 

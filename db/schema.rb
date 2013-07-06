@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130628220807) do
+ActiveRecord::Schema.define(version: 20130706000602) do
 
   create_table "songs", force: true do |t|
     t.string   "title"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 20130628220807) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "twitter"
+    t.string   "email"
   end
 
   add_index "submissions", ["user_id"], name: "index_submissions_on_user_id"

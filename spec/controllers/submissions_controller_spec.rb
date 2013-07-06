@@ -5,6 +5,8 @@ describe SubmissionsController do
     let(:params) do 
       {"submission"=>{
         "title"=>"juicy J",
+        "twitter"=>"seainhd",
+        "email"=>"blair@seainhd.com",
         "body"=>"Jordan Michael Houston (born April 5, 1975), better known by his stage name Juicy J, is an American rapper."},
         "youtube"=>{
           "1"=>"http://www.youtube.com/watch?v=VP7GNxLI9fM",
