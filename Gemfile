@@ -8,8 +8,8 @@ gem 'simple_form'
 gem 'haml-rails'
 gem 'haml'
 gem 'newrelic_rpm'
-gem 'ruby-oembed'
-gem 'httparty'
+gem 'wordpress', git: 'https://github.com/jordandobson/wordpress'
+
 
 ### http://railscasts.com/episodes/364-active-record-reputation-system?view=asciicast
 gem 'activerecord-reputation-system', github: 'NARKOZ/activerecord-reputation-system', branch: 'rails4' 

@@ -11,11 +11,11 @@ class SubmissionsController < ApplicationController
   # end
 
   def feed
-    request.format = "rss"
-    @submissions = Submission.latest
+    @submissions = Submission.latest.limit(5)
     
     respond_to do |format|
-      format.any {render rss: @submissions }
+      format.rss  { render rss: @submissions }
+      format.html { redirect_to feed_path(format: :rss)}
     end
   end
 
