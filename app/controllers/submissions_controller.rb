@@ -5,19 +5,22 @@ class SubmissionsController < ApplicationController
     @submissions = Submission.latest.limit(10)
   end
 
-  def pop
-    @submissions = Submission.all
-  end
+  # def pop
+  #   This needs to happen after popularity is created
+  #   @submissions = Submission.all
+  # end
 
   def feed
+    request.format = "rss"
     @submissions = Submission.latest
+    
     respond_to do |format|
-      format.rss { render :layout => false }
+      format.any {render rss: @submissions }
     end
   end
 
   def twitter
-    @submissions = Submission.where(twitter: params[:twitter]).all
+    @submissions = Submission.where(twitter: params[:twitter])
     render 'submissions/index'
   end
 
@@ -27,10 +30,6 @@ class SubmissionsController < ApplicationController
   # GET /submissions/new
   def new
     @submission = Submission.new
-  end
-
-  # GET /submissions/1/edit
-  def edit
   end
 
   # POST /submissions
@@ -47,30 +46,6 @@ class SubmissionsController < ApplicationController
         format.html { render action: 'new' }
         format.json { render json: @submission.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # PATCH/PUT /submissions/1
-  # PATCH/PUT /submissions/1.json
-  def update
-    respond_to do |format|
-      if @submission.update(submission_params)
-        format.html { redirect_to @submission, notice: 'Submission was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @submission.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /submissions/1
-  # DELETE /submissions/1.json
-  def destroy
-    @submission.destroy
-    respond_to do |format|
-      format.html { redirect_to submissions_url }
-      format.json { head :no_content }
     end
   end
 

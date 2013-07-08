@@ -26,6 +26,10 @@ class Submission < ActiveRecord::Base
     songs.where(:type == "Soundcloud".to_sym)
   end
 
+  def youtubes
+    videos.where(:type == "Youtube".to_sym)
+  end
+
   def bandcamps
     songs.where(:type == "Bandcamp".to_sym)
   end

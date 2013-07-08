@@ -1,6 +1,52 @@
 require 'spec_helper'
 
 describe SubmissionsController do 
+
+  describe 'GET index' do 
+    it 'should respond OK' do 
+      submission0 = create_submission
+      submission1 = create_submission(title: "second sub", body: "second body")
+      get :index
+      expect( response ).to be_success
+      expect( response ).to render_template("index")
+      expect( assigns(:submissions) ).to eq [submission1, submission0]
+    end
+  end
+
+  describe 'GET twitter' do 
+    it 'should resond OK with all submissions for a given twitter name' do
+      submission = create_submission
+      get :twitter, twitter: "seainhd"
+      expect( response ).to be_success
+      expect( assigns(:submissions) ).to eq [submission]
+    end
+  end
+
+
+  describe 'GET feed' do
+    render_views
+
+    it "returns feed from RSS format" do
+      submission = create_submission
+      get :feed, :format => "rss"
+      expect( assigns(:submissions) ).to eq [submission]
+      expect( response ).to be_success
+      expect( response ).to render_template("submissions/feed")
+      expect( response.content_type ).to eq("application/rss+xml")
+      expect( response.body ).to have_content submission.title
+    end
+
+    it "returns RSS feed from ANY format" do
+      submission = create_submission
+      get :feed
+      expect( assigns(:submissions) ).to eq [submission]
+      expect( response ).to be_success
+      expect( response ).to render_template("submissions/feed")
+      expect( response.content_type ).to eq("application/rss+xml")
+      expect( response.body ).to have_content submission.title
+    end
+  end
+
   describe 'POST create' do 
     let(:params) do 
       {"submission"=>{
