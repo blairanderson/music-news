@@ -1,19 +1,27 @@
-.row 
-  %blockquote
-    = link_to submission do
-      %i.pull-left.icon-heart
-      %h2
-        = submission_counter + 1
-        = submission.title
+.row-fluid
+  .span1 
+    / %img.img-rounded{src: "http://placehold.it/75/75"}
+  .span10
+    %blockquote
+      %button.btn.btn-mini.btn-inverse.pull-right
+        = "##{submission_counter + 1}"
+      = link_to submission do
+        %h2
+          = submission.title
       %h5
         = submission.body
+      = link_to "Comments", submission_path(submission, anchor: 'disqus_thread'), class: "label"
       / = link_to "0 points", '#', class: "label"
-      / by
-      / = link_to "seainhd", '#', class: "label"
-      about
-      = link_to time_ago_in_words(submission.created_at), '#', class: "label"
-      ago 
-      / = link_to "0 comments", '#', class: "label"
-.row
-  - submission.soundclouds.each do |target|
-    %span{class: "#{target.type.downcase}", data: {soundcloud: target.url}}
+      = link_to "posted #{time_ago_in_words(submission.created_at)} ago", submission_path(submission), class: "label"
+      = link_to "by #{submission.twitter.to_s}", twitter_name_path(submission.twitter), class: "label"
+.row-fluid
+  .span12
+    - submission.soundclouds.each do |target|
+      %span{class: "#{target.type.downcase}", data: {soundcloud: target.url}}
+  / THIS SPACE WILL BE USED FOR VOTING, SOMETHING PER SUBMISSION
+  / .span1
+  /   %button.btn.btn-block
+  /     %i.icon-heart.icon-white
+  /     %br
+  /     props
+    

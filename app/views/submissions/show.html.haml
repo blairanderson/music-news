@@ -1,4 +1,3 @@
-
 %h1
   = link_to @submission.title, @submission
 .pull-right#votes
@@ -17,7 +16,12 @@
     %span{class: "#{item.type.downcase}", id: "#{item.type.downcase}-#{index}", data: {soundcloud: item.url}}
       = item.url
 %p
-= render partial: "shared/comments"
+  - @submission.youtubes.each_with_index do |item, index|
+    = item.inspect
+    .video-container
+      %iframe#ytplayer{:frameborder => "0", :height => "450", :src => "http://www.youtube.com/embed/M7lc1UVf-VE?modestbranding=1&autohide=1&autoplay=0&origin=http://new.seainhd.com", :type => "text/html", :width => "640"}
+%p  
+= render partial: "shared/comments", locals: {item: @submission}
 
 %meta{:content => "summary", :name => "twitter:card"}/
 %meta{:content => "@seainhd", :name => "twitter:site"}/
@@ -25,3 +29,4 @@
 %meta{:content => "#{@submission.body}", :name => "twitter:description"}/
 %meta{:content => "@seainhd", :name => "twitter:creator"}/
 %meta{:content => "http://new.seainhd.com", :name => "twitter:domain"}/
+
