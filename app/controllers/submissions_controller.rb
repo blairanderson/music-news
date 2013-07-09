@@ -15,7 +15,8 @@ class SubmissionsController < ApplicationController
     
     respond_to do |format|
       format.rss  { render rss: @submissions }
-      format.html { redirect_to feed_path(format: :rss)}
+      format.html { redirect_to feed_path(format: :json)}
+      format.json  { render json: @submissions.to_json(include: [:songs])}
     end
   end
 

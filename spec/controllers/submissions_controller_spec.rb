@@ -28,7 +28,7 @@ describe SubmissionsController do
 
     it "returns feed from RSS format" do
       submission = create_submission
-      get :feed, :format => "rss"
+      get :feed, format: "rss"
       expect( assigns(:submissions) ).to eq [submission]
       expect( response ).to be_success
       expect( response ).to render_template("submissions/feed")
@@ -36,13 +36,12 @@ describe SubmissionsController do
       expect( response.body ).to have_content submission.title
     end
 
-    it "returns RSS feed from ANY format" do
+    it "returns feed from JSON format" do
       submission = create_submission
-      get :feed
+      get :feed, format: "json"
       expect( assigns(:submissions) ).to eq [submission]
       expect( response ).to be_success
-      expect( response ).to render_template("submissions/feed")
-      expect( response.content_type ).to eq("application/rss+xml")
+      expect( response.content_type ).to eq("application/json")
       expect( response.body ).to have_content submission.title
     end
   end
