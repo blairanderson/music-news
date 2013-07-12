@@ -9,7 +9,7 @@ gem 'haml-rails'
 gem 'haml'
 gem 'newrelic_rpm'
 gem 'wordpress', git: 'https://github.com/jordandobson/wordpress'
-# gem 'raredio', git: 'https://github.com/blairanderson/rawrdio-rb'
+gem 'raredio', git: 'https://github.com/blairanderson/rawrdio-rb'
 
 ### http://railscasts.com/episodes/364-active-record-reputation-system?view=asciicast
 gem 'activerecord-reputation-system', github: 'NARKOZ/activerecord-reputation-system', branch: 'rails4' 
