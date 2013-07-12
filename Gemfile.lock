@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/blairanderson/rawrdio-rb
-  revision: 033a9e2a6227eeb8daa85ba9c9141a08e308fb9d
+  revision: da18cdf071fb7b5a5498b4b686f52174eccde63f
   specs:
     raredio (0.0.1)
       faraday
