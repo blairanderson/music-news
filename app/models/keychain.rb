@@ -6,8 +6,8 @@ class Keychain < ActiveRecord::Base
     create do |key|
       key.api_token               = build_api_token
       key.api_secret              = build_api_secret
-      key.auth_credentials_secret = auth.credentials.secret
-      key.auth_credentials_token  = auth.credentials.token
+      key.auth_credentials_secret = auth['credentials']['secret']
+      key.auth_credentials_token  = auth['credentials']['token']
     end
   end
 

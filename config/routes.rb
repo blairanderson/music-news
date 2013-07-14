@@ -1,9 +1,9 @@
 MusicNews::Application.routes.draw do
   root 'submissions#index'
-  get '/gtfo' => redirect("http://seainhd.com"), as: "gtfo"
+  get '/seainhd' => redirect("http://www.seainhd.com"), as: "seainhd"
 
   resources :submissions, path: "s", except: [:edit, :update, :destroy] do 
-    get 'publish', on: :member
+    resource :publisher, only: [:show, :new, :create]
   end
   resource :static_pages, path: "/", only: [] do
     get :about

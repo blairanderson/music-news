@@ -1,5 +1,5 @@
 class SubmissionsController < ApplicationController
-  before_action :set_submission, only: [:show, :publish]
+  before_action :set_submission, only: [:show]
   
   def index
     @submissions = Submission.latest.limit(10)
@@ -21,9 +21,6 @@ class SubmissionsController < ApplicationController
   end
 
   def show
-  end
-
-  def publish
   end
 
   def new

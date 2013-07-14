@@ -23,7 +23,12 @@ group :production do
   gem 'rails_12factor'
 end
 
-gem 'simplecov', :require => false, :group => :test
+group :test do 
+  gem 'simplecov', :require => false
+  gem 'vcr'
+  gem 'fakeweb'
+  gem 'capybara-mechanize'
+end
 
 group :test, :development do 
   gem 'guard-rspec'

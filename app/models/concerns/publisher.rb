@@ -1,7 +1,10 @@
 class Publisher
-  def self.build_from submission
-    response = client.post("my title", "body text", ['test', "testing"])
-    puts response.inspect
+  def self.build_from submission 
+    begin
+      response = client.post("my title", "body text", ['test', "testing"])
+    rescue
+      "Error"
+    end
   end
 
 private
