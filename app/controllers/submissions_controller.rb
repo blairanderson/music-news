@@ -1,6 +1,7 @@
 class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :edit, :update, :destroy]
-
+  # before_filter :require_admin, only: [:index]
+  
   def index
     @submissions = Submission.latest.limit(10)
   end

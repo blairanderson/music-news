@@ -7,8 +7,13 @@ MusicNews::Application.routes.draw do
     get :about
   end
 
+  match "/auth/:provider/callback" => "sessions#create", via: [:get, :post]
+
+
   #vanity-URLS 
   get '/new', to: 'submissions#new', as: 'new'
   get '/feed', to: 'submissions#feed', as: 'feed'
+  get "/logout" => "sessions#destroy", :as => :logout
+  get "/signout" => "sessions#destroy", :as => :signout
   get ':twitter', to: 'submissions#twitter', as: 'twitter_name'  
 end

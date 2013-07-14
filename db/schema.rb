@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130706050325) do
+ActiveRecord::Schema.define(version: 20130714040042) do
+
+  create_table "keychains", force: true do |t|
+    t.string   "api_secret"
+    t.string   "api_token"
+    t.string   "auth_credentials_secret"
+    t.string   "auth_credentials_token"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "keychains", ["user_id"], name: "index_keychains_on_user_id"
 
   create_table "rs_evaluations", force: true do |t|
     t.string   "reputation_name"
@@ -81,6 +93,14 @@ ActiveRecord::Schema.define(version: 20130706050325) do
   end
 
   add_index "submissions", ["user_id"], name: "index_submissions_on_user_id"
+
+  create_table "users", force: true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "videos", force: true do |t|
     t.string   "type"

@@ -11,3 +11,17 @@
           =link_to "GTFO", gtfo_path
         %li
           =link_to "About", about_static_pages_path
+      %ul.nav.pull-right
+        - if logged_in?
+          %li
+            = link_to '#' do 
+              <i class="icon-user icon-white"></i>
+              Settings
+            - link_to "Welcome #{current_user.name}!", '#'
+          %li
+            = link_to signout_path do 
+              <i class="icon-off icon-white"></i>
+              Sign Out
+        - else
+          %li
+            = link_to "Sign in with Twitter", "/auth/twitter"
