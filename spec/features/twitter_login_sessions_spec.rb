@@ -15,7 +15,6 @@ describe "twitter auth and sessions" do
       }
     }
   OmniAuth.config.mock_auth[:twitter] = OpenStruct.new(auth_credentials)
-
   describe "creating an account" do 
     it 'should create an account' do 
       visit "/auth/twitter"
@@ -23,7 +22,7 @@ describe "twitter auth and sessions" do
     end
 
     it 'should find the created user' do 
-      User.create!(provider: "twitter", uid: '14828267')
+      create_admin
       visit '/auth/twitter'
       expect( page ).to have_content "Sign Out"
     end

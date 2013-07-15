@@ -13,9 +13,10 @@ MusicNews::Application.routes.draw do
 
 
   #vanity-URLS 
-  get '/new', to: 'submissions#new', as: 'new'
-  get '/feed', to: 'submissions#feed', as: 'feed'
-  get "/logout" => "sessions#destroy", :as => :logout
-  get "/signout" => "sessions#destroy", :as => :signout
-  get ':twitter', to: 'submissions#twitter', as: 'twitter_name'  
+  get '/more' => 'submissions#more', as: :more
+  get '/new', to: 'submissions#new', as: :new
+  get '/feed', to: 'submissions#feed', as: :feed
+  get "/logout" => "sessions#destroy", as: :logout
+  get "/signout" => "sessions#destroy", as: :signout
+  get ':twitter', to: 'submissions#twitter', as: :twitter_name
 end

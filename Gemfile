@@ -10,6 +10,7 @@ gem 'haml'
 gem 'newrelic_rpm'
 gem 'wordpress', git: 'https://github.com/jordandobson/wordpress'
 gem 'raredio', git: 'https://github.com/blairanderson/rawrdio-rb'
+gem 'soundcloud'
 
 gem 'omniauth'
 gem 'omniauth-twitter'
@@ -26,7 +27,7 @@ end
 group :test do 
   gem 'simplecov', :require => false
   gem 'vcr'
-  gem 'fakeweb'
+  gem 'webmock'
   gem 'capybara-mechanize'
 end
 

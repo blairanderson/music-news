@@ -13,6 +13,18 @@ describe SubmissionsController do
     end
   end
 
+  describe 'GET more' do 
+    it 'should respond OK' do
+      submission0 = create_submission
+      submission1 = create_submission(title: "second sub", body: "second body")
+      get :more
+      expect( response ).to be_success
+      expect( response ).to render_template("index")
+      expect( assigns(:submissions) ).to eq [submission1, submission0]
+    end
+  end
+
+
   describe 'GET twitter' do 
     it 'should resond OK with all submissions for a given twitter name' do
       submission = create_submission
@@ -72,11 +84,15 @@ describe SubmissionsController do
 
     end
     it 'should create a submission with attachments' do 
+      expect(Song.soundclouds.count).to eq 0
+      expect(Song.bandcamps.count).to eq 0
       post :create, params
+      
       expect(Submission.count).to eq 1
       expect(Youtube.count).to eq 2
-      expect(Soundcloud.count).to eq 2
-      expect(Bandcamp.count).to eq 3
+      expect(Song.count).to eq 5
+      expect(Song.bandcamps.count).to eq 3
+      expect(Song.soundclouds.count).to eq 2
     end
   end
 

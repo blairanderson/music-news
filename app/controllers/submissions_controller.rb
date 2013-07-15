@@ -20,6 +20,11 @@ class SubmissionsController < ApplicationController
     render 'submissions/index'
   end
 
+  def more
+    @submissions = Submission.order("created_at DESC")
+    render 'submissions/index'
+  end
+
   def show
   end
 
@@ -27,19 +32,14 @@ class SubmissionsController < ApplicationController
     @submission = Submission.new
   end
 
-
   def create
     @submission = Submission.new(submission_params)
 
-    respond_to do |format|
-      if @submission.save
-        AttachmentBuilder.process(attachment_params, @submission)
-        format.html { redirect_to @submission, notice: 'Submission was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @submission }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @submission.errors, status: :unprocessable_entity }
-      end
+    if @submission.save
+      AttachmentBuilder.process(attachment_params, @submission)
+      redirect_to @submission, notice: 'Submission was successfully created.'
+    else
+      render action: 'new'
     end
   end
 

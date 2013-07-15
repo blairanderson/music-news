@@ -79,6 +79,7 @@ color: #000;
 }
 .hero-unit{
   margin-bottom: 0px;
+  background-color: #fff;
 }
 
 .navbar-inverse .brand:hover, .navbar-inverse .nav>li>a:hover, .navbar-inverse .brand:focus, .navbar-inverse .nav>li>a:focus {

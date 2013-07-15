@@ -1,0 +1,117 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.soundcloud.com/oembed?client_id=c024bdd48e9ecf014c71af406201f3a2&format=json&url=https://soundcloud.com/yuniintaxco/echoes
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - SoundCloud Ruby Wrapper 0.3.1
+  response:
+    status:
+      code: 302
+      message: Moved Temporarily
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 15 Jul 2013 00:59:16 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Content-Length:
+      - '213'
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - no-cache
+      Location:
+      - http://soundcloud.com/oembed?url=https%3A%2F%2Fsoundcloud.com%2Fyuniintaxco%2Fechoes&format=json&client_id=c024bdd48e9ecf014c71af406201f3a2
+      X-Runtime:
+      - '1'
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Accept, Authorization, Content-Type, Origin
+      Access-Control-Expose-Headers:
+      - Date
+      Access-Control-Allow-Origin:
+      - '*'
+      Vary:
+      - Accept-Encoding
+      X-Cacheable:
+      - NO:Cache-Control=no-cache
+      X-Varnish:
+      - '1371082942'
+      Age:
+      - '0'
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+    body:
+      encoding: UTF-8
+      string: <html><body>You are being <a href="http://soundcloud.com/oembed?url=https%3A%2F%2Fsoundcloud.com%2Fyuniintaxco%2Fechoes&amp;format=json&amp;client_id=c024bdd48e9ecf014c71af406201f3a2">redirected</a>.</body></html>
+    http_version: 
+  recorded_at: Mon, 15 Jul 2013 00:59:18 GMT
+- request:
+    method: get
+    uri: http://soundcloud.com/oembed?client_id=c024bdd48e9ecf014c71af406201f3a2&format=json&url=https://soundcloud.com/yuniintaxco/echoes
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - SoundCloud Ruby Wrapper 0.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 15 Jul 2013 00:59:17 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '773'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Accept, Authorization, Content-Type, Origin
+      Access-Control-Expose-Headers:
+      - Date
+      Access-Control-Allow-Origin:
+      - '*'
+      X-Runtime:
+      - '67'
+      Etag:
+      - '"57407c365fc457879d0976bb0dc11c9a"'
+      Cache-Control:
+      - private, max-age=0, must-revalidate
+      Vary:
+      - Accept-Encoding,
+      X-Cacheable:
+      - NO:Cache-Control=max-age=0
+      X-Varnish:
+      - '1917698975'
+      Age:
+      - '0'
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+    body:
+      encoding: UTF-8
+      string: '{"version":1.0,"type":"rich","provider_name":"SoundCloud","provider_url":"http://soundcloud.com","height":166,"width":"100%","title":"Echoes
+        by Yuni in Taxco","description":"from our third album, PRIZES. Available 6.23
+        from Havaii Records.\r\n\r\nPre-order the limited edition vinyl here:\r\n\r\nhttp://havaii.bandcamp.com","thumbnail_url":"http://i1.sndcdn.com/artworks-000022810909-5axxr4-t500x500.jpg?cc07a88","html":"\u003Ciframe
+        width=\"100%\" height=\"166\" scrolling=\"no\" frameborder=\"no\" src=\"https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F45368100\u0026show_artwork=true\u0026client_id=c024bdd48e9ecf014c71af406201f3a2\"\u003E\u003C/iframe\u003E","author_name":"Yuni
+        in Taxco","author_url":"http://soundcloud.com/yuniintaxco"}'
+    http_version: 
+  recorded_at: Mon, 15 Jul 2013 00:59:19 GMT
+recorded_with: VCR 2.5.0

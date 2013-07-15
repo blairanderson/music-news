@@ -18,8 +18,7 @@ describe AttachmentBuilder do
     it 'should accept all attachement params and create things' do 
       AttachmentBuilder.process(params, submission)
       expect(Youtube.count).to eq 1
-      expect(Soundcloud.count).to eq 2
-      # expect(Bandcamp.count).to eq 0
+      expect(Song.soundclouds.count).to eq 2
     end    
   end
 
@@ -43,7 +42,7 @@ describe AttachmentBuilder do
       }
     end
     it 'should send the url to the soundcloud processor' do 
-      expect { AttachmentBuilder.process_soundcloud(soundcloud_params,submission) }.to change{Soundcloud.count}.by(2)
+      expect { AttachmentBuilder.process_soundcloud(soundcloud_params,submission) }.to change{Song.soundclouds.count}.by(2)
     end
   end
 
@@ -57,7 +56,7 @@ describe AttachmentBuilder do
         }
     end
     it 'should send the url to the soundcloud processor' do 
-      expect { AttachmentBuilder.process_bandcamp(bandcamp_params,submission) }.to change{Bandcamp.count}.by(3)
+      expect { AttachmentBuilder.process_bandcamp(bandcamp_params,submission) }.to change{Song.bandcamps.count}.by(3)
     end
   end
 end

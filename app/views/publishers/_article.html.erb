@@ -1,0 +1,11 @@
+<div class="hero-unit">
+  <div class="page-header">
+    <p>success</p>
+    <h1>
+      <%= @article.title %>
+      <small>
+        <%= link_to "visit #{@article.url}", @article.url, :target => "_blank" %>
+      </small>
+    </h1>
+  </div>
+</div>
