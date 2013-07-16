@@ -22,7 +22,6 @@ class SubmissionsController < ApplicationController
 
   def more
     @submissions = Submission.order("created_at DESC")
-    render 'submissions/index'
   end
 
   def show

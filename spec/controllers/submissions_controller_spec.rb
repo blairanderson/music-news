@@ -19,7 +19,7 @@ describe SubmissionsController do
       submission1 = create_submission(title: "second sub", body: "second body")
       get :more
       expect( response ).to be_success
-      expect( response ).to render_template("index")
+      expect( response ).to render_template("more")
       expect( assigns(:submissions) ).to eq [submission1, submission0]
     end
   end
