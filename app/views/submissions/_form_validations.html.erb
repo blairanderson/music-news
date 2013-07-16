@@ -14,6 +14,11 @@
       return (value.match(song)) || value === ""  ? true : false;
     }, "please match format http://artistname.bandcamp.com/track/track-name");
 
+  $.validator.addMethod("twitterName", function(value, element) {
+      var name = /^\w*$/;
+      return (value.match(name)) || value === ""  ? true : false;
+    }, "please only submit the name... remove the @");
+
   $("#new_submission").validate({
     rules: {
       submission_title: {required: true},
@@ -21,6 +26,11 @@
     }
   });
   
+  $("input#submission_twitter").rules("add", {
+    required: true,
+    twitterName: true
+  });
+
   $(".youtube").rules("add", { 
     required: false,  
     youtubeVideo: true
