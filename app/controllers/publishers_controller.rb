@@ -1,15 +1,14 @@
 class PublishersController < ApplicationController
-  before_filter :require_admin, only: [:new, :create]
-  before_action :set_submission, only: [:new, :create]
+  before_filter :require_admin, only: [:new, :create, :show]
+  before_action :set_submission, only: [:new, :create, :show]
   
   def new
     @article = Publisher.build_article(@submission)
   end
 
   def create
-    article = Publisher.build_article(@submission)
-    article.url = "http://seainhd.com/?p=13190&preview=1"
-    @article = article
+    @article = Publisher.build_article(@submission)
+    @article.send_to_wordpress
   end
 
   def show

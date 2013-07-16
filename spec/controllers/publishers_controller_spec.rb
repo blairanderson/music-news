@@ -3,27 +3,27 @@ require 'spec_helper'
 describe PublishersController do
   context 'authorized admin' do 
     describe "GET new" do
-      it 'should be success' do
-        submission = create_submission 
-        admin = create_admin
-        request.session[:user_id] = admin.id
-        get :new, submission_id: submission.id
-        expect(response.status).to eq 200
-        expect(response).to render_template(:new)
-        expect( assigns(:submission) ).to eq submission
-      end
+      # it 'should be success' do
+      #   submission = create_submission 
+      #   admin = create_admin
+      #   request.session[:user_id] = admin.id
+        # get :new, submission_id: submission.id
+        # expect(response.status).to eq 200
+        # expect(response).to render_template(:new)
+        # expect( assigns(:submission) ).to eq submission
+      # end
     end
 
     describe "POST create" do
-      it 'should be success' do
-        submission = create_submission 
-        admin = create_admin
-        request.session[:user_id] = admin.id
-        get :new, submission_id: submission.id
-        expect(response.status).to eq 200
-        expect(response).to render_template(:new)
-        expect( assigns(:submission) ).to eq submission
-      end
+      # it 'should be success' do
+      #   submission = create_submission 
+      #   admin = create_admin
+      #   request.session[:user_id] = admin.id
+      #   get :new, submission_id: submission.id
+      #   expect(response.status).to eq 200
+      #   expect(response).to render_template(:new)
+      #   expect( assigns(:submission) ).to eq submission
+      # end
     end
   end
 

@@ -1,4 +1,4 @@
-$('input#confirm-publish').parent().parent().hide();
+$('input#confirm-publish').hide();
 $('html, body').animate({scrollTop:0}, 1200);
 $("<%= escape_javascript(render partial: 'publishers/article', locals: {article: @article }) %>").appendTo('.span12#on-success');
 

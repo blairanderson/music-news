@@ -23,7 +23,7 @@ describe "twitter auth and sessions" do
 
     it 'should find the created user' do 
       create_admin
-      visit '/auth/twitter'
+      login_admin
       expect( page ).to have_content "Sign Out"
     end
   end

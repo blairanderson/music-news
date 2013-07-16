@@ -6,10 +6,6 @@ class Publisher
     @body = args[:body]
   end
 
-  def url=(url)
-    @url = url
-  end
-
   def self.build_article submission 
     title = "Listen: Some Music from @#{submission.twitter}"
     body = ""
@@ -40,8 +36,8 @@ class Publisher
   def send_to_wordpress
     begin
       response = client.post(title, body, ['music', "mp3"])
-      puts response.inspect
-      response
+      {"rsp"=>{"post"=>{"title"=>"Listen: Some Music from @yuni", "url"=>"http://seainhd.com/?p=13202&preview=1", "id"=>"13202&action=edit"}, "stat"=>"ok"}}
+      @url = response["rsp"]["post"]["url"]
     rescue
       "Error"
     end

@@ -1,0 +1,24 @@
+= link_to "Build Article...", new_submission_publisher_path(@submission), id: "new-submission", remote: :true, class: "btn btn-block btn-large btn-warning"
+.row-fluid
+  .span12#on-publish
+.row-fluid
+  %h2
+    Band Name:
+    = link_to @submission.title, twitter_name_path(@submission.twitter)
+  = twitter_link(@submission, class: "label label-warning")
+  = mail_to @submission.email, "band email", class: "label label-warning"
+  .span5
+    = @submission.body
+%hr          
+%ol
+- @submission.soundclouds.each do |song|
+  %li
+    =song.title
+    |
+    %b
+      =song.url
+
+%hr
+.row-fluid
+  .span12#on-prepare
+    

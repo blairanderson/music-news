@@ -5,3 +5,7 @@
 $ ->
   $("input#confirm-publish").click ->
     $(this).addClass("disabled")
+
+  $("a#new-submission").click ->
+    $(this).addClass("disabled")
+

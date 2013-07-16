@@ -1,0 +1,2 @@
+$("a#new-submission").hide();
+$("<%= escape_javascript(render partial: 'publishers/new_article', locals: {article: @article}) %>").appendTo('.span12#on-prepare')

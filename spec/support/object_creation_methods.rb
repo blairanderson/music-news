@@ -1,4 +1,20 @@
 module ObjectCreationMethods
+  def login_admin
+    OmniAuth.config.test_mode = true
+    auth_credentials = {
+        'uid' => '14828267',
+        'provider' => 'twitter',
+        'info' => {
+          'name' => 'Blair Anderson'
+        },
+        'credentials' => {
+          'secret' => "asdfghjkl",
+          'token' => "lkjhgfdsa"
+        }
+      }
+    OmniAuth.config.mock_auth[:twitter] = OpenStruct.new(auth_credentials)
+    visit '/auth/twitter'
+  end
 
   def create_submission(overrides = {})
     defaults = {
