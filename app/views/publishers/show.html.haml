@@ -2,6 +2,8 @@
 .row-fluid
   .span12#on-publish
 .row-fluid
+  - if current_admin
+    = link_to "remove", submission_path(@submission), method: :delete, confirm: "Are you sure?", class: "btn btn-large btn-block"
   %h2
     Band Name:
     = link_to @submission.title, twitter_name_path(@submission.twitter)
@@ -9,6 +11,13 @@
   = mail_to @submission.email, "band email", class: "label label-warning"
   .span5
     = @submission.body
+%hr
+=form_tag(new_submission_publisher_path(@submission), remote: true) do
+  = text_field_tag :title, nil, placeholder: "title", class: "block"
+  %br
+  = text_area_tag :title, nil, placeholder: "put some body here", cols: 200
+  %br
+  = submit_tag :submit, class: "btn"
 %hr          
 %ol
 - @submission.soundclouds.each do |song|
@@ -21,4 +30,5 @@
 %hr
 .row-fluid
   .span12#on-prepare
+= button_to "Publish to SEAINHD", submission_publisher_path(@submission), id: "confirm-publish", remote: :true, class: "btn btn-block btn-large btn-danger"
     

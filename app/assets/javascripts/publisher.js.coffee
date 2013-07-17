@@ -2,10 +2,11 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+
 $ ->
-  $("input#confirm-publish").click ->
-    $(this).addClass("disabled")
 
   $("a#new-submission").click ->
     $(this).addClass("disabled")
 
+$ ->
+  $("input#confirm-publish").hide()

@@ -1,6 +1,41 @@
 require 'spec_helper'
 
 describe Song do
+  describe 'validations' do 
+    valid_songs = [
+      "https://soundcloud.com/yuniintaxco/echoes",
+      "https://soundcloud.com/franklin-webber/golden-streets",
+      "https://soundcloud.com/band-d-ga-df-sdfasdf-dasfasdf/echoes"
+    ]
+
+    valid_songs.each do |song_url|
+      it "#{song_url} should be valid" do 
+        song = create_song(url: song_url)
+        expect(song.url).to eq song_url
+        expect(song).to be_valid
+      end
+    end
+
+    invalid_songs = [
+      "",
+      " | ",
+      " | | ",
+      "http://youtube.com/",
+      "sometbullshit/sometasdflkjasdf",
+      "https://soundcloud.com/",
+      "soundcloud.com/asdlkfjasdflkja/sometasdflkjasdf",
+      ]
+    invalid_songs.each do |song_url|
+      it "should be invalid: #{song_url}" do 
+        song = Song.new(url: song_url)
+
+        expect( song.url ).to eq song_url
+        
+        expect( song ).to be_invalid
+      end
+    end
+  end
+
   describe '#resolve' do 
     it 'should get information from the API' do
       VCR.use_cassette("oembed/yuniintaxco/echoes") do 

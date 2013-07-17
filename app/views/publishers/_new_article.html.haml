@@ -5,5 +5,3 @@
         = @article.title
       %p
         = @article.body.html_safe
-
-= button_to "Publish to SEAINHD?", submission_publisher_path(@submission), id: "confirm-publish", remote: :true, class: "btn btn-block btn-large btn-danger"

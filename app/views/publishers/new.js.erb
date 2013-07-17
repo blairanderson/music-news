@@ -1,2 +1,8 @@
 $("a#new-submission").hide();
 $("<%= escape_javascript(render partial: 'publishers/new_article', locals: {article: @article}) %>").appendTo('.span12#on-prepare')
+$('html, body').scrollTop(300);
+$('html, body').animate({scrollTop:1000}, 3000);
+$("input#confirm-publish").show()
+$("input#confirm-publish").on('click', function(e) {
+  $(this).addClass("disabled");
+})

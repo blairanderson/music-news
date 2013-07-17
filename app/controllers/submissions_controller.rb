@@ -1,5 +1,5 @@
 class SubmissionsController < ApplicationController
-  before_action :set_submission, only: [:show]
+  before_action :set_submission, only: [:show, :destroy]
   
   def index
     @submissions = Submission.latest.limit(10)
@@ -40,6 +40,11 @@ class SubmissionsController < ApplicationController
     else
       render action: 'new'
     end
+  end
+
+  def destroy
+    @submission.destroy
+    redirect_to root_path
   end
 
 private

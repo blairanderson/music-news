@@ -6,12 +6,13 @@ class Song < ActiveRecord::Base
   scope :soundclouds, -> { where(type: "Soundcloud") }
   scope :bandcamps, -> { where(type: "Bandcamp") }
 
+  validates :url, :format => { :with => /\A(?:https?:\/\/soundcloud\.com)\/.*/ }
 
   def resolve
     client = Soundcloud.new(:client_id => ENV['SOUNDCLOUD_ID'])
     begin
       track = client.get('/oembed', :url => url)
-
+      
       update(title: track.title)
       update(embed: track.html)
       update(active: "true")

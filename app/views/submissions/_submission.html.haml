@@ -1,5 +1,7 @@
 .row-fluid
-  .span1 
+  .span1
+    - if current_admin
+      = link_to "remove", submission_path(submission), method: :delete, confirm: "Are you sure?", class: "btn btn-large btn-block"
     / %img.img-rounded{src: "http://placehold.it/75/75"}
   .span10
     %blockquote

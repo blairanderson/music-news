@@ -1,5 +1,5 @@
 $('input#confirm-publish').hide();
 $('html, body').animate({scrollTop:0}, 1200);
-$("<%= escape_javascript(render partial: 'publishers/article', locals: {article: @article }) %>").appendTo('.span12#on-success');
+$("<%= escape_javascript(render partial: 'publishers/article', locals: {article: @article }) %>").appendTo('#on-publish.span12');
 
 
