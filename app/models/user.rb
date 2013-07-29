@@ -1,13 +1,15 @@
 class User < ActiveRecord::Base
 
   has_one :keychain, dependent: :destroy
+  validates :uid, numericality: true, uniqueness: true
+  validates :name, uniqueness: true
 
   def self.create_with_omniauth auth
     create! do |user|
       user.keychain = setup_keychain auth 
       user.provider = auth["provider"]
       user.uid = auth["uid"]
-      user.name = auth["info"]["name"]
+      user.name = auth["info"]["nickname"]
     end
   end
 

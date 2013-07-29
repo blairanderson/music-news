@@ -2,6 +2,14 @@ require 'spec_helper'
 
 describe SubmissionsController do 
 
+  describe 'GET show' do 
+    it 'should respond OK' do 
+      submission = create_submission
+      get :show, id: submission.id
+      expect( response ).to be_success
+    end
+  end
+
   describe 'GET index' do 
     it 'should respond OK' do 
       submission0 = create_submission
@@ -65,21 +73,12 @@ describe SubmissionsController do
         "twitter"=>"seainhd",
         "email"=>"blair@seainhd.com",
         "body"=>"Jordan Michael Houston (born April 5, 1975), better known by his stage name Juicy J, is an American rapper."},
-        "youtube"=>{
-          "1"=>"http://www.youtube.com/watch?v=VP7GNxLI9fM",
-          "2"=>"http://www.youtube.com/watch?v=WT7GNxLI9fM",
-          "4"=>""
-          },
         "soundcloud"=>{
           "1"=>"https://soundcloud.com/juicyjmusic/bounce-it", 
           "2"=>"https://soundcloud.com/juicyjmusic/show-out-remix-ft-pimp-c-and-t",
-          "4"=>""
-          }, 
-        "bandcamp"=>{
-          "1"=>"http://mysteryskulls.bandcamp.com/track/amazing",
-          "3"=>"http://mysteryskulls.bandcamp.com/track/you",
-          "2"=>"http://mysteryskulls.bandcamp.com/track/money",
-          "4"=>""}
+          "4"=>""},
+          'youtube' => {},
+          'bandcamp' => {}
       }
 
     end
@@ -89,9 +88,7 @@ describe SubmissionsController do
       post :create, params
       
       expect(Submission.count).to eq 1
-      expect(Youtube.count).to eq 2
-      expect(Song.count).to eq 5
-      expect(Song.bandcamps.count).to eq 3
+      expect(Song.count).to eq 2
       expect(Song.soundclouds.count).to eq 2
     end
   end

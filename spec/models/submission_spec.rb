@@ -14,12 +14,7 @@ describe Submission do
         "1"=>"https://soundcloud.com/juicyjmusic/bounce-it", 
         "2"=>"https://soundcloud.com/juicyjmusic/show-out-remix-ft-pimp-c-and-t",
         "4"=>""
-        }, 
-      :bandcamp=>{
-        "1"=>"http://mysteryskulls.bandcamp.com/track/amazing",
-        "3"=>"http://mysteryskulls.bandcamp.com/track/you",
-        "2"=>"http://mysteryskulls.bandcamp.com/track/money",
-        "4"=>""}
+        }
       }.with_indifferent_access
     end
     before :each do 
@@ -31,8 +26,8 @@ describe Submission do
       expect(subject.attachments.count).to eq 0
       AttachmentBuilder.process(stuff, subject) 
       expect(subject.videos.to_a.count).to eq 2
-      expect(subject.songs.to_a.count).to eq 5
-      expect(subject.attachments.count).to eq 7
+      expect(subject.songs.to_a.count).to eq 2
+      expect(subject.attachments.count).to eq 4
     end
   end
 end

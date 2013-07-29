@@ -7,7 +7,7 @@ describe "twitter auth and sessions" do
       'uid' => '14828267',
       'provider' => 'twitter',
       'info' => {
-        'name' => 'Blair Anderson'
+        'name' => 'blairanderson'
       },
       'credentials' => {
         'secret' => "asdfghjkl",

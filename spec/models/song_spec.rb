@@ -22,7 +22,6 @@ describe Song do
       " | | ",
       "http://youtube.com/",
       "sometbullshit/sometasdflkjasdf",
-      "https://soundcloud.com/",
       "soundcloud.com/asdlkfjasdflkja/sometasdflkjasdf",
       ]
     invalid_songs.each do |song_url|

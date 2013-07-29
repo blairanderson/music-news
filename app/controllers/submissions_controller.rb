@@ -25,6 +25,7 @@ class SubmissionsController < ApplicationController
   end
 
   def show
+    @submission.increment!(:view_count)
   end
 
   def new

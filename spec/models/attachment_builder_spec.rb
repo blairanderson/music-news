@@ -45,18 +45,4 @@ describe AttachmentBuilder do
       expect { AttachmentBuilder.process_soundcloud(soundcloud_params,submission) }.to change{Song.soundclouds.count}.by(2)
     end
   end
-
-  describe '.process_bandcamp' do 
-    let(:bandcamp_params) do 
-        {
-          "1"=>"http://mysteryskulls.bandcamp.com/track/amazing",
-          "3"=>"http://mysteryskulls.bandcamp.com/track/you",
-          "2"=>"http://mysteryskulls.bandcamp.com/track/money",
-          "4"=>""
-        }
-    end
-    it 'should send the url to the soundcloud processor' do 
-      expect { AttachmentBuilder.process_bandcamp(bandcamp_params,submission) }.to change{Song.bandcamps.count}.by(3)
-    end
-  end
 end
