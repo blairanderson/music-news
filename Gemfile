@@ -11,6 +11,7 @@ gem 'newrelic_rpm'
 gem 'wordpress', git: 'https://github.com/jordandobson/wordpress'
 gem 'raredio', git: 'https://github.com/blairanderson/rawrdio-rb'
 gem 'soundcloud'
+gem 'active_model_serializers'
 
 gem 'omniauth'
 gem 'omniauth-twitter'

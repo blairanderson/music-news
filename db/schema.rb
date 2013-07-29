@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130729034636) do
+ActiveRecord::Schema.define(version: 20130729182914) do
 
   create_table "keychains", force: true do |t|
     t.string   "api_secret"
@@ -79,6 +79,12 @@ ActiveRecord::Schema.define(version: 20130729034636) do
     t.datetime "updated_at"
     t.string   "thumbnail_url"
     t.text     "embed"
+    t.string   "stream_url"
+    t.integer  "play_count",        default: 0
+    t.integer  "comment_count",     default: 0
+    t.integer  "download_count",    default: 0
+    t.integer  "playback_count",    default: 0
+    t.integer  "favoritings_count", default: 0
   end
 
   add_index "songs", ["submission_id"], name: "index_songs_on_submission_id"

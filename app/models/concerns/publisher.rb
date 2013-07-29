@@ -12,7 +12,7 @@ class Publisher
 
     submission.soundclouds.each_with_index do |song, index|
       unless song.active == "true"
-        song.resolve
+        song.get_stats
       end
       body << "<h2>#{song.title}</h2>"
       body << "\n"

@@ -1,0 +1,78 @@
+$.ajaxSetup ({ cache: true });
+$(document).ready(function(){
+  $('#music-player').affix();
+
+  $(".soundcloud").each(function( index ){
+    var element = this;
+    var target = $(this).data('soundcloud');
+    $.ajax({
+      url: "http://soundcloud.com/oembed.json",
+      data: {
+        url: target,
+        color: "000000",
+        theme_color: "000000",
+        buying: "false",
+        sharing: "false",
+        download: "false",
+        show_bpm: 'false'},
+      success: function (response) {
+        var iframe = response.html;
+        $(element).html(response.html);
+      },
+      dataType: "json"
+    });
+  });
+});
+
+function updateCurrentTrack (track) {
+  $("#currentTrack").text(track.song.title);
+  var nowplaying = " <a target='_blank' href=" + track.song.source_url + "><i class='icon-cloud'></i></a>";
+  $("#currentTrack").append(nowplaying);
+};
+
+$(document).ready(function(){
+  SC.initialize({
+    client_id: "<%= ENV['SOUNDCLOUD_ID'] %>"
+  });
+
+  var playlist = [];
+  $.getJSON('songs/playlist', function(data) {
+    $.each(data, function(_i, song) {
+      playlist.push(song);
+    });
+  });
+
+
+  SC.whenStreamingReady( function() {
+    console.log('Streaming ready.');
+    var currentTrack = {song: playlist[0], index: 0};
+    console.log("current track", currentTrack.song);
+
+    updateCurrentTrack(currentTrack);
+
+    $("#play").on("click", function(e){
+      e.preventDefault();
+      SC.stream(currentTrack.song.stream_url, function(sound){
+        sound.play();
+      });
+
+    });
+
+    $('#stop').on('click', function(e) {
+      e.preventDefault();
+      SC.streamStopAll();
+    });
+
+    $('#next').on('click', function(e) {
+      e.preventDefault();
+      SC.streamStopAll();
+      currentTrack = {song: playlist[currentTrack.index + 1], index: currentTrack.index + 1};
+      SC.stream(currentTrack.song.stream_url, function(sound){
+        updateCurrentTrack(currentTrack);
+        sound.play();
+      });
+    });
+  });
+});
+
+
