@@ -36,7 +36,6 @@ class Publisher
   def send_to_wordpress
     begin
       response = client.post(title, body, ['music', "mp3"])
-      {"rsp"=>{"post"=>{"title"=>"Listen: Some Music from @yuni", "url"=>"http://seainhd.com/?p=13202&preview=1", "id"=>"13202&action=edit"}, "stat"=>"ok"}}
       @url = response["rsp"]["post"]["url"]
     rescue
       "Error"
