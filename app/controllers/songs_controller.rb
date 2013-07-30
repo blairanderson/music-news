@@ -1,5 +1,5 @@
 class SongsController < ApplicationController
-  before_action :set_song, only: [:show, :resolve]
+  before_action :set_song, only: [:show, :resolve, :onfinish]
 
   def index
     @songs = Song.order("created_at DESC")
@@ -25,6 +25,11 @@ class SongsController < ApplicationController
   def resolve
     @song.fetch_details
     render json: @song
+  end
+
+  def onfinish
+    @song.increment!(:play_count)
+    render nothing: true
   end
 
 end

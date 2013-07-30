@@ -10,6 +10,7 @@ class SongSerializer < ActiveModel::Serializer
               :favoritings_count,
               :submission,
               :song,
+              :onfinish,
               :resolve
 
   def source_url
@@ -18,6 +19,10 @@ class SongSerializer < ActiveModel::Serializer
 
   def resolve
     song_url(object) + '/resolve'
+  end
+
+  def onfinish
+    onfinish_song_url(object)
   end
 
   def song

@@ -2,26 +2,30 @@ $.ajaxSetup ({ cache: true });
 $(document).ready(function(){
   $('#music-player').affix();
 
-  $(".soundcloud").each(function( index ){
-    var element = this;
-    var target = $(this).data('soundcloud');
-    $.ajax({
-      url: "http://soundcloud.com/oembed.json",
-      data: {
-        url: target,
-        color: "000000",
-        theme_color: "000000",
-        buying: "false",
-        sharing: "false",
-        download: "false",
-        show_bpm: 'false'},
-      success: function (response) {
-        var iframe = response.html;
-        $(element).html(response.html);
-      },
-      dataType: "json"
+  var tracks = $('.soundcloud');
+  if ( tracks.length > 0 ) {
+    tracks.each(function( index ){
+      var element = this;
+      var target = $(this).data('soundcloud');
+      $.ajax({
+        url: "http://soundcloud.com/oembed.json",
+        data: {
+          url: target,
+          color: "000000",
+          theme_color: "000000",
+          buying: "false",
+          sharing: "false",
+          download: "false",
+          show_bpm: 'false'},
+        success: function (response) {
+          var iframe = response.html;
+          $(element).html(response.html);
+        },
+        dataType: "json"
+      });
     });
-  });
+  };
+
 });
 
 function updateCurrentTrack (track) {
@@ -29,6 +33,23 @@ function updateCurrentTrack (track) {
   var nowplaying = " <a target='_blank' href=" + track.song.source_url + "><i class='icon-cloud'></i></a>";
   $("#currentTrack").append(nowplaying);
 };
+
+function playCurrentTrack (track) {
+  SC.stream(track.song.stream_url, function(sound){
+    updateCurrentTrack(track);
+    sound.play({
+      onfinish: function() {
+        $.get(track.song.onfinish)
+        $('#next').trigger('click');
+      }
+    });
+  });
+}
+
+function advanceCurrentTrack (playlist, currentTrack) {
+  SC.streamStopAll();
+  return {song: playlist[currentTrack.index + 1], index: currentTrack.index + 1};
+}
 
 $(document).ready(function(){
   SC.initialize({
@@ -42,7 +63,6 @@ $(document).ready(function(){
     });
   });
 
-
   SC.whenStreamingReady( function() {
     console.log('Streaming ready.');
     var currentTrack = {song: playlist[0], index: 0};
@@ -52,10 +72,7 @@ $(document).ready(function(){
 
     $("#play").on("click", function(e){
       e.preventDefault();
-      SC.stream(currentTrack.song.stream_url, function(sound){
-        sound.play();
-      });
-
+      playCurrentTrack(currentTrack);
     });
 
     $('#stop').on('click', function(e) {
@@ -66,11 +83,8 @@ $(document).ready(function(){
     $('#next').on('click', function(e) {
       e.preventDefault();
       SC.streamStopAll();
-      currentTrack = {song: playlist[currentTrack.index + 1], index: currentTrack.index + 1};
-      SC.stream(currentTrack.song.stream_url, function(sound){
-        updateCurrentTrack(currentTrack);
-        sound.play();
-      });
+      currentTrack = advanceCurrentTrack(playlist, currentTrack);
+      playCurrentTrack(currentTrack);
     });
   });
 });

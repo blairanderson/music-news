@@ -2,7 +2,8 @@ class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :destroy]
   
   def index
-    @submissions = Submission.latest.limit(10)
+    # @submissions = Submission.latest.limit(10)
+    @submissions = Submission.order('created_at DESC').limit(5)
   end
 
   def feed

@@ -1,21 +1,20 @@
 .row-fluid
-  .span1
+  .span12
+    %button.btn.btn-mini.btn-inverse.pull-right
+      = "##{submission_counter + 1}"
+    = link_to submission do
+      %p.lead
+        = submission.title
+    %h5
+      = submission.body[0,200]
+    = link_to "Comments", submission_path(submission, anchor: 'disqus_thread'), class: "label"
+    = link_to "posted #{time_ago_in_words(submission.created_at)} ago", submission_path(submission), class: "label"
+    = link_to "by #{submission.twitter.to_s}", twitter_name_path(submission.twitter), class: "label"
+.row-fluid
+  .span12
     - if current_admin
       = link_to "remove", submission_path(submission), method: :delete, confirm: "Are you sure?", class: "btn btn-large btn-block"
     / %img.img-rounded{src: "http://placehold.it/75/75"}
-  .span10
-    %blockquote
-      %button.btn.btn-mini.btn-inverse.pull-right
-        = "##{submission_counter + 1}"
-      = link_to submission do
-        %h2
-          = submission.title
-      %h5
-        = submission.body
-      = link_to "Comments", submission_path(submission, anchor: 'disqus_thread'), class: "label"
-      / = link_to "0 points", '#', class: "label"
-      = link_to "posted #{time_ago_in_words(submission.created_at)} ago", submission_path(submission), class: "label"
-      = link_to "by #{submission.twitter.to_s}", twitter_name_path(submission.twitter), class: "label"
 .row-fluid
   .span12
     - submission.soundclouds.each do |target|
