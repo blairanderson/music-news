@@ -10,6 +10,14 @@ class Submission < ActiveRecord::Base
     Song.where(submission_id: self.id)
   end
 
+  def next
+    Submission.where(id: id + 1).first
+  end
+
+  def previous
+    Submission.where(id: id - 1).first
+  end
+
   def to_param
     "#{id}-#{title[0,20]}-#{body[0,40]}".parameterize
   end

@@ -2,32 +2,26 @@
   = link_to "Ready to Publish?", submission_publisher_path(@submission), class: "btn btn-large btn-block btn-success"
   %h4
     = "#{@submission.view_count} Views"
+.row-fluid
+  .span6
+    - if @submission.previous
+      = link_to "<<< Previous Submission", submission_path( @submission.previous ), class: "btn btn-inverse btn-mini btn-block"
+      
+  .span6
+    - if @submission.next
+      = link_to "Next Submission >>>",submission_path( @submission.next ), class: "btn btn-inverse btn-mini btn-block"  
 
-
-%h1
+%h1 
   = link_to @submission.title, @submission
-.pull-right#votes
-  .btn-group
-    %button.btn.btn-inverse
-      %i.icon-volume-down.icon-white
-    %button.btn.btn-inverse
-      %i.icon-volume-up.icon-white
-%blockquote
-  %h3
-    = @submission.body
+%p.lead
+  = @submission.body
 %p
-  = time_ago_in_words @submission.created_at
+  = "submitted #{time_ago_in_words @submission.created_at} ago"
 %p
   -  @submission.soundclouds.each_with_index do |item, index|
     = ( javascript_tag("$.get('#{resolve_song_path(item)}')") ) if item.need_details?
-    
     %span{class: "#{item.type.downcase}", id: "#{item.type.downcase}-#{index}", data: {soundcloud: item.url}}
       = item.url
-%p
-  / - @submission.youtubes.each_with_index do |item, index|
-  /   = item.inspect
-  /   .video-container
-  /     %iframe#ytplayer{:frameborder => "0", :height => "450", :src => "http://www.youtube.com/embed/M7lc1UVf-VE?modestbranding=1&autohide=1&autoplay=0&origin=http://new.seainhd.com", :type => "text/html", :width => "640"}
 %p  
 = render partial: "shared/comments", locals: {item: @submission}
 
