@@ -8,6 +8,14 @@ class Song < ActiveRecord::Base
 
   validates :url, :format => { :with => /\A(?:https?:\/\/soundcloud\.com)\/.*/ }
 
+  def has_details?
+     stream_url? && embed?
+  end
+
+  def need_details?
+    !has_details?
+  end
+
   def fetch_details
     resolve && get_stats
   end

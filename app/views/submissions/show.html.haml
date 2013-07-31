@@ -19,13 +19,15 @@
   = time_ago_in_words @submission.created_at
 %p
   -  @submission.soundclouds.each_with_index do |item, index|
+    = ( javascript_tag("$.get('#{resolve_song_path(item)}')") ) if item.need_details?
+    
     %span{class: "#{item.type.downcase}", id: "#{item.type.downcase}-#{index}", data: {soundcloud: item.url}}
       = item.url
 %p
-  - @submission.youtubes.each_with_index do |item, index|
-    = item.inspect
-    .video-container
-      %iframe#ytplayer{:frameborder => "0", :height => "450", :src => "http://www.youtube.com/embed/M7lc1UVf-VE?modestbranding=1&autohide=1&autoplay=0&origin=http://new.seainhd.com", :type => "text/html", :width => "640"}
+  / - @submission.youtubes.each_with_index do |item, index|
+  /   = item.inspect
+  /   .video-container
+  /     %iframe#ytplayer{:frameborder => "0", :height => "450", :src => "http://www.youtube.com/embed/M7lc1UVf-VE?modestbranding=1&autohide=1&autoplay=0&origin=http://new.seainhd.com", :type => "text/html", :width => "640"}
 %p  
 = render partial: "shared/comments", locals: {item: @submission}
 
