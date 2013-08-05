@@ -1,26 +1,34 @@
-$.ajaxSetup ({ cache: true });
-$(document).ready(function(){
-  var tracks = $('.soundcloud');
-  if ( tracks.length > 0 ) {
-    tracks.each(function( index ){
-      var element = this;
-      var target = $(this).data('soundcloud');
-      $.ajax({
-        url: "http://soundcloud.com/oembed.json",
-        data: {
-          url: target,
-          color: "000000",
-          theme_color: "000000",
-          buying: "false",
-          sharing: "false",
-          download: "false",
-          show_bpm: 'false'},
-        success: function (response) {
-          var iframe = response.html;
-          $(element).html(response.html);
-        },
-        dataType: "json"
-      });
-    });
-  };
+// $.ajaxSetup ({ cache: true });
+// $(document).ready(function(){
+//   var tracks = $('.soundcloud');
+//   if ( tracks.length > 0 ) {
+//     tracks.each(function( index ){
+//       var element = this;
+//       var target = $(this).data('soundcloud');
+//       $.ajax({
+//         url: "http://soundcloud.com/oembed.json",
+//         data: {
+//           url: target,
+//           color: "000000",
+//           theme_color: "000000",
+//           buying: "false",
+//           sharing: "false",
+//           download: "false",
+//           show_bpm: 'false'},
+//         success: function (response) {
+//           var iframe = response.html;
+//           $(element).html(iframe);
+//         },
+//         dataType: "json"
+//       });
+//     });
+//   };
+// });
+
+
+var container = document.querySelector('#window');
+var msnry = new Masonry( container, {
+  // options
+  columnWidth: 200,
+  itemSelector: '.item'
 });

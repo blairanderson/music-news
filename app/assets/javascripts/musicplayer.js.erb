@@ -2,7 +2,14 @@
 function updateCurrentTrack (track) {
   $("#currentTrack").text(track.song.title);
   var nowplaying = " <a target='_blank' href=" + track.song.source_url + "><i class='icon-cloud'></i></a>";
+  var target = $('[data-url="' + track.song.source_url+'"]');
+  $('.row-fluid').removeClass('highlight');
+  target.parent().addClass('highlight');
   $("#currentTrack").append(nowplaying);
+};
+
+function incrementPlaycount (track) {
+  $.get(track.song.onfinish);
 };
 
 function playCurrentTrack (track) {
@@ -10,7 +17,7 @@ function playCurrentTrack (track) {
     updateCurrentTrack(track);
     sound.play({
       onfinish: function() {
-        $.get(track.song.onfinish);
+        incrementPlaycount(track);
         $('#next').trigger('click');
       }
     });

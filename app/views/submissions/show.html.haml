@@ -1,5 +1,10 @@
 - if current_admin
-  = link_to "Ready to Publish?", submission_publisher_path(@submission), class: "btn btn-large btn-block btn-success"
+  .row-fluid
+    .span6
+      = link_to "Publish?", submission_publisher_path(@submission), class: "btn btn-large btn-block btn-success"
+    .span6
+      = link_to "Remove?", submission_path(@submission), method: :delete, confirm: "Are you sure?", class: "btn btn-large btn-block btn-inverse"
+
   %h4
     = "#{@submission.view_count} Views"
 .row-fluid

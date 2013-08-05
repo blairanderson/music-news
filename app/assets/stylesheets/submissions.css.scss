@@ -2,3 +2,22 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.highlight{
+-webkit-border-radius: 8px;
+-moz-border-radius: 8px;
+border-radius: 8px;
+background-color: #eef1ea;
+background-image: -webkit-gradient(radial, 50% 50%,0,50% 50%,200, from(rgb(225, 225, 225)), to(rgb(238, 241, 234)));
+background-image: -webkit-radial-gradient(50% 50%, rgb(238, 241, 234), rgb(225, 225, 225));
+background-image: -moz-radial-gradient(50% 50%, rgb(238, 241, 234), rgb(225, 225, 225));
+background-image: -o-radial-gradient(50% 50%, rgb(238, 241, 234), rgb(225, 225, 225));
+background-image: -ms-radial-gradient(50% 50%, rgb(238, 241, 234), rgb(225, 225, 225));
+background-image: radial-gradient(50% 50%, rgb(238, 241, 234), rgb(225, 225, 225));
+
+
+}
+
+hr {
+  border-bottom: 1px solid #000;
+  margin: 8px 0;
+}
