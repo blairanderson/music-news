@@ -1,4 +1,30 @@
-<% @songs.each do |song| %>
-  <%= image_tag song.thumbnail_url, size: '500x500', class: "item" %>
+<div id="window">
+  <% @songs.each do |song| %>
+    <div class="item">
+      <%= link_to song do %>
+      <%# image_tag "http://placehold.it/200/200", class: "item" %>
+      <%= image_tag song.thumbnail_url, size: '200x200', data: {url: song.url} %>
+      <p style="overflow: hidden">
+        <%= clean_title song.title %>
+      </p>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 
-<% end %>
+<script type="text/javascript">
+  $(document).ready(function () {
+    var container = document.querySelector('#window');
+    window.masonry = new Masonry( container, {
+      columnWidth: 200,
+      "gutter": 10,
+      itemSelector: '.item'
+    });
+    var msnry = window.masonry
+    msnry.on( 'layoutComplete', function() {
+      console.log('layout is complete');
+    });
+    // manually trigger initial layout
+    msnry.layout();
+  });
+</script>

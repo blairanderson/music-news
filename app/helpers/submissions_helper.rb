@@ -7,4 +7,12 @@ module SubmissionsHelper
   def cleanup(url)
     url.gsub('https://','').gsub('http://', '').gsub('soundcloud.com/','')
   end
+
+  def clean_title(title)
+    if title.nil?
+      "learn more..."
+    else
+      title[0..25]
+    end
+  end
 end

@@ -3,9 +3,8 @@
 <head>
   <title>MusicNews</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <%= javascript_include_tag "//cdn.jsdelivr.net/masonry/3.1.1/masonry.min.js" %>
   <%= stylesheet_link_tag "//netdna.bootstrapcdn.com/bootswatch/2.3.2/journal/bootstrap.min.css", "//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css", "application" %>
-  <%= javascript_include_tag "application", "//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js", "//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js", "//connect.soundcloud.com/sdk.js" %>
+  <%= javascript_include_tag "application", "//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js", "//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js", "//connect.soundcloud.com/sdk.js", "masonry.pkgd.js" %>
 
   <%= csrf_meta_tags %>
   <%= auto_discovery_link_tag(:rss, feed_url(format: :rss), {title: "SEAINHD RSS"}) %>
@@ -14,9 +13,7 @@
   <div class="navbar navbar-inverse">
     <%= render 'shared/navigation' %>
   </div>
-  <div class="container-fluid" id="window">
     <%= yield %>
-  </div>
     <%= render 'shared/footer' %>
   </body>
 </html>
