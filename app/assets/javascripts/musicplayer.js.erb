@@ -7,7 +7,6 @@ function updateCurrentTrack (track) {
   // target.addClass('highlight');
   // target.parent().addClass('highlight');
   $("#currentTrack").append(nowplaying);
-  window.masonry.layout();
 };
 
 function incrementPlaycount (track) {
@@ -46,8 +45,6 @@ $(document).ready(function(){
   });
 
   SC.whenStreamingReady( function() {
-    window.masonry.layout();
-    
     console.log('Streaming ready.');
     var currentTrack = {song: playlist[0], index: 0};
     console.log("current track", currentTrack.song);
