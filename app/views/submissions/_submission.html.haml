@@ -9,6 +9,9 @@
   = link_to "Comments", submission_path(submission, anchor: 'disqus_thread'), class: "label"
   = link_to "posted #{time_ago_in_words(submission.created_at)} ago", submission_path(submission), class: "label"
   = link_to "by #{submission.twitter.to_s}", twitter_name_path(submission.twitter), class: "label"
+  = content_tag :span, class: "label" do
+    PageViews:
+    = submission.view_count
   - submission.soundclouds.each do |song|
     %div{class: "#{song.type.downcase}", data:{url: "#{song.url}" }}
       = soundcloud_link(song.url)
