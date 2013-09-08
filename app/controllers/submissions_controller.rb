@@ -3,16 +3,17 @@ class SubmissionsController < ApplicationController
   
   def index
     # @submissions = Submission.latest.limit(10)
-    @submissions = Submission.order('created_at DESC').limit(20)
+    @submissions = Submission.latest.limit(20)
   end
 
   def feed
+    
     @submissions = Submission.latest.limit(5)
     
     respond_to do |format|
       format.rss  { render rss: @submissions }
       format.html { redirect_to feed_path(format: :json)}
-      format.json  { render json: @submissions.to_json(include: [:songs])}
+      format.json  { render json: @submissions.to_json(include: [:songs]) }
     end
   end
 
