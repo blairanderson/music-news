@@ -37,16 +37,16 @@ $(document).ready(function(){
     client_id: "<%= ENV['SOUNDCLOUD_ID'] %>"
   });
 
-  var playlist = [];
+  window.playlist = [];
   $.getJSON('/songs/playlist', function(data) {
     $.each(data, function(_i, song) {
-      playlist.push(song);
+      window.playlist.push(song);
     });
   });
 
   SC.whenStreamingReady( function() {
     console.log('Streaming ready.');
-    var currentTrack = {song: playlist[0], index: 0};
+    var currentTrack = {song: window.playlist[0], index: 0};
     console.log("current track", currentTrack.song);
 
     updateCurrentTrack(currentTrack);
@@ -64,7 +64,7 @@ $(document).ready(function(){
     $('#next').on('click', function(e) {
       e.preventDefault();
       SC.streamStopAll();
-      currentTrack = advanceCurrentTrack(playlist, currentTrack);
+      currentTrack = advanceCurrentTrack(window.playlist, currentTrack);
       playCurrentTrack(currentTrack);
     });
   });

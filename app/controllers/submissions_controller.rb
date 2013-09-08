@@ -3,7 +3,7 @@ class SubmissionsController < ApplicationController
   
   def index
     # @submissions = Submission.latest.limit(10)
-    @submissions = Submission.order('created_at DESC').limit(5)
+    @submissions = Submission.order('created_at DESC').limit(20)
   end
 
   def feed
