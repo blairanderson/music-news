@@ -1,3 +1,22 @@
 // Place all the styles related to the submissions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "imports";
+
+div#window{
+  section.content{
+    div#main{
+      @extend .col-sm-7;
+      @extend .col-sm-offset-1;
+    }
+    div#sidebar{
+      @extend .col-sm-3;
+      @extend .panel;
+    }
+  }
+}
+
+footer{
+  @extend .container;
+}
