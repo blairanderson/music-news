@@ -16,7 +16,7 @@ class MusicNews.Routers.Submissions extends Backbone.Router
     @target = @parent.find('div.body')
     _target = @target
     @parent.find('div.hero').html("This is the hero content")
-    debugger
+    
     if @collection.length
       view = new MusicNews.Views.SubmissionsIndex().render()
       _target.html(view.$el)

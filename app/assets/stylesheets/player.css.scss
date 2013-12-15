@@ -1,0 +1,39 @@
+#music-player{
+  #player{
+    @extend .btn-group;
+    button{
+      @extend .btn;
+      @extend .btn-default;
+      @extend .btn-xs;
+      &:active, &:hover{
+        background-color: #fff;
+      }
+      > i{
+        @extend .fa;
+        @extend .fa-2x;
+        @extend .fa-fw;
+        &.play{ @extend .fa-play; }
+        &.pause{ @extend .fa-pause; }
+        &.backward{ @extend .fa-step-backward; }
+        &.forward{ @extend .fa-step-forward; }
+        &.heart-full{ @extend .fa-heart; }
+        &.heart-half{ @extend .fa-heart-o; }
+        &.track{ @extend .fa-cloud; }
+        color: #0638d5;
+        opacity:0.5;
+        &:hover{
+          color: lighten(#0638d5, 10%);
+          opacity:0.8;
+        }
+      }
+    }
+  }
+  #playlist{
+    margin-top: 10px;
+    @extend .panel;
+    @extend .panel-primary;
+  }
+}
+
+
+

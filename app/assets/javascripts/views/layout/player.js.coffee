@@ -1,6 +1,5 @@
 class MusicNews.Views.Player extends Backbone.View
   id: 'music-player'
-  className: 'container'
   template: JST['shared/player']
   initialize: ->
     @api = SC

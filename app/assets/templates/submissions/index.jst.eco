@@ -9,7 +9,7 @@
   </p>
   
   <a href="<%= '/' + submission.get('id') %>">posted <%= submission.get('created_at') %> ago</a>
-  <a href="<%= '/' + submission.get('twitter') %>">by <%= submission.get('twitter') %></a>
+  <span>by <%= submission.get('twitter') %></span>
   <span>PageViews: <%= submission.get('view_count') %></span>
 
   <% if submission.songs.length: %>
