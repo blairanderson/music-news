@@ -1,2 +1,3 @@
-<div class="hero">This is the hero content</div>
+<div class="hero"></div>
+
 <div class="body">This is the main content</div>

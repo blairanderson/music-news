@@ -3,6 +3,7 @@ class SongsController < ApplicationController
 
   def index
     @songs = Song.order("created_at DESC")
+    render json: @songs
   end
 
   def playlist

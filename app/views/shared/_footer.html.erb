@@ -1,17 +1,18 @@
 <footer>
-  <hr>
-  <small class="offset1">
+  <small>
     <% if logged_in? %>
       <%= link_to signout_path do %>
-        <i class="icon-off icon-white"></i> Sign Out
+        <i class="glyphicon glyphicon-log-out"></i> Sign Out
       <% end %>
     <% else %>
-      <%= link_to "Twitter Auth", "/auth/twitter" %>
+      <%= link_to "/auth/twitter" do %>
+        <i class="glyphicon glyphicon-log-in"></i> Twitter Auth
+      <% end %>
     <% end %>
   </small>
-  <small class="offset1">
-    <%= link_to "a fun website by SeaInHD", "http://seainhd.com", class: "muted" %>
-  </small>
+  <p>
+    <%= link_to "a fun website by SeaInHD", "http://seainhd.com" %>
+  </p>
 </footer>
 
 <script type="text/javascript" name="google-analytics">

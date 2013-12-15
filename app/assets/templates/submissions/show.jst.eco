@@ -1,1 +1,13 @@
 the show eco
+<p class="lead">
+  title:
+  <%= @submission.get('title') %>
+</p>
+<p>
+  Body:
+  <%= @submission.get('body') %>
+</p>
+
+<span>posted <%= @submission.get('created_at') %> ago</span>
+<span>by <%= @submission.get('twitter') %></span>
+<span>PageViews: <%= @submission.get('view_count') %></span>

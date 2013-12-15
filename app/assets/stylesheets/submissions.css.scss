@@ -6,6 +6,7 @@
 
 div#window{
   section.content{
+    @extend .row;
     div#main{
       @extend .col-sm-7;
       @extend .col-sm-offset-1;

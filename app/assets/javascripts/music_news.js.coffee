@@ -12,20 +12,23 @@ window.MusicNews =
   Routers: {}
   initialize: ->
     $target = $('#window')
+    MusicNews.App.views.layout = new MusicNews.Views.Layout().render()
+    MusicNews.App.collections.songs = new MusicNews.Collections.Songs()
+    MusicNews.App.collections.submissions = new MusicNews.Collections.Submissions()
+    $target.append(MusicNews.App.views.layout.$el)
 
-    this.App.views.layout = new MusicNews.Views.Layout().render()
-    $target.append(this.App.views.layout.$el)
-
+    $target = $('#window')
     $body = $('<section/>', class: "content")
     $target.append($body)
 
-    this.App.views.main     = new MusicNews.Views.Main().render()
-    this.App.views.sidebar  = new MusicNews.Views.Sidebar().render()
+    MusicNews.App.views.main     = new MusicNews.Views.Main().render()
+    MusicNews.App.views.sidebar  = new MusicNews.Views.Sidebar().render()
 
-    $body.append(this.App.views.main.$el)
-    $body.append(this.App.views.sidebar.$el)
-
+    $body.append(MusicNews.App.views.main.$el)
+    $body.append(MusicNews.App.views.sidebar.$el)
+    
     Backbone.history.start({pushState: true})
+
 
 $(document).ready ->
   MusicNews.initialize()
