@@ -3,5 +3,7 @@ class MusicNews.Views.Sidebar extends Backbone.View
   template: JST['shared/sidebar']
 
   render: ->
-    $(@el).html(this.template())
+    MusicNews.App.views.player = new MusicNews.Views.Player().render()
+    $(@el).html( MusicNews.App.views.player.$el )
+    $(@el).append(this.template())
     this

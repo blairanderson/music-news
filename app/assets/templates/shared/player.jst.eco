@@ -1,0 +1,9 @@
+<div class="btn-group">
+  <button class="btn btn-default" id="previous" data-control="previous"><i class='glyphicon glyphicon-fast-backward'></i></button>
+  <button class="btn btn-default" id="love" data-control="love"><i class='glyphicon glyphicon-heart'></i></button>
+  <button class="btn btn-default" id="like" data-control="like"><i class='glyphicon glyphicon-heart-empty'></i></button>
+  <button class="btn btn-default" id="pause" data-control="pause"><i class='glyphicon glyphicon-pause'></i></button>
+  <button class="btn btn-default" id="play" data-control="play"><i class='glyphicon glyphicon-play'></i></button>
+  <button class="btn btn-default" id="next" data-control="next"><i class='glyphicon glyphicon-fast-forward'></i></button>
+  <button class="btn btn-default" id='currentTrack'>loading...</button>
+</div>

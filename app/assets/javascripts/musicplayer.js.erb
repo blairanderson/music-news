@@ -33,9 +33,7 @@ function advanceCurrentTrack (playlist, currentTrack) {
 $(document).ready(function(){
   $('#music-player').affix();
 
-  SC.initialize({
-    client_id: "<%= ENV['SOUNDCLOUD_ID'] %>"
-  });
+
 
   window.playlist = [];
   $.getJSON('/songs/playlist', function(data) {

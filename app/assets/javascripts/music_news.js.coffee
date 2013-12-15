@@ -11,12 +11,13 @@ window.MusicNews =
   Views: {}
   Routers: {}
   initialize: ->
+    MusicNews.App.collections.submissions = new MusicNews.Collections.Submissions()
+    MusicNews.App.collections.songs = new MusicNews.Collections.Songs()
+
     $target = $('#window')
     MusicNews.App.views.layout = new MusicNews.Views.Layout().render()
-    MusicNews.App.collections.songs = new MusicNews.Collections.Songs()
-    MusicNews.App.collections.submissions = new MusicNews.Collections.Submissions()
     $target.append(MusicNews.App.views.layout.$el)
-
+    
     $target = $('#window')
     $body = $('<section/>', class: "content")
     $target.append($body)
