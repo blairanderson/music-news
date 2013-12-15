@@ -1,1 +1,15 @@
-the submissions index
+<% for submission in @submissions.models: %>
+  <p class="lead">
+    title:
+    <%= submission.get('title') %>
+  </p>
+  <p>
+    Body:
+    <%= submission.get('body') %>
+  </p>
+
+  <a href="<%= '/' + submission.get('id') %>">posted <%= submission.get('created_at') %> ago</a>
+  <a href="<%= '/' + submission.get('twitter') %>">by <%= submission.get('twitter') %></a>
+  <span>PageViews: <%= submission.get('view_count') %></span>
+  <hr>
+<% end %>

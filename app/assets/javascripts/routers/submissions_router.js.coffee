@@ -1,7 +1,6 @@
 class MusicNews.Routers.Submissions extends Backbone.Router
   initialize: ->
     @collection = new MusicNews.Collections.Submissions()
-    @collection.fetch()
     MusicNews.App.collections.submissions = @collection
   routes: 
     'new': 'nothing'
@@ -12,9 +11,9 @@ class MusicNews.Routers.Submissions extends Backbone.Router
     console.log('nothing')
 
   index: ->
-    collection = new MusicNews.Collections.Submissions()
-    collection.fetch()
-    view = new MusicNews.Views.SubmissionsIndex().render()
+    @collection.fetch().done (data, stuff) ->
+      view = new MusicNews.Views.SubmissionsIndex().render()
+      MusicNews.App.views.main.$el.html(view.$el)
     
 
   show: -> 
