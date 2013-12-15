@@ -1,0 +1,13 @@
+nav{
+  @extend .navbar;
+  @extend .navbar-default;
+  .navbar-header > a {
+    @extend .navbar-brand;
+  }
+  div.collapse{
+    @extend .navbar-collapse;
+    ul.nav{
+      @extend .navbar-nav
+    }
+  }
+}
