@@ -11,3 +11,19 @@ nav{
     }
   }
 }
+
+
+form{
+  div.input{
+    @extend .form-group;
+    textarea, input[type='text'], input[type='email']{
+      @extend .form-control;
+    }
+  }
+  textarea, input[type='text'], input[type='email']{
+    @extend .form-control;
+  }
+  input.soundcloud{
+    margin-bottom: 25px;
+  }
+}
