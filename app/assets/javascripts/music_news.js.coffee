@@ -13,21 +13,19 @@ window.MusicNews =
   initialize: ->
     $target = $('#window')
 
-    $header = $('<section/>', class: "header")
-    $target.append($header)
     this.App.views.layout = new MusicNews.Views.Layout().render()
-    $header.append(this.App.views.layout.$el)
+    $target.append(this.App.views.layout.$el)
 
     $body = $('<section/>', class: "content")
     $target.append($body)
-    
-    this.App.views.main = new MusicNews.Views.Main().render()
-    $body.append(this.App.views.main.$el)
 
-    this.App.views.sidebar = new MusicNews.Views.Sidebar().render()
+    this.App.views.main     = new MusicNews.Views.Main().render()
+    this.App.views.sidebar  = new MusicNews.Views.Sidebar().render()
+
+    $body.append(this.App.views.main.$el)
     $body.append(this.App.views.sidebar.$el)
 
-    Backbone.history.start()
+    Backbone.history.start({pushState: true})
 
 $(document).ready ->
   MusicNews.initialize()
