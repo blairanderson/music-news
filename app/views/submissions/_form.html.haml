@@ -1,30 +1,13 @@
-= simple_form_for @submission do |f|
-  = f.input :title, label: "Band/Artist Name"
-  %p
-    .input-prepend
-      %span.add-on> @
-      = f.input_field :twitter, placeholder: "twitter username"
-  %p
-    .input-prepend
-      %span.add-on>
-        %i.icon-envelope
-      = f.input_field :email, placeholder: "booking/press email"
-  %p
-    = label_tag :soundcloud_url, "Soundcloud Song URLs(your best 3 songs...)",  class: "add"
-    = fields_for :soundcloud do |soundcloud|
-      = soundcloud.text_field 1, id: "soundcloud-1", placeholder: "http://www.soundcloud.com/artist-name/song-name", class: "soundcloud"
-  %p{style: "display: none;"}
-    = label_tag :youtube_url, nil,  class: "add"
-    = fields_for :youtube do |youtube|
-      = youtube.text_field 1, id: "youtube-1", class: "youtube"
-  %p{style: "display: none;"}
-    = label_tag :bandcamp_url, nil,  class: "add"
-    = fields_for :bandcamp do |bandcamp|
-      = bandcamp.text_field 1, id: "bandcamp-1", class: "bandcamp"
-  %p
+.container
+  = simple_form_for @submission do |f|
+    = f.input :title, label: "Band/Artist Name"
+    = f.input :twitter, placeholder: "twitter username"
+    = f.input :email, placeholder: "booking/press email"
+    .input.required
+      %label Soundcloud URLs
+      = simple_fields_for :soundcloud do |soundcloud|
+        = soundcloud.text_field 1, id: "soundcloud-1", placeholder: "http://www.soundcloud.com/artist-name/song-name", class: "soundcloud"
+        = soundcloud.text_field 2, id: "soundcloud-2", placeholder: "http://www.soundcloud.com/artist-name/song-name", class: "soundcloud"
+        = soundcloud.text_field 3, id: "soundcloud-3", placeholder: "http://www.soundcloud.com/artist-name/song-name", class: "soundcloud"
     = f.input :body, label: "BIO"
-  = f.button :submit, 'Submit!', class: "btn"
-
-
-= render partial: "form_validations"
-= render partial: "add_fields"
+    = f.button :submit, 'Submit!', class: "btn"
