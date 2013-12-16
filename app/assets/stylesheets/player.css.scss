@@ -32,6 +32,21 @@
     margin-top: 10px;
     @extend .panel;
     @extend .panel-primary;
+    .header{
+      @extend .panel-heading;
+      h3{
+        @extend .panel-title;
+      }
+    }
+    .body{
+      @extend .panel-body;
+      ul{
+        @extend .list-group;
+        li{
+          @extend .list-group-item;
+        }
+      }
+    }
   }
 }
 

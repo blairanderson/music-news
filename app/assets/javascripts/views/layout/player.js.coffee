@@ -8,20 +8,17 @@ class MusicNews.Views.Player extends Backbone.View
     SC.whenStreamingReady ->
       console.log 'streaming ready'
       _this.updateCurrentTrack()
-      debugger
 
   render: ->
     $(@el).html(this.template())
     this
 
+  playlistSongTemplate: JST['shared/track']
   updateCurrentTrack: ->
-    @getCurrentTrack() 
-    
+    @getCurrentTrack()
     $(@el).find('#playlist i.track').text("  now playing....")
-
-    $("#currentTrack").text(@currentTrack.song.title);
-    @currentTrack.song.source_url
-    $("#currentTrack").append(nowplaying);
+    markup = @playlistSongTemplate(song: @currentTrack )
+    $(@el).find('#playlist .body ul').prepend markup
   getCurrentTrack: ->
     @currentTrack ||= @songs.first()
     @currentTrack

@@ -24,12 +24,11 @@
   </button>
 </div>
 <div id="playlist">
-  <div class="panel-heading">
-    <h3 class="panel-title">
-      PlayList<i class='track'></i>
-    </h3>
+  <div class="header">
+    <h3>PlayList<i class='track'></i></h3>
   </div>
-  <div class="panel-body">
-    loading...
+  <div class="body">
+    <ul>
+    </ul>
   </div>
 </div>
