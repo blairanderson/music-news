@@ -12,13 +12,6 @@
         @extend .fa;
         @extend .fa-2x;
         @extend .fa-fw;
-        &.play{ @extend .fa-play; }
-        &.pause{ @extend .fa-pause; }
-        &.backward{ @extend .fa-step-backward; }
-        &.forward{ @extend .fa-step-forward; }
-        &.heart-full{ @extend .fa-heart; }
-        &.heart-half{ @extend .fa-heart-o; }
-        &.track{ @extend .fa-cloud; }
         color: #0638d5;
         opacity:0.5;
         &:hover{
@@ -27,6 +20,12 @@
         }
       }
     }
+    button#play > i{@extend .fa-play;}
+    button#pause > i{@extend .fa-pause;}
+    button#previous > i{@extend .fa-step-backward;}
+    button#next > i{@extend .fa-step-forward;}
+    button#love > i{@extend .fa-heart;}
+    button#like > i{@extend .fa-heart-o;}
   }
   #playlist{
     margin-top: 10px;
@@ -49,6 +48,7 @@
     }
   }
 }
+
 
 
 

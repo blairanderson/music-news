@@ -1,26 +1,22 @@
 <div id="player">
-  <button id="previous" data-control="previous">
-    <i class='backward'></i>
+  <button id="previous">
+    <i></i>
   </button>
 
-  <button id="love" data-control="love">
-    <i class='heart-full'></i>
+  <button id="love">
+    <i></i>
   </button>
 
-  <button id="like" data-control="like">
-    <i class='heart-half'></i>
+  <button id="like">
+    <i></i>
   </button>
 
-  <button id="pause" data-control="pause">
-    <i class='pause'></i>
+  <button id="play">
+    <i></i>
   </button>
 
-  <button id="play" data-control="play">
-    <i class='play'></i>
-  </button>
-
-  <button id="next" data-control="next">
-    <i class='forward'></i>
+  <button id="next">
+    <i></i>
   </button>
 </div>
 <div id="playlist">
