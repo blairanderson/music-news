@@ -15062,6 +15062,24 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     Collections: {},
     Views: {},
     Routers: {},
+    Helpers: {
+      env: {
+        prod: function() {
+          if (window.location.hostname === "0.0.0.0") {
+            return false;
+          } else {
+            return true;
+          }
+        },
+        dev: function() {
+          if (window.location.hostname === "0.0.0.0") {
+            return true;
+          } else {
+            return false;
+          }
+        }
+      }
+    },
     initialize: function() {
       var $body, $target;
       MusicNews.App.collections.submissions = new MusicNews.Collections.Submissions();
@@ -15176,7 +15194,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     }
     (function() {
       (function() {
-        __out.push('<div class="hero"></div>\n\n<div class="body">This is the main content</div>\n');
+        __out.push('<div class="hero">\n</div>\n\n<div class="body">This is the main content</div>\n');
       
       }).call(this);
       
@@ -15272,7 +15290,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     }
     (function() {
       (function() {
-        __out.push('this is the sidebar shit\n<img src="http://placehold.it/350x150" class="img-responsive">\n<img src="http://placehold.it/350x150" class="img-responsive">\n<img src="http://placehold.it/350x150" class="img-responsive">\n');
+        __out.push('<hr>\n<hr>\n');
       
       }).call(this);
       
@@ -15333,6 +15351,118 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     return __out.join('');
   };
 }).call(this);
+(function() { this.JST || (this.JST = {}); this.JST["submissions/_song"] = function(__obj) {
+    if (!__obj) __obj = {};
+    var __out = [], __capture = function(callback) {
+      var out = __out, result;
+      __out = [];
+      callback.call(this);
+      result = __out.join('');
+      __out = out;
+      return __safe(result);
+    }, __sanitize = function(value) {
+      if (value && value.ecoSafe) {
+        return value;
+      } else if (typeof value !== 'undefined' && value != null) {
+        return __escape(value);
+      } else {
+        return '';
+      }
+    }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
+    __safe = __obj.safe = function(value) {
+      if (value && value.ecoSafe) {
+        return value;
+      } else {
+        if (!(typeof value !== 'undefined' && value != null)) value = '';
+        var result = new String(value);
+        result.ecoSafe = true;
+        return result;
+      }
+    };
+    if (!__escape) {
+      __escape = __obj.escape = function(value) {
+        return ('' + value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      };
+    }
+    (function() {
+      (function() {
+        __out.push('<li class="media list-group-item">\n  <div class="media-body">\n    <h4 class="media-heading">\n      <a class="pull-left" href="#');
+      
+        __out.push(__sanitize(this.song.get('title')));
+      
+        __out.push('">');
+      
+        __out.push(__sanitize(this.song.get('title')));
+      
+        __out.push('</a>\n    </h4>\n    <h2>\n      Posted by ');
+      
+        __out.push(__sanitize(5435));
+      
+        __out.push(' people - Purchase Song: (<a href="http://amzn.com">link to amazon</a>)(<a href="http://itunes.com">link to itunes</a>)\n    </h2>\n    <hr>\n  </div>\n</li>\n');
+      
+      }).call(this);
+      
+    }).call(__obj);
+    __obj.safe = __objSafe, __obj.escape = __escape;
+    return __out.join('');
+  };
+}).call(this);
+(function() { this.JST || (this.JST = {}); this.JST["submissions/_submission"] = function(__obj) {
+    if (!__obj) __obj = {};
+    var __out = [], __capture = function(callback) {
+      var out = __out, result;
+      __out = [];
+      callback.call(this);
+      result = __out.join('');
+      __out = out;
+      return __safe(result);
+    }, __sanitize = function(value) {
+      if (value && value.ecoSafe) {
+        return value;
+      } else if (typeof value !== 'undefined' && value != null) {
+        return __escape(value);
+      } else {
+        return '';
+      }
+    }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
+    __safe = __obj.safe = function(value) {
+      if (value && value.ecoSafe) {
+        return value;
+      } else {
+        if (!(typeof value !== 'undefined' && value != null)) value = '';
+        var result = new String(value);
+        result.ecoSafe = true;
+        return result;
+      }
+    };
+    if (!__escape) {
+      __escape = __obj.escape = function(value) {
+        return ('' + value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      };
+    }
+    (function() {
+      (function() {
+        __out.push('<div class="row">\n  <div id="main-gutter">\n    <img src="');
+      
+        __out.push(__sanitize(this.submission.songs.models[0].get('thumbnail_url')));
+      
+        __out.push('" width="65px" height="65px" class="img-responsive">\n  </div>\n  <div id="main-content">\n    <ul class="list-group">\n    </ul>\n  </div>\n</div>\n');
+      
+      }).call(this);
+      
+    }).call(__obj);
+    __obj.safe = __objSafe, __obj.escape = __escape;
+    return __out.join('');
+  };
+}).call(this);
 (function() { this.JST || (this.JST = {}); this.JST["submissions/index"] = function(__obj) {
     if (!__obj) __obj = {};
     var __out = [], __capture = function(callback) {
@@ -15377,35 +15507,31 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
         _ref = this.submissions.models;
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           submission = _ref[_i];
-          __out.push('\n  <p class="lead">\n    title:\n    ');
-          __out.push(__sanitize(submission.get('title')));
-          __out.push('\n  </p>\n  <p>\n    Body:\n    ');
-          __out.push(__sanitize(submission.get('body')));
-          __out.push('\n  </p>\n  \n  <a href="');
-          __out.push(__sanitize('/' + submission.get('id')));
-          __out.push('">posted ');
-          __out.push(__sanitize(submission.get('created_at')));
-          __out.push(' ago</a>\n  <span>by ');
-          __out.push(__sanitize(submission.get('twitter')));
-          __out.push('</span>\n  <span>PageViews: ');
-          __out.push(__sanitize(submission.get('view_count')));
-          __out.push('</span>\n\n  ');
+          __out.push('\n  ');
           if (submission.songs.length) {
-            __out.push('\n    <ul class="list-group">\n      ');
+            __out.push('\n    <div class="submission" id="submission-');
+            __out.push(__sanitize(submission.get('id')));
+            __out.push('">\n      <div class="sub-gutter">\n        <a href="/');
+            __out.push(__sanitize(submission.get('id')));
+            __out.push('">\n          <img src="');
+            __out.push(__sanitize(submission.songs.models[0].get('thumbnail_url')));
+            __out.push('" class="img-responsive">\n        </a>\n      </div>\n      <div class="sub-content">\n        ');
             _ref1 = submission.songs.models;
             for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
               song = _ref1[_j];
-              __out.push('\n        <li class="media list-group-item">\n          <a class="pull-left" href="#">\n            <img class="media-object" src="');
-              __out.push(__sanitize(song.get('thumbnail_url')));
-              __out.push('" alt="..." width="65px" height="65px">\n          </a>\n          <div class="media-body">\n            <h4 class="media-heading">\n              ');
-              __out.push(__sanitize(song.get('url')));
-              __out.push('\n            </h4>\n            ');
-              __out.push(__sanitize(song.get('url')));
-              __out.push('\n          </div>\n        </li>\n      ');
+              __out.push('\n          <div class="song">\n            <div class="song-content">\n              <h2><a class="pull-left" href="songs/#');
+              __out.push(__sanitize(song.get('id')));
+              __out.push('">');
+              __out.push(__sanitize(song.get('title')));
+              __out.push('</a></h2>\n              <h4>\n                <a href="/');
+              __out.push(__sanitize(submission.get('id')));
+              __out.push('">\n                  Posted by ');
+              __out.push(__sanitize(5435));
+              __out.push(' people\n                </a>\n                <span>\n                 - Purchase Song: (<a href="http://amzn.com">link to amazon</a>)(<a href="http://itunes.com">link to itunes</a>)\n                </span>\n              </h4>\n            </div>\n            <div class="song-gutter">\n              <button>play / pause</button>\n              <button>like / love</button>\n            </div>\n          </div>\n        ');
             }
-            __out.push('\n    </ul>\n  ');
+            __out.push('\n      </div>\n    </div>\n  ');
           }
-          __out.push('\n\n\n\n  <hr>\n');
+          __out.push('\n');
         }
       
         __out.push('\n');
@@ -15574,7 +15700,15 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       return _ref;
     }
 
-    Submissions.prototype.url = 'feed.json';
+    console.log("collections submissions, change url.");
+
+    Submissions.prototype.url = function() {
+      if (MusicNews.Helpers.env.dev()) {
+        return 'http://new.seainhd.com/feed.json';
+      } else {
+        return 'feed.json';
+      }
+    };
 
     Submissions.prototype.model = MusicNews.Models.Submission;
 
@@ -15725,11 +15859,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       if (this.currentSound) {
         return this.currentSound.play();
       } else {
-        $stream_url = "http://api.soundcloud.com/tracks/121554172/stream";
-        /*
-          get actual stream url
-        */
-
+        $stream_url = song.get('stream_url');
         return SC.stream($stream_url, function(sound) {
           _this.currentSound = sound;
           return _this.currentSound.play();
@@ -15952,7 +16082,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       this.parent = MusicNews.App.views.main.$el;
       this.target = this.parent.find('div.body');
       _target = this.target;
-      this.parent.find('div.hero').html("This is the hero content");
       if (this.collection.length) {
         view = new MusicNews.Views.SubmissionsIndex().render();
         return _target.html(view.$el);
