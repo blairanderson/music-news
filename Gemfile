@@ -16,6 +16,7 @@ gem 'active_model_serializers'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'twitter'
+gem 'rack-cors', :require => 'rack/cors'
 
 group :production do 
   gem 'pg'

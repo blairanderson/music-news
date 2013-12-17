@@ -1,3 +1,3 @@
 class MusicNews.Collections.Submissions extends Backbone.Collection
-  url: 'feed.json'
+  url: 'http://new.seainhd.com/feed.json'
   model: MusicNews.Models.Submission

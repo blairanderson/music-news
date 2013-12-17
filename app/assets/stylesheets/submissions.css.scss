@@ -4,16 +4,15 @@
 
 
 div#window{
+
   section.content{
     @extend .row;
     div#main{
-      @extend .col-xs-7;
-      @extend .col-xs-offset-1;
+      @extend .col-xs-8;
     }
     div#sidebar{
-      @extend .col-xs-3;
+      @extend .col-xs-4;
       @extend .panel;
-      min-width: 285px;
     }
   }
 }

@@ -1,0 +1,33 @@
+<div id="main-gutter">
+  <img src="<%= @submission.songs.models.first().get('thumbnail_url') %>" class="img-responsive">
+</div>
+  <p class="lead">
+    title:
+    <%= @submission.get('title') %>
+  </p>
+  <p>
+    Body:
+    <%= @submission.get('body') %>
+  </p>
+  
+  <a href="<%= '/' + @submission.get('id') %>">posted <%= @submission.get('created_at') %> ago</a>
+  <span>by <%= @submission.get('twitter') %></span>
+  <span>PageViews: <%= @submission.get('view_count') %></span>
+
+  <% if @submission.songs.length: %>
+    <ul class="list-group">
+      <% for song in @submission.songs.models: %>
+        <li class="media list-group-item">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="<%= song.get('thumbnail_url') %>" alt="..." width="65px" height="65px">
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading">
+              <%= song.get('url') %>
+            </h4>
+            <%= song.get('url') %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
