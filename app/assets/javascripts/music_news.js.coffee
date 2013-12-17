@@ -10,6 +10,20 @@ window.MusicNews =
   Collections: {}
   Views: {}
   Routers: {}
+  Helpers: {
+    env:{
+      prod: ->
+        if window.location.hostname == "0.0.0.0"
+          false
+        else
+          true
+      dev: ->
+        if window.location.hostname == "0.0.0.0"
+          true
+        else
+          false
+    }
+  }
   initialize: ->
     MusicNews.App.collections.submissions = new MusicNews.Collections.Submissions()
     MusicNews.App.collections.songs = new MusicNews.Collections.Songs()

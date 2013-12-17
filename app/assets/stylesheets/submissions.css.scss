@@ -2,17 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
 div#window{
-
   section.content{
     @extend .row;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1000px;
     div#main{
       @extend .col-xs-8;
+      max-width: 660px;
     }
     div#sidebar{
       @extend .col-xs-4;
-      @extend .panel;
+      max-width: 330px;
     }
   }
 }
@@ -20,3 +22,36 @@ div#window{
 footer{
   @extend .container;
 }
+
+div#window > section.content > div#main > .body {
+  .submission-list{
+    .submission{
+      border-bottom: solid 3px #000;
+      @extend .row;
+      .sub-gutter{
+        @extend .col-xs-3;
+        img{
+          margin-top: 15px;
+        }
+      }
+      .sub-content{
+        @extend .col-xs-9;
+        .song{
+          @extend .row;
+          .song-content{
+            @extend .col-xs-10;
+            h2{
+              height: 100%;
+            }
+            h4{}
+          }
+          .song-gutter{
+            @extend .col-xs-2;
+          }
+        }
+      }
+    }
+  }
+
+}
+    

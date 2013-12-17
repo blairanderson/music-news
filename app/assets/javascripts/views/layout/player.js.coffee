@@ -41,10 +41,7 @@ class MusicNews.Views.Player extends Backbone.View
     if @currentSound
       @currentSound.play()
     else
-      $stream_url = "http://api.soundcloud.com/tracks/121554172/stream"
-      ###
-        get actual stream url
-      ###
+      $stream_url = song.get('stream_url')
       SC.stream $stream_url, (sound) => 
         _this.currentSound = sound
         _this.currentSound.play()

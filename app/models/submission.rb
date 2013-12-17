@@ -42,4 +42,11 @@ class Submission < ActiveRecord::Base
     songs.where(:type == "Bandcamp".to_sym)
   end
 
+  def purge_count
+    Submission.all.each_with_index {|s,i|  (puts "#{i} - #{s.id}") if s.songs.count < 1 }
+  end
+  
+  def purge
+    Submission.all.each {|s| s.destroy if s.songs.count < 1}
+  end
 end

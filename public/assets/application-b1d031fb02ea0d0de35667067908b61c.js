@@ -15062,6 +15062,24 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     Collections: {},
     Views: {},
     Routers: {},
+    Helpers: {
+      env: {
+        prod: function() {
+          if (window.location.hostname === "0.0.0.0") {
+            return false;
+          } else {
+            return true;
+          }
+        },
+        dev: function() {
+          if (window.location.hostname === "0.0.0.0") {
+            return true;
+          } else {
+            return false;
+          }
+        }
+      }
+    },
     initialize: function() {
       var $body, $target;
       MusicNews.App.collections.submissions = new MusicNews.Collections.Submissions();
@@ -15176,7 +15194,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     }
     (function() {
       (function() {
-        __out.push('<div class="hero"></div>\n\n<div class="body">This is the main content</div>\n');
+        __out.push('<div class="hero">\n</div>\n\n<div class="body">This is the main content</div>\n');
       
       }).call(this);
       
@@ -15224,7 +15242,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     }
     (function() {
       (function() {
-        __out.push('<div class="btn-group">\n  <button class="btn btn-default" id="previous" data-control="previous"><i class=\'glyphicon glyphicon-fast-backward\'></i></button>\n  <button class="btn btn-default" id="love" data-control="love"><i class=\'glyphicon glyphicon-heart\'></i></button>\n  <button class="btn btn-default" id="like" data-control="like"><i class=\'glyphicon glyphicon-heart-empty\'></i></button>\n  <button class="btn btn-default" id="pause" data-control="pause"><i class=\'glyphicon glyphicon-pause\'></i></button>\n  <button class="btn btn-default" id="play" data-control="play"><i class=\'glyphicon glyphicon-play\'></i></button>\n  <button class="btn btn-default" id="next" data-control="next"><i class=\'glyphicon glyphicon-fast-forward\'></i></button>\n  <button class="btn btn-default" id=\'currentTrack\'>loading...</button>\n</div>\n');
+        __out.push('<div id="player">\n  <button id="previous">\n    <i></i>\n  </button>\n\n  <button id="love">\n    <i></i>\n  </button>\n\n  <button id="like">\n    <i></i>\n  </button>\n\n  <button id="play">\n    <i></i>\n  </button>\n\n  <button id="next">\n    <i></i>\n  </button>\n</div>\n<div id="playlist">\n  <div class="header">\n    <h3>PlayList<i class=\'track\'></i></h3>\n  </div>\n  <div class="body">\n    <ul>\n    </ul>\n  </div>\n</div>\n');
       
       }).call(this);
       
@@ -15272,7 +15290,171 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     }
     (function() {
       (function() {
-        __out.push('this is the sidebar shit\n<img src="http://placehold.it/350x150" class="img-responsive">\n<img src="http://placehold.it/350x150" class="img-responsive">\n<img src="http://placehold.it/350x150" class="img-responsive">\n');
+        __out.push('<hr>\n<hr>\n');
+      
+      }).call(this);
+      
+    }).call(__obj);
+    __obj.safe = __objSafe, __obj.escape = __escape;
+    return __out.join('');
+  };
+}).call(this);
+(function() { this.JST || (this.JST = {}); this.JST["shared/track"] = function(__obj) {
+    if (!__obj) __obj = {};
+    var __out = [], __capture = function(callback) {
+      var out = __out, result;
+      __out = [];
+      callback.call(this);
+      result = __out.join('');
+      __out = out;
+      return __safe(result);
+    }, __sanitize = function(value) {
+      if (value && value.ecoSafe) {
+        return value;
+      } else if (typeof value !== 'undefined' && value != null) {
+        return __escape(value);
+      } else {
+        return '';
+      }
+    }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
+    __safe = __obj.safe = function(value) {
+      if (value && value.ecoSafe) {
+        return value;
+      } else {
+        if (!(typeof value !== 'undefined' && value != null)) value = '';
+        var result = new String(value);
+        result.ecoSafe = true;
+        return result;
+      }
+    };
+    if (!__escape) {
+      __escape = __obj.escape = function(value) {
+        return ('' + value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      };
+    }
+    (function() {
+      (function() {
+        __out.push('<li>\n  <i class=\'fa fa-play\'></i>\n  <span>');
+      
+        __out.push(__sanitize(this.song.get('url')));
+      
+        __out.push('</span>\n  <i class=\'fa fa-heart pull-right\'></i>\n</li>\n');
+      
+      }).call(this);
+      
+    }).call(__obj);
+    __obj.safe = __objSafe, __obj.escape = __escape;
+    return __out.join('');
+  };
+}).call(this);
+(function() { this.JST || (this.JST = {}); this.JST["submissions/_song"] = function(__obj) {
+    if (!__obj) __obj = {};
+    var __out = [], __capture = function(callback) {
+      var out = __out, result;
+      __out = [];
+      callback.call(this);
+      result = __out.join('');
+      __out = out;
+      return __safe(result);
+    }, __sanitize = function(value) {
+      if (value && value.ecoSafe) {
+        return value;
+      } else if (typeof value !== 'undefined' && value != null) {
+        return __escape(value);
+      } else {
+        return '';
+      }
+    }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
+    __safe = __obj.safe = function(value) {
+      if (value && value.ecoSafe) {
+        return value;
+      } else {
+        if (!(typeof value !== 'undefined' && value != null)) value = '';
+        var result = new String(value);
+        result.ecoSafe = true;
+        return result;
+      }
+    };
+    if (!__escape) {
+      __escape = __obj.escape = function(value) {
+        return ('' + value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      };
+    }
+    (function() {
+      (function() {
+        __out.push('<li class="media list-group-item">\n  <div class="media-body">\n    <h4 class="media-heading">\n      <a class="pull-left" href="#');
+      
+        __out.push(__sanitize(this.song.get('title')));
+      
+        __out.push('">');
+      
+        __out.push(__sanitize(this.song.get('title')));
+      
+        __out.push('</a>\n    </h4>\n    <h2>\n      Posted by ');
+      
+        __out.push(__sanitize(5435));
+      
+        __out.push(' people - Purchase Song: (<a href="http://amzn.com">link to amazon</a>)(<a href="http://itunes.com">link to itunes</a>)\n    </h2>\n    <hr>\n  </div>\n</li>\n');
+      
+      }).call(this);
+      
+    }).call(__obj);
+    __obj.safe = __objSafe, __obj.escape = __escape;
+    return __out.join('');
+  };
+}).call(this);
+(function() { this.JST || (this.JST = {}); this.JST["submissions/_submission"] = function(__obj) {
+    if (!__obj) __obj = {};
+    var __out = [], __capture = function(callback) {
+      var out = __out, result;
+      __out = [];
+      callback.call(this);
+      result = __out.join('');
+      __out = out;
+      return __safe(result);
+    }, __sanitize = function(value) {
+      if (value && value.ecoSafe) {
+        return value;
+      } else if (typeof value !== 'undefined' && value != null) {
+        return __escape(value);
+      } else {
+        return '';
+      }
+    }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
+    __safe = __obj.safe = function(value) {
+      if (value && value.ecoSafe) {
+        return value;
+      } else {
+        if (!(typeof value !== 'undefined' && value != null)) value = '';
+        var result = new String(value);
+        result.ecoSafe = true;
+        return result;
+      }
+    };
+    if (!__escape) {
+      __escape = __obj.escape = function(value) {
+        return ('' + value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      };
+    }
+    (function() {
+      (function() {
+        __out.push('<div class="row">\n  <div id="main-gutter">\n    <img src="');
+      
+        __out.push(__sanitize(this.submission.songs.models[0].get('thumbnail_url')));
+      
+        __out.push('" width="65px" height="65px" class="img-responsive">\n  </div>\n  <div id="main-content">\n    <ul class="list-group">\n    </ul>\n  </div>\n</div>\n');
       
       }).call(this);
       
@@ -15325,37 +15507,27 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
         _ref = this.submissions.models;
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           submission = _ref[_i];
-          __out.push('\n  <p class="lead">\n    title:\n    ');
-          __out.push(__sanitize(submission.get('title')));
-          __out.push('\n  </p>\n  <p>\n    Body:\n    ');
-          __out.push(__sanitize(submission.get('body')));
-          __out.push('\n  </p>\n  \n  <a href="');
-          __out.push(__sanitize('/' + submission.get('id')));
-          __out.push('">posted ');
-          __out.push(__sanitize(submission.get('created_at')));
-          __out.push(' ago</a>\n  <a href="');
-          __out.push(__sanitize('/' + submission.get('twitter')));
-          __out.push('">by ');
-          __out.push(__sanitize(submission.get('twitter')));
-          __out.push('</a>\n  <span>PageViews: ');
-          __out.push(__sanitize(submission.get('view_count')));
-          __out.push('</span>\n\n  ');
+          __out.push('\n  ');
           if (submission.songs.length) {
-            __out.push('\n    <ul class="list-group">\n      ');
+            __out.push('\n    <div class="submission" id="submission-');
+            __out.push(__sanitize(submission.get('id')));
+            __out.push('">\n      <div class="sub-gutter">\n        <img src="');
+            __out.push(__sanitize(submission.songs.models[0].get('thumbnail_url')));
+            __out.push('" class="img-responsive">\n      </div>\n      <div class="sub-content">\n        ');
             _ref1 = submission.songs.models;
             for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
               song = _ref1[_j];
-              __out.push('\n        <li class="media list-group-item">\n          <a class="pull-left" href="#">\n            <img class="media-object" src="');
-              __out.push(__sanitize(song.get('thumbnail_url')));
-              __out.push('" alt="..." width="65px" height="65px">\n          </a>\n          <div class="media-body">\n            <h4 class="media-heading">\n              ');
-              __out.push(__sanitize(song.get('url')));
-              __out.push('\n            </h4>\n            ');
-              __out.push(__sanitize(song.get('url')));
-              __out.push('\n          </div>\n        </li>\n      ');
+              __out.push('\n          <div class="song">\n            <div class="song-content">\n              <h2><a class="pull-left" href="#');
+              __out.push(__sanitize(song.get('title')));
+              __out.push('">');
+              __out.push(__sanitize(song.get('title')));
+              __out.push('</a></h2>\n              <h4>\n                Posted by ');
+              __out.push(__sanitize(5435));
+              __out.push(' people - Purchase Song: (<a href="http://amzn.com">link to amazon</a>)(<a href="http://itunes.com">link to itunes</a>)\n              </h4>\n            </div>\n            <div class="song-gutter">\n              <button>play / pause</button>\n              <button>like / love</button>\n            </div>\n          </div>\n        ');
             }
-            __out.push('\n    </ul>\n  ');
+            __out.push('\n      </div>\n    </div>\n  ');
           }
-          __out.push('\n\n\n\n  <hr>\n');
+          __out.push('\n');
         }
       
         __out.push('\n');
@@ -15524,7 +15696,15 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       return _ref;
     }
 
-    Submissions.prototype.url = 'feed.json';
+    console.log("collections submissions, change url.");
+
+    Submissions.prototype.url = function() {
+      if (MusicNews.Helpers.env.dev()) {
+        return 'http://new.seainhd.com/feed.json';
+      } else {
+        return 'feed.json';
+      }
+    };
 
     Submissions.prototype.model = MusicNews.Models.Submission;
 
@@ -15619,20 +15799,105 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
     Player.prototype.id = 'music-player';
 
-    Player.prototype.className = 'container';
-
     Player.prototype.template = JST['shared/player'];
 
+    Player.prototype.playlistSongTemplate = JST['shared/track'];
+
     Player.prototype.initialize = function() {
-      this.api = SC;
-      return this.api.initialize({
+      var _this;
+      _this = this;
+      this.songs = MusicNews.App.collections.songs;
+      SC.initialize({
         client_id: "c024bdd48e9ecf014c71af406201f3a2"
+      });
+      return SC.whenStreamingReady(function() {
+        console.log('streaming ready');
+        return _this.updateCurrentTrack();
       });
     };
 
     Player.prototype.render = function() {
       $(this.el).html(this.template());
       return this;
+    };
+
+    Player.prototype.events = {
+      "click div#player button": "buttonHandler"
+    };
+
+    Player.prototype.buttonHandler = function(e) {
+      var $action, $button;
+      e.preventDefault();
+      $button = $(e.currentTarget);
+      $action = $button.attr('id');
+      return this.buttonAction[$action](this, $button);
+    };
+
+    Player.prototype.updateCurrentTrack = function() {
+      var markup;
+      this.getCurrentTrack();
+      $(this.el).find('#playlist i.track').text("  now playing....");
+      markup = this.playlistSongTemplate({
+        song: this.currentTrack
+      });
+      return $(this.el).find('#playlist .body ul').prepend(markup);
+    };
+
+    Player.prototype.getCurrentTrack = function() {
+      this.currentTrack || (this.currentTrack = this.songs.first());
+      return this.currentTrack;
+    };
+
+    Player.prototype.playSong = function(song) {
+      var $stream_url,
+        _this = this;
+      _this = this;
+      if (this.currentSound) {
+        return this.currentSound.play();
+      } else {
+        $stream_url = song.get('stream_url');
+        return SC.stream($stream_url, function(sound) {
+          _this.currentSound = sound;
+          return _this.currentSound.play();
+        });
+      }
+    };
+
+    Player.prototype.pauseSong = function(song) {
+      var _this;
+      _this = this;
+      if (this.currentSound) {
+        return this.currentSound.pause();
+      }
+    };
+
+    Player.prototype.buttonAction = {
+      "play": function(player, button) {
+        var $song;
+        $song = player.currentTrack;
+        player.playSong($song);
+        button.attr('id', 'pause');
+        return console.log('play button action');
+      },
+      "pause": function(player, button) {
+        var $song;
+        $song = player.currentTrack;
+        player.pauseSong($song);
+        button.attr('id', 'play');
+        return console.log('pause button action');
+      },
+      "previous": function(player, button) {
+        return console.log("previous button action");
+      },
+      "love": function(player, button) {
+        return console.log("love button action");
+      },
+      "like": function(player, button) {
+        return console.log("like button action");
+      },
+      "next": function(player, button) {
+        return console.log("next button action");
+      }
     };
 
     return Player;
@@ -15813,8 +16078,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       this.parent = MusicNews.App.views.main.$el;
       this.target = this.parent.find('div.body');
       _target = this.target;
-      this.parent.find('div.hero').html("This is the hero content");
-      debugger;
       if (this.collection.length) {
         view = new MusicNews.Views.SubmissionsIndex().render();
         return _target.html(view.$el);
