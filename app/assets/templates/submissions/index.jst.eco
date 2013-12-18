@@ -10,7 +10,7 @@
         <% for song in submission.songs.models: %>
           <div class="song">
             <div class="song-content">
-              <h2><a class="pull-left" href="songs/#<%= song.get('id') %>"><%= song.get('title') %></a></h2>
+              <h2><a class="pull-left" href="#-example/songs/#<%= song.get('id') %>"><%= song.get('title') %></a></h2>
               <h4>
                 <a href="/<%= submission.get('id')%>">
                   Posted by <%= 5435 %> people

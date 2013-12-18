@@ -10,7 +10,8 @@ class MusicNews.Routers.Submissions extends Backbone.Router
     '/?id=:id': 'show'
 
   nothing: ->
-    console.log('nothing')
+    console.log(window.location.href)
+    return
 
   index: (data) ->
     possibleShow = window.location.search.split('=')[1]
