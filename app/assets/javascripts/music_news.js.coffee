@@ -10,20 +10,6 @@ window.MusicNews =
   Collections: {}
   Views: {}
   Routers: {}
-  Helpers: {
-    env:{
-      prod: ->
-        if window.location.hostname == "0.0.0.0"
-          false
-        else
-          true
-      dev: ->
-        if window.location.hostname == "0.0.0.0"
-          true
-        else
-          false
-    }
-  }
   initialize: ->
     MusicNews.App.collections.submissions = new MusicNews.Collections.Submissions()
     MusicNews.App.collections.songs = new MusicNews.Collections.Songs()
@@ -39,11 +25,25 @@ window.MusicNews =
     MusicNews.App.views.main     = new MusicNews.Views.Main().render()
     MusicNews.App.views.sidebar  = new MusicNews.Views.Sidebar().render()
 
-    $body.append(MusicNews.App.views.main.$el)
     $body.append(MusicNews.App.views.sidebar.$el)
+    $body.append(MusicNews.App.views.main.$el)
     
     Backbone.history.start({pushState: true})
 
+  Helpers: {
+    env:{
+      prod: ->
+        if window.location.hostname == "0.0.0.0"
+          false
+        else
+          true
+      dev: ->
+        if window.location.hostname == "0.0.0.0"
+          true
+        else
+          false
+    }
+  }
 
 $(document).ready ->
   MusicNews.initialize()
