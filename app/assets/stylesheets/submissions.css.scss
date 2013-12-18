@@ -11,10 +11,12 @@ div#window{
     div#main{
       @extend .col-xs-8;
       max-width: 660px;
+      min-width: 640px;
     }
     div#sidebar{
       @extend .col-xs-4;
       max-width: 330px;
+      min-width: 320px;
     }
   }
 }
@@ -27,6 +29,7 @@ div#window > section.content > div#main > .body {
   .submission-list{
     .submission{
       border-bottom: solid 3px #000;
+      margin-bottom: 20px;
       @extend .row;
       .sub-gutter{
         @extend .col-xs-3;
@@ -38,6 +41,7 @@ div#window > section.content > div#main > .body {
         @extend .col-xs-9;
         .song{
           @extend .row;
+          margin-bottom: 40px;
           .song-content{
             @extend .col-xs-10;
             h2{
@@ -47,6 +51,17 @@ div#window > section.content > div#main > .body {
           }
           .song-gutter{
             @extend .col-xs-2;
+            button{
+              @extend .btn;
+              @extend .btn-link;
+            }
+            button > i{@extend .fa;}
+            button.play > i {
+              @extend .fa-play;
+            }
+            button.heart > i {
+              @extend .fa-heart;
+            }
           }
         }
       }
