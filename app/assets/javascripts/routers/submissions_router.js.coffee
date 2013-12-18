@@ -7,11 +7,17 @@ class MusicNews.Routers.Submissions extends Backbone.Router
     'new': 'nothing'
     '': 'index'
     ':id': 'show'
+    '/?id=:id': 'show'
 
   nothing: ->
     console.log('nothing')
 
-  index: ->
+  index: (data) ->
+    possibleShow = window.location.search.split('=')[1]
+    if possibleShow
+      this.navigate(possibleShow, trigger: true)
+      return
+
     @parent = MusicNews.App.views.main.$el
     @target = @parent.find('div.body')
     _target = @target

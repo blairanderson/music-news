@@ -38,7 +38,7 @@ class SubmissionsController < ApplicationController
 
     if @submission.save
       AttachmentBuilder.process(attachment_params, @submission)
-      redirect_to @submission, notice: 'Submission was successfully created.'
+      redirect_to root_path(id: @submission.id), notice: 'Submission was successfully created.'
     else
       render action: 'new'
     end
