@@ -6,27 +6,27 @@ class SubmissionsController < ApplicationController
   end
 
   def feed
-    
-    @submissions = Submission.latest.limit(5)
-    
-    respond_to do |format|
-      format.rss  { render rss: @submissions }
-      format.html { redirect_to feed_path(format: :json)}
-      format.json  { render json: @submissions.to_json(include: [:songs]) }
-    end
+    @submissions = Submission.latest.limit(50)
+    render json: @submissions.to_json(include: [:songs])
   end
 
   def twitter
     @submissions = Submission.where(twitter: params[:twitter])
-    render 'submissions/index'
+    render json: @submissions.to_json(include: [:songs])
   end
 
   def more
     @submissions = Submission.order("created_at DESC")
+    render json: @submissions.to_json(include: [:songs])
   end
 
   def show
     @submission.increment!(:view_count)
+    respond_to do |format|
+      format.js{render json: @submission.to_json(include: [:songs])}
+      format.json{render json: @submission.to_json(include: [:songs])}
+      format.html{ redirect_to root_path(id: @submission.id)}
+    end
   end
 
   def new
