@@ -3,7 +3,7 @@
     <div class="submission" id="submission-<%= submission.get('id')%>">
       <div class="sub-gutter">
         <a href="/<%= submission.get('id')%>">
-          <img src="<%= submission.songs.models[0].get('thumbnail_url') %>" class="img-responsive">
+          <img src="<%= submission.thumbnail_url %>" class="img-responsive">
         </a>
       </div>
       <div class="sub-content">
@@ -21,8 +21,8 @@
               </h4>
             </div>
             <div class="song-gutter">
-              <button>play / pause</button>
-              <button>like / love</button>
+              <button class="play"><i></i></button>
+              <button class="heart"><i></i></button>
             </div>
           </div>
         <% end %>
