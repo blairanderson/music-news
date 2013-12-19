@@ -7,7 +7,7 @@ class MusicNews.Views.Layout extends Backbone.View
     this
 
   events: 
-    "click nav a" : "goTo"
+    "click a[href='/']" : "goTo"
 
   goTo: (e) ->
     e.preventDefault()

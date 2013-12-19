@@ -43,7 +43,13 @@ window.MusicNews =
         else
           false
     }
-  }
+    runner: ->
+      $item = $('#move-me')
+      $target = $('ul.nav#nav')
+      $target.append($item)
+  } 
+
 
 $(document).ready ->
   MusicNews.initialize()
+  MusicNews.Helpers.runner()

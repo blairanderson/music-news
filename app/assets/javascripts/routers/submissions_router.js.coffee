@@ -4,14 +4,9 @@ class MusicNews.Routers.Submissions extends Backbone.Router
     @songs = MusicNews.App.collections.songs
 
   routes: 
-    'new': 'nothing'
     '': 'index'
     ':id': 'show'
     '/?id=:id': 'show'
-
-  nothing: ->
-    console.log(window.location.href)
-    return
 
   index: (data) ->
     possibleShow = window.location.search.split('=')[1]

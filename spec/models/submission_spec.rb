@@ -30,4 +30,12 @@ describe Submission do
       expect(subject.attachments.count).to eq 4
     end
   end
+
+  describe '#purge_count' do
+    let!(:subject){create_submission}
+    before do
+      expect(subject).to be_valid
+      expect(subject.songs).to be_valid
+    end
+  end
 end
