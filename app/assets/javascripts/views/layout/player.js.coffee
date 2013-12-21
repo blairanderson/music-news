@@ -11,6 +11,8 @@ class MusicNews.Views.Player extends Backbone.View
     SC.whenStreamingReady ->
       console.log 'streaming ready'
       _this.updateCurrentTrack()
+      console.log( _this.currentTrack )
+
 
   render: ->
     $(@el).html(this.template())
@@ -39,15 +41,20 @@ class MusicNews.Views.Player extends Backbone.View
     @currentTrack
 
   playSong: (song)->
+    debugger
     _this = this
     if @currentSound
       @currentSound.play()
     else
-      debugger
-      $stream_url = _this.currentTrack.get('stream_url')
+      $stream_url = @currentTrack.get('stream_url')
+      if $stream_url is null or undefined
+        _this.currentTrack.destroy()
+        _this.advanceTrack()
+        return
+
       SC.stream $stream_url, (sound) => 
-        _this.currentSound = sound
-        _this.currentSound.play()
+        @currentSound = sound
+        @currentSound.play()
 
   pauseSong: (song)->
     _this = this
@@ -55,12 +62,13 @@ class MusicNews.Views.Player extends Backbone.View
       @currentSound.pause()
 
   advanceTrack: ->
-    this.currentSound.unload()
-    this.currentSound = undefined
     @songHistory.add(@currentTrack)
     @songs.remove(@currentTrack)
     @updateCurrentTrack
     @playSong
+  stopSong: ->
+    this.currentSound.unload()
+    this.currentSound = undefined
 
   buttonAction:
     "play": (player, button)->
@@ -76,6 +84,7 @@ class MusicNews.Views.Player extends Backbone.View
       console.log('pause button action')
 
     "next": (player, button)->
+      player.stopSong()
       player.advanceTrack()
       console.log("next button action")
 

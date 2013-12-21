@@ -31,7 +31,12 @@ window.MusicNews =
     Backbone.history.start({pushState: true})
 
   Helpers: {
-    env:{
+    urlBase: ->
+      if this.env.prod()
+        "/"
+      else
+        "http://new.seainhd.com/"
+    env: {
       prod: ->
         if window.location.hostname == "0.0.0.0"
           false
@@ -45,11 +50,11 @@ window.MusicNews =
     }
     runner: ->
       $item = $('#move-me')
-      $target = $('ul.nav#nav')
+      $target = $('ul.dropdown-menu')
       $target.append($item)
   } 
 
 
 $(document).ready ->
   MusicNews.initialize()
-  MusicNews.Helpers.runner()
+  # MusicNews.Helpers.runner()

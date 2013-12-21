@@ -16,7 +16,7 @@ nav{
 form{
   div.input{
     @extend .form-group;
-    textarea, input[type='text'], input[type='email']{
+    textarea, input[type='text'], input[type='email'], input[type='url']{
       @extend .form-control;
     }
   }

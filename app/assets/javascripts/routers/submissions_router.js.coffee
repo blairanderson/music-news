@@ -17,7 +17,6 @@ class MusicNews.Routers.Submissions extends Backbone.Router
     @parent = MusicNews.App.views.main.$el
     @target = @parent.find('div.body')
     _target = @target
-    
     if @collection.length
       view = new MusicNews.Views.SubmissionsIndex().render()
       _target.html(view.$el)
@@ -34,10 +33,12 @@ class MusicNews.Routers.Submissions extends Backbone.Router
 
     if @collection.length
       submission = MusicNews.App.collections.submissions.findWhere({id: parseInt(data)})
+      submission.fetch()
       view = new MusicNews.Views.Submission(model: submission).render()
       _target.html(view.$el)
     else
       @collection.fetch().done () ->
         submission = MusicNews.App.collections.submissions.findWhere({id: parseInt(data)})
+        submission.fetch()
         view = new MusicNews.Views.Submission(model: submission).render()
         _target.html(view.$el)
