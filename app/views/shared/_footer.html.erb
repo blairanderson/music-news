@@ -1,17 +1,15 @@
 <footer>
-  <small>
     <li id="move-me">
       <% if logged_in? %>
         <%= link_to signout_path do %>
-          <i class="glyphicon glyphicon-log-out"></i> Sign Out
+          <i class="fa fa-sign-out"></i> Sign Out
         <% end %>
       <% else %>
         <%= link_to "/auth/twitter" do %>
-          <i class="glyphicon glyphicon-log-in"></i> Sign In
+          <i class="fa fa-sign-in"></i> Sign In
         <% end %>
       <% end %>
     </li>
-  </small>
   <p>
     <%= link_to "a fun website by SeaInHD", "http://seainhd.com" %>
   </p>
