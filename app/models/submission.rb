@@ -4,11 +4,15 @@ class Submission < ActiveRecord::Base
   validates :body, presence: true
   validates :twitter, presence: true
   validates :email, presence: true
+  has_many :songs
+  accepts_nested_attributes_for :songs, reject_if: :missing_url?
+
+  def missing_url?(attributes)
+    !(/\A(?:https?:\/\/soundcloud\.com)\/.*/ === attributes['url'])
+  end
+  
   scope :latest, -> { order("created_at DESC") }
 
-  def songs
-    Song.where(submission_id: self.id)
-  end
 
   def next
     Submission.where(id: id + 1).first
@@ -43,10 +47,20 @@ class Submission < ActiveRecord::Base
   end
 
   def self.purge_count
-    Submission.all.each_with_index {|s,i|  (puts "#{i} - #{s.id}") if s.songs.count < 1 }
+    subs = Submission.where(songs_count: 0).count
+    sub_total = Submission.count
+    "#{subs} of #{sub_total} without songs."
   end
   
+
+  def self.update_all_song_counts
+    Submission.all.each do |s|
+      s.update songs_count: s.songs.length
+    end
+  end
+
+private
   def self.purge
-    Submission.all.each {|s| s.destroy if s.songs.count < 1}
+    Submission.where(songs_count: 0).destroy_all
   end
 end
