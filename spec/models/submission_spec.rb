@@ -21,14 +21,6 @@ describe Submission do
       expect(subject.title).to eq "Valid Band Title"
       expect(subject.body).to eq "Valid Band Bio"
     end
-
-    it 'should have many attachments' do 
-      expect(subject.attachments.count).to eq 0
-      AttachmentBuilder.process(stuff, subject) 
-      expect(subject.videos.to_a.count).to eq 2
-      expect(subject.songs.to_a.count).to eq 2
-      expect(subject.attachments.count).to eq 4
-    end
   end
 
   describe '#purge_count' do

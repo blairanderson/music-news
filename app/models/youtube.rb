@@ -1,5 +1,4 @@
 class Youtube < Video
-  include Attachment
   def embed
     @embed || "<iframe id='ytplayer' type='text/html' width='#{embed_width}' height='#{embed_height}' src='#{parse_for_embed + embed_details}' frameborder='0'/>".html_safe
   end
