@@ -26,16 +26,17 @@ class SubmissionsController < ApplicationController
   end
 
   def resolve
-    if @submission.songs.present?
+    if @submission.songs.empty?
+      @submission.destroy
+      path = new_path
+    else
       @submission.songs.each do |s|
         s.resolve
         sleep 1
       end
-      redirect_to bb_submission_path(@submission)
-    else
-      @submission.destroy
-      redirect_to new_path, notice: "At Least One Song is Required."
+      path = bb_submission_path(@submission)
     end
+    redirect_to path
   end
 
   def new
