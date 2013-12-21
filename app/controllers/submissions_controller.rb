@@ -1,5 +1,5 @@
 class SubmissionsController < ApplicationController
-  before_action :set_submission, only: [:show, :destroy]
+  before_action :set_submission, only: [:show, :destroy, :resolve]
   
   def index
     @submissions = Submission.latest.limit(20)
@@ -22,10 +22,18 @@ class SubmissionsController < ApplicationController
 
   def show
     @submission.increment!(:view_count)
-    respond_to do |format|
-      format.js{render json: @submission.to_json(include: [:songs])}
-      format.json{render json: @submission.to_json(include: [:songs])}
-      format.html{ redirect_to root_path(id: @submission.id)}
+    redirect_to bb_submission_path(@submission)
+  end
+
+  def resolve
+    if @submission.songs.present?
+      @submission.songs.each do |s|
+        s.resolve
+        sleep 1
+      end
+      redirect_to bb_submission_path(@submission)
+    else
+      redirect_to new_path, notice: "At Least One Song is Required."
     end
   end
 
@@ -37,8 +45,7 @@ class SubmissionsController < ApplicationController
     @submission = Submission.new(submission_params)
 
     if @submission.save
-      AttachmentBuilder.process(attachment_params, @submission)
-      redirect_to root_path(id: @submission.id), notice: 'Submission was successfully created.'
+      redirect_to resolve_submission_path(@submission), notice: 'Submission was successfully created.'
     else
       render action: 'new'
     end
@@ -55,14 +62,6 @@ private
   end
 
   def submission_params
-    params.require(:submission).permit(:title, :body, :user_id, :twitter, :email)
-  end
-
-  def attachment_params
-    items = {}
-    items[:youtube]     = params[:youtube]
-    items[:soundcloud]  = params[:soundcloud]
-    items[:bandcamp]    = params[:bandcamp]
-    items
+    params.require(:submission).permit(:title, :body, :user_id, :twitter, :email, songs_attributes:[:url])
   end
 end

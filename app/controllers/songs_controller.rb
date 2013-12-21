@@ -1,35 +1,22 @@
 class SongsController < ApplicationController
-  before_action :set_song, only: [:show, :resolve, :onfinish]
+  before_action :set_song, only: [:show]
 
   def index
     @songs = Song.order("created_at DESC")
     render json: @songs
   end
 
-  def playlist
-    @songs = Song.where(active: "true").order("created_at DESC")
-    render json: @songs, root: false
+  def show
+    @song.resolve
+    render json: @song
+  end
+
+  def destroy
+    @song.destroy
+    render js: "window.location.href = window.location.origin;"
   end
 
   def set_song
     @song = Song.find(params[:id])
   end
-
-  def show
-    unless @song.active == "true"
-      @song.fetch_details
-    end
-    render json: @song
-  end
-
-  def resolve
-    @song.fetch_details
-    render json: @song
-  end
-
-  def onfinish
-    @song.increment!(:play_count)
-    render nothing: true
-  end
-
 end
