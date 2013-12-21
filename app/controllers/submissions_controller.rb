@@ -33,6 +33,7 @@ class SubmissionsController < ApplicationController
       end
       redirect_to bb_submission_path(@submission)
     else
+      @submission.destroy
       redirect_to new_path, notice: "At Least One Song is Required."
     end
   end
