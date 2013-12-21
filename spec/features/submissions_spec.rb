@@ -8,11 +8,12 @@ describe Submission do
       fill_in 'submission_email', with: "band@example.com"
       fill_in 'submission_twitter', with: "seainhd"
       fill_in 'submission_body', with: "Valid Band Body"
-      fill_in 'soundcloud-1', with: "https://soundcloud.com/juicyjmusic/bounce-it"
+      fill_in 'submission[songs_attributes][0][url]', with: "https://soundcloud.com/juicyjmusic/bounce-it"
+      fill_in 'submission[songs_attributes][1][url]', with: "https://soundcloud.com/juicyjmusic/bounce-it"
+      fill_in 'submission[songs_attributes][2][url]', with: "https://soundcloud.com/juicyjmusic/bounce-it"
       click_on "Submit!"
       expect(Submission.count).to eq 1
-      expect(Song.soundclouds.count).to eq 1
-      expect(Song.count).to eq 1
+      expect(Song.count).to eq 3
       target = Song.first
       expect(target.url).to eq "https://soundcloud.com/juicyjmusic/bounce-it"
     end

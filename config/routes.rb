@@ -5,20 +5,15 @@ MusicNews::Application.routes.draw do
 
   resources :submissions, path: 's', except: [:edit, :update] do 
     resource :publisher, only: [:show, :new, :create]
+    member do
+      get :resolve
+    end
   end
   resource :static_pages, path: '/', only: [] do
     get :about
   end
 
-  resources :songs, only: [:index, :show] do
-    collection do 
-      get :playlist
-    end
-    member do 
-      get :resolve
-      get :onfinish
-    end
-  end
+  resources :songs, only: [:index, :show, :destroy]
 
 
   #vanity-URLS 

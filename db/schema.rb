@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130729182914) do
+ActiveRecord::Schema.define(version: 20131221033026) do
 
   create_table "keychains", force: true do |t|
     t.string   "api_secret"
@@ -53,7 +53,8 @@ ActiveRecord::Schema.define(version: 20130729182914) do
     t.datetime "updated_at"
     t.string   "twitter"
     t.string   "email"
-    t.integer  "view_count", default: 0
+    t.integer  "view_count",  default: 0
+    t.integer  "songs_count", default: 0
   end
 
   add_index "submissions", ["user_id"], name: "index_submissions_on_user_id"

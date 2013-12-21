@@ -4,10 +4,9 @@
     = f.input :twitter, placeholder: "twitter username"
     = f.input :email, placeholder: "booking/press email"
     .input.required
-      %label Soundcloud URLs
-      = simple_fields_for :soundcloud do |soundcloud|
-        = soundcloud.text_field 1, id: "soundcloud-1", placeholder: "http://www.soundcloud.com/artist-name/song-name", class: "soundcloud"
-        = soundcloud.text_field 2, id: "soundcloud-2", placeholder: "http://www.soundcloud.com/artist-name/song-name", class: "soundcloud"
-        = soundcloud.text_field 3, id: "soundcloud-3", placeholder: "http://www.soundcloud.com/artist-name/song-name", class: "soundcloud"
+      .alert.alert-info
+        %label Each URL Must Be For a Single Soundcloud Song. 
+      = f.simple_fields_for :songs, 3.times.map{@submission.songs.build} do |s|
+        = s.input :url, required: false, placeholder: "http://soundcloud.com/artist-name/song-name", class: "soundcloud"
     = f.input :body, label: "BIO"
-    = f.button :submit, 'Submit!', class: "btn"
+    = f.button :submit, 'Submit!', data: { disable_with: "Submitted, Please Wait..."} ,class: "btn btn-block btn-lg btn-primary"
