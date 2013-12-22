@@ -33,7 +33,7 @@
       </ul>
     </div><!-- /.navbar-collapse -->
   </div>
-  <div class="container" id="player-container">
+  <div class="player-container" id="player-container">
 
   </div>
 </nav>

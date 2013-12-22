@@ -18,7 +18,7 @@
   <button id="next">
     <i></i>
   </button>
-  <button id="player">
-    Current Status
-  </button>
 </div>
+<span id="player">
+  Current Status
+</span>

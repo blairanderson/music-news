@@ -39,8 +39,8 @@ footer{
 div#window > section.content > div#main > .body {
   .submission-list{
     .submission{
-      border-bottom: solid 3px #000;
-      margin-bottom: 20px;
+      border-bottom: solid 1px #cccccc;
+      margin: 10px 0px;
       @extend .row;
       .sub-gutter{
         @extend .col-xs-1;
@@ -58,7 +58,7 @@ div#window > section.content > div#main > .body {
           -moz-border-radius: 5px;
           border-radius: 5px;
           &:hover{
-            background-color: #e7e7e7;
+            background-color: #f9fbff;
           }
           .song-content{
             @extend .col-xs-9;
@@ -80,37 +80,58 @@ div#window > section.content > div#main > .body {
               margin-bottom: 2px;
             }
             button{
+              border-color: #333;
               > i{
                 @extend .fa;
               }
+              &:hover > i {
+                @extend .fa-spin;
+              }
               &.play{
-                background-color: hsl(302, 72%, 47%) !important;
-                background-repeat: repeat-x;
-                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ce21c8", endColorstr="#ce21c8");
-                background-image: -khtml-gradient(linear, left top, left bottom, from(#ce21c8), to(#ce21c8));
-                background-image: -moz-linear-gradient(top, #ce21c8, #ce21c8);
-                background-image: -ms-linear-gradient(top, #ce21c8, #ce21c8);
-                background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ce21c8), color-stop(100%, #ce21c8));
-                background-image: -webkit-linear-gradient(top, #ce21c8, #ce21c8);
-                background-image: -o-linear-gradient(top, #ce21c8, #ce21c8);
-                background-image: linear-gradient(#ce21c8, #ce21c8);
-                border-color: #ce21c8 #ce21c8 hsl(302, 72%, 47%);
-                color: #fff !important;
-                text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.00);
-                -webkit-font-smoothing: antialiased;
+                background-color: #FF1493;
+                color: #fff;
                 > i {
                   @extend .fa-play;
+                }
+                &:hover{
+                  background-color: white;
+                  color: #FF1493;
+                  border-color: #FF1493;
+                  box-shadow: 0 0 20px #FF1493;
                 }
               }
               &.heart > i {
                 @extend .fa-heart;
                 color: red;
               }
+              &.heart:hover{
+                background-color: white;
+                border-color: red;
+                box-shadow: 0 0 20px red;
+              }
               &.facebook > i {
                 @extend .fa-facebook;
               }
+              &.facebook:hover{
+                border-color: lighten(#3B5999, 10%);
+                background-color: #fff;
+                box-shadow: 0 0 20px lighten(#3B5999, 20%);
+                > i {
+                  @extend .fa-facebook;
+                  color: #3B5999;
+                }
+              }
               &.twitter > i {
                 @extend .fa-twitter;
+              }
+              &.twitter:hover{
+                background-color: #fff;
+                border-color: #4099FF;
+                box-shadow: 0 0 20px #4099FF;
+                > i {
+                  @extend .fa-twitter;
+                  color: #4099FF;
+                }
               }
             } 
           }

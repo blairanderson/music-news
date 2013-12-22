@@ -7,7 +7,21 @@ nav{
   div.collapse{
     @extend .navbar-collapse;
     ul.nav{
-      @extend .navbar-nav
+      @extend .navbar-nav;
+      > li > a {
+      }
+    }
+  }
+  div.player-container{
+    background: white;
+    color: #333333;
+    background-color: white;
+    border-top: #cccccc 1px solid;
+    border-bottom: #cccccc 1px solid;
+    div#music-player{
+      @extend .container;
+      div#player{
+      }
     }
   }
 }
