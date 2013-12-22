@@ -18,13 +18,7 @@
   <button id="next">
     <i></i>
   </button>
-</div>
-<div id="playlist">
-  <div class="header">
-    <h3>PlayList<i class='track'></i></h3>
-  </div>
-  <div class="body">
-    <ul>
-    </ul>
-  </div>
+  <button id="player">
+    Current Status
+  </button>
 </div>

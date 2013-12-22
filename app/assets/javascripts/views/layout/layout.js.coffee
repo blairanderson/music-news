@@ -3,7 +3,11 @@ class MusicNews.Views.Layout extends Backbone.View
   template: JST['shared/layout']
 
   render: ->
-    $(@el).html(this.template())
+    $markup = $(this.template())
+
+    MusicNews.App.views.player = new MusicNews.Views.Player().render()
+    $markup.find('div#player-container').html( MusicNews.App.views.player.$el )
+    $(@el).html($markup)
     this
 
   events: 

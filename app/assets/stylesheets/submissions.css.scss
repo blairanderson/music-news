@@ -4,17 +4,13 @@
 
 a{
   color: black;
+  text-decoration: underline;
+  &:hover{
+    text-decoration: none;
+    color: white !important;
+  }
 }
 p, span , h1, h2, h3, h4, h5 {
-  background-color: #b6f776;
-background-image: -webkit-gradient(linear, left center, right center, from(rgb(182, 247, 118)), to(rgb(72, 95, 255)));
-background-image: -webkit-linear-gradient(left, rgb(182, 247, 118), rgb(72, 95, 255));
-background-image: -moz-linear-gradient(left, rgb(182, 247, 118), rgb(72, 95, 255));
-background-image: -o-linear-gradient(left, rgb(182, 247, 118), rgb(72, 95, 255));
-background-image: -ms-linear-gradient(left, rgb(182, 247, 118), rgb(72, 95, 255));
-background-image: linear-gradient(left, rgb(182, 247, 118), rgb(72, 95, 255));
-filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1,StartColorStr='#b6f776', EndColorStr='#485fff');
-
 }
 
 div#window{
@@ -57,7 +53,13 @@ div#window > section.content > div#main > .body {
         @extend .col-xs-11;
         .song{
           @extend .row;
-          margin-bottom: 40px;
+          margin-bottom: 10px 0px;
+          -webkit-border-radius: 5px;
+          -moz-border-radius: 5px;
+          border-radius: 5px;
+          &:hover{
+            background-color: #e7e7e7;
+          }
           .song-content{
             @extend .col-xs-9;
             padding-top: 15px;
@@ -69,6 +71,7 @@ div#window > section.content > div#main > .body {
           .song-gutter{
             @extend .col-xs-3;
             padding-top: 15px;
+            padding-bottom: 15px;
             button{
               @extend .btn;
               @extend .btn-default;

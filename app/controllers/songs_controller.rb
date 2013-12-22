@@ -12,6 +12,7 @@ class SongsController < ApplicationController
   end
 
   def destroy
+    binding.pry
     @song.destroy
     render js: "window.location.href = window.location.origin;"
   end
