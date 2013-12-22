@@ -2,6 +2,21 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+a{
+  color: black;
+}
+p, span , h1, h2, h3, h4, h5 {
+  background-color: #b6f776;
+background-image: -webkit-gradient(linear, left center, right center, from(rgb(182, 247, 118)), to(rgb(72, 95, 255)));
+background-image: -webkit-linear-gradient(left, rgb(182, 247, 118), rgb(72, 95, 255));
+background-image: -moz-linear-gradient(left, rgb(182, 247, 118), rgb(72, 95, 255));
+background-image: -o-linear-gradient(left, rgb(182, 247, 118), rgb(72, 95, 255));
+background-image: -ms-linear-gradient(left, rgb(182, 247, 118), rgb(72, 95, 255));
+background-image: linear-gradient(left, rgb(182, 247, 118), rgb(72, 95, 255));
+filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1,StartColorStr='#b6f776', EndColorStr='#485fff');
+
+}
+
 div#window{
   section.content{
     @extend .row;
@@ -32,29 +47,34 @@ div#window > section.content > div#main > .body {
       margin-bottom: 20px;
       @extend .row;
       .sub-gutter{
-        @extend .col-xs-3;
+        @extend .col-xs-1;
+        padding: 0;
         img{
           margin-top: 15px;
         }
       }
       .sub-content{
-        @extend .col-xs-9;
+        @extend .col-xs-11;
         .song{
           @extend .row;
           margin-bottom: 40px;
           .song-content{
-            @extend .col-xs-10;
+            @extend .col-xs-9;
+            padding-top: 15px;
             h2{
               height: 100%;
             }
             h4{}
           }
           .song-gutter{
-            @extend .col-xs-2;
+            @extend .col-xs-3;
+            padding-top: 15px;
             button{
               @extend .btn;
               @extend .btn-default;
               width: 40px;
+              height: 38px;
+              margin-bottom: 2px;
             }
             button{
               > i{
@@ -83,12 +103,16 @@ div#window > section.content > div#main > .body {
                 @extend .fa-heart;
                 color: red;
               }
+              &.facebook > i {
+                @extend .fa-facebook;
+              }
+              &.twitter > i {
+                @extend .fa-twitter;
+              }
             } 
           }
         }
       }
     }
   }
-
-}
-    
+}    

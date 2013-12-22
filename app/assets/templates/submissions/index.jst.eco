@@ -10,18 +10,19 @@
         <% for song in submission.songs.models: %>
           <div class="song">
             <div class="song-content">
-              <h2><a class="pull-left" href=""><%= song.get('title') %></a></h2>
-              <h4>
-                <a href="/<%= submission.get('id')%>">
-                  Posted by <%= 5435 %> people
-                </a>
+              <p>
+                <a class="pull-left" href=""><%= song.get('title') %></a> - 
+                <a href="/<%= submission.get('id')%>">Posted by <%= 5435 %> people.</a>
+                <br>
                 <span>
-                 - Purchase Song: (<a href="http://amzn.com">link to amazon</a>)(<a href="http://itunes.com">link to itunes</a>)
+                 Purchase Song: (<a href="http://amzn.com">link to amazon</a>)(<a href="http://itunes.com">link to itunes</a>)
                 </span>
-              </h4>
+              </p>
             </div>
             <div class="song-gutter">
+              <button class="facebook"><i></i></button>
               <button class="play"><i></i></button>
+              <button class="twitter"><i></i></button>
               <button class="heart"><i></i></button>
             </div>
           </div>

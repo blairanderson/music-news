@@ -15062,7 +15062,34 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     Collections: {},
     Views: {},
     Routers: {},
+    initialize: function() {
+      var $body, $target;
+      MusicNews.App.collections.submissions = new MusicNews.Collections.Submissions();
+      MusicNews.App.collections.songs = new MusicNews.Collections.Songs();
+      $target = $('#window');
+      MusicNews.App.views.layout = new MusicNews.Views.Layout().render();
+      $target.append(MusicNews.App.views.layout.$el);
+      $target = $('#window');
+      $body = $('<section/>', {
+        "class": "content"
+      });
+      $target.append($body);
+      MusicNews.App.views.main = new MusicNews.Views.Main().render();
+      MusicNews.App.views.sidebar = new MusicNews.Views.Sidebar().render();
+      $body.append(MusicNews.App.views.sidebar.$el);
+      $body.append(MusicNews.App.views.main.$el);
+      return Backbone.history.start({
+        pushState: true
+      });
+    },
     Helpers: {
+      urlBase: function() {
+        if (this.env.prod()) {
+          return "/";
+        } else {
+          return "http://new.seainhd.com/";
+        }
+      },
       env: {
         prod: function() {
           if (window.location.hostname === "0.0.0.0") {
@@ -15078,27 +15105,13 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
             return false;
           }
         }
+      },
+      runner: function() {
+        var $item, $target;
+        $item = $('#move-me');
+        $target = $('ul.dropdown-menu');
+        return $target.append($item);
       }
-    },
-    initialize: function() {
-      var $body, $target;
-      MusicNews.App.collections.submissions = new MusicNews.Collections.Submissions();
-      MusicNews.App.collections.songs = new MusicNews.Collections.Songs();
-      $target = $('#window');
-      MusicNews.App.views.layout = new MusicNews.Views.Layout().render();
-      $target.append(MusicNews.App.views.layout.$el);
-      $target = $('#window');
-      $body = $('<section/>', {
-        "class": "content"
-      });
-      $target.append($body);
-      MusicNews.App.views.main = new MusicNews.Views.Main().render();
-      MusicNews.App.views.sidebar = new MusicNews.Views.Sidebar().render();
-      $body.append(MusicNews.App.views.main.$el);
-      $body.append(MusicNews.App.views.sidebar.$el);
-      return Backbone.history.start({
-        pushState: true
-      });
     }
   };
 
@@ -15146,7 +15159,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     }
     (function() {
       (function() {
-        __out.push('<nav role="navigation">\n  <div class="container">\n  <!-- Brand and toggle get grouped for better mobile display -->\n    <div class="navbar-header">\n      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse-1">\n        <span class="sr-only">Toggle navigation</span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n      </button>\n      <a href="/">MyMusic</a>\n    </div>\n\n    <!-- Collect the nav links, forms, and other content for toggling -->\n    <div class="collapse" id="collapse-1">\n      <ul class="nav">\n        <li><a href="#pop">Pop</a></li>\n        <li><a href="/new">New</a></li>\n        <li><a href="#about">About</a></li>\n      </ul>\n      <ul class="nav navbar-right">\n        <li><a href="#">Link</a></li>\n        <li class="dropdown">\n          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>\n          <ul class="dropdown-menu">\n            <li><a href="#">Action</a></li>\n            <li><a href="#">Another action</a></li>\n            <li><a href="#">Something else here</a></li>\n            <li class="divider"></li>\n            <li><a href="#">Separated link</a></li>\n          </ul>\n        </li>\n      </ul>\n    </div><!-- /.navbar-collapse -->\n  </div>\n</nav>\n');
+        __out.push('<nav role="navigation">\n  <div class="container">\n  <!-- Brand and toggle get grouped for better mobile display -->\n    <div class="navbar-header">\n      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse-1">\n        <span class="sr-only">Toggle navigation</span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n      </button>\n      <a href="/">MyMusic</a>\n    </div>\n\n    <!-- Collect the nav links, forms, and other content for toggling -->\n    <div class="collapse" id="collapse-1">\n      <ul class="nav" id="nav">\n        <li><a href="#pop">Pop</a></li>\n        <li><a href="#new">New</a></li>\n        <li><a href="#about">About</a></li>\n      </ul>\n      <ul class="nav navbar-right">\n        <li class="dropdown">\n          <a href="#" class="dropdown-toggle" data-toggle="dropdown">\n            <button class="btn btn-default fa fa-bars"></button>\n          </a>\n          <ul class="dropdown-menu">\n            <li><a href="#">Action</a></li>\n            <li><a href="#">Another action</a></li>\n            <li><a href="#">Something else here</a></li>\n            <li class="divider"></li>\n          </ul>\n        </li>\n      </ul>\n    </div><!-- /.navbar-collapse -->\n  </div>\n</nav>\n');
       
       }).call(this);
       
@@ -15514,20 +15527,18 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
             __out.push('">\n      <div class="sub-gutter">\n        <a href="/');
             __out.push(__sanitize(submission.get('id')));
             __out.push('">\n          <img src="');
-            __out.push(__sanitize(submission.songs.models[0].get('thumbnail_url')));
+            __out.push(__sanitize(submission.thumbnail_url));
             __out.push('" class="img-responsive">\n        </a>\n      </div>\n      <div class="sub-content">\n        ');
             _ref1 = submission.songs.models;
             for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
               song = _ref1[_j];
-              __out.push('\n          <div class="song">\n            <div class="song-content">\n              <h2><a class="pull-left" href="songs/#');
-              __out.push(__sanitize(song.get('id')));
-              __out.push('">');
+              __out.push('\n          <div class="song">\n            <div class="song-content">\n              <p>\n                <a class="pull-left" href="">');
               __out.push(__sanitize(song.get('title')));
-              __out.push('</a></h2>\n              <h4>\n                <a href="/');
+              __out.push('</a> - \n                <a href="/');
               __out.push(__sanitize(submission.get('id')));
-              __out.push('">\n                  Posted by ');
+              __out.push('">Posted by ');
               __out.push(__sanitize(5435));
-              __out.push(' people\n                </a>\n                <span>\n                 - Purchase Song: (<a href="http://amzn.com">link to amazon</a>)(<a href="http://itunes.com">link to itunes</a>)\n                </span>\n              </h4>\n            </div>\n            <div class="song-gutter">\n              <button>play / pause</button>\n              <button>like / love</button>\n            </div>\n          </div>\n        ');
+              __out.push(' people.</a>\n                <br>\n                <span>\n                 Purchase Song: (<a href="http://amzn.com">link to amazon</a>)(<a href="http://itunes.com">link to itunes</a>)\n                </span>\n              </p>\n            </div>\n            <div class="song-gutter">\n              <button class="facebook"><i></i></button>\n              <button class="play"><i></i></button>\n              <button class="twitter"><i></i></button>\n              <button class="heart"><i></i></button>\n            </div>\n          </div>\n        ');
             }
             __out.push('\n      </div>\n    </div>\n  ');
           }
@@ -15646,8 +15657,16 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       return _ref;
     }
 
+    Submission.prototype.url = function() {
+      return "/s/" + this.id + "/resolve";
+    };
+
+    Submission.prototype.defaultThumbnail = function() {
+      return "http://placehold.it/300x300";
+    };
+
     Submission.prototype.parse = function(data) {
-      var new_song, song_data, _i, _len, _ref1, _this;
+      var firstSong, new_song, song_data, _i, _len, _ref1, _this;
       this.songs = new MusicNews.Collections.Songs();
       _this = this;
       _ref1 = data.songs;
@@ -15656,6 +15675,12 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
         new_song = new MusicNews.Models.Song(song_data);
         MusicNews.App.collections.songs.add(new_song);
         _this.songs.add(new_song);
+      }
+      firstSong = this.songs.models[0];
+      if (firstSong && firstSong.get('thumbnail_url')) {
+        this.thumbnail_url = firstSong.get('thumbnail_url');
+      } else {
+        this.thumbnail_url = this.defaultThumbnail();
       }
       return data;
     };
@@ -15740,7 +15765,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     };
 
     Layout.prototype.events = {
-      "click nav a": "goTo"
+      "click a[href='/']": "goTo"
     };
 
     Layout.prototype.goTo = function(e) {
@@ -15811,12 +15836,14 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       var _this;
       _this = this;
       this.songs = MusicNews.App.collections.songs;
+      this.songHistory = new MusicNews.Collections.Songs;
       SC.initialize({
         client_id: "c024bdd48e9ecf014c71af406201f3a2"
       });
       return SC.whenStreamingReady(function() {
         console.log('streaming ready');
-        return _this.updateCurrentTrack();
+        _this.updateCurrentTrack();
+        return console.log(_this.currentTrack);
       });
     };
 
@@ -15840,26 +15867,34 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     Player.prototype.updateCurrentTrack = function() {
       var markup;
       this.getCurrentTrack();
-      $(this.el).find('#playlist i.track').text("  now playing....");
-      markup = this.playlistSongTemplate({
-        song: this.currentTrack
-      });
-      return $(this.el).find('#playlist .body ul').prepend(markup);
+      if (this.currentTrack) {
+        $(this.el).find('#playlist i.track').text("  now playing....");
+        markup = this.playlistSongTemplate({
+          song: this.currentTrack
+        });
+        return $(this.el).find('#playlist .body ul').prepend(markup);
+      }
     };
 
     Player.prototype.getCurrentTrack = function() {
-      this.currentTrack || (this.currentTrack = this.songs.first());
+      this.currentTrack = this.songs.first();
       return this.currentTrack;
     };
 
     Player.prototype.playSong = function(song) {
+      debugger;
       var $stream_url,
         _this = this;
       _this = this;
       if (this.currentSound) {
         return this.currentSound.play();
       } else {
-        $stream_url = song.get('stream_url');
+        $stream_url = this.currentTrack.get('stream_url');
+        if ($stream_url === null || void 0) {
+          _this.currentTrack.destroy();
+          _this.advanceTrack();
+          return;
+        }
         return SC.stream($stream_url, function(sound) {
           _this.currentSound = sound;
           return _this.currentSound.play();
@@ -15873,6 +15908,18 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       if (this.currentSound) {
         return this.currentSound.pause();
       }
+    };
+
+    Player.prototype.advanceTrack = function() {
+      this.songHistory.add(this.currentTrack);
+      this.songs.remove(this.currentTrack);
+      this.updateCurrentTrack;
+      return this.playSong;
+    };
+
+    Player.prototype.stopSong = function() {
+      this.currentSound.unload();
+      return this.currentSound = void 0;
     };
 
     Player.prototype.buttonAction = {
@@ -15890,6 +15937,11 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
         button.attr('id', 'play');
         return console.log('pause button action');
       },
+      "next": function(player, button) {
+        player.stopSong();
+        player.advanceTrack();
+        return console.log("next button action");
+      },
       "previous": function(player, button) {
         return console.log("previous button action");
       },
@@ -15898,9 +15950,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       },
       "like": function(player, button) {
         return console.log("like button action");
-      },
-      "next": function(player, button) {
-        return console.log("next button action");
       }
     };
 
@@ -16068,17 +16117,20 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     };
 
     Submissions.prototype.routes = {
-      'new': 'nothing',
       '': 'index',
-      ':id': 'show'
+      ':id': 'show',
+      '/?id=:id': 'show'
     };
 
-    Submissions.prototype.nothing = function() {
-      return console.log('nothing');
-    };
-
-    Submissions.prototype.index = function() {
-      var view, _target;
+    Submissions.prototype.index = function(data) {
+      var possibleShow, view, _target;
+      possibleShow = window.location.search.split('=')[1];
+      if (possibleShow) {
+        this.navigate(possibleShow, {
+          trigger: true
+        });
+        return;
+      }
       this.parent = MusicNews.App.views.main.$el;
       this.target = this.parent.find('div.body');
       _target = this.target;
@@ -16103,6 +16155,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
         submission = MusicNews.App.collections.submissions.findWhere({
           id: parseInt(data)
         });
+        submission.fetch();
         view = new MusicNews.Views.Submission({
           model: submission
         }).render();
@@ -16112,6 +16165,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
           submission = MusicNews.App.collections.submissions.findWhere({
             id: parseInt(data)
           });
+          submission.fetch();
           view = new MusicNews.Views.Submission({
             model: submission
           }).render();
