@@ -27,29 +27,17 @@
     button#love > i{@extend .fa-heart;}
     button#like > i{@extend .fa-heart-o;}
   }
-  span#player {
-    font-size: 17px;
+  span#playlist {
     padding-left: 20px;
     padding-right:20px;
-  }
-  #playlist{
-    margin-top: 10px;
-    @extend .panel;
-    @extend .panel-primary;
-    .header{
-      @extend .panel-heading;
-      h3{
-        @extend .panel-title;
-      }
-    }
-    .body{
-      @extend .panel-body;
-      ul{
-        @extend .list-group;
-        li{
-          @extend .list-group-item;
-        }
-      }
+    border: none;
+
+    a{
+      font-size: 17px;
+      text-decoration: none;
+      border: none;
+      color: #ff6600;
+      font-weight: bold;
     }
   }
 }

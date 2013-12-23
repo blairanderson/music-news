@@ -2,17 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-a{
-  color: black;
-  text-decoration: underline;
-  &:hover{
-    text-decoration: none;
-    color: white !important;
-  }
-}
-p, span , h1, h2, h3, h4, h5 {
-}
-
 div#window{
   section.content{
     @extend .row;
@@ -84,9 +73,6 @@ div#window > section.content > div#main > .body {
               > i{
                 @extend .fa;
               }
-              &:hover > i {
-                @extend .fa-spin;
-              }
               &.play{
                 background-color: #FF1493;
                 color: #fff;
@@ -133,10 +119,10 @@ div#window > section.content > div#main > .body {
                   color: #4099FF;
                 }
               }
-            } 
+            }
           }
         }
       }
     }
   }
-}    
+}
