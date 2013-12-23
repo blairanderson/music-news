@@ -1,11 +1,16 @@
-<li class="media list-group-item">
-  <div class="media-body">
-    <h4 class="media-heading">
-      <a class="pull-left" href="#<%= @song.get('title') %>"><%= @song.get('title') %></a>
-    </h4>
-    <h2>
-      Posted by <%= 5435 %> people - Purchase Song: (<a href="http://amzn.com">link to amazon</a>)(<a href="http://itunes.com">link to itunes</a>)
-    </h2>
-    <hr>
-  </div>
-</li>
+<div class="song-content">
+  <p>
+    <a class="pull-left" href=""><%= @song.get('title') %></a> -
+    <a href="/<%= @song.get('submission_id')%>">view submission</a>
+    <br>
+    <span>
+     Purchase Song: (<a href="http://amzn.com">link to amazon</a>)(<a href="http://itunes.com">link to itunes</a>)
+    </span>
+  </p>
+</div>
+<div class="song-gutter">
+  <button class="facebook"><i></i></button>
+  <button class="play"><i></i></button>
+  <button class="twitter"><i></i></button>
+  <button class="heart"><i></i></button>
+</div>

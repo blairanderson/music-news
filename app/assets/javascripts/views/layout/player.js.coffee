@@ -16,6 +16,8 @@ class MusicNews.Views.Player extends Backbone.View
 
   render: ->
     $(@el).html(this.template())
+    @playButton = this.$el.find('button[data-action="play-pause-button"]')
+
     this
 
   events:
@@ -25,7 +27,7 @@ class MusicNews.Views.Player extends Backbone.View
     e.preventDefault();
     $button = $(e.currentTarget)
     $action = $button.attr('id')
-    @buttonAction[$action](this, $button)
+    @buttonAction[$action](this)
 
 
   updateCurrentTrack: ->
@@ -37,17 +39,18 @@ class MusicNews.Views.Player extends Backbone.View
 
 
   getCurrentTrack: ->
-    @currentTrack = @songs.first()
+    @currentTrack ||= @songs.first()
     @currentTrack
 
   playSong: ->
     _this = this
+    @playButton.attr('id', 'pause')
+
     if @currentSound
       @currentSound.play()
     else
       $stream_url = @currentTrack.get('stream_url')
       if $stream_url is null or undefined
-        _this.currentTrack.destroy()
         _this.advanceTrack()
         return
 
@@ -57,6 +60,8 @@ class MusicNews.Views.Player extends Backbone.View
 
   pauseSong: ->
     _this = this
+    @playButton.attr('id', 'play')
+
     if @currentSound
       @currentSound.pause()
 
@@ -82,36 +87,30 @@ class MusicNews.Views.Player extends Backbone.View
     this.currentSound = undefined
 
   buttonAction:
-    "play": (player, button)->
+    "play": (player)->
       player.playSong()
-      button.attr('id', 'pause')
       console.log('play button action')
 
-    "pause": (player, button)->
+    "pause": (player)->
       player.pauseSong()
-      button.attr('id', 'play')
       console.log('pause button action')
 
-    "next": (player, button)->
-      $playButton = player.$el.find('button[data-action="play-pause-button"]')
-
-      this.pause(player, $playButton )
+    "next": (player)->
+      this.pause(player)
       player.advanceTrack()
-      this.play(player, $playButton)
+      this.play(player)
 
       console.log("next button action")
 
-    "previous": (player, button)->
-      $playButton = player.$el.find('button[data-action="play-pause-button"]')
-
-      this.pause(player, $playButton )
+    "previous": (player)->
+      this.pause(player)
       player.previousTrack()
-      this.play(player, $playButton)
+      this.play(player)
 
       console.log("previous button action")
 
-    "love": (player, button)->
+    "love": (player)->
       console.log("love button action")
 
-    "like": (player, button)->
+    "like": (player)->
       console.log("like button action")
