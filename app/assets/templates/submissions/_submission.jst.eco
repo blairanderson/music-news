@@ -1,9 +1,29 @@
-<div class="row">
-  <div id="main-gutter">
-    <img src="<%= @submission.songs.models[0].get('thumbnail_url') %>" width="65px" height="65px" class="img-responsive">
-  </div>
-  <div id="main-content">
-    <ul class="list-group">
-    </ul>
-  </div>
-</div>
+<% if @submission.songs.length: %>
+    <div class="sub-gutter">
+      <a href="/<%= @submission.get('id')%>">
+        <img src="<%= @submission.thumbnail_url %>" class="img-responsive">
+      </a>
+    </div>
+    <div class="sub-content">
+      <% for song in @submission.songs.models: %>
+        <div class="song">
+          <div class="song-content">
+            <p>
+              <a class="pull-left" href=""><%= song.get('title') %></a> -
+              <a href="/<%= @submission.get('id')%>">Posted by <%= 5435 %> people.</a>
+              <br>
+              <span>
+               Purchase Song: (<a href="http://amzn.com">link to amazon</a>)(<a href="http://itunes.com">link to itunes</a>)
+              </span>
+            </p>
+          </div>
+          <div class="song-gutter">
+            <button class="facebook"><i></i></button>
+            <button class="play"><i></i></button>
+            <button class="twitter"><i></i></button>
+            <button class="heart"><i></i></button>
+          </div>
+        </div>
+      <% end %>
+    </div>
+<% end %>
