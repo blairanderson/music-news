@@ -1,6 +1,6 @@
 class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :destroy, :resolve]
-  
+
   def index
     @submissions = Submission.latest.limit(20)
   end
@@ -15,28 +15,22 @@ class SubmissionsController < ApplicationController
     render json: @submissions.to_json(include: [:songs])
   end
 
-  def more
-    @submissions = Submission.order("created_at DESC")
-    render json: @submissions.to_json(include: [:songs])
-  end
-
   def show
     @submission.increment!(:view_count)
-    redirect_to bb_submission_path(@submission)
+    redirect_to root_path(id: @submission.id)
   end
 
   def resolve
     if @submission.songs.empty?
       @submission.destroy
-      path = new_path
+      render :new
     else
       @submission.songs.each do |s|
         s.resolve
         sleep 1
       end
-      path = bb_submission_path(@submission)
+      redirect_to bb_submission_path(@submission)
     end
-    redirect_to path
   end
 
   def new
@@ -47,7 +41,7 @@ class SubmissionsController < ApplicationController
     @submission = Submission.new(submission_params)
 
     if @submission.save
-      redirect_to resolve_submission_path(@submission), notice: 'Submission was successfully created.'
+      redirect_to root_path(id: @submission.id), notice: 'Submission was successfully created.'
     else
       render action: 'new'
     end

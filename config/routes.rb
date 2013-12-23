@@ -3,7 +3,7 @@ MusicNews::Application.routes.draw do
   get '/seainhd' => redirect('http://www.seainhd.com')
   match '/auth/:provider/callback' => 'sessions#create', via: [:get, :post]
 
-  resources :submissions, path: 's', except: [:edit, :update] do 
+  resources :submissions, path: 's', except: [:edit, :update] do
     resource :publisher, only: [:show, :new, :create]
     member do
       get :resolve
@@ -16,9 +16,8 @@ MusicNews::Application.routes.draw do
   resources :songs, only: [:index, :show, :destroy]
 
 
-  #vanity-URLS 
+  #vanity-URLS
   get 'new' => 'submissions#new'
-  get 'more' => 'submissions#more'
   get 'feed' => 'submissions#feed'
   get 'logout' => 'sessions#destroy'
   get 'signout' => 'sessions#destroy'

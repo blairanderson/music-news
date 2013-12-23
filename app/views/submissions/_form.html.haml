@@ -5,8 +5,10 @@
     = f.input :email, placeholder: "booking/press email"
     .input.required
       .alert.alert-info
-        %label Each URL Must Be For a Single Soundcloud Song. 
-      = f.simple_fields_for :songs, 3.times.map{@submission.songs.build} do |s|
+        %label Each URL Must Be For a Single Soundcloud Song.
+      = f.simple_fields_for :songs, @submission.songs.build do |s|
+        = s.input :url, required: true, placeholder: "http://soundcloud.com/artist-name/song-name", class: "soundcloud"
+      = f.simple_fields_for :songs, 2.times.map{@submission.songs.build} do |s|
         = s.input :url, required: false, placeholder: "http://soundcloud.com/artist-name/song-name", class: "soundcloud"
     = f.input :body, label: "BIO"
     = f.button :submit, 'Submit!', data: { disable_with: "Submitted, Please Wait..."} ,class: "btn btn-block btn-lg btn-primary"

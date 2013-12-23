@@ -18,11 +18,14 @@ module ObjectCreationMethods
 
   def create_submission(overrides = {})
     defaults = {
-      title: "Valid Band Title", 
+      title: "Valid Band Title",
       body: "Valid Band Bio",
       twitter: "seainhd",
-      email: "example@example.com"
+      email: "example@example.com",
+      songs_attributes: {"0"=>{url: "https://soundcloud.com/furns/sparks"}}
     }
+
+
     Submission.create!(defaults.merge(overrides))
   end
 
@@ -32,16 +35,16 @@ module ObjectCreationMethods
 
   def create_user(overrides = {})
     defaults = {
-      provider: 'twitter', 
+      provider: 'twitter',
       uid: '1',
-      name: 'Doug Funny' 
+      name: 'Doug Funny'
     }
     User.create!(defaults.merge(overrides))
   end
 
   def create_song(overrides = {})
     defaults = {
-      type: "Soundcloud", 
+      type: "Soundcloud",
       url: "https://soundcloud.com/yuniintaxco/echoes"
     }
     Song.create!( defaults.merge(overrides) )

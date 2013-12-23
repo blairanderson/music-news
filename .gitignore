@@ -17,3 +17,5 @@
 /doc
 /coverage
 .env
+# Ignore application configuration
+/config/application.yml

@@ -17,18 +17,19 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'twitter'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'figaro'
 
-group :production do 
+group :production do
   gem 'pg'
   gem 'rails_12factor'
 end
 
-group :test do 
+group :test do
   gem 'vcr', '2.8.0'
   gem 'webmock', '1.16'
 end
 
-group :test, :development do 
+group :test, :development do
   gem 'dotenv-rails'
   gem 'guard-rspec'
   gem 'sqlite3'
@@ -37,7 +38,7 @@ group :test, :development do
   gem 'launchy'
 end
 
-group :development do 
+group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
 end

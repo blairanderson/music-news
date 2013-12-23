@@ -5,14 +5,26 @@ class Submission < ActiveRecord::Base
   validates :twitter, presence: true
   validates :email, presence: true
   has_many :songs
+  validate :associated_songs
+
+  def associated_songs
+    errors.add(:songs, 'Must Have At Least 1 Song') unless self.songs.length > 0
+  end
+
   accepts_nested_attributes_for :songs, reject_if: :missing_url?
 
   def missing_url?(attributes)
-    !(/\A(?:https?:\/\/soundcloud\.com)\/.*/ === attributes['url'])
+    !(/\A(?:https?:\/\/soundcloud\.com)\/.+\/.+/ === attributes['url']) && !attributes['url'].include?('/sets/')
   end
-  
+
   scope :latest, -> { order("created_at DESC") }
 
+  after_save :resolve_songs
+  def resolve_songs
+    songs.each do |s|
+      s.resolve
+    end
+  end
 
   def next
     Submission.where(id: id + 1).first
@@ -51,7 +63,7 @@ class Submission < ActiveRecord::Base
     sub_total = Submission.count
     "#{subs} of #{sub_total} without songs."
   end
-  
+
 
   def self.update_all_song_counts
     Submission.all.each do |s|
