@@ -1,7 +1,7 @@
 <div id="player">
   <button id="previous">
     <i></i>
-  </button>
+   </button>
 
   <button id="love">
     <i></i>
@@ -11,7 +11,7 @@
     <i></i>
   </button>
 
-  <button id="play">
+  <button id="play" data-action="play-pause-button">
     <i></i>
   </button>
 
@@ -19,6 +19,5 @@
     <i></i>
   </button>
 </div>
-<span id="player">
-  Current Status
+<span id="playlist">
 </span>

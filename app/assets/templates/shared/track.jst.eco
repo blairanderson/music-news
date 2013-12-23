@@ -1,5 +1,1 @@
-<li>
-  <i class='fa fa-play'></i>
-  <span><%= @song.get('url') %></span>
-  <i class='fa fa-heart pull-right'></i>
-</li>
+<a href="<%= @song.get('url') %>" target="_blank"><%= @song.get('title') %></a>
