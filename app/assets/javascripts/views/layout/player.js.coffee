@@ -61,8 +61,8 @@ class MusicNews.Views.Player extends Backbone.View
       @currentSound.pause()
 
   advanceTrack: ->
-    @songHistory.add(@currentTrack)
-    @songs.remove(@currentTrack)
+    $song = @songs.shift()
+    @songHistory.unshift($song)
 
     if @songs.length == 0
       window.location.href = window.location.href
@@ -71,9 +71,11 @@ class MusicNews.Views.Player extends Backbone.View
       @updateCurrentTrack()
 
   previousTrack: ->
-    $song = @songHistory.first()
-    @songs.add($song)
-    @songHistory.remove($song)
+    $song = @songHistory.shift()
+    if !$song
+      return
+    @songs.unshift($song)
+    @updateCurrentTrack()
 
   stopSong: ->
     this.currentSound.unload()
