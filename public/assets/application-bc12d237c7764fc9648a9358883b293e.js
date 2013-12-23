@@ -15159,7 +15159,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     }
     (function() {
       (function() {
-        __out.push('<nav role="navigation">\n  <div class="container">\n  <!-- Brand and toggle get grouped for better mobile display -->\n    <div class="navbar-header">\n      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse-1">\n        <span class="sr-only">Toggle navigation</span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n      </button>\n      <a href="/">MyMusic</a>\n    </div>\n\n    <!-- Collect the nav links, forms, and other content for toggling -->\n    <div class="collapse" id="collapse-1">\n      <ul class="nav" id="nav">\n        <li><a href="#pop">Pop</a></li>\n        <li><a href="#new">New</a></li>\n        <li><a href="#about">About</a></li>\n      </ul>\n      <ul class="nav navbar-right">\n        <li class="dropdown">\n          <a href="#" class="dropdown-toggle" data-toggle="dropdown">\n            <button class="btn btn-default fa fa-bars"></button>\n          </a>\n          <ul class="dropdown-menu">\n            <li><a href="#">Action</a></li>\n            <li><a href="#">Another action</a></li>\n            <li><a href="#">Something else here</a></li>\n            <li class="divider"></li>\n          </ul>\n        </li>\n      </ul>\n    </div><!-- /.navbar-collapse -->\n  </div>\n</nav>\n');
+        __out.push('<nav role="navigation">\n  <div class="container">\n  <!-- Brand and toggle get grouped for better mobile display -->\n    <div class="navbar-header">\n      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse-1">\n        <span class="sr-only">Toggle navigation</span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n      </button>\n      <a href="/">SEAinHD - Music</a>\n    </div>\n\n    <!-- Collect the nav links, forms, and other content for toggling -->\n    <div class="collapse" id="collapse-1">\n      <ul class="nav" id="nav">\n        <li><a href="#pop">Pop</a></li>\n        <li><a href="#new">New</a></li>\n        <li><a href="#about">About</a></li>\n      </ul>\n      <ul class="nav navbar-right">\n        <li class="dropdown">\n          <a href="#" class="dropdown-toggle" data-toggle="dropdown">\n            <button class="btn btn-default fa fa-bars"></button>\n          </a>\n          <ul class="dropdown-menu">\n            <li><a href="#">Action</a></li>\n            <li><a href="#">Another action</a></li>\n            <li><a href="#">Something else here</a></li>\n            <li class="divider"></li>\n          </ul>\n        </li>\n      </ul>\n    </div><!-- /.navbar-collapse -->\n  </div>\n  <div class="player-container" id="player-container">\n\n  </div>\n</nav>\n');
       
       }).call(this);
       
@@ -15255,7 +15255,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     }
     (function() {
       (function() {
-        __out.push('<div id="player">\n  <button id="previous">\n    <i></i>\n  </button>\n\n  <button id="love">\n    <i></i>\n  </button>\n\n  <button id="like">\n    <i></i>\n  </button>\n\n  <button id="play">\n    <i></i>\n  </button>\n\n  <button id="next">\n    <i></i>\n  </button>\n</div>\n<div id="playlist">\n  <div class="header">\n    <h3>PlayList<i class=\'track\'></i></h3>\n  </div>\n  <div class="body">\n    <ul>\n    </ul>\n  </div>\n</div>\n');
+        __out.push('<div id="player">\n  <button id="previous">\n    <i></i>\n   </button>\n\n  <button id="love">\n    <i></i>\n  </button>\n\n  <button id="like">\n    <i></i>\n  </button>\n\n  <button id="play" data-action="play-pause-button">\n    <i></i>\n  </button>\n\n  <button id="next">\n    <i></i>\n  </button>\n</div>\n<span id="playlist">\n</span>\n');
       
       }).call(this);
       
@@ -15303,7 +15303,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     }
     (function() {
       (function() {
-        __out.push('<hr>\n<hr>\n');
+      
       
       }).call(this);
       
@@ -15351,11 +15351,15 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     }
     (function() {
       (function() {
-        __out.push('<li>\n  <i class=\'fa fa-play\'></i>\n  <span>');
+        __out.push('<a href="');
       
         __out.push(__sanitize(this.song.get('url')));
       
-        __out.push('</span>\n  <i class=\'fa fa-heart pull-right\'></i>\n</li>\n');
+        __out.push('" target="_blank">');
+      
+        __out.push(__sanitize(this.song.get('title')));
+      
+        __out.push('</a>\n');
       
       }).call(this);
       
@@ -15532,13 +15536,13 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
             _ref1 = submission.songs.models;
             for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
               song = _ref1[_j];
-              __out.push('\n          <div class="song">\n            <div class="song-content">\n              <h2><a class="pull-left" href="">');
+              __out.push('\n          <div class="song">\n            <div class="song-content">\n              <p>\n                <a class="pull-left" href="">');
               __out.push(__sanitize(song.get('title')));
-              __out.push('</a></h2>\n              <h4>\n                <a href="/');
+              __out.push('</a> - \n                <a href="/');
               __out.push(__sanitize(submission.get('id')));
-              __out.push('">\n                  Posted by ');
+              __out.push('">Posted by ');
               __out.push(__sanitize(5435));
-              __out.push(' people\n                </a>\n                <span>\n                 - Purchase Song: (<a href="http://amzn.com">link to amazon</a>)(<a href="http://itunes.com">link to itunes</a>)\n                </span>\n              </h4>\n            </div>\n            <div class="song-gutter">\n              <button class="play"><i></i></button>\n              <button class="heart"><i></i></button>\n            </div>\n          </div>\n        ');
+              __out.push(' people.</a>\n                <br>\n                <span>\n                 Purchase Song: (<a href="http://amzn.com">link to amazon</a>)(<a href="http://itunes.com">link to itunes</a>)\n                </span>\n              </p>\n            </div>\n            <div class="song-gutter">\n              <button class="facebook"><i></i></button>\n              <button class="play"><i></i></button>\n              <button class="twitter"><i></i></button>\n              <button class="heart"><i></i></button>\n            </div>\n          </div>\n        ');
             }
             __out.push('\n      </div>\n    </div>\n  ');
           }
@@ -15728,11 +15732,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     console.log("collections submissions, change url.");
 
     Submissions.prototype.url = function() {
-      if (MusicNews.Helpers.env.dev()) {
-        return 'http://new.seainhd.com/feed.json';
-      } else {
-        return 'feed.json';
-      }
+      return 'feed';
     };
 
     Submissions.prototype.model = MusicNews.Models.Submission;
@@ -15760,7 +15760,11 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     Layout.prototype.template = JST['shared/layout'];
 
     Layout.prototype.render = function() {
-      $(this.el).html(this.template());
+      var $markup;
+      $markup = $(this.template());
+      MusicNews.App.views.player = new MusicNews.Views.Player().render();
+      $markup.find('div#player-container').html(MusicNews.App.views.player.$el);
+      $(this.el).html($markup);
       return this;
     };
 
@@ -15866,13 +15870,13 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
     Player.prototype.updateCurrentTrack = function() {
       var markup;
+      this.currentSound = void 0;
       this.getCurrentTrack();
       if (this.currentTrack) {
-        $(this.el).find('#playlist i.track').text("  now playing....");
         markup = this.playlistSongTemplate({
           song: this.currentTrack
         });
-        return $(this.el).find('#playlist .body ul').prepend(markup);
+        return $(this.el).find('#playlist').html(markup);
       }
     };
 
@@ -15881,8 +15885,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       return this.currentTrack;
     };
 
-    Player.prototype.playSong = function(song) {
-      debugger;
+    Player.prototype.playSong = function() {
       var $stream_url,
         _this = this;
       _this = this;
@@ -15902,7 +15905,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       }
     };
 
-    Player.prototype.pauseSong = function(song) {
+    Player.prototype.pauseSong = function() {
       var _this;
       _this = this;
       if (this.currentSound) {
@@ -15911,10 +15914,24 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     };
 
     Player.prototype.advanceTrack = function() {
-      this.songHistory.add(this.currentTrack);
-      this.songs.remove(this.currentTrack);
-      this.updateCurrentTrack;
-      return this.playSong;
+      var $song;
+      $song = this.songs.shift();
+      this.songHistory.unshift($song);
+      if (this.songs.length === 0) {
+        window.location.href = window.location.href;
+      } else {
+        return this.updateCurrentTrack();
+      }
+    };
+
+    Player.prototype.previousTrack = function() {
+      var $song;
+      $song = this.songHistory.shift();
+      if (!$song) {
+        return;
+      }
+      this.songs.unshift($song);
+      return this.updateCurrentTrack();
     };
 
     Player.prototype.stopSong = function() {
@@ -15924,25 +15941,29 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
     Player.prototype.buttonAction = {
       "play": function(player, button) {
-        var $song;
-        $song = player.currentTrack;
-        player.playSong($song);
+        player.playSong();
         button.attr('id', 'pause');
         return console.log('play button action');
       },
       "pause": function(player, button) {
-        var $song;
-        $song = player.currentTrack;
-        player.pauseSong($song);
+        player.pauseSong();
         button.attr('id', 'play');
         return console.log('pause button action');
       },
       "next": function(player, button) {
-        player.stopSong();
+        var $playButton;
+        $playButton = player.$el.find('button[data-action="play-pause-button"]');
+        this.pause(player, $playButton);
         player.advanceTrack();
+        this.play(player, $playButton);
         return console.log("next button action");
       },
       "previous": function(player, button) {
+        var $playButton;
+        $playButton = player.$el.find('button[data-action="play-pause-button"]');
+        this.pause(player, $playButton);
+        player.previousTrack();
+        this.play(player, $playButton);
         return console.log("previous button action");
       },
       "love": function(player, button) {
@@ -15976,8 +15997,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     Sidebar.prototype.template = JST['shared/sidebar'];
 
     Sidebar.prototype.render = function() {
-      MusicNews.App.views.player = new MusicNews.Views.Player().render();
-      $(this.el).html(MusicNews.App.views.player.$el);
       $(this.el).append(this.template());
       return this;
     };
