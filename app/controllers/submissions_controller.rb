@@ -2,7 +2,7 @@ class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :destroy, :resolve]
 
   def index
-    @submissions = Submission.latest.limit(20)
+    @submissions = Submission.latest.limit(20).includes(:songs)
   end
 
   def feed
