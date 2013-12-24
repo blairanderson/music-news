@@ -3,6 +3,10 @@
     <i></i>
    </button>
 
+  <button id="nolove">
+    <i></i>
+  </button>
+
   <button id="love">
     <i></i>
   </button>

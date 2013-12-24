@@ -12,11 +12,9 @@
         @extend .fa;
         @extend .fa-2x;
         @extend .fa-fw;
-        color: #0638d5;
-        opacity:0.5;
+        color: #000;
         &:hover{
-          color: lighten(#0638d5, 10%);
-          opacity:0.8;
+          color: lighten(#000, 50%);
         }
       }
     }
@@ -24,8 +22,15 @@
     button#pause > i{@extend .fa-pause;}
     button#previous > i{@extend .fa-step-backward;}
     button#next > i{@extend .fa-step-forward;}
-    button#love > i{@extend .fa-heart;}
-    button#like > i{@extend .fa-heart-o;}
+    button#nolove > i{@extend .fa-heart;}
+    button#love > i{
+      @extend .fa-heart;
+      color: red;
+    }
+    button#like > i{
+      @extend .fa-heart-o;
+      color: red;
+    }
   }
   span#playlist {
     padding-left: 20px;
