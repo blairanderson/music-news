@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans|Open+Sans|Roboto|Oswald);
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -132,7 +133,7 @@
 }
 
 /* line 81, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/font-awesome-rails-4.0.3.0/app/assets/stylesheets/font-awesome.css.erb */
-.fa-spin, div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-gutter button:hover > i {
+.fa-spin {
   -webkit-animation: spin 2s infinite linear;
   -moz-animation: spin 2s infinite linear;
   -o-animation: spin 2s infinite linear;
@@ -306,7 +307,7 @@
 }
 
 /* line 205, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/font-awesome-rails-4.0.3.0/app/assets/stylesheets/font-awesome.css.erb */
-.fa-heart:before, div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-gutter button.heart > i:before, #music-player #player button#love > i:before {
+.fa-heart:before, div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-gutter button.heart > i:before, #music-player #player button#nolove > i:before, #music-player #player button#love > i:before {
   content: "\f004";
 }
 
@@ -3085,7 +3086,7 @@ pre code {
 }
 
 /* line 715, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.col-xs-12, .col-sm-12, .col-md-12, .col-lg-12, .col-xs-11, div#window > section.content > div#main > .body .submission-list .submission .sub-content, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-9, div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-content, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-8, div#window section.content div#main, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-4, div#window section.content div#sidebar, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-3, div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-gutter, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-1, div#window > section.content > div#main > .body .submission-list .submission .sub-gutter, .col-sm-1, .col-md-1, .col-lg-1 {
+.col-xs-12, div#window section.content div#main, div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-content form input[type="text"], .col-sm-12, .col-md-12, .col-lg-12, .col-xs-11, div#window > section.content > div#main > .body .submission-list .submission .sub-content, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-9, div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-content, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-content form input[type="text"], .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-3, div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-gutter, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-1, div#window > section.content > div#main > .body .submission-list .submission .sub-gutter, .col-sm-1, .col-md-1, .col-lg-1 {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
@@ -3093,7 +3094,7 @@ pre code {
 }
 
 /* line 734, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.col-xs-12, .col-xs-11, div#window > section.content > div#main > .body .submission-list .submission .sub-content, .col-xs-10, .col-xs-9, div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-content, .col-xs-8, div#window section.content div#main, .col-xs-7, .col-xs-6, .col-xs-5, .col-xs-4, div#window section.content div#sidebar, .col-xs-3, div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-gutter, .col-xs-2, .col-xs-1, div#window > section.content > div#main > .body .submission-list .submission .sub-gutter {
+.col-xs-12, div#window section.content div#main, div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-content form input[type="text"], .col-xs-11, div#window > section.content > div#main > .body .submission-list .submission .sub-content, .col-xs-10, .col-xs-9, div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-content, .col-xs-8, .col-xs-7, .col-xs-6, .col-xs-5, .col-xs-4, .col-xs-3, div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-gutter, .col-xs-2, .col-xs-1, div#window > section.content > div#main > .body .submission-list .submission .sub-gutter {
   float: left;
 }
 
@@ -3113,7 +3114,7 @@ pre code {
 }
 
 /* line 742, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.col-xs-4, div#window section.content div#sidebar {
+.col-xs-4 {
   width: 33.3333333333%;
 }
 
@@ -3133,7 +3134,7 @@ pre code {
 }
 
 /* line 742, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.col-xs-8, div#window section.content div#main {
+.col-xs-8 {
   width: 66.6666666667%;
 }
 
@@ -3153,7 +3154,7 @@ pre code {
 }
 
 /* line 742, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.col-xs-12 {
+.col-xs-12, div#window section.content div#main, div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-content form input[type="text"] {
   width: 100%;
 }
 
@@ -3876,7 +3877,7 @@ pre code {
 }
 @media (min-width: 1200px) {
   /* line 734, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-  .col-lg-12, .col-lg-11, .col-lg-10, .col-lg-9, .col-lg-8, .col-lg-7, .col-lg-6, .col-lg-5, .col-lg-4, .col-lg-3, .col-lg-2, .col-lg-1 {
+  .col-lg-12, .col-lg-11, .col-lg-10, .col-lg-9, .col-lg-8, .col-lg-7, .col-lg-6, div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-content form input[type="text"], .col-lg-5, .col-lg-4, .col-lg-3, .col-lg-2, .col-lg-1 {
     float: left;
   }
 
@@ -3906,7 +3907,7 @@ pre code {
   }
 
   /* line 742, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-  .col-lg-6 {
+  .col-lg-6, div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-content form input[type="text"] {
     width: 50%;
   }
 
@@ -6857,13 +6858,13 @@ a.thumbnail.active {
 }
 
 /* line 8, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_list-group.scss */
-.list-group, #music-player #playlist .body ul {
+.list-group {
   margin-bottom: 20px;
   padding-left: 0;
 }
 
 /* line 17, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_list-group.scss */
-.list-group-item, #music-player #playlist .body ul li {
+.list-group-item {
   position: relative;
   display: block;
   padding: 10px 15px;
@@ -6872,22 +6873,22 @@ a.thumbnail.active {
   border: 1px solid #dddddd;
 }
 /* line 27, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_list-group.scss */
-.list-group-item:first-child, #music-player #playlist .body ul li:first-child {
+.list-group-item:first-child {
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
 }
 /* line 30, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_list-group.scss */
-.list-group-item:last-child, #music-player #playlist .body ul li:last-child {
+.list-group-item:last-child {
   margin-bottom: 0;
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
 }
 /* line 36, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_list-group.scss */
-.list-group-item > .badge, #music-player #playlist .body ul li > .badge {
+.list-group-item > .badge {
   float: right;
 }
 /* line 39, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_list-group.scss */
-.list-group-item > .badge + .badge, #music-player #playlist .body ul li > .badge + .badge {
+.list-group-item > .badge + .badge {
   margin-right: 5px;
 }
 
@@ -6933,7 +6934,7 @@ a.list-group-item.active .list-group-item-text, a.list-group-item.active:hover .
 }
 
 /* line 7, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel, #music-player #playlist {
+.panel {
   margin-bottom: 20px;
   background-color: white;
   border: 1px solid transparent;
@@ -6943,171 +6944,133 @@ a.list-group-item.active .list-group-item-text, a.list-group-item.active:hover .
 }
 
 /* line 16, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel-body, #music-player #playlist .body {
+.panel-body {
   padding: 15px;
 }
 /* line 21, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.panel-body:before, #music-player #playlist .body:before, .panel-body:after, #music-player #playlist .body:after {
+.panel-body:before, .panel-body:after {
   content: " ";
   display: table;
 }
 /* line 25, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.panel-body:after, #music-player #playlist .body:after {
+.panel-body:after {
   clear: both;
 }
 
 /* line 28, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel > .list-group, #music-player #playlist > .list-group, #music-player #playlist .body .panel > ul, #music-player #playlist .body #playlist > ul {
+.panel > .list-group {
   margin-bottom: 0;
 }
 /* line 31, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel > .list-group .list-group-item, #music-player #playlist > .list-group .list-group-item, #music-player #playlist .body .panel > ul .list-group-item, #music-player #playlist .body #playlist > ul .list-group-item, .panel > .list-group #music-player #playlist .body ul li, #music-player #playlist .body ul .panel > .list-group li, #music-player #playlist > .list-group .body ul li, #music-player #playlist .body .panel > ul li, #music-player #playlist .body #playlist > ul li {
+.panel > .list-group .list-group-item {
   border-width: 1px 0;
 }
 /* line 35, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel > .list-group .list-group-item:first-child, #music-player #playlist > .list-group .list-group-item:first-child, #music-player #playlist .body .panel > ul .list-group-item:first-child, #music-player #playlist .body #playlist > ul .list-group-item:first-child, .panel > .list-group #music-player #playlist .body ul li:first-child, #music-player #playlist .body ul .panel > .list-group li:first-child, #music-player #playlist > .list-group .body ul li:first-child, #music-player #playlist .body .panel > ul li:first-child, #music-player #playlist .body #playlist > ul li:first-child {
+.panel > .list-group .list-group-item:first-child {
   border-top-right-radius: 0;
   border-top-left-radius: 0;
 }
 /* line 39, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel > .list-group .list-group-item:last-child, #music-player #playlist > .list-group .list-group-item:last-child, #music-player #playlist .body .panel > ul .list-group-item:last-child, #music-player #playlist .body #playlist > ul .list-group-item:last-child, .panel > .list-group #music-player #playlist .body ul li:last-child, #music-player #playlist .body ul .panel > .list-group li:last-child, #music-player #playlist > .list-group .body ul li:last-child, #music-player #playlist .body .panel > ul li:last-child, #music-player #playlist .body #playlist > ul li:last-child {
+.panel > .list-group .list-group-item:last-child {
   border-bottom: 0;
 }
 
 /* line 47, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel-heading + .list-group .list-group-item:first-child, #music-player #playlist .header + .list-group .list-group-item:first-child, #music-player #playlist .body .panel-heading + ul .list-group-item:first-child, #music-player #playlist .body .header + ul .list-group-item:first-child, .panel-heading + .list-group #music-player #playlist .body ul li:first-child, #music-player #playlist .body ul .panel-heading + .list-group li:first-child, #music-player #playlist .header + .list-group .body ul li:first-child, #music-player #playlist .body ul .header + .list-group li:first-child, #music-player #playlist .body .panel-heading + ul li:first-child, #music-player #playlist .body .header + ul li:first-child {
+.panel-heading + .list-group .list-group-item:first-child {
   border-top-width: 0;
 }
 
 /* line 60, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel > .table, #music-player #playlist > .table,
-.panel > .table-responsive > .table,
-#music-player #playlist > .table-responsive > .table {
+.panel > .table,
+.panel > .table-responsive > .table {
   margin-bottom: 0;
 }
 /* line 64, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel > .panel-body + .table, #music-player #playlist > .panel-body + .table, #music-player #playlist .panel > .body + .table, #music-player #playlist > .body + .table,
-.panel > .panel-body + .table-responsive,
-#music-player #playlist > .panel-body + .table-responsive,
-#music-player #playlist .panel > .body + .table-responsive,
-#music-player #playlist > .body + .table-responsive {
+.panel > .panel-body + .table,
+.panel > .panel-body + .table-responsive {
   border-top: 1px solid #dddddd;
 }
 /* line 68, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel > .table > tbody:first-child th, #music-player #playlist > .table > tbody:first-child th,
-.panel > .table > tbody:first-child td,
-#music-player #playlist > .table > tbody:first-child td {
+.panel > .table > tbody:first-child th,
+.panel > .table > tbody:first-child td {
   border-top: 0;
 }
 /* line 72, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel > .table-bordered, #music-player #playlist > .table-bordered,
-.panel > .table-responsive > .table-bordered,
-#music-player #playlist > .table-responsive > .table-bordered {
+.panel > .table-bordered,
+.panel > .table-responsive > .table-bordered {
   border: 0;
 }
 /* line 79, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel > .table-bordered > thead > tr > th:first-child, #music-player #playlist > .table-bordered > thead > tr > th:first-child,
+.panel > .table-bordered > thead > tr > th:first-child,
 .panel > .table-bordered > thead > tr > td:first-child,
-#music-player #playlist > .table-bordered > thead > tr > td:first-child,
 .panel > .table-bordered > tbody > tr > th:first-child,
-#music-player #playlist > .table-bordered > tbody > tr > th:first-child,
 .panel > .table-bordered > tbody > tr > td:first-child,
-#music-player #playlist > .table-bordered > tbody > tr > td:first-child,
 .panel > .table-bordered > tfoot > tr > th:first-child,
-#music-player #playlist > .table-bordered > tfoot > tr > th:first-child,
 .panel > .table-bordered > tfoot > tr > td:first-child,
-#music-player #playlist > .table-bordered > tfoot > tr > td:first-child,
 .panel > .table-responsive > .table-bordered > thead > tr > th:first-child,
-#music-player #playlist > .table-responsive > .table-bordered > thead > tr > th:first-child,
 .panel > .table-responsive > .table-bordered > thead > tr > td:first-child,
-#music-player #playlist > .table-responsive > .table-bordered > thead > tr > td:first-child,
 .panel > .table-responsive > .table-bordered > tbody > tr > th:first-child,
-#music-player #playlist > .table-responsive > .table-bordered > tbody > tr > th:first-child,
 .panel > .table-responsive > .table-bordered > tbody > tr > td:first-child,
-#music-player #playlist > .table-responsive > .table-bordered > tbody > tr > td:first-child,
 .panel > .table-responsive > .table-bordered > tfoot > tr > th:first-child,
-#music-player #playlist > .table-responsive > .table-bordered > tfoot > tr > th:first-child,
-.panel > .table-responsive > .table-bordered > tfoot > tr > td:first-child,
-#music-player #playlist > .table-responsive > .table-bordered > tfoot > tr > td:first-child {
+.panel > .table-responsive > .table-bordered > tfoot > tr > td:first-child {
   border-left: 0;
 }
 /* line 83, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel > .table-bordered > thead > tr > th:last-child, #music-player #playlist > .table-bordered > thead > tr > th:last-child,
+.panel > .table-bordered > thead > tr > th:last-child,
 .panel > .table-bordered > thead > tr > td:last-child,
-#music-player #playlist > .table-bordered > thead > tr > td:last-child,
 .panel > .table-bordered > tbody > tr > th:last-child,
-#music-player #playlist > .table-bordered > tbody > tr > th:last-child,
 .panel > .table-bordered > tbody > tr > td:last-child,
-#music-player #playlist > .table-bordered > tbody > tr > td:last-child,
 .panel > .table-bordered > tfoot > tr > th:last-child,
-#music-player #playlist > .table-bordered > tfoot > tr > th:last-child,
 .panel > .table-bordered > tfoot > tr > td:last-child,
-#music-player #playlist > .table-bordered > tfoot > tr > td:last-child,
 .panel > .table-responsive > .table-bordered > thead > tr > th:last-child,
-#music-player #playlist > .table-responsive > .table-bordered > thead > tr > th:last-child,
 .panel > .table-responsive > .table-bordered > thead > tr > td:last-child,
-#music-player #playlist > .table-responsive > .table-bordered > thead > tr > td:last-child,
 .panel > .table-responsive > .table-bordered > tbody > tr > th:last-child,
-#music-player #playlist > .table-responsive > .table-bordered > tbody > tr > th:last-child,
 .panel > .table-responsive > .table-bordered > tbody > tr > td:last-child,
-#music-player #playlist > .table-responsive > .table-bordered > tbody > tr > td:last-child,
 .panel > .table-responsive > .table-bordered > tfoot > tr > th:last-child,
-#music-player #playlist > .table-responsive > .table-bordered > tfoot > tr > th:last-child,
-.panel > .table-responsive > .table-bordered > tfoot > tr > td:last-child,
-#music-player #playlist > .table-responsive > .table-bordered > tfoot > tr > td:last-child {
+.panel > .table-responsive > .table-bordered > tfoot > tr > td:last-child {
   border-right: 0;
 }
 /* line 88, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel > .table-bordered > thead > tr:last-child > th, #music-player #playlist > .table-bordered > thead > tr:last-child > th, .panel > .table-bordered > thead > tr:last-child > td, #music-player #playlist > .table-bordered > thead > tr:last-child > td,
+.panel > .table-bordered > thead > tr:last-child > th, .panel > .table-bordered > thead > tr:last-child > td,
 .panel > .table-bordered > tbody > tr:last-child > th,
-#music-player #playlist > .table-bordered > tbody > tr:last-child > th,
 .panel > .table-bordered > tbody > tr:last-child > td,
-#music-player #playlist > .table-bordered > tbody > tr:last-child > td,
 .panel > .table-bordered > tfoot > tr:last-child > th,
-#music-player #playlist > .table-bordered > tfoot > tr:last-child > th,
 .panel > .table-bordered > tfoot > tr:last-child > td,
-#music-player #playlist > .table-bordered > tfoot > tr:last-child > td,
 .panel > .table-responsive > .table-bordered > thead > tr:last-child > th,
-#music-player #playlist > .table-responsive > .table-bordered > thead > tr:last-child > th,
 .panel > .table-responsive > .table-bordered > thead > tr:last-child > td,
-#music-player #playlist > .table-responsive > .table-bordered > thead > tr:last-child > td,
 .panel > .table-responsive > .table-bordered > tbody > tr:last-child > th,
-#music-player #playlist > .table-responsive > .table-bordered > tbody > tr:last-child > th,
 .panel > .table-responsive > .table-bordered > tbody > tr:last-child > td,
-#music-player #playlist > .table-responsive > .table-bordered > tbody > tr:last-child > td,
 .panel > .table-responsive > .table-bordered > tfoot > tr:last-child > th,
-#music-player #playlist > .table-responsive > .table-bordered > tfoot > tr:last-child > th,
-.panel > .table-responsive > .table-bordered > tfoot > tr:last-child > td,
-#music-player #playlist > .table-responsive > .table-bordered > tfoot > tr:last-child > td {
+.panel > .table-responsive > .table-bordered > tfoot > tr:last-child > td {
   border-bottom: 0;
 }
 /* line 94, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel > .table-responsive, #music-player #playlist > .table-responsive {
+.panel > .table-responsive {
   border: 0;
   margin-bottom: 0;
 }
 
 /* line 102, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel-heading, #music-player #playlist .header {
+.panel-heading {
   padding: 10px 15px;
   border-bottom: 1px solid transparent;
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
 }
 /* line 107, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel-heading > .dropdown .dropdown-toggle, #music-player #playlist .header > .dropdown .dropdown-toggle {
+.panel-heading > .dropdown .dropdown-toggle {
   color: inherit;
 }
 
 /* line 113, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel-title, #music-player #playlist .header h3 {
+.panel-title {
   margin-top: 0;
   margin-bottom: 0;
   font-size: 16px;
   color: inherit;
 }
 /* line 119, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel-title > a, #music-player #playlist .header h3 > a {
+.panel-title > a {
   color: inherit;
 }
 
@@ -7121,21 +7084,21 @@ a.list-group-item.active .list-group-item-text, a.list-group-item.active:hover .
 }
 
 /* line 140, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel-group .panel, .panel-group #music-player #playlist, #music-player .panel-group #playlist {
+.panel-group .panel {
   margin-bottom: 0;
   border-radius: 4px;
   overflow: hidden;
 }
 /* line 144, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel-group .panel + .panel, .panel-group #music-player #playlist + .panel, #music-player .panel-group #playlist + .panel, .panel-group #music-player .panel + #playlist, #music-player .panel-group .panel + #playlist, .panel-group #music-player #playlist + #playlist, #music-player .panel-group #playlist + #playlist {
+.panel-group .panel + .panel {
   margin-top: 5px;
 }
 /* line 149, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel-group .panel-heading, .panel-group #music-player #playlist .header, #music-player #playlist .panel-group .header {
+.panel-group .panel-heading {
   border-bottom: 0;
 }
 /* line 151, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel-group .panel-heading + .panel-collapse .panel-body, .panel-group #music-player #playlist .header + .panel-collapse .panel-body, #music-player #playlist .panel-group .header + .panel-collapse .panel-body, .panel-group .panel-heading + .panel-collapse #music-player #playlist .body, #music-player #playlist .panel-group .panel-heading + .panel-collapse .body, .panel-group #music-player #playlist .header + .panel-collapse .body, #music-player #playlist .panel-group .header + .panel-collapse .body {
+.panel-group .panel-heading + .panel-collapse .panel-body {
   border-top: 1px solid #dddddd;
 }
 /* line 155, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
@@ -7143,7 +7106,7 @@ a.list-group-item.active .list-group-item-text, a.list-group-item.active:hover .
   border-top: 0;
 }
 /* line 157, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel-group .panel-footer + .panel-collapse .panel-body, .panel-group .panel-footer + .panel-collapse #music-player #playlist .body, #music-player #playlist .panel-group .panel-footer + .panel-collapse .body {
+.panel-group .panel-footer + .panel-collapse .panel-body {
   border-bottom: 1px solid #dddddd;
 }
 
@@ -7152,36 +7115,36 @@ a.list-group-item.active .list-group-item-text, a.list-group-item.active:hover .
   border-color: #dddddd;
 }
 /* line 380, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.panel-default > .panel-heading, #music-player #playlist .panel-default > .header {
+.panel-default > .panel-heading {
   color: #333333;
   background-color: whitesmoke;
   border-color: #dddddd;
 }
 /* line 385, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.panel-default > .panel-heading + .panel-collapse .panel-body, #music-player #playlist .panel-default > .header + .panel-collapse .panel-body, .panel-default > .panel-heading + .panel-collapse #music-player #playlist .body, #music-player #playlist .panel-default > .panel-heading + .panel-collapse .body, #music-player #playlist .panel-default > .header + .panel-collapse .body {
+.panel-default > .panel-heading + .panel-collapse .panel-body {
   border-top-color: #dddddd;
 }
 /* line 390, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.panel-default > .panel-footer + .panel-collapse .panel-body, .panel-default > .panel-footer + .panel-collapse #music-player #playlist .body, #music-player #playlist .panel-default > .panel-footer + .panel-collapse .body {
+.panel-default > .panel-footer + .panel-collapse .panel-body {
   border-bottom-color: #dddddd;
 }
 
 /* line 168, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_panels.scss */
-.panel-primary, #music-player #playlist {
+.panel-primary {
   border-color: #428bca;
 }
 /* line 380, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.panel-primary > .panel-heading, #music-player #playlist > .panel-heading, #music-player #playlist .panel-primary > .header, #music-player #playlist > .header {
+.panel-primary > .panel-heading {
   color: white;
   background-color: #428bca;
   border-color: #428bca;
 }
 /* line 385, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.panel-primary > .panel-heading + .panel-collapse .panel-body, #music-player #playlist > .panel-heading + .panel-collapse .panel-body, #music-player #playlist .panel-primary > .header + .panel-collapse .panel-body, #music-player #playlist > .header + .panel-collapse .panel-body, .panel-primary > .panel-heading + .panel-collapse #music-player #playlist .body, #music-player #playlist .panel-primary > .panel-heading + .panel-collapse .body, #music-player #playlist > .panel-heading + .panel-collapse .body, #music-player #playlist .panel-primary > .header + .panel-collapse .body, #music-player #playlist > .header + .panel-collapse .body {
+.panel-primary > .panel-heading + .panel-collapse .panel-body {
   border-top-color: #428bca;
 }
 /* line 390, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.panel-primary > .panel-footer + .panel-collapse .panel-body, #music-player #playlist > .panel-footer + .panel-collapse .panel-body, .panel-primary > .panel-footer + .panel-collapse #music-player #playlist .body, #music-player #playlist .panel-primary > .panel-footer + .panel-collapse .body, #music-player #playlist > .panel-footer + .panel-collapse .body {
+.panel-primary > .panel-footer + .panel-collapse .panel-body {
   border-bottom-color: #428bca;
 }
 
@@ -7190,17 +7153,17 @@ a.list-group-item.active .list-group-item-text, a.list-group-item.active:hover .
   border-color: #d6e9c6;
 }
 /* line 380, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.panel-success > .panel-heading, #music-player #playlist .panel-success > .header {
+.panel-success > .panel-heading {
   color: #3c763d;
   background-color: #dff0d8;
   border-color: #d6e9c6;
 }
 /* line 385, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.panel-success > .panel-heading + .panel-collapse .panel-body, #music-player #playlist .panel-success > .header + .panel-collapse .panel-body, .panel-success > .panel-heading + .panel-collapse #music-player #playlist .body, #music-player #playlist .panel-success > .panel-heading + .panel-collapse .body, #music-player #playlist .panel-success > .header + .panel-collapse .body {
+.panel-success > .panel-heading + .panel-collapse .panel-body {
   border-top-color: #d6e9c6;
 }
 /* line 390, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.panel-success > .panel-footer + .panel-collapse .panel-body, .panel-success > .panel-footer + .panel-collapse #music-player #playlist .body, #music-player #playlist .panel-success > .panel-footer + .panel-collapse .body {
+.panel-success > .panel-footer + .panel-collapse .panel-body {
   border-bottom-color: #d6e9c6;
 }
 
@@ -7209,17 +7172,17 @@ a.list-group-item.active .list-group-item-text, a.list-group-item.active:hover .
   border-color: #faebcc;
 }
 /* line 380, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.panel-warning > .panel-heading, #music-player #playlist .panel-warning > .header {
+.panel-warning > .panel-heading {
   color: #8a6d3b;
   background-color: #fcf8e3;
   border-color: #faebcc;
 }
 /* line 385, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.panel-warning > .panel-heading + .panel-collapse .panel-body, #music-player #playlist .panel-warning > .header + .panel-collapse .panel-body, .panel-warning > .panel-heading + .panel-collapse #music-player #playlist .body, #music-player #playlist .panel-warning > .panel-heading + .panel-collapse .body, #music-player #playlist .panel-warning > .header + .panel-collapse .body {
+.panel-warning > .panel-heading + .panel-collapse .panel-body {
   border-top-color: #faebcc;
 }
 /* line 390, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.panel-warning > .panel-footer + .panel-collapse .panel-body, .panel-warning > .panel-footer + .panel-collapse #music-player #playlist .body, #music-player #playlist .panel-warning > .panel-footer + .panel-collapse .body {
+.panel-warning > .panel-footer + .panel-collapse .panel-body {
   border-bottom-color: #faebcc;
 }
 
@@ -7228,17 +7191,17 @@ a.list-group-item.active .list-group-item-text, a.list-group-item.active:hover .
   border-color: #ebccd1;
 }
 /* line 380, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.panel-danger > .panel-heading, #music-player #playlist .panel-danger > .header {
+.panel-danger > .panel-heading {
   color: #a94442;
   background-color: #f2dede;
   border-color: #ebccd1;
 }
 /* line 385, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.panel-danger > .panel-heading + .panel-collapse .panel-body, #music-player #playlist .panel-danger > .header + .panel-collapse .panel-body, .panel-danger > .panel-heading + .panel-collapse #music-player #playlist .body, #music-player #playlist .panel-danger > .panel-heading + .panel-collapse .body, #music-player #playlist .panel-danger > .header + .panel-collapse .body {
+.panel-danger > .panel-heading + .panel-collapse .panel-body {
   border-top-color: #ebccd1;
 }
 /* line 390, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.panel-danger > .panel-footer + .panel-collapse .panel-body, .panel-danger > .panel-footer + .panel-collapse #music-player #playlist .body, #music-player #playlist .panel-danger > .panel-footer + .panel-collapse .body {
+.panel-danger > .panel-footer + .panel-collapse .panel-body {
   border-bottom-color: #ebccd1;
 }
 
@@ -7247,17 +7210,17 @@ a.list-group-item.active .list-group-item-text, a.list-group-item.active:hover .
   border-color: #bce8f1;
 }
 /* line 380, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.panel-info > .panel-heading, #music-player #playlist .panel-info > .header {
+.panel-info > .panel-heading {
   color: #31708f;
   background-color: #d9edf7;
   border-color: #bce8f1;
 }
 /* line 385, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.panel-info > .panel-heading + .panel-collapse .panel-body, #music-player #playlist .panel-info > .header + .panel-collapse .panel-body, .panel-info > .panel-heading + .panel-collapse #music-player #playlist .body, #music-player #playlist .panel-info > .panel-heading + .panel-collapse .body, #music-player #playlist .panel-info > .header + .panel-collapse .body {
+.panel-info > .panel-heading + .panel-collapse .panel-body {
   border-top-color: #bce8f1;
 }
 /* line 390, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.panel-info > .panel-footer + .panel-collapse .panel-body, .panel-info > .panel-footer + .panel-collapse #music-player #playlist .body, #music-player #playlist .panel-info > .panel-footer + .panel-collapse .body {
+.panel-info > .panel-footer + .panel-collapse .panel-body {
   border-bottom-color: #bce8f1;
 }
 
@@ -8163,120 +8126,110 @@ form input.soundcloud {
   margin-bottom: 25px;
 }
 
-/* line 5, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
-a {
-  color: black;
-  text-decoration: underline;
-}
-/* line 8, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
-a:hover {
-  text-decoration: none;
-  color: white !important;
-}
-
-/* line 17, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+/* line 6, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
 div#window section.content {
   margin-left: auto;
   margin-right: auto;
-  max-width: 1000px;
-}
-/* line 22, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
-div#window section.content div#main {
-  max-width: 660px;
-  min-width: 640px;
-}
-/* line 27, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
-div#window section.content div#sidebar {
-  max-width: 330px;
-  min-width: 320px;
+  max-width: 1100px;
 }
 
-/* line 41, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+/* line 25, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
 div#window > section.content > div#main > .body .submission-list .submission {
   border-bottom: solid 1px #cccccc;
   margin: 10px 0px;
 }
-/* line 45, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+/* line 29, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
 div#window > section.content > div#main > .body .submission-list .submission .sub-gutter {
   padding: 0;
 }
-/* line 48, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+/* line 32, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
 div#window > section.content > div#main > .body .submission-list .submission .sub-gutter img {
-  margin-top: 15px;
+  margin-top: 45px;
 }
-/* line 54, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+/* line 38, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
 div#window > section.content > div#main > .body .submission-list .submission .sub-content .song {
   margin-bottom: 10px 0px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+  padding: 30px 0px;
 }
-/* line 60, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+/* line 45, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
 div#window > section.content > div#main > .body .submission-list .submission .sub-content .song:hover {
-  background-color: #f9fbff;
+  background-color: #e6e6e6;
 }
-/* line 63, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+/* line 48, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
 div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-content {
   padding-top: 15px;
 }
-/* line 66, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
-div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-content h2 {
-  height: 100%;
+/* line 52, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-content form input[type="text"] {
+  height: 22px;
 }
-/* line 71, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+/* line 58, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-content p > a {
+  font-size: 1.5em;
+  font-family: 'Roboto', sans-serif;
+}
+/* line 62, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-content p > a span a {
+  font-family: 'Open Sans', sans-serif;
+}
+/* line 68, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
 div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-gutter {
+  max-width: 120px;
   padding-top: 15px;
   padding-bottom: 15px;
 }
-/* line 75, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+/* line 73, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
 div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-gutter button {
   width: 40px;
   height: 38px;
   margin-bottom: 2px;
 }
-/* line 82, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+/* line 80, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
 div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-gutter button {
   border-color: #333;
 }
-/* line 90, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+/* line 85, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
 div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-gutter button.play {
   background-color: #FF1493;
   color: #fff;
 }
-/* line 96, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+/* line 91, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
 div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-gutter button.play:hover {
   background-color: white;
   color: #FF1493;
   border-color: #FF1493;
   box-shadow: 0 0 20px #FF1493;
 }
-/* line 103, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+/* line 98, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
 div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-gutter button.heart > i {
   color: red;
 }
-/* line 107, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+/* line 102, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
 div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-gutter button.heart:hover {
   background-color: white;
   border-color: red;
   box-shadow: 0 0 20px red;
 }
-/* line 115, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+/* line 110, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
 div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-gutter button.facebook:hover {
   border-color: #4d70ba;
   background-color: #fff;
   box-shadow: 0 0 20px #728dc8;
 }
-/* line 119, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+/* line 114, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
 div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-gutter button.facebook:hover > i {
   color: #3B5999;
 }
-/* line 127, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+/* line 122, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
 div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-gutter button.twitter:hover {
   background-color: #fff;
   border-color: #4099FF;
   box-shadow: 0 0 20px #4099FF;
 }
-/* line 131, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+/* line 126, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
 div#window > section.content > div#main > .body .submission-list .submission .sub-content .song .song-gutter button.twitter:hover > i {
   color: #4099FF;
 }
@@ -8287,21 +8240,31 @@ div#window > section.content > div#main > .body .submission-list .submission .su
 }
 /* line 11, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/player.css.scss */
 #music-player #player button > i {
-  color: #0638d5;
-  opacity: 0.5;
+  color: #000;
 }
-/* line 17, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/player.css.scss */
+/* line 16, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/player.css.scss */
 #music-player #player button > i:hover {
-  color: #164cf8;
-  opacity: 0.8;
+  color: gray;
+}
+/* line 26, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/player.css.scss */
+#music-player #player button#love > i {
+  color: red;
 }
 /* line 30, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/player.css.scss */
-#music-player span#player {
-  font-size: 17px;
-  padding-left: 20px;
-  padding-right: 20px;
+#music-player #player button#like > i {
+  color: red;
 }
 /* line 35, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/player.css.scss */
-#music-player #playlist {
-  margin-top: 10px;
+#music-player span#playlist {
+  padding-left: 20px;
+  padding-right: 20px;
+  border: none;
+}
+/* line 40, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/player.css.scss */
+#music-player span#playlist a {
+  font-size: 17px;
+  text-decoration: none;
+  border: none;
+  color: #ff6600;
+  font-weight: bold;
 }
