@@ -12,18 +12,6 @@ nav{
       }
     }
   }
-  div.player-container{
-    background: white;
-    color: #333333;
-    background-color: white;
-    border-top: #cccccc 1px solid;
-    border-bottom: #cccccc 1px solid;
-    div#music-player{
-      @extend .container;
-      div#player{
-      }
-    }
-  }
 }
 
 

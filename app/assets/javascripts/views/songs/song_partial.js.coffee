@@ -4,6 +4,7 @@ class MusicNews.Views.SongPartial extends Backbone.View
   initialize: (options) ->
     @song = options.model
     @player = MusicNews.App.views.player
+    @router = MusicNews.App.routers.submissions
 
   render: ->
     markup = @template(song: @song)
@@ -13,16 +14,23 @@ class MusicNews.Views.SongPartial extends Backbone.View
 
   events:
     "click a" : "goToShow"
-    "click button.play" : "playSong"
+    "click button.play, button.pause" : "buttonHandler"
+    "click button.facebook" : "facebook"
+    "click button.twitter" : "twitter"
 
   goToShow: (e) ->
     e.preventDefault()
     target = $(e.currentTarget).attr('href')
     @router.navigate(target, trigger: true)
 
-  playSong: (e) ->
+  buttonHandler: (e) ->
     e.preventDefault()
+    $button = $(e.currentTarget)
+    $action = $button.attr('class')
+    this[$action]($button)
+    @_togglePlayPauseButton($button)
 
+  play: ->
     @player.pauseSong()
 
     @player.currentSound = undefined
@@ -31,5 +39,12 @@ class MusicNews.Views.SongPartial extends Backbone.View
       markup = @player.playlistSongTemplate(song: @song )
       @player.$el.find('#playlist').html markup
     @player.playSong()
+  pause: ->
+    @player.pauseSong()
+  facebook: ->
+
+  twitter: ->
 
 
+  _togglePlayPauseButton: (button) ->
+    button.toggleClass('play pause')

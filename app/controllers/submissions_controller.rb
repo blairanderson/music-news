@@ -10,9 +10,8 @@ class SubmissionsController < ApplicationController
     render json: @submissions.to_json(include: [:songs])
   end
 
-  def twitter
-    @submissions = Submission.where(twitter: params[:twitter])
-    render json: @submissions.to_json(include: [:songs])
+  def backbone_redirect
+    redirect_to root_path(id: params[:id])
   end
 
   def show

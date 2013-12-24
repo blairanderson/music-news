@@ -1,0 +1,101 @@
+div#window > section.content > div#main > .body  > .submission-list > .submission > .sub-content{
+  .song{
+    @extend .row;
+    margin-bottom: 10px 0px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 30px 0px;
+    &:hover{
+      background-color: darken(#FFFFFF, 5%);
+    }
+    .song-content{
+      @extend .col-xs-9;
+      padding-top: 15px;
+      form{
+        input[type="text"]{
+          height: 22px;
+          @extend .col-lg-6;
+          @extend .col-xs-12;
+        }
+      }
+      p > a {
+        font-size: 1.5em;
+        font-family: 'Roboto', sans-serif;
+        span{
+          a{
+            font-family: 'Open Sans', sans-serif;
+          }
+        }
+      }
+    }
+    .song-gutter{
+      @extend .col-xs-3;
+      max-width: 120px;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      button{
+        @extend .btn;
+        @extend .btn-default;
+        width: 40px;
+        height: 38px;
+        margin-bottom: 2px;
+      }
+      button{
+        border-color: #333;
+        > i{
+          @extend .fa;
+        }
+        &.pause > i {
+          @extend .fa-pause;
+        }
+        &.play{
+          background-color: #FF1493;
+          color: #fff;
+          > i {
+            @extend .fa-play;
+          }
+          &:hover{
+            background-color: white;
+            color: #FF1493;
+            border-color: #FF1493;
+            box-shadow: 0 0 20px #FF1493;
+          }
+        }
+        &.heart > i {
+          @extend .fa-heart;
+          color: red;
+        }
+        &.heart:hover{
+          background-color: white;
+          border-color: red;
+          box-shadow: 0 0 20px red;
+        }
+        &.facebook > i {
+          @extend .fa-facebook;
+        }
+        &.facebook:hover{
+          border-color: lighten(#3B5999, 10%);
+          background-color: #fff;
+          box-shadow: 0 0 20px lighten(#3B5999, 20%);
+          > i {
+            @extend .fa-facebook;
+            color: #3B5999;
+          }
+        }
+        &.twitter > i {
+          @extend .fa-twitter;
+        }
+        &.twitter:hover{
+          background-color: #fff;
+          border-color: #4099FF;
+          box-shadow: 0 0 20px #4099FF;
+          > i {
+            @extend .fa-twitter;
+            color: #4099FF;
+          }
+        }
+      }
+    }
+  }
+}

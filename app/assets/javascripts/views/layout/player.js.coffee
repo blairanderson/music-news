@@ -7,11 +7,11 @@ class MusicNews.Views.Player extends Backbone.View
     _this = this
     @songs = MusicNews.App.collections.songs
     @songHistory = new MusicNews.Collections.Songs
-    SC.initialize(client_id: "c024bdd48e9ecf014c71af406201f3a2");
-    SC.whenStreamingReady ->
-      console.log 'streaming ready'
-      _this.updateCurrentTrack()
-      console.log( _this.currentTrack )
+    # SC.initialize(client_id: "c024bdd48e9ecf014c71af406201f3a2");
+    # SC.whenStreamingReady ->
+    #   console.log 'streaming ready'
+    #   _this.updateCurrentTrack()
+    #   console.log( _this.currentTrack )
 
 
   render: ->

@@ -4,9 +4,11 @@ class MusicNews.Views.Layout extends Backbone.View
 
   render: ->
     $markup = $(this.template())
+    $playerContainer = $markup.find('div#player-container')
 
     MusicNews.App.views.player = new MusicNews.Views.Player().render()
-    $markup.find('div#player-container').html( MusicNews.App.views.player.$el )
+    $playerContainer.html( MusicNews.App.views.player.$el )
+    $playerContainer.affix()
     $(@el).html($markup)
     this
 

@@ -21,5 +21,5 @@ MusicNews::Application.routes.draw do
   get 'feed' => 'submissions#feed'
   get 'logout' => 'sessions#destroy'
   get 'signout' => 'sessions#destroy'
-  get ':twitter' => 'submissions#twitter', as: :twitter_name
+  get ':id' => 'submissions#backbone_redirect'
 end
