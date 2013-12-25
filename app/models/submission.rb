@@ -66,9 +66,10 @@ class Submission < ActiveRecord::Base
 
 
   def self.update_all_song_counts
-    Submission.all.includes(:songs).each do |s|
-      puts s.songs.count
-      s.update songs_count: s.songs.count
+    Submission.all.includes(:songs).each_with_index do |s, index|
+      puts "#{index.to_s.rjust(3, '0')} - #{s.songs.count}"
+      s.songs_count = s.songs.count
+      s.save
     end
   end
 
