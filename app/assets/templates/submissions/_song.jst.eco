@@ -5,14 +5,16 @@
   <button class="twitter"><i></i></button>
 </div>
 <div class="song-content">
-  <p>
+  <div>
     <a class="pull-left" href="/<%= @song.get('submission_id')%>"><%= @song.get('title') %></a>
-    <br>
+  </div>
+  <br>
+  <div>
     <span>
      Purchase Song: (<a href="http://amzn.com">link to amazon</a>)(<a href="http://itunes.com">link to itunes</a>)
     </span>
-  </p>
+  </div>
   <form>
-    <input type="text" placeholder="chill, dance, party, sex">
+    <input type="text" placeholder="chill, dance, party, slowwave, slowgaze, nu-disco">
   </form>
 </div>

@@ -7,14 +7,6 @@
     <i></i>
   </button>
 
-  <button id="love">
-    <i></i>
-  </button>
-
-  <button id="like">
-    <i></i>
-  </button>
-
   <button id="play" data-action="play-pause-button">
     <i></i>
   </button>

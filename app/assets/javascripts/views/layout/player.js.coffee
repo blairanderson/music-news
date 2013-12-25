@@ -7,11 +7,11 @@ class MusicNews.Views.Player extends Backbone.View
     _this = this
     @songs = MusicNews.App.collections.songs
     @songHistory = new MusicNews.Collections.Songs
-    # SC.initialize(client_id: "c024bdd48e9ecf014c71af406201f3a2");
-    # SC.whenStreamingReady ->
-    #   console.log 'streaming ready'
-    #   _this.updateCurrentTrack()
-    #   console.log( _this.currentTrack )
+    SC.initialize(client_id: "c024bdd48e9ecf014c71af406201f3a2");
+    SC.whenStreamingReady ->
+      console.log 'streaming ready'
+      _this.updateCurrentTrack()
+      console.log( _this.currentTrack )
 
 
   render: ->
@@ -21,14 +21,13 @@ class MusicNews.Views.Player extends Backbone.View
     this
 
   events:
-    "click div#player button" : "buttonHandler"
-
-  buttonHandler: (e)->
-    e.preventDefault();
-    $button = $(e.currentTarget)
-    $action = $button.attr('id')
-    @buttonAction[$action](this)
-
+    "click button#play" : "playSong"
+    "click button#pause" : "pauseSong"
+    "click button#next" : "nextSong"
+    "click button#previous" : "previousSong"
+    "click button#nolove" : "noloveSong"
+    "click button#love" : "loveSong"
+    "click button#like" : "likeSong"
 
   updateCurrentTrack: ->
     @currentSound = undefined
@@ -37,12 +36,12 @@ class MusicNews.Views.Player extends Backbone.View
       markup = @playlistSongTemplate(song: @currentTrack )
       $(@el).find('#playlist').html markup
 
-
   getCurrentTrack: ->
     @currentTrack ||= @songs.first()
     @currentTrack
 
-  playSong: ->
+  playSong: (e) ->
+    e.preventDefault()
     _this = this
     @playButton.attr('id', 'pause')
 
@@ -58,14 +57,17 @@ class MusicNews.Views.Player extends Backbone.View
         @currentSound = sound
         @currentSound.play()
 
-  pauseSong: ->
+  pauseSong: (e) ->
+    e.preventDefault()
     _this = this
     @playButton.attr('id', 'play')
 
     if @currentSound
       @currentSound.pause()
 
-  advanceTrack: ->
+  nextSong: (e) ->
+    e.preventDefault()
+    @pauseSong()
     $song = @songs.shift()
     @songHistory.unshift($song)
 
@@ -73,44 +75,38 @@ class MusicNews.Views.Player extends Backbone.View
       window.location.href = window.location.href
       return
     else
+      @currentTrack = undefined
       @updateCurrentTrack()
+    @playSong()
 
-  previousTrack: ->
+  previousSong: (e) ->
+    e.preventDefault()
+    @pauseSong()
     $song = @songHistory.shift()
     if !$song
       return
     @songs.unshift($song)
+    @currentTrack = undefined
     @updateCurrentTrack()
+    @playSong()
 
-  stopSong: ->
-    this.currentSound.unload()
-    this.currentSound = undefined
+  noloveSong: (e) ->
+    e.preventDefault()
+    $button = $(e.currentTarget)
+    # do stuff
+    $button.attr("id", "love")
+    console.log("no love button")
+    
+  loveSong: (e) ->
+    e.preventDefault()
+    $button = $(e.currentTarget)
+    # do stuff
+    $button.attr("id", "like")
+    console.log("love button")
 
-  buttonAction:
-    "play": (player)->
-      player.playSong()
-      console.log('play button action')
-
-    "pause": (player)->
-      player.pauseSong()
-      console.log('pause button action')
-
-    "next": (player)->
-      this.pause(player)
-      player.advanceTrack()
-      this.play(player)
-
-      console.log("next button action")
-
-    "previous": (player)->
-      this.pause(player)
-      player.previousTrack()
-      this.play(player)
-
-      console.log("previous button action")
-
-    "love": (player)->
-      console.log("love button action")
-
-    "like": (player)->
-      console.log("like button action")
+  likeSong: (e) ->
+    e.preventDefault()
+    $button = $(e.currentTarget)
+    # do stuff
+    $button.attr("id", "nolove")
+    console.log("like button")
