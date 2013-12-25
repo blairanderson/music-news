@@ -20,16 +20,11 @@ class SubmissionsController < ApplicationController
   end
 
   def resolve
-    if @submission.songs.empty?
-      @submission.destroy
-      render :new
-    else
-      @submission.songs.each do |s|
-        s.resolve
-        sleep 1
-      end
-      redirect_to bb_submission_path(@submission)
+    @submission.songs.each do |s|
+      s.resolve
+      sleep 1
     end
+    redirect_to bb_submission_path(@submission)
   end
 
   def new
