@@ -57,30 +57,4 @@ class Submission < ActiveRecord::Base
   def bandcamps
     songs.where(:type == "Bandcamp".to_sym)
   end
-
-  def self.purge_count
-    subs = Submission.where(songs_count: 0).count
-    sub_total = Submission.count
-    "#{subs} of #{sub_total} without songs."
-  end
-
-
-  def self.update_all_song_counts
-    Submission.all.includes(:songs).each_with_index do |s, index|
-      puts "#{index.to_s.rjust(3, '0')} - #{s.songs.count}"
-      s.songs_count = s.songs.count
-      s.save
-    end
-  end
-
-private
-  def self.purge
-    count = Submission.where(songs_count: 0)
-    if count < 5
-      count.destroy_all
-    else
-      puts 'Purge too Many. '
-      count.last(5).destroy_all
-    end
-  end
 end
