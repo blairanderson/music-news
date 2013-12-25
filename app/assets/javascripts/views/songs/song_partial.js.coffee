@@ -24,6 +24,7 @@ class MusicNews.Views.SongPartial extends Backbone.View
     @router.navigate(target, trigger: true)
 
   buttonHandler: (e) ->
+    debugger
     e.preventDefault()
     $button = $(e.currentTarget)
     $action = $button.attr('class')
@@ -31,6 +32,7 @@ class MusicNews.Views.SongPartial extends Backbone.View
     @_togglePlayPauseButton($button)
 
   play: ->
+    debugger
     @player.pauseSong()
 
     @player.currentSound = undefined

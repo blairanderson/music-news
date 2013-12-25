@@ -41,7 +41,7 @@ class MusicNews.Views.Player extends Backbone.View
     @currentTrack
 
   playSong: (e) ->
-    e.preventDefault()
+    e.preventDefault() if e
     _this = this
     @playButton.attr('id', 'pause')
 
@@ -58,7 +58,7 @@ class MusicNews.Views.Player extends Backbone.View
         @currentSound.play()
 
   pauseSong: (e) ->
-    e.preventDefault()
+    e.preventDefault() if e
     _this = this
     @playButton.attr('id', 'play')
 
@@ -66,7 +66,7 @@ class MusicNews.Views.Player extends Backbone.View
       @currentSound.pause()
 
   nextSong: (e) ->
-    e.preventDefault()
+    e.preventDefault() if e
     @pauseSong()
     $song = @songs.shift()
     @songHistory.unshift($song)
@@ -80,7 +80,7 @@ class MusicNews.Views.Player extends Backbone.View
     @playSong()
 
   previousSong: (e) ->
-    e.preventDefault()
+    e.preventDefault() if e
     @pauseSong()
     $song = @songHistory.shift()
     if !$song
@@ -91,21 +91,21 @@ class MusicNews.Views.Player extends Backbone.View
     @playSong()
 
   noloveSong: (e) ->
-    e.preventDefault()
+    e.preventDefault() if e
     $button = $(e.currentTarget)
     # do stuff
     $button.attr("id", "love")
     console.log("no love button")
     
   loveSong: (e) ->
-    e.preventDefault()
+    e.preventDefault() if e
     $button = $(e.currentTarget)
     # do stuff
     $button.attr("id", "like")
     console.log("love button")
 
   likeSong: (e) ->
-    e.preventDefault()
+    e.preventDefault() if e
     $button = $(e.currentTarget)
     # do stuff
     $button.attr("id", "nolove")
