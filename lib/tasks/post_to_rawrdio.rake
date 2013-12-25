@@ -10,10 +10,10 @@ task :post_to_rawrdio => :environment do
 end
 
 desc "resolve all songs without stream urls"
-task :fetch_details => :environment do
-  Song.where(stream_url: nil).each do |song|
+task :resolve => :environment do
+  Song.all.each do |song|
     puts "resolving #{song.url}"
     sleep 1
-    song.fetch_details
+    song.resolve
   end
 end
