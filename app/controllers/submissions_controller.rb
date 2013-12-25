@@ -1,12 +1,12 @@
 class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :destroy, :resolve]
 
-  def index
-    @submissions = Submission.latest.limit(20).includes(:songs)
+  def backbone
+    render :index
   end
 
-  def feed
-    @submissions = Submission.latest.limit(50)
+  def index
+    @submissions = Submission.latest.includes(:songs).limit(20)
     render json: @submissions.to_json(include: [:songs])
   end
 

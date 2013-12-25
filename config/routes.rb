@@ -1,9 +1,9 @@
 MusicNews::Application.routes.draw do
-  root 'submissions#index'
+  root 'submissions#backbone'
   get '/seainhd' => redirect('http://www.seainhd.com')
   match '/auth/:provider/callback' => 'sessions#create', via: [:get, :post]
 
-  resources :submissions, path: 's', except: [:edit, :update] do
+  resources :submissions, except: [:edit, :update] do
     resource :publisher, only: [:show, :new, :create]
     member do
       get :resolve
