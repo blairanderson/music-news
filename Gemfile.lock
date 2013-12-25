@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/blairanderson/font-awesome-rails
+  revision: af3685e91d147a930d593b56baa5020aa9e8654b
+  specs:
+    font-awesome-rails (4.0.3.0)
+      railties (>= 3.2, < 5.0)
+
+GIT
   remote: https://github.com/blairanderson/rawrdio-rb
   revision: da18cdf071fb7b5a5498b4b686f52174eccde63f
   specs:
@@ -106,8 +113,6 @@ GEM
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
-    font-awesome-rails (4.0.3.0)
-      railties (>= 3.2, < 5.0)
     formatador (0.2.4)
     fssm (0.2.10)
     guard (2.2.5)
@@ -313,7 +318,7 @@ DEPENDENCIES
   compass-rails
   dotenv-rails
   figaro
-  font-awesome-rails
+  font-awesome-rails!
   guard-rspec
   haml
   haml-rails
