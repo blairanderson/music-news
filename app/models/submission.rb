@@ -66,13 +66,20 @@ class Submission < ActiveRecord::Base
 
 
   def self.update_all_song_counts
-    Submission.all.each do |s|
-      s.update songs_count: s.songs.length
+    Submission.all.includes(:songs).each do |s|
+      puts s.songs.count
+      s.update songs_count: s.songs.count
     end
   end
 
 private
   def self.purge
-    Submission.where(songs_count: 0).destroy_all
+    count = Submission.where(songs_count: 0)
+    if count < 5
+      count.destroy_all
+    else
+      puts 'Purge too Many. '
+      count.last(5).destroy_all
+    end
   end
 end
