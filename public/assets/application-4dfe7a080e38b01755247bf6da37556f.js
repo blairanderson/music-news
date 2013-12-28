@@ -15159,7 +15159,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     }
     (function() {
       (function() {
-        __out.push('<nav role="navigation">\n  <div class="container">\n  <!-- Brand and toggle get grouped for better mobile display -->\n    <div class="navbar-header">\n      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse-1">\n        <span class="sr-only">Toggle navigation</span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n      </button>\n      <a href="/">SEAinHD - Music</a>\n    </div>\n\n    <!-- Collect the nav links, forms, and other content for toggling -->\n    <div class="collapse" id="collapse-1">\n      <ul class="nav" id="nav">\n        <li><a href="#pop">Pop</a></li>\n        <li><a href="#new">New</a></li>\n        <li><a href="#about">About</a></li>\n      </ul>\n      <ul class="nav navbar-right">\n        <li class="dropdown">\n          <a href="#" class="dropdown-toggle" data-toggle="dropdown">\n            <button class="btn btn-default fa fa-bars"></button>\n          </a>\n          <ul class="dropdown-menu">\n            <li><a href="#">Action</a></li>\n            <li><a href="#">Another action</a></li>\n            <li><a href="#">Something else here</a></li>\n            <li class="divider"></li>\n          </ul>\n        </li>\n      </ul>\n    </div><!-- /.navbar-collapse -->\n  </div>\n  <div class="player-container" id="player-container">\n\n  </div>\n</nav>\n');
+        __out.push('<nav role="navigation">\n  <div class="container">\n  <!-- Brand and toggle get grouped for better mobile display -->\n    <div class="navbar-header">\n      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse-1">\n        <span class="sr-only">Toggle navigation</span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n      </button>\n      <a href="/">SEAinHD - Music</a>\n    </div>\n\n    <!-- Collect the nav links, forms, and other content for toggling -->\n    <div class="collapse" id="collapse-1">\n      <ul class="nav" id="nav">\n        <li><a href="#pop">Pop</a></li>\n        <li><a href="#new">New</a></li>\n        <li><a href="#about">About</a></li>\n      </ul>\n      <ul class="nav navbar-right">\n        <li class="dropdown">\n          <a href="#" class="dropdown-toggle" data-toggle="dropdown">\n            <button class="btn btn-default fa fa-bars"></button>\n          </a>\n          <ul class="dropdown-menu">\n            <li><a href="#">Action</a></li>\n            <li><a href="#">Another action</a></li>\n            <li><a href="#">Something else here</a></li>\n            <li class="divider"></li>\n          </ul>\n        </li>\n      </ul>\n    </div><!-- /.navbar-collapse -->\n  </div>\n  <div class="player-container" id="player-container">\n  </div>\n</nav>\n');
       
       }).call(this);
       
@@ -15255,7 +15255,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     }
     (function() {
       (function() {
-        __out.push('<div id="player">\n  <button id="previous">\n    <i></i>\n   </button>\n\n  <button id="nolove">\n    <i></i>\n  </button>\n\n  <button id="love">\n    <i></i>\n  </button>\n\n  <button id="like">\n    <i></i>\n  </button>\n\n  <button id="play" data-action="play-pause-button">\n    <i></i>\n  </button>\n\n  <button id="next">\n    <i></i>\n  </button>\n</div>\n<span id="playlist">\n</span>\n');
+        __out.push('<div id="player">\n  <button id="previous">\n    <i></i>\n   </button>\n\n  <button id="nolove">\n    <i></i>\n  </button>\n\n  <button id="play" data-action="play-pause-button">\n    <i></i>\n  </button>\n\n  <button id="next">\n    <i></i>\n  </button>\n</div>\n<br>\n<span id="playlist">\n</span>\n');
       
       }).call(this);
       
@@ -15407,7 +15407,11 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     }
     (function() {
       (function() {
-        __out.push('<div class="song-gutter">\n  <button class="play"><i></i></button>\n  <button class="heart"><i></i></button>\n  <button class="facebook"><i></i></button>\n  <button class="twitter"><i></i></button>\n</div>\n<div class="song-content">\n  <p>\n    <a class="pull-left" href="/');
+        __out.push('<div class="song-gutter">\n  <button class="play"><i></i></button>\n  <button class="heart"><i></i></button>\n  <button class="facebook" href="');
+      
+        __out.push(__sanitize(this.song.get('submission_url')));
+      
+        __out.push('"><i></i></button>\n  <button class="twitter"><i></i></button>\n</div>\n<div class="song-content">\n  <div>\n    <a class="pull-left" href="/');
       
         __out.push(__sanitize(this.song.get('submission_id')));
       
@@ -15415,7 +15419,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       
         __out.push(__sanitize(this.song.get('title')));
       
-        __out.push('</a> -\n    <a href="">author?</a>\n    <br>\n    <span>\n     Purchase Song: (<a href="http://amzn.com">link to amazon</a>)(<a href="http://itunes.com">link to itunes</a>)\n    </span>\n  </p>\n  <form>\n    <input type="text" placeholder="chill, dance, party, sex">\n  </form>\n</div>\n');
+        __out.push('</a>\n  </div>\n  <br>\n  <div>\n    <span>\n     Purchase Song: (<a href="http://amzn.com">link to amazon</a>)(<a href="http://itunes.com">link to itunes</a>)\n    </span>\n  </div>\n  <form>\n    <input type="text" placeholder="chill, dance, party, slowwave, slowgaze, nu-disco">\n  </form>\n</div>\n');
       
       }).call(this);
       
@@ -15599,6 +15603,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
         song_data = _ref1[_i];
         new_song = new MusicNews.Models.Song(song_data);
+        new_song.set("submission_url", "" + window.location.origin + "/" + (new_song.get('submission_id')));
         MusicNews.App.collections.songs.add(new_song);
         _this.songs.add(new_song);
       }
@@ -15654,7 +15659,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     console.log("collections submissions, change url.");
 
     Submissions.prototype.url = function() {
-      return 'feed';
+      return 'submissions';
     };
 
     Submissions.prototype.model = MusicNews.Models.Submission;
@@ -15682,10 +15687,12 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     Layout.prototype.template = JST['shared/layout'];
 
     Layout.prototype.render = function() {
-      var $markup;
+      var $markup, $playerContainer;
       $markup = $(this.template());
+      $playerContainer = $markup.find('div#player-container');
       MusicNews.App.views.player = new MusicNews.Views.Player().render();
-      $markup.find('div#player-container').html(MusicNews.App.views.player.$el);
+      $playerContainer.html(MusicNews.App.views.player.$el);
+      $playerContainer.affix();
       $(this.el).html($markup);
       return this;
     };
@@ -15763,6 +15770,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       _this = this;
       this.songs = MusicNews.App.collections.songs;
       this.songHistory = new MusicNews.Collections.Songs;
+      MusicNews.App.views.submissions = [];
       SC.initialize({
         client_id: "c024bdd48e9ecf014c71af406201f3a2"
       });
@@ -15780,15 +15788,13 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     };
 
     Player.prototype.events = {
-      "click div#player button": "buttonHandler"
-    };
-
-    Player.prototype.buttonHandler = function(e) {
-      var $action, $button;
-      e.preventDefault();
-      $button = $(e.currentTarget);
-      $action = $button.attr('id');
-      return this.buttonAction[$action](this);
+      "click button#play": "playSong",
+      "click button#pause": "pauseSong",
+      "click button#next": "nextSong",
+      "click button#previous": "previousSong",
+      "click button#nolove": "noloveSong",
+      "click button#love": "loveSong",
+      "click button#like": "likeSong"
     };
 
     Player.prototype.updateCurrentTrack = function() {
@@ -15808,13 +15814,27 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       return this.currentTrack;
     };
 
-    Player.prototype.playSong = function() {
+    Player.prototype.playSong = function(e) {
       var $stream_url,
         _this = this;
+      if (e) {
+        e.preventDefault();
+      }
       _this = this;
       this.playButton.attr('id', 'pause');
+      this.playOptions = {
+        onfinish: function() {
+          return _this.nextSong();
+        },
+        onplay: function() {
+          return MusicNews.App.collections.songs.each(function(song) {
+            song.view.$el.removeClass("active");
+            return song.view.button.removeClass('pause').addClass('play');
+          });
+        }
+      };
       if (this.currentSound) {
-        return this.currentSound.play();
+        return this.currentSound.play(this.playOptions);
       } else {
         $stream_url = this.currentTrack.get('stream_url');
         if ($stream_url === null || void 0) {
@@ -15823,13 +15843,16 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
         }
         return SC.stream($stream_url, function(sound) {
           _this.currentSound = sound;
-          return _this.currentSound.play();
+          return _this.currentSound.play(_this.playOptions);
         });
       }
     };
 
-    Player.prototype.pauseSong = function() {
+    Player.prototype.pauseSong = function(e) {
       var _this;
+      if (e) {
+        e.preventDefault();
+      }
       _this = this;
       this.playButton.attr('id', 'play');
       if (this.currentSound) {
@@ -15837,59 +15860,68 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       }
     };
 
-    Player.prototype.advanceTrack = function() {
+    Player.prototype.nextSong = function(e) {
       var $song;
+      if (e) {
+        e.preventDefault();
+      }
+      this.pauseSong();
       $song = this.songs.shift();
       this.songHistory.unshift($song);
       if (this.songs.length === 0) {
         window.location.href = window.location.href;
+        return;
       } else {
-        return this.updateCurrentTrack();
+        this.currentTrack = void 0;
+        this.updateCurrentTrack();
       }
+      return this.playSong();
     };
 
-    Player.prototype.previousTrack = function() {
+    Player.prototype.previousSong = function(e) {
       var $song;
+      if (e) {
+        e.preventDefault();
+      }
+      this.pauseSong();
       $song = this.songHistory.shift();
       if (!$song) {
         return;
       }
       this.songs.unshift($song);
-      return this.updateCurrentTrack();
+      this.currentTrack = void 0;
+      this.updateCurrentTrack();
+      return this.playSong();
     };
 
-    Player.prototype.stopSong = function() {
-      this.currentSound.unload();
-      return this.currentSound = void 0;
-    };
-
-    Player.prototype.buttonAction = {
-      "play": function(player) {
-        player.playSong();
-        return console.log('play button action');
-      },
-      "pause": function(player) {
-        player.pauseSong();
-        return console.log('pause button action');
-      },
-      "next": function(player) {
-        this.pause(player);
-        player.advanceTrack();
-        this.play(player);
-        return console.log("next button action");
-      },
-      "previous": function(player) {
-        this.pause(player);
-        player.previousTrack();
-        this.play(player);
-        return console.log("previous button action");
-      },
-      "love": function(player) {
-        return console.log("love button action");
-      },
-      "like": function(player) {
-        return console.log("like button action");
+    Player.prototype.noloveSong = function(e) {
+      var $button;
+      if (e) {
+        e.preventDefault();
       }
+      $button = $(e.currentTarget);
+      $button.attr("id", "love");
+      return console.log("no love button");
+    };
+
+    Player.prototype.loveSong = function(e) {
+      var $button;
+      if (e) {
+        e.preventDefault();
+      }
+      $button = $(e.currentTarget);
+      $button.attr("id", "like");
+      return console.log("love button");
+    };
+
+    Player.prototype.likeSong = function(e) {
+      var $button;
+      if (e) {
+        e.preventDefault();
+      }
+      $button = $(e.currentTarget);
+      $button.attr("id", "nolove");
+      return console.log("like button");
     };
 
     return Player;
@@ -15943,7 +15975,10 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
     SongPartial.prototype.initialize = function(options) {
       this.song = options.model;
-      return this.player = MusicNews.App.views.player;
+      options.model.view = this;
+      this.button = this.$el.find("button.play");
+      this.player = MusicNews.App.views.player;
+      return this.router = MusicNews.App.routers.submissions;
     };
 
     SongPartial.prototype.render = function() {
@@ -15958,7 +15993,9 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
     SongPartial.prototype.events = {
       "click a": "goToShow",
-      "click button.play": "playSong"
+      "click button.play, button.pause": "buttonHandler",
+      "click button.facebook": "facebook",
+      "click button.twitter": "twitter"
     };
 
     SongPartial.prototype.goToShow = function(e) {
@@ -15970,9 +16007,17 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       });
     };
 
-    SongPartial.prototype.playSong = function(e) {
-      var markup;
+    SongPartial.prototype.buttonHandler = function(e) {
+      var $action;
       e.preventDefault();
+      this.button = $(e.currentTarget);
+      $action = this.button.attr('class');
+      this[$action](this.button);
+      return this.playPauseAddClass();
+    };
+
+    SongPartial.prototype.play = function() {
+      var markup;
       this.player.pauseSong();
       this.player.currentSound = void 0;
       this.player.currentTrack = this.song;
@@ -15983,6 +16028,19 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
         this.player.$el.find('#playlist').html(markup);
       }
       return this.player.playSong();
+    };
+
+    SongPartial.prototype.pause = function() {
+      return this.player.pauseSong();
+    };
+
+    SongPartial.prototype.facebook = function() {};
+
+    SongPartial.prototype.twitter = function() {};
+
+    SongPartial.prototype.playPauseAddClass = function() {
+      this.$el.addClass("active");
+      return this.button.toggleClass('play pause');
     };
 
     return SongPartial;
@@ -16044,6 +16102,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
     SubmissionPartial.prototype.initialize = function(options) {
       this.submission = options.model;
+      options.model.view = this;
       return this.player = MusicNews.App.views.player;
     };
 
@@ -16121,6 +16180,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
         view = new MusicNews.Views.SubmissionPartial({
           model: submission
         }).render().$el;
+        MusicNews.App.views.submissions.push(view);
         return _this.$el.append(view);
       });
       return this;
@@ -16173,7 +16233,9 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
     Submissions.prototype.initialize = function() {
       this.collection = MusicNews.App.collections.submissions;
-      return this.songs = MusicNews.App.collections.songs;
+      this.songs = MusicNews.App.collections.songs;
+      this.view = new MusicNews.Views.SubmissionsIndex();
+      return MusicNews.App.views.submissions.push(this.view);
     };
 
     Submissions.prototype.routes = {
@@ -16183,7 +16245,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     };
 
     Submissions.prototype.index = function(data) {
-      var possibleShow, view, _target;
+      var $parent, $target, possibleShow, _target, _view;
       possibleShow = window.location.search.split('=')[1];
       if (possibleShow) {
         this.navigate(possibleShow, {
@@ -16191,45 +16253,46 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
         });
         return;
       }
-      this.parent = MusicNews.App.views.main.$el;
-      this.target = this.parent.find('div.body');
-      _target = this.target;
+      _view = this.view;
+      $parent = MusicNews.App.views.main.$el;
+      $target = $parent.find('div.body');
+      _target = $target;
       if (this.collection.length) {
-        view = new MusicNews.Views.SubmissionsIndex().render();
-        return _target.html(view.$el);
+        return _target.html(this.view.render().$el);
       } else {
         return this.collection.fetch().done(function() {
-          view = new MusicNews.Views.SubmissionsIndex().render();
-          return _target.html(view.$el);
+          return _target.html(_view.render().$el);
         });
       }
     };
 
     Submissions.prototype.show = function(data) {
-      var submission, view, _target;
-      this.parent = MusicNews.App.views.main.$el;
-      this.target = this.parent.find('div.body');
-      _target = this.target;
-      this.parent.find('div.hero').html("This is the hero content");
+      var $parent, $target, submission, _target;
+      $parent = MusicNews.App.views.main.$el;
+      $target = $parent.find('div.body');
+      _target = $target;
+      $parent.find('div.hero').html("This is the hero content");
       if (this.collection.length) {
         submission = MusicNews.App.collections.submissions.findWhere({
           id: parseInt(data)
         });
         submission.fetch();
-        view = new MusicNews.Views.Submission({
+        this.currentSubmission = new MusicNews.Views.Submission({
           model: submission
         }).render();
-        return _target.html(view.$el);
+        MusicNews.App.views.currentSubmission = this.currentSubmission;
+        return _target.html(this.currentSubmission.$el);
       } else {
         return this.collection.fetch().done(function() {
           submission = MusicNews.App.collections.submissions.findWhere({
             id: parseInt(data)
           });
           submission.fetch();
-          view = new MusicNews.Views.Submission({
+          this.currentSubmission = new MusicNews.Views.Submission({
             model: submission
           }).render();
-          return _target.html(view.$el);
+          MusicNews.App.views.currentSubmission = this.currentSubmission;
+          return _target.html(this.currentSubmission.$el);
         });
       }
     };
