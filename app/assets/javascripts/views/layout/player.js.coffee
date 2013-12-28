@@ -7,6 +7,7 @@ class MusicNews.Views.Player extends Backbone.View
     _this = this
     @songs = MusicNews.App.collections.songs
     @songHistory = new MusicNews.Collections.Songs
+    MusicNews.App.views.submissions = []
     SC.initialize(client_id: "c024bdd48e9ecf014c71af406201f3a2");
     SC.whenStreamingReady ->
       console.log 'streaming ready'
@@ -44,9 +45,17 @@ class MusicNews.Views.Player extends Backbone.View
     e.preventDefault() if e
     _this = this
     @playButton.attr('id', 'pause')
+    @playOptions=
+      onfinish: ->
+        _this.nextSong()
+      onplay: ->
+        MusicNews.App.collections.songs.each (song) ->
+          song.view.$el.removeClass "active"
+          song.view.button.removeClass('pause').addClass('play');
 
     if @currentSound
-      @currentSound.play()
+      @currentSound.play(@playOptions) 
+      
     else
       $stream_url = @currentTrack.get('stream_url')
       if $stream_url is null or undefined
@@ -55,7 +64,8 @@ class MusicNews.Views.Player extends Backbone.View
 
       SC.stream $stream_url, (sound) =>
         @currentSound = sound
-        @currentSound.play()
+        @currentSound.play(@playOptions)
+      
 
   pauseSong: (e) ->
     e.preventDefault() if e
