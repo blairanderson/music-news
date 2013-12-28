@@ -3,6 +3,7 @@ class MusicNews.Views.SubmissionPartial extends Backbone.View
   template: JST['submissions/_submission']
   initialize: (options) ->
     @submission = options.model
+    options.model.view = this
     @player = MusicNews.App.views.player
 
   render: ->
