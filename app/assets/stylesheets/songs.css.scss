@@ -9,6 +9,9 @@ div#window > section.content > div#main > .body  > .submission-list > .submissio
     &:hover{
       background-color: darken(#FFFFFF, 5%);
     }
+    &.active{
+      background-color: #FFC;
+    }
     .song-content{
       @extend .col-xs-9;
       padding-top: 15px;

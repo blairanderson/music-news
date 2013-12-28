@@ -9,5 +9,6 @@ class MusicNews.Views.SubmissionsIndex extends Backbone.View
     _this = this
     @collection.each (submission) ->
       view = new MusicNews.Views.SubmissionPartial(model: submission).render().$el
+      MusicNews.App.views.submissions.push view
       _this.$el.append view
     this
