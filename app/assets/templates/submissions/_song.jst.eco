@@ -6,7 +6,7 @@
 </div>
 <div class="song-content">
   <div>
-    <a class="pull-left" href="/<%= @song.get('submission_id')%>"><%= @song.get('title') %></a>
+    <a class="pull-left" href="/song/<%= @song.get('id')%>"><%= @song.get('title') %></a>
   </div>
   <br>
   <div>
