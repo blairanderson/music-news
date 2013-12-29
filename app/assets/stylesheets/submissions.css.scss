@@ -22,20 +22,57 @@ footer{
 
 
 div#window > section.content > div#main > .body {
+  .submission-show{
+    @extend .row;
+    .content{
+      float: left;
+      @extend .col-xs-12;
+      @extend .col-sm-6;
+    }
+    .gutter{
+      float: right;
+      @extend .col-xs-12;
+      @extend .col-sm-6;
+    }
+  }
   .submission-list{
     .submission{
       border-bottom: solid 1px #cccccc;
       margin: 10px 0px;
       @extend .row;
+      &:hover{
+        background-color: #fff;
+      }
       .sub-gutter{
-        @extend .col-xs-1;
-        padding: 0;
+        @extend .col-xs-4;
+        .img {
+          padding: 10px;
+          background-color: #fff;
+          -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+          -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+
+        }
         img{
-          margin-top: 45px;
+        }
+        a{
+          font-family: Oswald;
+          span{
+            font-size: 3em;
+            line-height: 1em;
+            font-weight: bold;
+          }
+          p{
+            font-size: 2em;
+            line-height: 1em;
+          }
+          h6{
+            float: right;
+          }
         }
       }
       .sub-content{
-        @extend .col-xs-11;
+        @extend .col-xs-8;
       }
     }
   }

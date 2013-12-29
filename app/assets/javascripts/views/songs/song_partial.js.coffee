@@ -3,6 +3,7 @@ class MusicNews.Views.SongPartial extends Backbone.View
   template: JST['submissions/_song']
   initialize: (options) ->
     @song = options.model
+    @submission = options.submission
     options.model.view = this
     @button = this.$el.find("button.play")
     @player = MusicNews.App.views.player
@@ -44,8 +45,11 @@ class MusicNews.Views.SongPartial extends Backbone.View
   pause: ->
     @player.pauseSong()
   facebook: ->
-
+    @openWindow(@submission.get('share'), "FACEBOOP DAT")
   twitter: ->
+    @openWindow(@submission.get('tweet'), "TWOOT dat")
+  openWindow: (url, name) ->
+    window.open(url, name, "height=800,width=900")
 
 
   playPauseAddClass: ->

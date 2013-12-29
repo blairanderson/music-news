@@ -4,6 +4,7 @@ class MusicNews.Views.SubmissionPartial extends Backbone.View
   initialize: (options) ->
     @submission = options.model
     options.model.view = this
+    @router = MusicNews.App.routers.submissions
     @player = MusicNews.App.views.player
 
   render: ->
@@ -18,7 +19,7 @@ class MusicNews.Views.SubmissionPartial extends Backbone.View
     _this = this
 
     @submission.songs.each (song) ->
-      view = new MusicNews.Views.SongPartial(model: song).render().$el
+      view = new MusicNews.Views.SongPartial(model: song, submission: _this.submission).render().$el
       _this.$el.find('div.sub-content').append view
 
   events:

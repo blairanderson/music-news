@@ -1,13 +1,21 @@
-the show eco
-<p class="lead">
-  title:
-  <%= @submission.get('title') %>
-</p>
-<p>
-  Body:
-  <%= @submission.get('body') %>
-</p>
+<div class="gutter">
+  <a href="<%= @submission.get('tweet') %>" target="_blank">
+    <i class="fa fa-twitter"></i>
+    <%= @submission.get('twitter') %>
+    <i class="fa fa-twitter"></i>
+  </a>
+  <div class="img">
+    <img src="<%= @submission.thumbnail_url %>" class="img-responsive">
+  </div>
+</div>
 
-<span>posted <%= @submission.get('created_at') %> ago</span>
-<span>by <%= @submission.get('twitter') %></span>
-<span>PageViews: <%= @submission.get('view_count') %></span>
+<div class="content">
+  
+  <span><%= @submission.get('title')%></span>
+  <p class="lead"><%= @submission.get('body')%></p>
+  <div class="songs-list">
+  </div>
+  <h3>
+    submitted <%= @submission.get('fromNow')%>, on <%= @submission.get('calendar')%>. views: <%= @submission.get('view_count') %>
+  </h3>
+</div>
