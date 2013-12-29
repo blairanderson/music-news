@@ -15,7 +15,6 @@ MusicNews::Application.routes.draw do
 
   resources :songs, only: [:index, :show, :destroy]
 
-
   #vanity-URLS
   get 'new' => 'submissions#new'
   get 'feed' => 'submissions#feed'
