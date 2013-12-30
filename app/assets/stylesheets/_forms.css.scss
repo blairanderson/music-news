@@ -1,6 +1,7 @@
 nav{
   @extend .navbar;
   @extend .navbar-default;
+  margin-bottom: 0px;
   .navbar-header > a {
     @extend .navbar-brand;
   }
