@@ -16,5 +16,5 @@
   </button>
 </div>
 <br>
-<span id="playlist">
-</span>
+<div id="playlist">
+</div>

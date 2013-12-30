@@ -12,21 +12,21 @@ div.player-container{
   div#music-player{
     margin-left: auto;
     margin-right: auto;
-    max-width: 600px;
-    min-width: 320px;
+    max-width: 440px;
     #player{
+      width: 100%;
       @extend .btn-group;
       button{
         @extend .btn;
         @extend .btn-default;
-        @extend .btn-xs;
-        &:active, &:hover{
+        @extend .btn-lg;
+        width: 25%;
+        &:hover{
           background-color: #fff;
         }
         > i{
           @extend .fa;
           @extend .fa-2x;
-          @extend .fa-fw;
           color: #000;
           &:hover{
             color: lighten(#000, 50%);
@@ -47,11 +47,9 @@ div.player-container{
         color: red;
       }
     }
-    span#playlist {
-      padding-left: 20px;
-      padding-right:20px;
+    div#playlist {
       border: none;
-
+      text-align: center;
       a{
         font-size: 17px;
         text-decoration: none;

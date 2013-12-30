@@ -27,7 +27,7 @@
 }
 
 /* line 17, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/bundler/gems/font-awesome-rails-af3685e91d14/app/assets/stylesheets/font-awesome.css.erb */
-.fa, div.player-container div#music-player #player button > i, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button > i {
+.fa, div.player-container div#music-player #player button > i, .song button > i {
   display: inline-block;
   font-family: FontAwesome;
   font-style: normal;
@@ -66,7 +66,7 @@
 }
 
 /* line 44, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/bundler/gems/font-awesome-rails-af3685e91d14/app/assets/stylesheets/font-awesome.css.erb */
-.fa-fw, div.player-container div#music-player #player button > i {
+.fa-fw {
   width: 1.2857142857142858em;
   text-align: center;
 }
@@ -115,12 +115,12 @@
 }
 
 /* line 77, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/bundler/gems/font-awesome-rails-af3685e91d14/app/assets/stylesheets/font-awesome.css.erb */
-.fa.pull-left, div.player-container div#music-player #player button > i.pull-left, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button > i.pull-left {
+.fa.pull-left, div.player-container div#music-player #player button > i.pull-left, .song button > i.pull-left {
   margin-right: .3em;
 }
 
 /* line 80, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/bundler/gems/font-awesome-rails-af3685e91d14/app/assets/stylesheets/font-awesome.css.erb */
-.fa.pull-right, div.player-container div#music-player #player button > i.pull-right, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button > i.pull-right {
+.fa.pull-right, div.player-container div#music-player #player button > i.pull-right, .song button > i.pull-right {
   margin-left: .3em;
 }
 
@@ -299,7 +299,7 @@
 }
 
 /* line 207, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/bundler/gems/font-awesome-rails-af3685e91d14/app/assets/stylesheets/font-awesome.css.erb */
-.fa-heart:before, div.player-container div#music-player #player button#nolove > i:before, div.player-container div#music-player #player button#love > i:before, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.heart > i:before {
+.fa-heart:before, div.player-container div#music-player #player button#nolove > i:before, div.player-container div#music-player #player button#love > i:before, .song button.heart > i:before {
   content: "\f004";
 }
 
@@ -638,12 +638,12 @@
 }
 
 /* line 412, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/bundler/gems/font-awesome-rails-af3685e91d14/app/assets/stylesheets/font-awesome.css.erb */
-.fa-play:before, div.player-container div#music-player #player button#play > i:before, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.play > i:before {
+.fa-play:before, div.player-container div#music-player #player button#play > i:before, .song button.play > i:before {
   content: "\f04b";
 }
 
 /* line 415, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/bundler/gems/font-awesome-rails-af3685e91d14/app/assets/stylesheets/font-awesome.css.erb */
-.fa-pause:before, div.player-container div#music-player #player button#pause > i:before, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.pause > i:before {
+.fa-pause:before, div.player-container div#music-player #player button#pause > i:before, .song button.pause > i:before {
   content: "\f04c";
 }
 
@@ -1006,12 +1006,12 @@
 }
 
 /* line 634, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/bundler/gems/font-awesome-rails-af3685e91d14/app/assets/stylesheets/font-awesome.css.erb */
-.fa-twitter:before, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.twitter > i:before, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.twitter:hover > i:before {
+.fa-twitter:before, .song button.twitter > i:before, .song button.twitter:hover > i:before {
   content: "\f099";
 }
 
 /* line 637, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/bundler/gems/font-awesome-rails-af3685e91d14/app/assets/stylesheets/font-awesome.css.erb */
-.fa-facebook:before, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.facebook > i:before, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.facebook:hover > i:before {
+.fa-facebook:before, .song button.facebook > i:before, .song button.facebook:hover > i:before {
   content: "\f09a";
 }
 
@@ -2499,10 +2499,10 @@ table {
   }
 
   /* line 87, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_print.scss */
-  .btn > .caret, div.player-container div#music-player #player button > .caret, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button > .caret,
+  .btn > .caret, div.player-container div#music-player #player button > .caret, .song .song-gutter button > .caret,
   .dropup > .btn > .caret,
   div.player-container div#music-player #player .dropup > button > .caret,
-  div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .dropup > button > .caret {
+  .song .song-gutter .dropup > button > .caret {
     border-top-color: #000 !important;
   }
 
@@ -3063,22 +3063,22 @@ pre code {
 }
 
 /* line 21, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_grid.scss */
-.row, div#window section.content, div#window > section.content > div#main > .body .submission-list .submission, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song {
+.row, div#window section.content, div#window > section.content > div#main > .body .submission-show, div#window > section.content > div#main > .body .submission-list .submission, .song {
   margin-left: -15px;
   margin-right: -15px;
 }
 /* line 21, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.row:before, div#window section.content:before, div#window > section.content > div#main > .body .submission-list .submission:before, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song:before, .row:after, div#window section.content:after, div#window > section.content > div#main > .body .submission-list .submission:after, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song:after {
+.row:before, div#window section.content:before, div#window > section.content > div#main > .body .submission-show:before, div#window > section.content > div#main > .body .submission-list .submission:before, .song:before, .row:after, div#window section.content:after, div#window > section.content > div#main > .body .submission-show:after, div#window > section.content > div#main > .body .submission-list .submission:after, .song:after {
   content: " ";
   display: table;
 }
 /* line 25, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.row:after, div#window section.content:after, div#window > section.content > div#main > .body .submission-list .submission:after, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song:after {
+.row:after, div#window section.content:after, div#window > section.content > div#main > .body .submission-show:after, div#window > section.content > div#main > .body .submission-list .submission:after, .song:after {
   clear: both;
 }
 
 /* line 715, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.col-xs-12, div#window section.content div#main, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-content form input[type="text"], .col-sm-12, .col-md-12, .col-lg-12, .col-xs-11, div#window > section.content > div#main > .body .submission-list .submission .sub-content, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-9, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-content, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-content form input[type="text"], .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-3, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-1, div#window > section.content > div#main > .body .submission-list .submission .sub-gutter, .col-sm-1, .col-md-1, .col-lg-1 {
+.col-xs-12, div#window section.content div#main, div#window > section.content > div#main > .body .submission-show .content, div#window > section.content > div#main > .body .submission-show .gutter, .song .song-content form input[type="text"], .col-sm-12, .col-md-12, .col-lg-12, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-9, .song .song-content, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-8, div#window > section.content > div#main > .body .submission-list .submission .sub-content, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-6, .col-sm-6, div#window > section.content > div#main > .body .submission-show .content, div#window > section.content > div#main > .body .submission-show .gutter, .col-md-6, .col-lg-6, .song .song-content form input[type="text"], .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-4, div#window > section.content > div#main > .body .submission-list .submission .sub-gutter, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-3, .song .song-gutter, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1 {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
@@ -3086,12 +3086,12 @@ pre code {
 }
 
 /* line 734, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.col-xs-12, div#window section.content div#main, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-content form input[type="text"], .col-xs-11, div#window > section.content > div#main > .body .submission-list .submission .sub-content, .col-xs-10, .col-xs-9, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-content, .col-xs-8, .col-xs-7, .col-xs-6, .col-xs-5, .col-xs-4, .col-xs-3, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter, .col-xs-2, .col-xs-1, div#window > section.content > div#main > .body .submission-list .submission .sub-gutter {
+.col-xs-12, div#window section.content div#main, div#window > section.content > div#main > .body .submission-show .content, div#window > section.content > div#main > .body .submission-show .gutter, .song .song-content form input[type="text"], .col-xs-11, .col-xs-10, .col-xs-9, .song .song-content, .col-xs-8, div#window > section.content > div#main > .body .submission-list .submission .sub-content, .col-xs-7, .col-xs-6, .col-xs-5, .col-xs-4, div#window > section.content > div#main > .body .submission-list .submission .sub-gutter, .col-xs-3, .song .song-gutter, .col-xs-2, .col-xs-1 {
   float: left;
 }
 
 /* line 742, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.col-xs-1, div#window > section.content > div#main > .body .submission-list .submission .sub-gutter {
+.col-xs-1 {
   width: 8.3333333333%;
 }
 
@@ -3101,12 +3101,12 @@ pre code {
 }
 
 /* line 742, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.col-xs-3, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter {
+.col-xs-3, .song .song-gutter {
   width: 25%;
 }
 
 /* line 742, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.col-xs-4 {
+.col-xs-4, div#window > section.content > div#main > .body .submission-list .submission .sub-gutter {
   width: 33.3333333333%;
 }
 
@@ -3126,12 +3126,12 @@ pre code {
 }
 
 /* line 742, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.col-xs-8 {
+.col-xs-8, div#window > section.content > div#main > .body .submission-list .submission .sub-content {
   width: 66.6666666667%;
 }
 
 /* line 742, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.col-xs-9, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-content {
+.col-xs-9, .song .song-content {
   width: 75%;
 }
 
@@ -3141,12 +3141,12 @@ pre code {
 }
 
 /* line 742, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.col-xs-11, div#window > section.content > div#main > .body .submission-list .submission .sub-content {
+.col-xs-11 {
   width: 91.6666666667%;
 }
 
 /* line 742, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.col-xs-12, div#window section.content div#main, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-content form input[type="text"] {
+.col-xs-12, div#window section.content div#main, div#window > section.content > div#main > .body .submission-show .content, div#window > section.content > div#main > .body .submission-show .gutter, .song .song-content form input[type="text"] {
   width: 100%;
 }
 
@@ -3347,7 +3347,7 @@ pre code {
 
 @media (min-width: 768px) {
   /* line 734, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-  .col-sm-12, .col-sm-11, .col-sm-10, .col-sm-9, .col-sm-8, .col-sm-7, .col-sm-6, .col-sm-5, .col-sm-4, .col-sm-3, .col-sm-2, .col-sm-1 {
+  .col-sm-12, .col-sm-11, .col-sm-10, .col-sm-9, .col-sm-8, .col-sm-7, .col-sm-6, div#window > section.content > div#main > .body .submission-show .content, div#window > section.content > div#main > .body .submission-show .gutter, .col-sm-5, .col-sm-4, .col-sm-3, .col-sm-2, .col-sm-1 {
     float: left;
   }
 
@@ -3377,7 +3377,7 @@ pre code {
   }
 
   /* line 742, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-  .col-sm-6 {
+  .col-sm-6, div#window > section.content > div#main > .body .submission-show .content, div#window > section.content > div#main > .body .submission-show .gutter {
     width: 50%;
   }
 
@@ -3869,7 +3869,7 @@ pre code {
 }
 @media (min-width: 1200px) {
   /* line 734, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-  .col-lg-12, .col-lg-11, .col-lg-10, .col-lg-9, .col-lg-8, .col-lg-7, .col-lg-6, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-content form input[type="text"], .col-lg-5, .col-lg-4, .col-lg-3, .col-lg-2, .col-lg-1 {
+  .col-lg-12, .col-lg-11, .col-lg-10, .col-lg-9, .col-lg-8, .col-lg-7, .col-lg-6, .song .song-content form input[type="text"], .col-lg-5, .col-lg-4, .col-lg-3, .col-lg-2, .col-lg-1 {
     float: left;
   }
 
@@ -3899,7 +3899,7 @@ pre code {
   }
 
   /* line 742, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-  .col-lg-6, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-content form input[type="text"] {
+  .col-lg-6, .song .song-content form input[type="text"] {
     width: 50%;
   }
 
@@ -4584,7 +4584,7 @@ input[type="checkbox"],
 .input-group-sm > .input-group-addon,
 .input-group-sm > .input-group-btn > .btn,
 div.player-container div#music-player #player .input-group-sm > .input-group-btn > button,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .input-group-sm > .input-group-btn > button {
+.song .song-gutter .input-group-sm > .input-group-btn > button {
   height: 30px;
   padding: 5px 10px;
   font-size: 12px;
@@ -4612,7 +4612,7 @@ textarea.input-sm, .input-group-sm > textarea.form-control, form div.input .inpu
 .input-group-lg > .input-group-addon,
 .input-group-lg > .input-group-btn > .btn,
 div.player-container div#music-player #player .input-group-lg > .input-group-btn > button,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .input-group-lg > .input-group-btn > button {
+.song .song-gutter .input-group-lg > .input-group-btn > button {
   height: 46px;
   padding: 10px 16px;
   font-size: 18px;
@@ -4806,7 +4806,7 @@ textarea.input-lg, .input-group-lg > textarea.form-control, form div.input .inpu
 }
 
 /* line 9, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_buttons.scss */
-.btn, div.player-container div#music-player #player button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button {
+.btn, div.player-container div#music-player #player button, .song .song-gutter button {
   display: inline-block;
   margin-bottom: 0;
   font-weight: normal;
@@ -4827,25 +4827,25 @@ textarea.input-lg, .input-group-lg > textarea.form-control, form div.input .inpu
   user-select: none;
 }
 /* line 22, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_buttons.scss */
-.btn:focus, div.player-container div#music-player #player button:focus, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button:focus {
+.btn:focus, div.player-container div#music-player #player button:focus, .song .song-gutter button:focus {
   outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
 /* line 27, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_buttons.scss */
-.btn:hover, div.player-container div#music-player #player button:hover, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button:hover, .btn:focus, div.player-container div#music-player #player button:focus, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button:focus {
+.btn:hover, div.player-container div#music-player #player button:hover, .song .song-gutter button:hover, .btn:focus, div.player-container div#music-player #player button:focus, .song .song-gutter button:focus {
   color: #333333;
   text-decoration: none;
 }
 /* line 33, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_buttons.scss */
-.btn:active, div.player-container div#music-player #player button:active, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button:active, .btn.active, div.player-container div#music-player #player button.active, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.active {
+.btn:active, div.player-container div#music-player #player button:active, .song .song-gutter button:active, .btn.active, div.player-container div#music-player #player button.active, .song .song-gutter button.active {
   outline: 0;
   background-image: none;
   -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 /* line 41, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_buttons.scss */
-.btn.disabled, div.player-container div#music-player #player button.disabled, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.disabled, .btn[disabled], div.player-container div#music-player #player button[disabled], div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button[disabled], fieldset[disabled] .btn, fieldset[disabled] div.player-container div#music-player #player button, div.player-container div#music-player #player fieldset[disabled] button, fieldset[disabled] div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter fieldset[disabled] button {
+.btn.disabled, div.player-container div#music-player #player button.disabled, .song .song-gutter button.disabled, .btn[disabled], div.player-container div#music-player #player button[disabled], .song .song-gutter button[disabled], fieldset[disabled] .btn, fieldset[disabled] div.player-container div#music-player #player button, div.player-container div#music-player #player fieldset[disabled] button, fieldset[disabled] .song .song-gutter button, .song .song-gutter fieldset[disabled] button {
   cursor: not-allowed;
   pointer-events: none;
   opacity: 0.65;
@@ -4855,38 +4855,38 @@ textarea.input-lg, .input-group-lg > textarea.form-control, form div.input .inpu
 }
 
 /* line 53, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_buttons.scss */
-.btn-default, div.player-container div#music-player #player button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button {
+.btn-default, div.player-container div#music-player #player button, .song .song-gutter button {
   color: #333333;
   background-color: white;
   border-color: #cccccc;
 }
 /* line 451, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.btn-default:hover, div.player-container div#music-player #player button:hover, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button:hover, .btn-default:focus, div.player-container div#music-player #player button:focus, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button:focus, .btn-default:active, div.player-container div#music-player #player button:active, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button:active, .btn-default.active, div.player-container div#music-player #player button.active, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.active {
+.btn-default:hover, div.player-container div#music-player #player button:hover, .song .song-gutter button:hover, .btn-default:focus, div.player-container div#music-player #player button:focus, .song .song-gutter button:focus, .btn-default:active, div.player-container div#music-player #player button:active, .song .song-gutter button:active, .btn-default.active, div.player-container div#music-player #player button.active, .song .song-gutter button.active {
   color: #333333;
   background-color: #ebebeb;
   border-color: #adadad;
 }
 /* line 456, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.open .btn-default.dropdown-toggle, .open div.player-container div#music-player #player button.dropdown-toggle, div.player-container div#music-player #player .open button.dropdown-toggle, .open div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.dropdown-toggle, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .open button.dropdown-toggle {
+.open .btn-default.dropdown-toggle, .open div.player-container div#music-player #player button.dropdown-toggle, div.player-container div#music-player #player .open button.dropdown-toggle, .open .song .song-gutter button.dropdown-toggle, .song .song-gutter .open button.dropdown-toggle {
   color: #333333;
   background-color: #ebebeb;
   border-color: #adadad;
 }
 /* line 462, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.btn-default:active, div.player-container div#music-player #player button:active, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button:active, .btn-default.active, div.player-container div#music-player #player button.active, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.active {
+.btn-default:active, div.player-container div#music-player #player button:active, .song .song-gutter button:active, .btn-default.active, div.player-container div#music-player #player button.active, .song .song-gutter button.active {
   background-image: none;
 }
 /* line 465, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.open .btn-default.dropdown-toggle, .open div.player-container div#music-player #player button.dropdown-toggle, div.player-container div#music-player #player .open button.dropdown-toggle, .open div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.dropdown-toggle, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .open button.dropdown-toggle {
+.open .btn-default.dropdown-toggle, .open div.player-container div#music-player #player button.dropdown-toggle, div.player-container div#music-player #player .open button.dropdown-toggle, .open .song .song-gutter button.dropdown-toggle, .song .song-gutter .open button.dropdown-toggle {
   background-image: none;
 }
 /* line 475, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.btn-default.disabled, div.player-container div#music-player #player button.disabled, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.disabled, .btn-default.disabled:hover, div.player-container div#music-player #player button.disabled:hover, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.disabled:hover, .btn-default.disabled:focus, div.player-container div#music-player #player button.disabled:focus, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.disabled:focus, .btn-default.disabled:active, div.player-container div#music-player #player button.disabled:active, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.disabled:active, .btn-default.disabled.active, div.player-container div#music-player #player button.disabled.active, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.disabled.active, .btn-default[disabled], div.player-container div#music-player #player button[disabled], div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button[disabled], .btn-default[disabled]:hover, div.player-container div#music-player #player button[disabled]:hover, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button[disabled]:hover, .btn-default[disabled]:focus, div.player-container div#music-player #player button[disabled]:focus, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button[disabled]:focus, .btn-default[disabled]:active, div.player-container div#music-player #player button[disabled]:active, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button[disabled]:active, .btn-default[disabled].active, div.player-container div#music-player #player button[disabled].active, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button[disabled].active, fieldset[disabled] .btn-default, fieldset[disabled] div.player-container div#music-player #player button, div.player-container div#music-player #player fieldset[disabled] button, fieldset[disabled] div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter fieldset[disabled] button, fieldset[disabled] .btn-default:hover, fieldset[disabled] div.player-container div#music-player #player button:hover, div.player-container div#music-player #player fieldset[disabled] button:hover, fieldset[disabled] div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button:hover, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter fieldset[disabled] button:hover, fieldset[disabled] .btn-default:focus, fieldset[disabled] div.player-container div#music-player #player button:focus, div.player-container div#music-player #player fieldset[disabled] button:focus, fieldset[disabled] div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button:focus, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter fieldset[disabled] button:focus, fieldset[disabled] .btn-default:active, fieldset[disabled] div.player-container div#music-player #player button:active, div.player-container div#music-player #player fieldset[disabled] button:active, fieldset[disabled] div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button:active, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter fieldset[disabled] button:active, fieldset[disabled] .btn-default.active, fieldset[disabled] div.player-container div#music-player #player button.active, div.player-container div#music-player #player fieldset[disabled] button.active, fieldset[disabled] div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.active, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter fieldset[disabled] button.active {
+.btn-default.disabled, div.player-container div#music-player #player button.disabled, .song .song-gutter button.disabled, .btn-default.disabled:hover, div.player-container div#music-player #player button.disabled:hover, .song .song-gutter button.disabled:hover, .btn-default.disabled:focus, div.player-container div#music-player #player button.disabled:focus, .song .song-gutter button.disabled:focus, .btn-default.disabled:active, div.player-container div#music-player #player button.disabled:active, .song .song-gutter button.disabled:active, .btn-default.disabled.active, div.player-container div#music-player #player button.disabled.active, .song .song-gutter button.disabled.active, .btn-default[disabled], div.player-container div#music-player #player button[disabled], .song .song-gutter button[disabled], .btn-default[disabled]:hover, div.player-container div#music-player #player button[disabled]:hover, .song .song-gutter button[disabled]:hover, .btn-default[disabled]:focus, div.player-container div#music-player #player button[disabled]:focus, .song .song-gutter button[disabled]:focus, .btn-default[disabled]:active, div.player-container div#music-player #player button[disabled]:active, .song .song-gutter button[disabled]:active, .btn-default[disabled].active, div.player-container div#music-player #player button[disabled].active, .song .song-gutter button[disabled].active, fieldset[disabled] .btn-default, fieldset[disabled] div.player-container div#music-player #player button, div.player-container div#music-player #player fieldset[disabled] button, fieldset[disabled] .song .song-gutter button, .song .song-gutter fieldset[disabled] button, fieldset[disabled] .btn-default:hover, fieldset[disabled] div.player-container div#music-player #player button:hover, div.player-container div#music-player #player fieldset[disabled] button:hover, fieldset[disabled] .song .song-gutter button:hover, .song .song-gutter fieldset[disabled] button:hover, fieldset[disabled] .btn-default:focus, fieldset[disabled] div.player-container div#music-player #player button:focus, div.player-container div#music-player #player fieldset[disabled] button:focus, fieldset[disabled] .song .song-gutter button:focus, .song .song-gutter fieldset[disabled] button:focus, fieldset[disabled] .btn-default:active, fieldset[disabled] div.player-container div#music-player #player button:active, div.player-container div#music-player #player fieldset[disabled] button:active, fieldset[disabled] .song .song-gutter button:active, .song .song-gutter fieldset[disabled] button:active, fieldset[disabled] .btn-default.active, fieldset[disabled] div.player-container div#music-player #player button.active, div.player-container div#music-player #player fieldset[disabled] button.active, fieldset[disabled] .song .song-gutter button.active, .song .song-gutter fieldset[disabled] button.active {
   background-color: white;
   border-color: #cccccc;
 }
 /* line 481, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_mixins.scss */
-.btn-default .badge, div.player-container div#music-player #player button .badge, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button .badge {
+.btn-default .badge, div.player-container div#music-player #player button .badge, .song .song-gutter button .badge {
   color: white;
   background-color: #fff;
 }
@@ -5106,7 +5106,7 @@ textarea.input-lg, .input-group-lg > textarea.form-control, form div.input .inpu
 }
 
 /* line 120, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_buttons.scss */
-.btn-lg, .btn-group-lg > .btn, div.player-container div#music-player #player .btn-group-lg > button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-lg > button {
+.btn-lg, .btn-group-lg > .btn, .song .song-gutter .btn-group-lg > button, div.player-container div#music-player #player button {
   padding: 10px 16px;
   font-size: 18px;
   line-height: 1.33;
@@ -5114,7 +5114,7 @@ textarea.input-lg, .input-group-lg > textarea.form-control, form div.input .inpu
 }
 
 /* line 124, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_buttons.scss */
-.btn-sm, .btn-group-sm > .btn, div.player-container div#music-player #player .btn-group-sm > button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-sm > button {
+.btn-sm, .btn-group-sm > .btn, div.player-container div#music-player #player .btn-group-sm > button, .song .song-gutter .btn-group-sm > button {
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
@@ -5122,7 +5122,7 @@ textarea.input-lg, .input-group-lg > textarea.form-control, form div.input .inpu
 }
 
 /* line 128, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_buttons.scss */
-.btn-xs, .btn-group-xs > .btn, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-xs > button, div.player-container div#music-player #player button {
+.btn-xs, .btn-group-xs > .btn, div.player-container div#music-player #player .btn-group-xs > button, .song .song-gutter .btn-group-xs > button {
   padding: 1px 5px;
   font-size: 12px;
   line-height: 1.5;
@@ -5337,54 +5337,52 @@ input[type="button"].btn-block {
   vertical-align: middle;
 }
 /* line 11, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group > .btn, div.player-container div#music-player #player > .btn, div.player-container div#music-player #player .btn-group > button, div.player-container div#music-player #player > button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group > button, div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter #player > button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player #player > button,
+.btn-group > .btn, div.player-container div#music-player #player > .btn, div.player-container div#music-player #player .btn-group > button, div.player-container div#music-player #player > button, .song .song-gutter .btn-group > button,
 .btn-group-vertical > .btn,
 div.player-container div#music-player #player .btn-group-vertical > button,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > button {
+.song .song-gutter .btn-group-vertical > button {
   position: relative;
   float: left;
 }
 /* line 18, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group > .btn:hover, div.player-container div#music-player #player > .btn:hover, div.player-container div#music-player #player .btn-group > button:hover, div.player-container div#music-player #player > button:hover, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group > button:hover, div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter #player > button:hover, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player #player > button:hover, .btn-group > .btn:focus, div.player-container div#music-player #player > .btn:focus, div.player-container div#music-player #player .btn-group > button:focus, div.player-container div#music-player #player > button:focus, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group > button:focus, div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter #player > button:focus, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player #player > button:focus, .btn-group > .btn:active, div.player-container div#music-player #player > .btn:active, div.player-container div#music-player #player .btn-group > button:active, div.player-container div#music-player #player > button:active, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group > button:active, div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter #player > button:active, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player #player > button:active, .btn-group > .btn.active, div.player-container div#music-player #player > .btn.active, div.player-container div#music-player #player .btn-group > button.active, div.player-container div#music-player #player > button.active, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group > button.active, div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter #player > button.active, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player #player > button.active,
+.btn-group > .btn:hover, div.player-container div#music-player #player > .btn:hover, div.player-container div#music-player #player .btn-group > button:hover, div.player-container div#music-player #player > button:hover, .song .song-gutter .btn-group > button:hover, .btn-group > .btn:focus, div.player-container div#music-player #player > .btn:focus, div.player-container div#music-player #player .btn-group > button:focus, div.player-container div#music-player #player > button:focus, .song .song-gutter .btn-group > button:focus, .btn-group > .btn:active, div.player-container div#music-player #player > .btn:active, div.player-container div#music-player #player .btn-group > button:active, div.player-container div#music-player #player > button:active, .song .song-gutter .btn-group > button:active, .btn-group > .btn.active, div.player-container div#music-player #player > .btn.active, div.player-container div#music-player #player .btn-group > button.active, div.player-container div#music-player #player > button.active, .song .song-gutter .btn-group > button.active,
 .btn-group-vertical > .btn:hover,
 div.player-container div#music-player #player .btn-group-vertical > button:hover,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > button:hover,
+.song .song-gutter .btn-group-vertical > button:hover,
 .btn-group-vertical > .btn:focus,
 div.player-container div#music-player #player .btn-group-vertical > button:focus,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > button:focus,
+.song .song-gutter .btn-group-vertical > button:focus,
 .btn-group-vertical > .btn:active,
 div.player-container div#music-player #player .btn-group-vertical > button:active,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > button:active,
+.song .song-gutter .btn-group-vertical > button:active,
 .btn-group-vertical > .btn.active,
 div.player-container div#music-player #player .btn-group-vertical > button.active,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > button.active {
+.song .song-gutter .btn-group-vertical > button.active {
   z-index: 2;
 }
 /* line 21, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group > .btn:focus, div.player-container div#music-player #player > .btn:focus, div.player-container div#music-player #player .btn-group > button:focus, div.player-container div#music-player #player > button:focus, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group > button:focus, div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter #player > button:focus, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player #player > button:focus,
+.btn-group > .btn:focus, div.player-container div#music-player #player > .btn:focus, div.player-container div#music-player #player .btn-group > button:focus, div.player-container div#music-player #player > button:focus, .song .song-gutter .btn-group > button:focus,
 .btn-group-vertical > .btn:focus,
 div.player-container div#music-player #player .btn-group-vertical > button:focus,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > button:focus {
+.song .song-gutter .btn-group-vertical > button:focus {
   outline: none;
 }
 
 /* line 33, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group .btn + .btn, div.player-container div#music-player #player .btn + .btn, div.player-container div#music-player #player button + .btn, .btn-group div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button + .btn, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group button + .btn, div.player-container div#music-player #player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button + .btn, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player #player button + .btn, div.player-container div#music-player #player .btn + button, div.player-container div#music-player #player button + button, .btn-group div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn + button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group .btn + button, div.player-container div#music-player #player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn + button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player #player .btn + button, .btn-group div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button + button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group button + button, div.player-container div#music-player #player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button + button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player #player button + button,
+.btn-group .btn + .btn, div.player-container div#music-player #player .btn + .btn, div.player-container div#music-player #player button + .btn, .btn-group .song .song-gutter button + .btn, .song .song-gutter .btn-group button + .btn, div.player-container div#music-player #player .btn + button, div.player-container div#music-player #player button + button, .btn-group .song .song-gutter .btn + button, .song .song-gutter .btn-group .btn + button, .btn-group .song .song-gutter button + button, .song .song-gutter .btn-group button + button,
 .btn-group .btn + .btn-group,
 div.player-container div#music-player #player .btn + .btn-group,
 div.player-container div#music-player #player button + .btn-group,
-.btn-group div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button + .btn-group,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group button + .btn-group,
-div.player-container div#music-player #player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button + .btn-group,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player #player button + .btn-group,
+.btn-group .song .song-gutter button + .btn-group,
+.song .song-gutter .btn-group button + .btn-group,
 .btn-group div.player-container div#music-player .btn + #player,
 div.player-container div#music-player .btn-group .btn + #player,
 div.player-container div#music-player #player .btn + #player,
 div.player-container div#music-player #player button + #player,
-.btn-group div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player button + #player,
-div.player-container div#music-player .btn-group div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button + #player,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group div.player-container div#music-player button + #player,
-div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group button + #player,
+.btn-group .song .song-gutter div.player-container div#music-player button + #player,
+div.player-container div#music-player .btn-group .song .song-gutter button + #player,
+.song .song-gutter .btn-group div.player-container div#music-player button + #player,
+div.player-container div#music-player .song .song-gutter .btn-group button + #player,
 .btn-group .btn-group + .btn,
 div.player-container div#music-player #player .btn-group + .btn,
 .btn-group div.player-container div#music-player #player + .btn,
@@ -5393,14 +5391,12 @@ div.player-container div#music-player #player #player + .btn,
 div.player-container div#music-player #player .btn-group .btn-group + button,
 div.player-container div#music-player #player .btn-group + button,
 div.player-container div#music-player #player #player + button,
-.btn-group div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group + button,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group .btn-group + button,
-div.player-container div#music-player #player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group + button,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player #player .btn-group + button,
-.btn-group div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter #player + button,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group div.player-container div#music-player #player + button,
-div.player-container div#music-player .btn-group div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter #player + button,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player .btn-group #player + button,
+.btn-group .song .song-gutter .btn-group + button,
+.song .song-gutter .btn-group .btn-group + button,
+.btn-group div.player-container div#music-player .song .song-gutter #player + button,
+.song .song-gutter .btn-group div.player-container div#music-player #player + button,
+div.player-container div#music-player .btn-group .song .song-gutter #player + button,
+.song .song-gutter div.player-container div#music-player .btn-group #player + button,
 .btn-group .btn-group + .btn-group,
 div.player-container div#music-player #player .btn-group + .btn-group,
 .btn-group div.player-container div#music-player #player + .btn-group,
@@ -5429,21 +5425,21 @@ div.player-container div#music-player #player #player + #player {
   float: left;
 }
 /* line 49, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-toolbar > .btn + .btn, div.player-container div#music-player #player .btn-toolbar > button + .btn, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-toolbar > button + .btn, div.player-container div#music-player #player .btn-toolbar > .btn + button, div.player-container div#music-player #player .btn-toolbar > button + button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-toolbar > .btn + button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-toolbar > button + button,
+.btn-toolbar > .btn + .btn, div.player-container div#music-player #player .btn-toolbar > button + .btn, .song .song-gutter .btn-toolbar > button + .btn, div.player-container div#music-player #player .btn-toolbar > .btn + button, div.player-container div#music-player #player .btn-toolbar > button + button, .song .song-gutter .btn-toolbar > .btn + button, .song .song-gutter .btn-toolbar > button + button,
 .btn-toolbar > .btn + .btn-group,
 div.player-container div#music-player #player .btn-toolbar > button + .btn-group,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-toolbar > button + .btn-group,
+.song .song-gutter .btn-toolbar > button + .btn-group,
 div.player-container div#music-player .btn-toolbar > .btn + #player,
 div.player-container div#music-player #player .btn-toolbar > button + #player,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player .btn-toolbar > button + #player,
-div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-toolbar > button + #player,
+.song .song-gutter div.player-container div#music-player .btn-toolbar > button + #player,
+div.player-container div#music-player .song .song-gutter .btn-toolbar > button + #player,
 .btn-toolbar > .btn-group + .btn,
 div.player-container div#music-player .btn-toolbar > #player + .btn,
 div.player-container div#music-player #player .btn-toolbar > .btn-group + button,
 div.player-container div#music-player #player .btn-toolbar > #player + button,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-toolbar > .btn-group + button,
-div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-toolbar > #player + button,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player .btn-toolbar > #player + button,
+.song .song-gutter .btn-toolbar > .btn-group + button,
+div.player-container div#music-player .song .song-gutter .btn-toolbar > #player + button,
+.song .song-gutter div.player-container div#music-player .btn-toolbar > #player + button,
 .btn-toolbar > .btn-group + .btn-group,
 div.player-container div#music-player .btn-toolbar > #player + .btn-group,
 div.player-container div#music-player .btn-toolbar > .btn-group + #player,
@@ -5452,22 +5448,22 @@ div.player-container div#music-player .btn-toolbar > #player + #player {
 }
 
 /* line 55, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle), div.player-container div#music-player #player > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle), div.player-container div#music-player #player .btn-group > button:not(:first-child):not(:last-child):not(.dropdown-toggle), div.player-container div#music-player #player > button:not(:first-child):not(:last-child):not(.dropdown-toggle), div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group > button:not(:first-child):not(:last-child):not(.dropdown-toggle), div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter #player > button:not(:first-child):not(:last-child):not(.dropdown-toggle), div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player #player > button:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle), div.player-container div#music-player #player > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle), div.player-container div#music-player #player .btn-group > button:not(:first-child):not(:last-child):not(.dropdown-toggle), div.player-container div#music-player #player > button:not(:first-child):not(:last-child):not(.dropdown-toggle), .song .song-gutter .btn-group > button:not(:first-child):not(:last-child):not(.dropdown-toggle) {
   border-radius: 0;
 }
 
 /* line 60, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group > .btn:first-child, div.player-container div#music-player #player > .btn:first-child, div.player-container div#music-player #player .btn-group > button:first-child, div.player-container div#music-player #player > button:first-child, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group > button:first-child, div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter #player > button:first-child, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player #player > button:first-child {
+.btn-group > .btn:first-child, div.player-container div#music-player #player > .btn:first-child, div.player-container div#music-player #player .btn-group > button:first-child, div.player-container div#music-player #player > button:first-child, .song .song-gutter .btn-group > button:first-child {
   margin-left: 0;
 }
 /* line 62, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle), div.player-container div#music-player #player > .btn:first-child:not(:last-child):not(.dropdown-toggle), div.player-container div#music-player #player .btn-group > button:first-child:not(:last-child):not(.dropdown-toggle), div.player-container div#music-player #player > button:first-child:not(:last-child):not(.dropdown-toggle), div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group > button:first-child:not(:last-child):not(.dropdown-toggle), div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter #player > button:first-child:not(:last-child):not(.dropdown-toggle), div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player #player > button:first-child:not(:last-child):not(.dropdown-toggle) {
+.btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle), div.player-container div#music-player #player > .btn:first-child:not(:last-child):not(.dropdown-toggle), div.player-container div#music-player #player .btn-group > button:first-child:not(:last-child):not(.dropdown-toggle), div.player-container div#music-player #player > button:first-child:not(:last-child):not(.dropdown-toggle), .song .song-gutter .btn-group > button:first-child:not(:last-child):not(.dropdown-toggle) {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
 }
 
 /* line 68, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group > .btn:last-child:not(:first-child), div.player-container div#music-player #player > .btn:last-child:not(:first-child), div.player-container div#music-player #player .btn-group > button:last-child:not(:first-child), div.player-container div#music-player #player > button:last-child:not(:first-child), div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group > button:last-child:not(:first-child), div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter #player > button:last-child:not(:first-child), div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player #player > button:last-child:not(:first-child),
+.btn-group > .btn:last-child:not(:first-child), div.player-container div#music-player #player > .btn:last-child:not(:first-child), div.player-container div#music-player #player .btn-group > button:last-child:not(:first-child), div.player-container div#music-player #player > button:last-child:not(:first-child), .song .song-gutter .btn-group > button:last-child:not(:first-child),
 .btn-group > .dropdown-toggle:not(:first-child),
 div.player-container div#music-player #player > .dropdown-toggle:not(:first-child) {
   border-bottom-left-radius: 0;
@@ -5480,12 +5476,12 @@ div.player-container div#music-player #player > .dropdown-toggle:not(:first-chil
 }
 
 /* line 76, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn, div.player-container div#music-player #player > .btn-group:not(:first-child):not(:last-child) > .btn, div.player-container div#music-player .btn-group > #player:not(:first-child):not(:last-child) > .btn, div.player-container div#music-player #player > #player:not(:first-child):not(:last-child) > .btn, div.player-container div#music-player #player .btn-group > .btn-group:not(:first-child):not(:last-child) > button, div.player-container div#music-player #player > .btn-group:not(:first-child):not(:last-child) > button, div.player-container div#music-player .btn-group > #player:not(:first-child):not(:last-child) > button, div.player-container div#music-player #player > #player:not(:first-child):not(:last-child) > button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group > .btn-group:not(:first-child):not(:last-child) > button, div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter #player > .btn-group:not(:first-child):not(:last-child) > button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player #player > .btn-group:not(:first-child):not(:last-child) > button, div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group > #player:not(:first-child):not(:last-child) > button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player .btn-group > #player:not(:first-child):not(:last-child) > button {
+.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn, div.player-container div#music-player #player > .btn-group:not(:first-child):not(:last-child) > .btn, div.player-container div#music-player .btn-group > #player:not(:first-child):not(:last-child) > .btn, div.player-container div#music-player #player > #player:not(:first-child):not(:last-child) > .btn, div.player-container div#music-player #player .btn-group > .btn-group:not(:first-child):not(:last-child) > button, div.player-container div#music-player #player > .btn-group:not(:first-child):not(:last-child) > button, div.player-container div#music-player .btn-group > #player:not(:first-child):not(:last-child) > button, div.player-container div#music-player #player > #player:not(:first-child):not(:last-child) > button, .song .song-gutter .btn-group > .btn-group:not(:first-child):not(:last-child) > button {
   border-radius: 0;
 }
 
 /* line 81, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group > .btn-group:first-child > .btn:last-child, div.player-container div#music-player #player > .btn-group:first-child > .btn:last-child, div.player-container div#music-player .btn-group > #player:first-child > .btn:last-child, div.player-container div#music-player #player > #player:first-child > .btn:last-child, div.player-container div#music-player #player .btn-group > .btn-group:first-child > button:last-child, div.player-container div#music-player #player > .btn-group:first-child > button:last-child, div.player-container div#music-player .btn-group > #player:first-child > button:last-child, div.player-container div#music-player #player > #player:first-child > button:last-child, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group > .btn-group:first-child > button:last-child, div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter #player > .btn-group:first-child > button:last-child, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player #player > .btn-group:first-child > button:last-child, div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group > #player:first-child > button:last-child, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player .btn-group > #player:first-child > button:last-child,
+.btn-group > .btn-group:first-child > .btn:last-child, div.player-container div#music-player #player > .btn-group:first-child > .btn:last-child, div.player-container div#music-player .btn-group > #player:first-child > .btn:last-child, div.player-container div#music-player #player > #player:first-child > .btn:last-child, div.player-container div#music-player #player .btn-group > .btn-group:first-child > button:last-child, div.player-container div#music-player #player > .btn-group:first-child > button:last-child, div.player-container div#music-player .btn-group > #player:first-child > button:last-child, div.player-container div#music-player #player > #player:first-child > button:last-child, .song .song-gutter .btn-group > .btn-group:first-child > button:last-child,
 .btn-group > .btn-group:first-child > .dropdown-toggle,
 div.player-container div#music-player #player > .btn-group:first-child > .dropdown-toggle,
 div.player-container div#music-player .btn-group > #player:first-child > .dropdown-toggle,
@@ -5495,7 +5491,7 @@ div.player-container div#music-player #player > #player:first-child > .dropdown-
 }
 
 /* line 85, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group > .btn-group:last-child > .btn:first-child, div.player-container div#music-player #player > .btn-group:last-child > .btn:first-child, div.player-container div#music-player .btn-group > #player:last-child > .btn:first-child, div.player-container div#music-player #player > #player:last-child > .btn:first-child, div.player-container div#music-player #player .btn-group > .btn-group:last-child > button:first-child, div.player-container div#music-player #player > .btn-group:last-child > button:first-child, div.player-container div#music-player .btn-group > #player:last-child > button:first-child, div.player-container div#music-player #player > #player:last-child > button:first-child, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group > .btn-group:last-child > button:first-child, div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter #player > .btn-group:last-child > button:first-child, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player #player > .btn-group:last-child > button:first-child, div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group > #player:last-child > button:first-child, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player .btn-group > #player:last-child > button:first-child {
+.btn-group > .btn-group:last-child > .btn:first-child, div.player-container div#music-player #player > .btn-group:last-child > .btn:first-child, div.player-container div#music-player .btn-group > #player:last-child > .btn:first-child, div.player-container div#music-player #player > #player:last-child > .btn:first-child, div.player-container div#music-player #player .btn-group > .btn-group:last-child > button:first-child, div.player-container div#music-player #player > .btn-group:last-child > button:first-child, div.player-container div#music-player .btn-group > #player:last-child > button:first-child, div.player-container div#music-player #player > #player:last-child > button:first-child, .song .song-gutter .btn-group > .btn-group:last-child > button:first-child {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
 }
@@ -5508,13 +5504,13 @@ div.player-container div#music-player .open#player .dropdown-toggle {
 }
 
 /* line 109, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group > .btn + .dropdown-toggle, div.player-container div#music-player #player > .btn + .dropdown-toggle, div.player-container div#music-player #player .btn-group > button + .dropdown-toggle, div.player-container div#music-player #player > button + .dropdown-toggle, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group > button + .dropdown-toggle, div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter #player > button + .dropdown-toggle, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player #player > button + .dropdown-toggle {
+.btn-group > .btn + .dropdown-toggle, div.player-container div#music-player #player > .btn + .dropdown-toggle, div.player-container div#music-player #player .btn-group > button + .dropdown-toggle, div.player-container div#music-player #player > button + .dropdown-toggle, .song .song-gutter .btn-group > button + .dropdown-toggle {
   padding-left: 8px;
   padding-right: 8px;
 }
 
 /* line 113, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group > .btn-lg + .dropdown-toggle, div.player-container div#music-player #player > .btn-lg + .dropdown-toggle, .btn-group-lg.btn-group > .btn + .dropdown-toggle, div.player-container div#music-player .btn-group-lg#player > .btn + .dropdown-toggle, div.player-container div#music-player #player .btn-group-lg.btn-group > button + .dropdown-toggle, div.player-container div#music-player #player .btn-group-lg#player > button + .dropdown-toggle, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-lg.btn-group > button + .dropdown-toggle, div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-lg#player > button + .dropdown-toggle, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player .btn-group-lg#player > button + .dropdown-toggle {
+.btn-group > .btn-lg + .dropdown-toggle, div.player-container div#music-player #player > .btn-lg + .dropdown-toggle, .btn-group-lg.btn-group > .btn + .dropdown-toggle, div.player-container div#music-player .btn-group-lg#player > .btn + .dropdown-toggle, div.player-container div#music-player #player .btn-group-lg#player > button + .dropdown-toggle, .song .song-gutter .btn-group-lg.btn-group > button + .dropdown-toggle, div.player-container div#music-player #player .btn-group > button + .dropdown-toggle, div.player-container div#music-player #player > button + .dropdown-toggle {
   padding-left: 12px;
   padding-right: 12px;
 }
@@ -5531,32 +5527,30 @@ div.player-container div#music-player .open#player .dropdown-toggle {
 }
 
 /* line 131, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn .caret, div.player-container div#music-player #player button .caret, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button .caret {
+.btn .caret, div.player-container div#music-player #player button .caret, .song .song-gutter button .caret {
   margin-left: 0;
 }
 
 /* line 135, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-lg .caret, .btn-group-lg > .btn .caret, div.player-container div#music-player #player .btn-group-lg > button .caret, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-lg > button .caret {
+.btn-lg .caret, .btn-group-lg > .btn .caret, .song .song-gutter .btn-group-lg > button .caret, div.player-container div#music-player #player button .caret {
   border-width: 5px 5px 0;
   border-bottom-width: 0;
 }
 
 /* line 140, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.dropup .btn-lg .caret, .dropup .btn-group-lg > .btn .caret, .dropup div.player-container div#music-player #player .btn-group-lg > button .caret, div.player-container div#music-player #player .dropup .btn-group-lg > button .caret, .dropup div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-lg > button .caret, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .dropup .btn-group-lg > button .caret {
+.dropup .btn-lg .caret, .dropup .btn-group-lg > .btn .caret, .dropup .song .song-gutter .btn-group-lg > button .caret, .song .song-gutter .dropup .btn-group-lg > button .caret, .dropup div.player-container div#music-player #player button .caret, div.player-container div#music-player #player .dropup button .caret {
   border-width: 0 5px 5px;
 }
 
 /* line 151, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group-vertical > .btn, div.player-container div#music-player #player .btn-group-vertical > button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > button,
+.btn-group-vertical > .btn, div.player-container div#music-player #player .btn-group-vertical > button, .song .song-gutter .btn-group-vertical > button,
 .btn-group-vertical > .btn-group,
 div.player-container div#music-player .btn-group-vertical > #player,
 .btn-group-vertical > .btn-group > .btn,
 div.player-container div#music-player .btn-group-vertical > #player > .btn,
 div.player-container div#music-player #player .btn-group-vertical > .btn-group > button,
 div.player-container div#music-player .btn-group-vertical > #player > button,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > .btn-group > button,
-div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > #player > button,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player .btn-group-vertical > #player > button {
+.song .song-gutter .btn-group-vertical > .btn-group > button {
   display: block;
   float: none;
   width: 100%;
@@ -5572,25 +5566,25 @@ div#window > section.content > div#main > .body > .submission-list > .submission
   clear: both;
 }
 /* line 161, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group-vertical > .btn-group > .btn, div.player-container div#music-player .btn-group-vertical > #player > .btn, div.player-container div#music-player #player .btn-group-vertical > .btn-group > button, div.player-container div#music-player .btn-group-vertical > #player > button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > .btn-group > button, div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > #player > button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player .btn-group-vertical > #player > button {
+.btn-group-vertical > .btn-group > .btn, div.player-container div#music-player .btn-group-vertical > #player > .btn, div.player-container div#music-player #player .btn-group-vertical > .btn-group > button, div.player-container div#music-player .btn-group-vertical > #player > button, .song .song-gutter .btn-group-vertical > .btn-group > button {
   float: none;
 }
 /* line 169, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group-vertical > .btn + .btn, div.player-container div#music-player #player .btn-group-vertical > button + .btn, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > button + .btn, div.player-container div#music-player #player .btn-group-vertical > .btn + button, div.player-container div#music-player #player .btn-group-vertical > button + button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > .btn + button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > button + button,
+.btn-group-vertical > .btn + .btn, div.player-container div#music-player #player .btn-group-vertical > button + .btn, .song .song-gutter .btn-group-vertical > button + .btn, div.player-container div#music-player #player .btn-group-vertical > .btn + button, div.player-container div#music-player #player .btn-group-vertical > button + button, .song .song-gutter .btn-group-vertical > .btn + button, .song .song-gutter .btn-group-vertical > button + button,
 .btn-group-vertical > .btn + .btn-group,
 div.player-container div#music-player #player .btn-group-vertical > button + .btn-group,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > button + .btn-group,
+.song .song-gutter .btn-group-vertical > button + .btn-group,
 div.player-container div#music-player .btn-group-vertical > .btn + #player,
 div.player-container div#music-player #player .btn-group-vertical > button + #player,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player .btn-group-vertical > button + #player,
-div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > button + #player,
+.song .song-gutter div.player-container div#music-player .btn-group-vertical > button + #player,
+div.player-container div#music-player .song .song-gutter .btn-group-vertical > button + #player,
 .btn-group-vertical > .btn-group + .btn,
 div.player-container div#music-player .btn-group-vertical > #player + .btn,
 div.player-container div#music-player #player .btn-group-vertical > .btn-group + button,
 div.player-container div#music-player #player .btn-group-vertical > #player + button,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > .btn-group + button,
-div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > #player + button,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player .btn-group-vertical > #player + button,
+.song .song-gutter .btn-group-vertical > .btn-group + button,
+div.player-container div#music-player .song .song-gutter .btn-group-vertical > #player + button,
+.song .song-gutter div.player-container div#music-player .btn-group-vertical > #player + button,
 .btn-group-vertical > .btn-group + .btn-group,
 div.player-container div#music-player .btn-group-vertical > #player + .btn-group,
 div.player-container div#music-player .btn-group-vertical > .btn-group + #player,
@@ -5600,29 +5594,29 @@ div.player-container div#music-player .btn-group-vertical > #player + #player {
 }
 
 /* line 176, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group-vertical > .btn:not(:first-child):not(:last-child), div.player-container div#music-player #player .btn-group-vertical > button:not(:first-child):not(:last-child), div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > button:not(:first-child):not(:last-child) {
+.btn-group-vertical > .btn:not(:first-child):not(:last-child), div.player-container div#music-player #player .btn-group-vertical > button:not(:first-child):not(:last-child), .song .song-gutter .btn-group-vertical > button:not(:first-child):not(:last-child) {
   border-radius: 0;
 }
 /* line 179, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group-vertical > .btn:first-child:not(:last-child), div.player-container div#music-player #player .btn-group-vertical > button:first-child:not(:last-child), div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > button:first-child:not(:last-child) {
+.btn-group-vertical > .btn:first-child:not(:last-child), div.player-container div#music-player #player .btn-group-vertical > button:first-child:not(:last-child), .song .song-gutter .btn-group-vertical > button:first-child:not(:last-child) {
   border-top-right-radius: 4px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 /* line 183, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group-vertical > .btn:last-child:not(:first-child), div.player-container div#music-player #player .btn-group-vertical > button:last-child:not(:first-child), div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > button:last-child:not(:first-child) {
+.btn-group-vertical > .btn:last-child:not(:first-child), div.player-container div#music-player #player .btn-group-vertical > button:last-child:not(:first-child), .song .song-gutter .btn-group-vertical > button:last-child:not(:first-child) {
   border-bottom-left-radius: 4px;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
 }
 
 /* line 188, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn, div.player-container div#music-player .btn-group-vertical > #player:not(:first-child):not(:last-child) > .btn, div.player-container div#music-player #player .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > button, div.player-container div#music-player .btn-group-vertical > #player:not(:first-child):not(:last-child) > button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > button, div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > #player:not(:first-child):not(:last-child) > button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player .btn-group-vertical > #player:not(:first-child):not(:last-child) > button {
+.btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn, div.player-container div#music-player .btn-group-vertical > #player:not(:first-child):not(:last-child) > .btn, div.player-container div#music-player #player .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > button, div.player-container div#music-player .btn-group-vertical > #player:not(:first-child):not(:last-child) > button, .song .song-gutter .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > button {
   border-radius: 0;
 }
 
 /* line 193, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group-vertical > .btn-group:first-child > .btn:last-child, div.player-container div#music-player .btn-group-vertical > #player:first-child > .btn:last-child, div.player-container div#music-player #player .btn-group-vertical > .btn-group:first-child > button:last-child, div.player-container div#music-player .btn-group-vertical > #player:first-child > button:last-child, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > .btn-group:first-child > button:last-child, div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > #player:first-child > button:last-child, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player .btn-group-vertical > #player:first-child > button:last-child,
+.btn-group-vertical > .btn-group:first-child > .btn:last-child, div.player-container div#music-player .btn-group-vertical > #player:first-child > .btn:last-child, div.player-container div#music-player #player .btn-group-vertical > .btn-group:first-child > button:last-child, div.player-container div#music-player .btn-group-vertical > #player:first-child > button:last-child, .song .song-gutter .btn-group-vertical > .btn-group:first-child > button:last-child,
 .btn-group-vertical > .btn-group:first-child > .dropdown-toggle,
 div.player-container div#music-player .btn-group-vertical > #player:first-child > .dropdown-toggle {
   border-bottom-right-radius: 0;
@@ -5630,7 +5624,7 @@ div.player-container div#music-player .btn-group-vertical > #player:first-child 
 }
 
 /* line 197, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group-vertical > .btn-group:last-child > .btn:first-child, div.player-container div#music-player .btn-group-vertical > #player:last-child > .btn:first-child, div.player-container div#music-player #player .btn-group-vertical > .btn-group:last-child > button:first-child, div.player-container div#music-player .btn-group-vertical > #player:last-child > button:first-child, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > .btn-group:last-child > button:first-child, div.player-container div#music-player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-vertical > #player:last-child > button:first-child, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player .btn-group-vertical > #player:last-child > button:first-child {
+.btn-group-vertical > .btn-group:last-child > .btn:first-child, div.player-container div#music-player .btn-group-vertical > #player:last-child > .btn:first-child, div.player-container div#music-player #player .btn-group-vertical > .btn-group:last-child > button:first-child, div.player-container div#music-player .btn-group-vertical > #player:last-child > button:first-child, .song .song-gutter .btn-group-vertical > .btn-group:last-child > button:first-child {
   border-top-right-radius: 0;
   border-top-left-radius: 0;
 }
@@ -5643,7 +5637,7 @@ div.player-container div#music-player .btn-group-vertical > #player:first-child 
   border-collapse: separate;
 }
 /* line 212, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group-justified > .btn, div.player-container div#music-player #player .btn-group-justified > button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-justified > button,
+.btn-group-justified > .btn, div.player-container div#music-player #player .btn-group-justified > button, .song .song-gutter .btn-group-justified > button,
 .btn-group-justified > .btn-group,
 div.player-container div#music-player .btn-group-justified > #player {
   float: none;
@@ -5651,15 +5645,15 @@ div.player-container div#music-player .btn-group-justified > #player {
   width: 1%;
 }
 /* line 217, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group-justified > .btn-group .btn, div.player-container div#music-player .btn-group-justified > #player .btn, .btn-group-justified > .btn-group div.player-container div#music-player #player button, div.player-container div#music-player #player .btn-group-justified > .btn-group button, div.player-container div#music-player .btn-group-justified > #player button, .btn-group-justified > .btn-group div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-justified > .btn-group button, div.player-container div#music-player .btn-group-justified > #player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player .btn-group-justified > #player button {
+.btn-group-justified > .btn-group .btn, div.player-container div#music-player .btn-group-justified > #player .btn, .btn-group-justified > .btn-group div.player-container div#music-player #player button, div.player-container div#music-player #player .btn-group-justified > .btn-group button, div.player-container div#music-player .btn-group-justified > #player button, .btn-group-justified > .btn-group .song .song-gutter button, .song .song-gutter .btn-group-justified > .btn-group button {
   width: 100%;
 }
 
 /* line 225, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-[data-toggle="buttons"] > .btn > input[type="radio"], div.player-container div#music-player #player [data-toggle="buttons"] > button > input[type="radio"], div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter [data-toggle="buttons"] > button > input[type="radio"],
+[data-toggle="buttons"] > .btn > input[type="radio"], div.player-container div#music-player #player [data-toggle="buttons"] > button > input[type="radio"], .song .song-gutter [data-toggle="buttons"] > button > input[type="radio"],
 [data-toggle="buttons"] > .btn > input[type="checkbox"],
 div.player-container div#music-player #player [data-toggle="buttons"] > button > input[type="checkbox"],
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter [data-toggle="buttons"] > button > input[type="checkbox"] {
+.song .song-gutter [data-toggle="buttons"] > button > input[type="checkbox"] {
   display: none;
 }
 
@@ -5741,7 +5735,7 @@ form .input-group input[type='email']:not(:first-child):not(:last-child) {
 .input-group-sm > .input-group-addon,
 .input-group-sm > .input-group-btn > .input-group-addon.btn,
 div.player-container div#music-player #player .input-group-sm > .input-group-btn > button.input-group-addon,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .input-group-sm > .input-group-btn > button.input-group-addon {
+.song .song-gutter .input-group-sm > .input-group-btn > button.input-group-addon {
   padding: 5px 10px;
   font-size: 12px;
   border-radius: 3px;
@@ -5751,7 +5745,7 @@ div#window > section.content > div#main > .body > .submission-list > .submission
 .input-group-lg > .input-group-addon,
 .input-group-lg > .input-group-btn > .input-group-addon.btn,
 div.player-container div#music-player #player .input-group-lg > .input-group-btn > button.input-group-addon,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .input-group-lg > .input-group-btn > button.input-group-addon {
+.song .song-gutter .input-group-lg > .input-group-btn > button.input-group-addon {
   padding: 10px 16px;
   font-size: 18px;
   border-radius: 6px;
@@ -5767,11 +5761,11 @@ div#window > section.content > div#main > .body > .submission-list > .submission
 .input-group-addon:first-child,
 .input-group-btn:first-child > .btn,
 div.player-container div#music-player #player .input-group-btn:first-child > button,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .input-group-btn:first-child > button,
+.song .song-gutter .input-group-btn:first-child > button,
 .input-group-btn:first-child > .dropdown-toggle,
 .input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle),
 div.player-container div#music-player #player .input-group-btn:last-child > button:not(:last-child):not(.dropdown-toggle),
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .input-group-btn:last-child > button:not(:last-child):not(.dropdown-toggle) {
+.song .song-gutter .input-group-btn:last-child > button:not(:last-child):not(.dropdown-toggle) {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
 }
@@ -5786,11 +5780,11 @@ div#window > section.content > div#main > .body > .submission-list > .submission
 .input-group-addon:last-child,
 .input-group-btn:last-child > .btn,
 div.player-container div#music-player #player .input-group-btn:last-child > button,
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .input-group-btn:last-child > button,
+.song .song-gutter .input-group-btn:last-child > button,
 .input-group-btn:last-child > .dropdown-toggle,
 .input-group-btn:first-child > .btn:not(:first-child),
 div.player-container div#music-player #player .input-group-btn:first-child > button:not(:first-child),
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .input-group-btn:first-child > button:not(:first-child) {
+.song .song-gutter .input-group-btn:first-child > button:not(:first-child) {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
 }
@@ -5806,24 +5800,24 @@ div#window > section.content > div#main > .body > .submission-list > .submission
   white-space: nowrap;
 }
 /* line 118, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_input-groups.scss */
-.input-group-btn:first-child > .btn, div.player-container div#music-player #player .input-group-btn:first-child > button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .input-group-btn:first-child > button {
+.input-group-btn:first-child > .btn, div.player-container div#music-player #player .input-group-btn:first-child > button, .song .song-gutter .input-group-btn:first-child > button {
   margin-right: -1px;
 }
 /* line 121, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_input-groups.scss */
-.input-group-btn:last-child > .btn, div.player-container div#music-player #player .input-group-btn:last-child > button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .input-group-btn:last-child > button {
+.input-group-btn:last-child > .btn, div.player-container div#music-player #player .input-group-btn:last-child > button, .song .song-gutter .input-group-btn:last-child > button {
   margin-left: -1px;
 }
 
 /* line 125, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_input-groups.scss */
-.input-group-btn > .btn, div.player-container div#music-player #player .input-group-btn > button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .input-group-btn > button {
+.input-group-btn > .btn, div.player-container div#music-player #player .input-group-btn > button, .song .song-gutter .input-group-btn > button {
   position: relative;
 }
 /* line 128, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_input-groups.scss */
-.input-group-btn > .btn + .btn, div.player-container div#music-player #player .input-group-btn > button + .btn, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .input-group-btn > button + .btn, div.player-container div#music-player #player .input-group-btn > .btn + button, div.player-container div#music-player #player .input-group-btn > button + button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .input-group-btn > .btn + button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .input-group-btn > button + button {
+.input-group-btn > .btn + .btn, div.player-container div#music-player #player .input-group-btn > button + .btn, .song .song-gutter .input-group-btn > button + .btn, div.player-container div#music-player #player .input-group-btn > .btn + button, div.player-container div#music-player #player .input-group-btn > button + button, .song .song-gutter .input-group-btn > .btn + button, .song .song-gutter .input-group-btn > button + button {
   margin-left: -4px;
 }
 /* line 133, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_input-groups.scss */
-.input-group-btn > .btn:hover, div.player-container div#music-player #player .input-group-btn > button:hover, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .input-group-btn > button:hover, .input-group-btn > .btn:active, div.player-container div#music-player #player .input-group-btn > button:active, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .input-group-btn > button:active {
+.input-group-btn > .btn:hover, div.player-container div#music-player #player .input-group-btn > button:hover, .song .song-gutter .input-group-btn > button:hover, .input-group-btn > .btn:active, div.player-container div#music-player #player .input-group-btn > button:active, .song .song-gutter .input-group-btn > button:active {
   z-index: 2;
 }
 
@@ -6351,12 +6345,12 @@ nav div.collapse ul.nav > li > .dropdown-menu.pull-right {
   margin-bottom: 8px;
 }
 /* line 347, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-.navbar-btn.btn-sm, .btn-group-sm > .navbar-btn.btn, div.player-container div#music-player #player .btn-group-sm > button.navbar-btn, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-sm > button.navbar-btn {
+.navbar-btn.btn-sm, .btn-group-sm > .navbar-btn.btn, div.player-container div#music-player #player .btn-group-sm > button.navbar-btn, .song .song-gutter .btn-group-sm > button.navbar-btn {
   margin-top: 10px;
   margin-bottom: 10px;
 }
 /* line 350, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-.navbar-btn.btn-xs, .btn-group-xs > .navbar-btn.btn, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn-group-xs > button.navbar-btn, div.player-container div#music-player #player button.navbar-btn {
+.navbar-btn.btn-xs, .btn-group-xs > .navbar-btn.btn, div.player-container div#music-player #player .btn-group-xs > button.navbar-btn, .song .song-gutter .btn-group-xs > button.navbar-btn {
   margin-top: 14px;
   margin-bottom: 14px;
 }
@@ -7358,12 +7352,12 @@ button.close {
   clear: both;
 }
 /* line 104, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_modals.scss */
-.modal-footer .btn + .btn, .modal-footer div.player-container div#music-player #player button + .btn, div.player-container div#music-player #player .modal-footer button + .btn, .modal-footer div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button + .btn, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .modal-footer button + .btn, .modal-footer div.player-container div#music-player #player .btn + button, div.player-container div#music-player #player .modal-footer .btn + button, .modal-footer div.player-container div#music-player #player button + button, div.player-container div#music-player #player .modal-footer button + button, .modal-footer div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn + button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .modal-footer .btn + button, .modal-footer div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button + button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .modal-footer button + button {
+.modal-footer .btn + .btn, .modal-footer div.player-container div#music-player #player button + .btn, div.player-container div#music-player #player .modal-footer button + .btn, .modal-footer .song .song-gutter button + .btn, .song .song-gutter .modal-footer button + .btn, .modal-footer div.player-container div#music-player #player .btn + button, div.player-container div#music-player #player .modal-footer .btn + button, .modal-footer div.player-container div#music-player #player button + button, div.player-container div#music-player #player .modal-footer button + button, .modal-footer .song .song-gutter .btn + button, .song .song-gutter .modal-footer .btn + button, .modal-footer .song .song-gutter button + button, .song .song-gutter .modal-footer button + button {
   margin-left: 5px;
   margin-bottom: 0;
 }
 /* line 109, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_modals.scss */
-.modal-footer .btn-group .btn + .btn, .modal-footer div.player-container div#music-player #player .btn + .btn, div.player-container div#music-player .modal-footer #player .btn + .btn, div.player-container div#music-player #player .modal-footer .btn-group button + .btn, .modal-footer div.player-container div#music-player #player button + .btn, div.player-container div#music-player .modal-footer #player button + .btn, .modal-footer .btn-group div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button + .btn, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .modal-footer .btn-group button + .btn, .modal-footer div.player-container div#music-player #player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button + .btn, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .modal-footer div.player-container div#music-player #player button + .btn, div.player-container div#music-player .modal-footer #player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button + .btn, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player .modal-footer #player button + .btn, div.player-container div#music-player #player .modal-footer .btn-group .btn + button, .modal-footer div.player-container div#music-player #player .btn + button, div.player-container div#music-player .modal-footer #player .btn + button, div.player-container div#music-player #player .modal-footer .btn-group button + button, .modal-footer div.player-container div#music-player #player button + button, div.player-container div#music-player .modal-footer #player button + button, .modal-footer .btn-group div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn + button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .modal-footer .btn-group .btn + button, .modal-footer div.player-container div#music-player #player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn + button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .modal-footer div.player-container div#music-player #player .btn + button, div.player-container div#music-player .modal-footer #player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .btn + button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player .modal-footer #player .btn + button, .modal-footer .btn-group div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button + button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .modal-footer .btn-group button + button, .modal-footer div.player-container div#music-player #player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button + button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter .modal-footer div.player-container div#music-player #player button + button, div.player-container div#music-player .modal-footer #player div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button + button, div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter div.player-container div#music-player .modal-footer #player button + button {
+.modal-footer .btn-group .btn + .btn, .modal-footer div.player-container div#music-player #player .btn + .btn, div.player-container div#music-player .modal-footer #player .btn + .btn, div.player-container div#music-player #player .modal-footer .btn-group button + .btn, .modal-footer div.player-container div#music-player #player button + .btn, div.player-container div#music-player .modal-footer #player button + .btn, .modal-footer .btn-group .song .song-gutter button + .btn, .song .song-gutter .modal-footer .btn-group button + .btn, div.player-container div#music-player #player .modal-footer .btn-group .btn + button, .modal-footer div.player-container div#music-player #player .btn + button, div.player-container div#music-player .modal-footer #player .btn + button, div.player-container div#music-player #player .modal-footer .btn-group button + button, .modal-footer div.player-container div#music-player #player button + button, div.player-container div#music-player .modal-footer #player button + button, .modal-footer .btn-group .song .song-gutter .btn + button, .song .song-gutter .modal-footer .btn-group .btn + button, .modal-footer .btn-group .song .song-gutter button + button, .song .song-gutter .modal-footer .btn-group button + button {
   margin-left: -1px;
 }
 /* line 113, /Users/blairanderson/.rvm/gems/ruby-2.0.0-p247/gems/bootstrap-sass-3.0.3.0/vendor/assets/stylesheets/bootstrap/_modals.scss */
@@ -8112,18 +8106,49 @@ div#window section.content {
   max-width: 1100px;
 }
 
-/* line 26, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+/* line 27, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+div#window > section.content > div#main > .body .submission-show .content {
+  float: left;
+}
+/* line 32, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+div#window > section.content > div#main > .body .submission-show .gutter {
+  float: right;
+}
+/* line 39, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
 div#window > section.content > div#main > .body .submission-list .submission {
   border-bottom: solid 1px #cccccc;
   margin: 10px 0px;
 }
-/* line 30, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
-div#window > section.content > div#main > .body .submission-list .submission .sub-gutter {
-  padding: 0;
+/* line 43, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+div#window > section.content > div#main > .body .submission-list .submission:hover {
+  background-color: #fff;
 }
-/* line 33, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
-div#window > section.content > div#main > .body .submission-list .submission .sub-gutter img {
-  margin-top: 45px;
+/* line 48, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+div#window > section.content > div#main > .body .submission-list .submission .sub-gutter .img {
+  padding: 10px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+}
+/* line 58, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+div#window > section.content > div#main > .body .submission-list .submission .sub-gutter a {
+  font-family: Oswald;
+}
+/* line 60, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+div#window > section.content > div#main > .body .submission-list .submission .sub-gutter a span {
+  font-size: 3em;
+  line-height: 1em;
+  font-weight: bold;
+}
+/* line 65, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+div#window > section.content > div#main > .body .submission-list .submission .sub-gutter a p {
+  font-size: 2em;
+  line-height: 1em;
+}
+/* line 69, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/submissions.css.scss */
+div#window > section.content > div#main > .body .submission-list .submission .sub-gutter a h6 {
+  float: right;
 }
 
 /* line 1, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/player.css.scss */
@@ -8144,14 +8169,21 @@ div.player-container.affix {
 div.player-container div#music-player {
   margin-left: auto;
   margin-right: auto;
-  max-width: 600px;
-  min-width: 320px;
+  max-width: 440px;
 }
-/* line 23, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/player.css.scss */
-div.player-container div#music-player #player button:active, div.player-container div#music-player #player button:hover {
+/* line 16, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/player.css.scss */
+div.player-container div#music-player #player {
+  width: 100%;
+}
+/* line 19, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/player.css.scss */
+div.player-container div#music-player #player button {
+  width: 25%;
+}
+/* line 24, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/player.css.scss */
+div.player-container div#music-player #player button:hover {
   background-color: #fff;
 }
-/* line 26, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/player.css.scss */
+/* line 27, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/player.css.scss */
 div.player-container div#music-player #player button > i {
   color: #000;
 }
@@ -8168,13 +8200,12 @@ div.player-container div#music-player #player button#like > i {
   color: red;
 }
 /* line 50, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/player.css.scss */
-div.player-container div#music-player span#playlist {
-  padding-left: 20px;
-  padding-right: 20px;
+div.player-container div#music-player div#playlist {
   border: none;
+  text-align: center;
 }
-/* line 55, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/player.css.scss */
-div.player-container div#music-player span#playlist a {
+/* line 53, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/player.css.scss */
+div.player-container div#music-player div#playlist a {
   font-size: 17px;
   text-decoration: none;
   border: none;
@@ -8182,94 +8213,94 @@ div.player-container div#music-player span#playlist a {
   font-weight: bold;
 }
 
-/* line 2, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song {
+/* line 1, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
+.song {
   margin-bottom: 10px 0px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
   padding: 30px 0px;
 }
-/* line 9, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song:hover {
+/* line 8, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
+.song:hover {
   background-color: #f2f2f2;
 }
-/* line 12, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song.active {
+/* line 11, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
+.song.active {
   background-color: #FFC;
 }
-/* line 15, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-content {
+/* line 14, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
+.song .song-content {
   padding-top: 15px;
 }
-/* line 19, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-content form input[type="text"] {
+/* line 18, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
+.song .song-content form input[type="text"] {
   height: 22px;
 }
-/* line 25, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-content p > a {
+/* line 24, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
+.song .song-content p > a {
   font-size: 1.5em;
   font-family: 'Roboto', sans-serif;
 }
-/* line 29, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-content p > a span a {
+/* line 28, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
+.song .song-content p > a span a {
   font-family: 'Open Sans', sans-serif;
 }
-/* line 35, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter {
+/* line 34, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
+.song .song-gutter {
   max-width: 120px;
   padding-top: 15px;
   padding-bottom: 15px;
 }
-/* line 40, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button {
+/* line 39, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
+.song .song-gutter button {
   width: 40px;
   height: 38px;
   margin-bottom: 2px;
 }
 /* line 47, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button {
+.song button {
   border-color: #333;
 }
 /* line 55, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.play {
+.song button.play {
   background-color: #FF1493;
   color: #fff;
 }
 /* line 61, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.play:hover {
+.song button.play:hover {
   background-color: white;
   color: #FF1493;
   border-color: #FF1493;
   box-shadow: 0 0 20px #FF1493;
 }
 /* line 68, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.heart > i {
+.song button.heart > i {
   color: red;
 }
 /* line 72, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.heart:hover {
+.song button.heart:hover {
   background-color: white;
   border-color: red;
   box-shadow: 0 0 20px red;
 }
 /* line 80, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.facebook:hover {
+.song button.facebook:hover {
   border-color: #4d70ba;
   background-color: #fff;
   box-shadow: 0 0 20px #728dc8;
 }
 /* line 84, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.facebook:hover > i {
+.song button.facebook:hover > i {
   color: #3B5999;
 }
 /* line 92, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.twitter:hover {
+.song button.twitter:hover {
   background-color: #fff;
   border-color: #4099FF;
   box-shadow: 0 0 20px #4099FF;
 }
 /* line 96, /Users/blairanderson/Documents/dev/ruby/music-news/app/assets/stylesheets/songs.css.scss */
-div#window > section.content > div#main > .body > .submission-list > .submission > .sub-content .song .song-gutter button.twitter:hover > i {
+.song button.twitter:hover > i {
   color: #4099FF;
 }
