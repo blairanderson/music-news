@@ -20,5 +20,8 @@ MusicNews::Application.routes.draw do
   get 'feed' => 'submissions#feed'
   get 'logout' => 'sessions#destroy'
   get 'signout' => 'sessions#destroy'
+
+  # backbone redirects
   get ':id' => 'submissions#backbone_redirect'
+  get '/song/:id' => 'songs#backbone_redirect'
 end
