@@ -13,6 +13,7 @@ window.MusicNews =
   initialize: ->
     MusicNews.App.collections.submissions = new MusicNews.Collections.Submissions()
     MusicNews.App.collections.songs = new MusicNews.Collections.Songs()
+    MusicNews.App.collections.popular_songs = new MusicNews.Collections.PopularSongs()
 
     $target = $('#window')
     MusicNews.App.views.layout = new MusicNews.Views.Layout().render()

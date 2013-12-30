@@ -20,6 +20,7 @@ div.player-container{
         @extend .btn;
         @extend .btn-default;
         @extend .btn-lg;
+        
         width: 25%;
         &:hover{
           background-color: #fff;
