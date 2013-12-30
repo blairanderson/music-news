@@ -10,9 +10,9 @@ class Publisher
     title = "Listen: Some Music from @#{submission.twitter}"
     body = ""
 
-    submission.soundclouds.each_with_index do |song, index|
+    submission.songs.each_with_index do |song, index|
       unless song.active == "true"
-        song.fetch_details
+        song.resolve
       end
       body << "<h2>#{song.title}</h2>"
       body << "\n"
@@ -42,24 +42,7 @@ class Publisher
     end
   end
 
-  # def self.build_tweet body="Welcome to SEAinHD"
-  #   new(body: body)
-  # end
-
-  # def send_to_twitter
-  #   begin
-  #     tweet.update(body)
-  #   rescue Exception => e
-      
-  #   end
-  # end
-
 private
-  # def tweet
-  #   keychain = User.where(uid: "114985899").first.keychain
-  #   Twitter::Client.new(:oauth_token => keychain.auth_credentials_token, :oauth_token_secret => keychain.auth_credentials_secret)
-  # end
-
   def client
     Wordpress::Client.new(ENV['WORDPRESS_USERNAME'],ENV['WORDPRESS_PASSWORD'], ENV['WORDPRESS_URL'])
   end

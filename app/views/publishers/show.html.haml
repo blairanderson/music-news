@@ -6,7 +6,7 @@
     = link_to "remove", submission_path(@submission), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-large btn-block"
   %h2
     Band Name:
-    = link_to @submission.title, twitter_name_path(@submission.twitter)
+    = @submission.title
   = twitter_link(@submission, class: "label label-warning")
   = mail_to @submission.email, "band email", class: "label label-warning"
   .span12
