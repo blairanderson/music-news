@@ -16,30 +16,8 @@ describe SubmissionsController do
       submission1 = create_submission(title: "second sub", body: "second body")
       get :index
       expect( response ).to be_success
-      expect( response ).to render_template("index")
-      expect( assigns(:submissions) ).to eq [submission1, submission0]
-    end
-  end
-
-  describe 'GET twitter' do
-    it 'should resond OK with all submissions for a given twitter name' do
-      submission = create_submission
-      get :twitter, twitter: "seainhd"
-      expect( response ).to be_success
-      expect( assigns(:submissions) ).to eq [submission]
-    end
-  end
-
-
-  describe 'GET feed' do
-    render_views
-    it "returns feed from JSON format" do
-      submission = create_submission
-      get :feed, format: "json"
-      expect( assigns(:submissions) ).to eq [submission]
-      expect( response ).to be_success
       expect( response.content_type ).to eq("application/json")
-      expect( response.body ).to have_content submission.title
+      expect( assigns(:submissions) ).to eq [submission1, submission0]
     end
   end
 
