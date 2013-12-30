@@ -28,6 +28,11 @@ div#window > section.content > div#main > .body {
       float: left;
       @extend .col-xs-12;
       @extend .col-sm-6;
+      p.lead{
+        max-height: 250px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
     .gutter{
       float: right;
