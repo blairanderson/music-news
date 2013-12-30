@@ -1,7 +1,6 @@
 class MusicNews.Routers.Submissions extends Backbone.Router
   initialize: ->
     @collection = MusicNews.App.collections.submissions
-    @popular = MusicNews.App.collections.popular_songs
     @songs = MusicNews.App.collections.songs
     MusicNews.App.views.submissions =  []
 
@@ -12,9 +11,8 @@ class MusicNews.Routers.Submissions extends Backbone.Router
     'song/:id': 'songShow'
 
   songShow:(data)->
-    $parent = MusicNews.App.views.main.$el
-    $target = $parent.find('div.body')
-    _target = $target
+    @target = MusicNews.App.views.main.$el.find('div.body')
+    _target = @target
     if @songs.length
       song = @songs.findWhere({id: parseInt(data)})
       @currentSong = new MusicNews.Views.SongPartial(model: song).render()
@@ -27,61 +25,52 @@ class MusicNews.Routers.Submissions extends Backbone.Router
 
 
   popular: (data) ->
-    debugger
-    $parent = MusicNews.App.views.main.$el
-    $target = $parent.find('div.body')
-    _target = $target
-    if @popular.length
+    @target = MusicNews.App.views.main.$el.find('div.body')
+    _target = @target
+    if @songs.length
       _target.empty()
-      @popular.each (song) ->
+      @songs.each (song) ->
         view = new MusicNews.Views.SongPartial(model: song).render()
         _target.append view.$el
     else 
       _target.empty()
-      _popular = @popular
-      @popular.fetch().done () ->
-        _popular.each (song) ->
-          debugger
+      _songs = @songs
+      @songs.fetch().done () ->
+        _songs.each (song) ->
           view = new MusicNews.Views.SongPartial(model: song).render()
           _target.append view.$el
-    
 
   index: (data) ->
+    @target = MusicNews.App.views.main.$el.find('div.body')
+
+    # redirect to submission-show
     possibleShow = window.location.search.split('id=')[1]
     if possibleShow
       this.navigate(possibleShow, trigger: true)
       return
+    # redirect to song-show
     possibleSong = window.location.search.split('song=')[1]
     if possibleSong
-      this.navigate('song/'+possibleSong, trigger: true)
+      this.navigate('song/'+ possibleSong, trigger: true)
       return
 
-    _view = @view
-    $parent = MusicNews.App.views.main.$el
-    $target = $parent.find('div.body')
-    _target = $target
-    @view = new MusicNews.Views.SubmissionsIndex()
-    _view = @view
+    _target = @target
+    _view = new MusicNews.Views.SubmissionsIndex()
     if @collection.length
-      _target.html @view.render().$el
+      _target.html _view.render().$el
     else 
       @collection.fetch().done () ->
         _target.html _view.render().$el
     
   show: (data) -> 
-    $parent = MusicNews.App.views.main.$el
-    $target = $parent.find('div.body')
-    _target = $target
-    $parent.find('div.hero').html("This is the hero content")
-
+    @target = MusicNews.App.views.main.$el.find('div.body')
+    _target = @target
     if @collection.length
       submission = MusicNews.App.collections.submissions.findWhere({id: parseInt(data)})
-      @currentSubmission = new MusicNews.Views.Submission(model: submission).render()
-      MusicNews.App.views.currentSubmission = @currentSubmission
-      _target.html(@currentSubmission.$el)
+      view = new MusicNews.Views.Submission(model: submission).render()
+      _target.html view.$el
     else
       @collection.fetch().done () ->
         submission = MusicNews.App.collections.submissions.findWhere({id: parseInt(data)})
-        @currentSubmission = new MusicNews.Views.Submission(model: submission).render()
-        MusicNews.App.views.currentSubmission = @currentSubmission
-        _target.html(@currentSubmission.$el)
+        view = new MusicNews.Views.Submission(model: submission).render()
+        _target.html view.$el

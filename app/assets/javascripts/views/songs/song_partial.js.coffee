@@ -5,15 +5,15 @@ class MusicNews.Views.SongPartial extends Backbone.View
     @song = options.model
     @submission = options.submission
     options.model.view = this
-    @button = this.$el.find("button.play")
     @player = MusicNews.App.views.player
     @router = MusicNews.App.routers.submissions
 
   render: ->
     markup = @template(song: @song)
     this.$el.html(markup)
-
     this.$el.attr('id', "song-#{@song.get('id')}" )
+    if @song == @player.currentTrack
+      @playPauseAddClass('play')
     this
 
   events:
@@ -28,10 +28,9 @@ class MusicNews.Views.SongPartial extends Backbone.View
     @router.navigate(target, trigger: true)
   buttonHandler: (e) ->
     e.preventDefault()
-    @button = $(e.currentTarget)
-    $action = @button.attr('class')
-    this[$action](@button)
-    @playPauseAddClass()
+    $action = $(e.currentTarget).attr('class')
+    this[$action]()
+    @playPauseAddClass($action)
 
   play: ->
     @player.pauseSong()
@@ -42,6 +41,7 @@ class MusicNews.Views.SongPartial extends Backbone.View
       markup = @player.playlistSongTemplate(song: @song )
       @player.$el.find('#playlist').html markup
     @player.playSong()
+    
   pause: ->
     @player.pauseSong()
   facebook: ->
@@ -51,7 +51,15 @@ class MusicNews.Views.SongPartial extends Backbone.View
   openWindow: (url, name) ->
     window.open(url, name, "height=800,width=900")
 
+  button: ->
+    this.$el.find('button.play, button.pause')
 
-  playPauseAddClass: ->
-    this.$el.addClass("active")
-    @button.toggleClass('play pause')
+  playPauseAddClass: (state) ->
+    if state = 'play'
+      this.$el.addClass("active")
+      @button().addClass('pause').removeClass('play')
+      return
+    if state = 'pause'
+      this.$el.removeClass("active")
+      @button().removeClass('pause').addClass('play')
+      return

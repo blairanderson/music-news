@@ -6,15 +6,11 @@
 </div>
 <div class="song-content">
   <div>
-    <a class="pull-left" href="/song/<%= @song.get('id')%>"><%= @song.get('title') %></a>
+    <a href="/song/<%= @song.get('id')%>"><%= @song.get('title') %></a>
   </div>
-  <br>
   <div>
     <span>
-     Purchase Song: (<a href="http://amzn.com">link to amazon</a>)(<a href="http://itunes.com">link to itunes</a>)
+     Purchase: (<a href="http://amzn.com">amazon</a>)(<a href="http://itunes.com">itunes</a>)
     </span>
   </div>
-  <form>
-    <input type="text" placeholder="chill, dance, party, slowwave, slowgaze, nu-disco">
-  </form>
 </div>

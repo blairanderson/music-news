@@ -6,4 +6,6 @@ class MusicNews.Views.Main extends Backbone.View
 
   render: ->
     $(@el).html(this.template())
+    @hero = $(@el).find('div.hero')
+    @body = $(@el).find('div.body')
     this

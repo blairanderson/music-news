@@ -49,9 +49,9 @@ class MusicNews.Views.Player extends Backbone.View
       onfinish: ->
         _this.nextSong()
       onplay: ->
-        MusicNews.App.collections.songs.each (song) ->
-          song.view.$el.removeClass "active"
-          song.view.button.removeClass('pause').addClass('play');
+        songs = MusicNews.App.views.main.body.find('div.song')
+        songs.removeClass "active"
+        songs.find('button.pause').removeClass('pause').addClass('play');
 
     if @currentSound
       @currentSound.play(@playOptions) 
