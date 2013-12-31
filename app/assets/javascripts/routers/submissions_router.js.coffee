@@ -3,6 +3,7 @@ class MusicNews.Routers.Submissions extends Backbone.Router
     @collection = MusicNews.App.collections.submissions
     @songs = MusicNews.App.collections.songs
     MusicNews.App.views.submissions =  []
+    @bind 'all', @_trackPageView
 
   routes: 
     '': 'index'
@@ -74,3 +75,7 @@ class MusicNews.Routers.Submissions extends Backbone.Router
         submission = MusicNews.App.collections.submissions.findWhere({id: parseInt(data)})
         view = new MusicNews.Views.Submission(model: submission).render()
         _target.html view.$el
+
+  _trackPageView: ->
+    url = Backbone.history.getFragment
+    _gaq.push(['_trackPageView', url])
