@@ -6,7 +6,7 @@ class SubmissionsController < ApplicationController
   end
 
   def index
-    @submissions = Submission.latest.includes(:songs).limit(20)
+    @submissions = Submission.latest.includes(:songs).limit(50)
     render json: @submissions.to_json(include: [:songs])
   end
 
