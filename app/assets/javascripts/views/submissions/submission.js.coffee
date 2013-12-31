@@ -13,3 +13,12 @@ class MusicNews.Views.Submission extends Backbone.View
       view = new MusicNews.Views.SongPartial(model: song, submission: _this.model).render().$el
       $target.append view
     this
+
+  events:
+    'click h3': 'publisher'
+
+  publisher: ->
+    url = "#{window.location.origin}/submissions/#{@model.get('id')}/publisher"
+    @openWindow(url, 'publish')
+  openWindow: (url, name) ->
+    window.open(url, name, "height=800,width=900")

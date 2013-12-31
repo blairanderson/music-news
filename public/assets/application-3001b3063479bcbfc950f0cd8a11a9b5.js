@@ -17380,7 +17380,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       var $body, $target;
       MusicNews.App.collections.submissions = new MusicNews.Collections.Submissions();
       MusicNews.App.collections.songs = new MusicNews.Collections.Songs();
-      MusicNews.App.collections.popular_songs = new MusicNews.Collections.PopularSongs();
       $target = $('#window');
       MusicNews.App.views.layout = new MusicNews.Views.Layout().render();
       $target.append(MusicNews.App.views.layout.$el);
@@ -17994,33 +17993,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  MusicNews.Collections.PopularSongs = (function(_super) {
-    __extends(PopularSongs, _super);
-
-    function PopularSongs() {
-      _ref = PopularSongs.__super__.constructor.apply(this, arguments);
-      return _ref;
-    }
-
-    PopularSongs.prototype.url = function() {
-      var url;
-      url = window.location.origin + '/songs?sort=popular';
-      console.log("popular songs url", url);
-      return url;
-    };
-
-    PopularSongs.prototype.model = MusicNews.Models.Song;
-
-    return PopularSongs;
-
-  })(Backbone.Collection);
-
-}).call(this);
-(function() {
-  var _ref,
-    __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
   MusicNews.Collections.Songs = (function(_super) {
     __extends(Songs, _super);
 
@@ -18511,6 +18483,20 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       return this;
     };
 
+    Submission.prototype.events = {
+      'click h3': 'publisher'
+    };
+
+    Submission.prototype.publisher = function() {
+      var url;
+      url = "" + window.location.origin + "/submissions/" + (this.model.get('id')) + "/publisher";
+      return this.openWindow(url, 'publish');
+    };
+
+    Submission.prototype.openWindow = function(url, name) {
+      return window.open(url, name, "height=800,width=900");
+    };
+
     return Submission;
 
   })(Backbone.View);
@@ -18669,7 +18655,8 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     Submissions.prototype.initialize = function() {
       this.collection = MusicNews.App.collections.submissions;
       this.songs = MusicNews.App.collections.songs;
-      return MusicNews.App.views.submissions = [];
+      MusicNews.App.views.submissions = [];
+      return this.bind('all', this._trackPageView);
     };
 
     Submissions.prototype.routes = {
@@ -18783,6 +18770,12 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
           return _target.html(view.$el);
         });
       }
+    };
+
+    Submissions.prototype._trackPageView = function() {
+      var url;
+      url = Backbone.history.getFragment;
+      return _gaq.push(['_trackPageView', url]);
     };
 
     return Submissions;
