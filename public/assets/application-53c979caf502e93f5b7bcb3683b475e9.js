@@ -17380,7 +17380,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       var $body, $target;
       MusicNews.App.collections.submissions = new MusicNews.Collections.Submissions();
       MusicNews.App.collections.songs = new MusicNews.Collections.Songs();
-      MusicNews.App.collections.popular_songs = new MusicNews.Collections.PopularSongs();
       $target = $('#window');
       MusicNews.App.views.layout = new MusicNews.Views.Layout().render();
       $target.append(MusicNews.App.views.layout.$el);
@@ -17726,7 +17725,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       
         __out.push(__sanitize(this.song.get('submission_url')));
       
-        __out.push('"><i></i></button>\n  <button class="twitter"><i></i></button>\n</div>\n<div class="song-content">\n  <div>\n    <a class="pull-left" href="/song/');
+        __out.push('"><i></i></button>\n  <button class="twitter"><i></i></button>\n</div>\n<div class="song-content">\n  <div>\n    <a href="/song/');
       
         __out.push(__sanitize(this.song.get('id')));
       
@@ -17734,7 +17733,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       
         __out.push(__sanitize(this.song.get('title')));
       
-        __out.push('</a>\n  </div>\n  <br>\n  <div>\n    <span>\n     Purchase Song: (<a href="http://amzn.com">link to amazon</a>)(<a href="http://itunes.com">link to itunes</a>)\n    </span>\n  </div>\n  <form>\n    <input type="text" placeholder="chill, dance, party, slowwave, slowgaze, nu-disco">\n  </form>\n</div>\n');
+        __out.push('</a>\n  </div>\n  <div>\n    <span>\n     Purchase: (<a href="http://amzn.com">amazon</a>)(<a href="http://itunes.com">itunes</a>)\n    </span>\n  </div>\n</div>\n');
       
       }).call(this);
       
@@ -17994,33 +17993,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  MusicNews.Collections.PopularSongs = (function(_super) {
-    __extends(PopularSongs, _super);
-
-    function PopularSongs() {
-      _ref = PopularSongs.__super__.constructor.apply(this, arguments);
-      return _ref;
-    }
-
-    PopularSongs.prototype.url = function() {
-      var url;
-      url = window.location.origin + '/songs?sort=popular';
-      console.log("popular songs url", url);
-      return url;
-    };
-
-    PopularSongs.prototype.model = MusicNews.Models.Song;
-
-    return PopularSongs;
-
-  })(Backbone.Collection);
-
-}).call(this);
-(function() {
-  var _ref,
-    __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
   MusicNews.Collections.Songs = (function(_super) {
     __extends(Songs, _super);
 
@@ -18032,6 +18004,10 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     Songs.prototype.url = 'songs';
 
     Songs.prototype.model = MusicNews.Models.Song;
+
+    Songs.prototype.comparator = function(song) {
+      return -song.get('playback_count');
+    };
 
     return Songs;
 
@@ -18134,6 +18110,8 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
     Main.prototype.render = function() {
       $(this.el).html(this.template());
+      this.hero = $(this.el).find('div.hero');
+      this.body = $(this.el).find('div.body');
       return this;
     };
 
@@ -18223,10 +18201,10 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
           return _this.nextSong();
         },
         onplay: function() {
-          return MusicNews.App.collections.songs.each(function(song) {
-            song.view.$el.removeClass("active");
-            return song.view.button.removeClass('pause').addClass('play');
-          });
+          var songs;
+          songs = MusicNews.App.views.main.body.find('div.song');
+          songs.removeClass("active");
+          return songs.find('button.pause').removeClass('pause').addClass('play');
         }
       };
       if (this.currentSound) {
@@ -18373,7 +18351,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       this.song = options.model;
       this.submission = options.submission;
       options.model.view = this;
-      this.button = this.$el.find("button.play");
       this.player = MusicNews.App.views.player;
       return this.router = MusicNews.App.routers.submissions;
     };
@@ -18385,6 +18362,9 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       });
       this.$el.html(markup);
       this.$el.attr('id', "song-" + (this.song.get('id')));
+      if (this.song === this.player.currentTrack) {
+        this.playPauseAddClass('play');
+      }
       return this;
     };
 
@@ -18407,10 +18387,9 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     SongPartial.prototype.buttonHandler = function(e) {
       var $action;
       e.preventDefault();
-      this.button = $(e.currentTarget);
-      $action = this.button.attr('class');
-      this[$action](this.button);
-      return this.playPauseAddClass();
+      $action = $(e.currentTarget).attr('class');
+      this[$action]();
+      return this.playPauseAddClass($action);
     };
 
     SongPartial.prototype.play = function() {
@@ -18443,9 +18422,20 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       return window.open(url, name, "height=800,width=900");
     };
 
-    SongPartial.prototype.playPauseAddClass = function() {
-      this.$el.addClass("active");
-      return this.button.toggleClass('play pause');
+    SongPartial.prototype.button = function() {
+      return this.$el.find('button.play, button.pause');
+    };
+
+    SongPartial.prototype.playPauseAddClass = function(state) {
+      if (state = 'play') {
+        this.$el.addClass("active");
+        this.button().addClass('pause').removeClass('play');
+        return;
+      }
+      if (state = 'pause') {
+        this.$el.removeClass("active");
+        this.button().removeClass('pause').addClass('play');
+      }
     };
 
     return SongPartial;
@@ -18650,9 +18640,9 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
     Submissions.prototype.initialize = function() {
       this.collection = MusicNews.App.collections.submissions;
-      this.popular = MusicNews.App.collections.popular_songs;
       this.songs = MusicNews.App.collections.songs;
-      return MusicNews.App.views.submissions = [];
+      MusicNews.App.views.submissions = [];
+      return this.bind('all', this._trackPageView);
     };
 
     Submissions.prototype.routes = {
@@ -18663,10 +18653,9 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     };
 
     Submissions.prototype.songShow = function(data) {
-      var $parent, $target, song, _target;
-      $parent = MusicNews.App.views.main.$el;
-      $target = $parent.find('div.body');
-      _target = $target;
+      var song, _target;
+      this.target = MusicNews.App.views.main.$el.find('div.body');
+      _target = this.target;
       if (this.songs.length) {
         song = this.songs.findWhere({
           id: parseInt(data)
@@ -18689,14 +18678,12 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     };
 
     Submissions.prototype.popular = function(data) {
-      debugger;
-      var $parent, $target, _popular, _target;
-      $parent = MusicNews.App.views.main.$el;
-      $target = $parent.find('div.body');
-      _target = $target;
-      if (this.popular.length) {
+      var _songs, _target;
+      this.target = MusicNews.App.views.main.$el.find('div.body');
+      _target = this.target;
+      if (this.songs.length) {
         _target.empty();
-        return this.popular.each(function(song) {
+        return this.songs.each(function(song) {
           var view;
           view = new MusicNews.Views.SongPartial({
             model: song
@@ -18705,10 +18692,9 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
         });
       } else {
         _target.empty();
-        _popular = this.popular;
-        return this.popular.fetch().done(function() {
-          return _popular.each(function(song) {
-            debugger;
+        _songs = this.songs;
+        return this.songs.fetch().done(function() {
+          return _songs.each(function(song) {
             var view;
             view = new MusicNews.Views.SongPartial({
               model: song
@@ -18720,7 +18706,8 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     };
 
     Submissions.prototype.index = function(data) {
-      var $parent, $target, possibleShow, possibleSong, _target, _view;
+      var possibleShow, possibleSong, _target, _view;
+      this.target = MusicNews.App.views.main.$el.find('div.body');
       possibleShow = window.location.search.split('id=')[1];
       if (possibleShow) {
         this.navigate(possibleShow, {
@@ -18735,14 +18722,10 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
         });
         return;
       }
-      _view = this.view;
-      $parent = MusicNews.App.views.main.$el;
-      $target = $parent.find('div.body');
-      _target = $target;
-      this.view = new MusicNews.Views.SubmissionsIndex();
-      _view = this.view;
+      _target = this.target;
+      _view = new MusicNews.Views.SubmissionsIndex();
       if (this.collection.length) {
-        return _target.html(this.view.render().$el);
+        return _target.html(_view.render().$el);
       } else {
         return this.collection.fetch().done(function() {
           return _target.html(_view.render().$el);
@@ -18751,32 +18734,34 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     };
 
     Submissions.prototype.show = function(data) {
-      var $parent, $target, submission, _target;
-      $parent = MusicNews.App.views.main.$el;
-      $target = $parent.find('div.body');
-      _target = $target;
-      $parent.find('div.hero').html("This is the hero content");
+      var submission, view, _target;
+      this.target = MusicNews.App.views.main.$el.find('div.body');
+      _target = this.target;
       if (this.collection.length) {
         submission = MusicNews.App.collections.submissions.findWhere({
           id: parseInt(data)
         });
-        this.currentSubmission = new MusicNews.Views.Submission({
+        view = new MusicNews.Views.Submission({
           model: submission
         }).render();
-        MusicNews.App.views.currentSubmission = this.currentSubmission;
-        return _target.html(this.currentSubmission.$el);
+        return _target.html(view.$el);
       } else {
         return this.collection.fetch().done(function() {
           submission = MusicNews.App.collections.submissions.findWhere({
             id: parseInt(data)
           });
-          this.currentSubmission = new MusicNews.Views.Submission({
+          view = new MusicNews.Views.Submission({
             model: submission
           }).render();
-          MusicNews.App.views.currentSubmission = this.currentSubmission;
-          return _target.html(this.currentSubmission.$el);
+          return _target.html(view.$el);
         });
       }
+    };
+
+    Submissions.prototype._trackPageView = function() {
+      var url;
+      url = Backbone.history.getFragment;
+      return _gaq.push(['_trackPageView', url]);
     };
 
     return Submissions;
