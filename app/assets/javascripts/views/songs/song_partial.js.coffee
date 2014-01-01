@@ -45,12 +45,10 @@ class MusicNews.Views.SongPartial extends Backbone.View
   pause: ->
     @player.pauseSong()
   facebook: ->
-    @openWindow(@submission.get('share'), "FACEBOOP DAT")
+    MusicNews.Helpers.openWindow(@submission.get('share'), "FACEBOOP DAT")
   twitter: ->
-    @openWindow(@submission.get('tweet'), "TWOOT dat")
-  openWindow: (url, name) ->
-    window.open(url, name, "height=800,width=900")
-
+    MusicNews.Helpers.openWindow(@submission.get('tweet'), "TWOOT dat")
+  
   button: ->
     this.$el.find('button.play, button.pause')
 

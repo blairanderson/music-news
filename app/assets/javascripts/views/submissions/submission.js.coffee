@@ -19,6 +19,4 @@ class MusicNews.Views.Submission extends Backbone.View
 
   publisher: ->
     url = "#{window.location.origin}/submissions/#{@model.get('id')}/publisher"
-    @openWindow(url, 'publish')
-  openWindow: (url, name) ->
-    window.open(url, name, "height=800,width=900")
+    MusicNews.Helpers.openWindow(url, 'publish')

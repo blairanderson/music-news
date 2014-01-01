@@ -31,6 +31,9 @@ window.MusicNews =
     Backbone.history.start({pushState: true})
 
   Helpers: {
+    openWindow: (url, name) ->
+      window.open(url, name, "height=800,width=900")
+
     urlBase: ->
       if this.env.prod()
         "/"

@@ -29,7 +29,11 @@ class MusicNews.Views.Player extends Backbone.View
     "click button#nolove" : "noloveSong"
     "click button#love" : "loveSong"
     "click button#like" : "likeSong"
+    "click a": "goTo"
 
+  goTo: (e) ->
+    url = $(e.currentTarget).attr('href')
+    MusicNews.Helpers.openWindow(url, 'Soundcloud')
   updateCurrentTrack: ->
     @currentSound = undefined
     @getCurrentTrack()
