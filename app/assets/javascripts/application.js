@@ -15,6 +15,7 @@
 //= require validations
 //= require moment
 //= require bootstrap
+//= require bootstrap-tour
 //= require underscore
 //= require backbone
 //= require music_news
