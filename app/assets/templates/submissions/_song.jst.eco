@@ -14,3 +14,6 @@
     </span>
   </div>
 </div>
+<div class="song-art">
+  <img src="<%= @song.get('thumbnail_url')%>">
+</div>

@@ -1,3 +1,5 @@
+$pink: #FF1493;
+
 .song{
   @extend .row;
   margin-bottom: 10px 0px;
@@ -5,14 +7,12 @@
   -moz-border-radius: 5px;
   border-radius: 5px;
   padding: 30px 0px;
-  &:hover{
-    background-color: darken(#FFFFFF, 5%);
-  }
   &.active{
     background-color: #FFC;
   }
   .song-content{
-    @extend .col-xs-9;
+    @extend .col-xs-7;
+    min-width: 210px;
     padding-top: 15px;
     form{
       input[type="text"]{
@@ -31,6 +31,13 @@
       }
     }
   }
+  .song-art{
+    @extend .col-xs-2;
+    img {
+       @extend .img-responsive;
+       @extend .img-rounded;
+    }
+  }
   .song-gutter{
     @extend .col-xs-3;
     max-width: 120px;
@@ -44,58 +51,92 @@
       margin-bottom: 2px;
     }
   }
+  $heart: red;
+  $facebook: #3B5999;
+  $twitter: #4099FF;
+  $icons: "heart", "facebook", "twitter";
+  $things: $heart, $facebook, $twitter;
   button{
-    border-color: #333;
     > i{
       @extend .fa;
     }
     &.pause > i {
       @extend .fa-pause;
     }
-    &.play{
-      background-color: #FF1493;
-      color: #fff;
-      > i {
-        @extend .fa-play;
-      }
-      &:hover{
-        background-color: white;
-        color: #FF1493;
-        border-color: #FF1493;
-        box-shadow: 0 0 20px #FF1493;
-      }
+    &.play > i {
+      color: $pink;
+      @extend .fa-play;
     }
-    &.heart > i {
-      @extend .fa-heart;
-      color: red;
-    }
-    &.heart:hover{
+    &.play:hover{
       background-color: white;
-      border-color: red;
-      box-shadow: 0 0 20px red;
+      border-color: $pink;
+      box-shadow: 0 0 20px $pink;
     }
-    &.facebook > i {
-      @extend .fa-facebook;
-    }
-    &.facebook:hover{
-      border-color: lighten(#3B5999, 10%);
-      background-color: #fff;
-      box-shadow: 0 0 20px lighten(#3B5999, 20%);
-      > i {
-        @extend .fa-facebook;
-        color: #3B5999;
+    @for $i from 1 through length($things) {
+      &.#{nth($icons, $i)} {
+        border-color: nth($things, $i);
+
+      }
+      &.#{nth($icons, $i)} > i {
+        color: nth($things, $i);
       }
     }
-    &.twitter > i {
-      @extend .fa-twitter;
+    @each $icon in $icons {
+      &.#{$icon}, &.#{$icon} > i {
+        visibility: hidden
+      }
+      &.#{$icon} > i {
+        @extend .fa-#{$icon};
+      }
     }
-    &.twitter:hover{
-      background-color: #fff;
-      border-color: #4099FF;
-      box-shadow: 0 0 20px #4099FF;
-      > i {
-        @extend .fa-twitter;
-        color: #4099FF;
+
+  }
+  &:hover{
+    background-color: darken(#FFFFFF, 3%);
+    button{
+      @each $icon in $icons {
+        &.#{$icon}, &.#{$icon} > i {
+          visibility: visible;
+        }
+      }
+      &.heart > i {
+        color: red;
+      }
+      &.heart:hover{
+        background-color: white;
+        border-color: red;
+        box-shadow: 0 0 20px red;
+      }
+      &.facebook:hover{
+        border-color: lighten(#3B5999, 10%);
+        background-color: #fff;
+        box-shadow: 0 0 20px lighten(#3B5999, 20%);
+        > i {
+          color: #3B5999;
+        }
+      }
+      &.twitter:hover{
+        background-color: #fff;
+        border-color: #4099FF;
+        box-shadow: 0 0 20px #4099FF;
+        > i {
+          color: #4099FF;
+        }
+      }
+    }
+  }
+}
+@media(max-width:767px){
+  .song{
+    .song-art{
+      @extend .hidden-xs;
+    }
+    $icons: "heart", "facebook", "twitter";
+    button{
+      @each $icon in $icons {
+        &.#{$icon}, &.#{$icon} > i {
+          visibility: visible;
+        }
       }
     }
   }
