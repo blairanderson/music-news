@@ -32,7 +32,8 @@ $pink: #FF1493;
     }
   }
   .song-art{
-    @extend .col-xs-2;
+    @extend .col-xs-9;
+    @extend .col-sm-2;
     img {
        @extend .img-responsive;
        @extend .img-rounded;
@@ -126,11 +127,9 @@ $pink: #FF1493;
     }
   }
 }
+
 @media(max-width:767px){
   .song{
-    .song-art{
-      @extend .hidden-xs;
-    }
     $icons: "heart", "facebook", "twitter";
     button{
       @each $icon in $icons {
