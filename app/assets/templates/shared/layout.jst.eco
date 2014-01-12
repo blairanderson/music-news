@@ -14,7 +14,7 @@
       <ul class="nav" id="nav">
         <li><a href="/">Latest.</a></li>
         <li><a href="/popular">Popular.</a></li>
-        <li><a href="#tour" class="tour"> <i class="fa fa-info"></i>Tour.</a></li>
+        <li><a href="#tour" class="tour">Tour.</a></li>
       </ul>
     </div>
   </div>

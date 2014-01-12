@@ -12,7 +12,6 @@ class MusicNews.Routers.Submissions extends Backbone.Router
     'song/:id': 'songShow'
 
   songShow:(data)->
-    @target = MusicNews.App.views.main.$el.find('div.body')
     _target = @target
     if @songs.length
       song = @songs.findWhere({id: parseInt(data)})
@@ -26,7 +25,6 @@ class MusicNews.Routers.Submissions extends Backbone.Router
 
 
   popular: (data) ->
-    @target = MusicNews.App.views.main.$el.find('div.body')
     _target = @target
     if @songs.length
       _target.empty()
@@ -42,8 +40,6 @@ class MusicNews.Routers.Submissions extends Backbone.Router
           _target.append view.$el
 
   index: (data) ->
-    @target = MusicNews.App.views.main.$el.find('div.body')
-
     # redirect to submission-show
     possibleShow = window.location.search.split('id=')[1]
     if possibleShow
@@ -64,7 +60,6 @@ class MusicNews.Routers.Submissions extends Backbone.Router
         _target.html _view.render().$el
     
   show: (data) -> 
-    @target = MusicNews.App.views.main.$el.find('div.body')
     _target = @target
     if @collection.length
       submission = MusicNews.App.collections.submissions.findWhere({id: parseInt(data)})
