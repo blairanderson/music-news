@@ -14,6 +14,7 @@ window.MusicNews =
     MusicNews.App.collections.submissions = new MusicNews.Collections.Submissions()
     MusicNews.App.collections.songs = new MusicNews.Collections.Songs()
 
+    this.App.title = $('title')
     $target = $('#window')
     MusicNews.App.views.layout = new MusicNews.Views.Layout().render()
     $target.append(MusicNews.App.views.layout.$el)
@@ -52,12 +53,12 @@ window.MusicNews =
           false
     }
     runner: ->
-      $item = $('#move-me')
-      $target = $('ul.dropdown-menu')
+      $item = $('li#move-me')
+      $target = $('ul.nav#right-nav')
       $target.append($item)
   } 
 
 
 $(document).ready ->
   MusicNews.initialize()
-  # MusicNews.Helpers.runner()
+  MusicNews.Helpers.runner()

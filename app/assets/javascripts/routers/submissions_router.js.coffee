@@ -11,34 +11,6 @@ class MusicNews.Routers.Submissions extends Backbone.Router
     ':id': 'show'
     'song/:id': 'songShow'
 
-  songShow:(data)->
-    _target = @target
-    if @songs.length
-      song = @songs.findWhere({id: parseInt(data)})
-      @currentSong = new MusicNews.Views.SongPartial(model: song).render()
-      _target.html(@currentSong.$el)
-    else
-      @collection.fetch().done () ->
-        song = MusicNews.App.collections.songs.findWhere({id: parseInt(data)})
-        @currentSong = new MusicNews.Views.SongPartial(model: song).render()
-        _target.html(@currentSong.$el)
-
-
-  popular: (data) ->
-    _target = @target
-    if @songs.length
-      _target.empty()
-      @songs.each (song) ->
-        view = new MusicNews.Views.SongPartial(model: song).render()
-        _target.append view.$el
-    else 
-      _target.empty()
-      _songs = @songs
-      @songs.fetch().done () ->
-        _songs.each (song) ->
-          view = new MusicNews.Views.SongPartial(model: song).render()
-          _target.append view.$el
-
   index: (data) ->
     # redirect to submission-show
     possibleShow = window.location.search.split('id=')[1]
@@ -59,6 +31,21 @@ class MusicNews.Routers.Submissions extends Backbone.Router
       @collection.fetch().done () ->
         _target.html _view.render().$el
     
+  popular: (data) ->
+    _target = @target
+    if @songs.length
+      _target.empty()
+      @songs.each (song) ->
+        view = new MusicNews.Views.SongPartial(model: song).render()
+        _target.append view.$el
+    else 
+      _target.empty()
+      _songs = @songs
+      @songs.fetch().done () ->
+        _songs.each (song) ->
+          view = new MusicNews.Views.SongPartial(model: song).render()
+          _target.append view.$el
+          
   show: (data) -> 
     _target = @target
     if @collection.length
@@ -71,6 +58,18 @@ class MusicNews.Routers.Submissions extends Backbone.Router
         view = new MusicNews.Views.Submission(model: submission).render()
         _target.html view.$el
 
+  songShow:(data)->
+    _target = @target
+    if @songs.length
+      song = @songs.findWhere({id: parseInt(data)})
+      @currentSong = new MusicNews.Views.SongPartial(model: song).render()
+      _target.html(@currentSong.$el)
+    else
+      @collection.fetch().done () ->
+        song = MusicNews.App.collections.songs.findWhere({id: parseInt(data)})
+        @currentSong = new MusicNews.Views.SongPartial(model: song).render()
+        _target.html(@currentSong.$el)
+        
   _trackPageView: ->
     url = Backbone.history.getFragment
     _gaq.push(['_trackPageView', url])

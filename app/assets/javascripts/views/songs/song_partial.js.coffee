@@ -7,11 +7,13 @@ class MusicNews.Views.SongPartial extends Backbone.View
     options.model.view = this
     @player = MusicNews.App.views.player
     @router = MusicNews.App.routers.submissions
+    MusicNews.App.title.text( this.model.get('title') )
 
   render: ->
     markup = @template(song: @song)
     this.$el.html(markup)
     this.$el.attr('id', "song-#{@song.get('id')}" )
+    $('[data-spy="scroll"]').each( -> $(this).scrollspy('refresh') )
     if @song == @player.currentTrack
       @playPauseAddClass('play')
     this

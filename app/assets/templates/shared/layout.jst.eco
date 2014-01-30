@@ -16,6 +16,8 @@
         <li><a href="/popular">Popular.</a></li>
         <li><a href="#tour" class="tour">Tour.</a></li>
       </ul>
+      <ul class="nav" id="right-nav">
+      </ul>
     </div>
   </div>
   <div class="player-container" id="player-container">

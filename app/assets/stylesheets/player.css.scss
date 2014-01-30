@@ -19,7 +19,7 @@ div.player-container{
       button{
         @extend .btn;
         @extend .btn-default;
-        @extend .btn-lg;
+        @extend .btn-xs;
         
         width: 25%;
         &:hover{
@@ -55,7 +55,7 @@ div.player-container{
         font-size: 17px;
         text-decoration: none;
         border: none;
-        color: #ff6600;
+        color: #000000;
         font-weight: bold;
       }
     }
