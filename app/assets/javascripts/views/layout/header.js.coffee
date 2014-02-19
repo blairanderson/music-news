@@ -1,14 +1,9 @@
-class MusicNews.Views.Layout extends Backbone.View
+class MusicNews.Views.Header extends Backbone.View
   id: 'header'
-  template: JST['shared/layout']
+  template: JST['shared/header']
 
   render: ->
     $markup = $(this.template())
-    $playerContainer = $markup.find('div#player-container')
-
-    MusicNews.App.views.player = new MusicNews.Views.Player().render()
-    $playerContainer.html( MusicNews.App.views.player.$el )
-    $playerContainer.affix()
     $(@el).html($markup)
     this
 

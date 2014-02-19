@@ -1,14 +1,14 @@
 class MusicNews.Views.SubmissionsIndex extends Backbone.View
   className: 'submission-list'
-
-  initialize: ->
-    @router = MusicNews.App.routers.submissions
-    @collection = MusicNews.App.collections.submissions
+  template: JST['shared/main']
+  initialize:(args) ->
+    @collection = args.collection
+    @$el.html @template() 
+    @target = $('div.body')
 
   render: ->
-    _this = this
-    @collection.each (submission) ->
-      view = new MusicNews.Views.SubmissionPartial(model: submission).render().$el
-      MusicNews.App.views.submissions.push view
-      _this.$el.append view
+    @collection.deferred.done =>
+      @collection.each (submission) =>
+        view = new MusicNews.Views.SubmissionPartial(model: submission).render()
+        @target.append view.$el
     this

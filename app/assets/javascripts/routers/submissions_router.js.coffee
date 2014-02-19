@@ -6,30 +6,10 @@ class MusicNews.Routers.Submissions extends Backbone.Router
     @bind 'all', @_trackPageView
 
   routes: 
-    '': 'index'
     'popular': 'popular'
     ':id': 'show'
     'song/:id': 'songShow'
 
-  index: (data) ->
-    # redirect to submission-show
-    possibleShow = window.location.search.split('id=')[1]
-    if possibleShow
-      this.navigate(possibleShow, trigger: true)
-      return
-    # redirect to song-show
-    possibleSong = window.location.search.split('song=')[1]
-    if possibleSong
-      this.navigate('song/'+ possibleSong, trigger: true)
-      return
-
-    _target = @target
-    _view = new MusicNews.Views.SubmissionsIndex()
-    if @collection.length
-      _target.html _view.render().$el
-    else 
-      @collection.fetch().done () ->
-        _target.html _view.render().$el
     
   popular: (data) ->
     _target = @target

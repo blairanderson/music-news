@@ -7,20 +7,17 @@ class MusicNews.Views.SubmissionPartial extends Backbone.View
     @router = MusicNews.App.routers.submissions
     @player = MusicNews.App.views.player
 
+  id: =>
+    "submission-#{@model.get('id')}"
+    
   render: ->
     markup = @template(submission: @submission)
     this.$el.html(markup)
-    this.$el.attr('id', "submission-#{@submission.get('id')}" )
-    this.setSongViews()
-
-    this
-
-  setSongViews: ->
     _this = this
-
-    @submission.songs.each (song) ->
-      view = new MusicNews.Views.SongPartial(model: song, submission: _this.submission).render().$el
-      _this.$el.find('div.sub-content').append view
+    @submission.songs.each (song) =>
+      view = new MusicNews.Views.SongPartial(model: song, submission: @submission).render().$el
+      @$el.find('div.sub-content').append view
+    this
 
   events:
     "click a" : "goToShow"

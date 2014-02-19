@@ -1,7 +1,9 @@
 class MusicNews.Collections.Submissions extends Backbone.Collection
+  initialize: ->
+    @deferred = @fetch()
+
   url: ->
-    url = window.location.origin + '/submissions'
-    console.log('url', url)
-    url
+    '/submissions'
+    
   model: MusicNews.Models.Submission
 

@@ -9,20 +9,24 @@ class MusicNews.Views.SongPartial extends Backbone.View
     @router = MusicNews.App.routers.submissions
     MusicNews.App.title.text( this.model.get('title') )
 
+  id: ->
+    "song-#{@model.get('id')}"
+
   render: ->
     markup = @template(song: @song)
     this.$el.html(markup)
-    this.$el.attr('id', "song-#{@song.get('id')}" )
-    $('[data-spy="scroll"]').each( -> $(this).scrollspy('refresh') )
-    if @song == @player.currentTrack
-      @playPauseAddClass('play')
+    # $('[data-spy="scroll"]').each( -> $(this).scrollspy('refresh') )
+
+    # this should be the collections job!!!
+    # if @model == @player.currentTrack
+    #   @playPauseAddClass('play')
     this
 
   events:
-    "click a" : "goToShow"
+    "click a"                         : "goToShow"
     "click button.play, button.pause" : "buttonHandler"
-    "click button.facebook" : "facebook"
-    "click button.twitter" : "twitter"
+    "click button.facebook"           : "facebook"
+    "click button.twitter"            : "twitter"
 
   goToShow: (e) ->
     e.preventDefault()
