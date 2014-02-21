@@ -16,11 +16,6 @@ div#window{
   }
 }
 
-footer{
-  @extend .container;
-}
-
-
 div#window > section.content > div#main > .body {
   .submission-show{
     @extend .row;

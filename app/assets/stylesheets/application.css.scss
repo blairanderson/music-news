@@ -15,14 +15,14 @@
 
 @import url(http://fonts.googleapis.com/css?family=Droid+Sans|Open+Sans|Roboto|Oswald);
 
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+ }
+
 @import "font-awesome";
 @import "variables";
 @import "imports";
-@import "forms";
-@import "submissions";
-@import "player";
-@import "songs";
 
-.spinner{
-  background-image: image-url('spinner.gif');
-}
+@import "global/global";
+@import "submissions/submissions";
+@import "songs/songs";
