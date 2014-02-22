@@ -1,32 +1,34 @@
 window.MusicNews =
-  App: {
-    models: {}
-    collections: {}
-    views: {}
-    routers: {}
-  }
-
   Models: {}
+  models: {}
   Collections: {}
+  collections: {}
   Views: {}
+  views: {}
   Routers: {}
   initialize: ->
-    this.App.title = $('title')
-    $target = $('#window')
-    @header = new MusicNews.Views.Header().render()
-    $target.append(@header.$el)
-    $body = $('<section/>', class: "content")
-    $target.append($body)
+    @title = $('title')
 
-    @main     = new MusicNews.Views.Main().render()
-    $body.append(@main.$el)
+    $spinner = $('<div class="spinner"/>')
+
+    @header_container = $('#header')
+    @header_container.html($spinner)
+
+    @player_container = $('#player')
+    @main_container = $('#container')
+    @content_container = $('#content')
+    @sidebar_container = $('#sidebar')
+    @footer_container = $('#footer')
 
     @sidebar  = new MusicNews.Views.Sidebar().render()
-    $body.append(@sidebar.$el)
+    @sidebar_container.replaceWith(@sidebar.$el)
 
-    @router = new MusicNews.Routers.Router
-
-    Backbone.history.start({pushState: true})
+    @player = {}
+    @session = new MusicNews.Session();
+    # loading screen
+    @session.deferred.done =>
+      @router = new MusicNews.Router(app: this)
+      Backbone.history.start({pushState: true})
 
   Helpers: {
     openWindow: (url, name) ->
