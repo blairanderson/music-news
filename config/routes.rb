@@ -12,6 +12,8 @@ MusicNews::Application.routes.draw do
   end
 
   resources :songs, only: [:index, :show, :destroy]
+
+  resource :session, only: [:show, :create, :update, :destroy]
   match '/auth/:provider/callback' => 'sessions#create', via: [:get, :post]
 
   #vanity-URLS
