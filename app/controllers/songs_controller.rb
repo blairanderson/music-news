@@ -7,7 +7,7 @@ class SongsController < ApplicationController
     else
       @songs = Song.order("created_at DESC")
     end
-    render json: @songs.to_json
+    render json: @songs
   end
 
   def show
