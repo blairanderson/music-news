@@ -19,6 +19,12 @@ GIT
     wordpress (0.2.0)
       mechanize (~> 2.0)
 
+PATH
+  remote: ./gems/bootstrap-sass
+  specs:
+    bootstrap-sass (3.1.0.1)
+      sass (~> 3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -61,8 +67,6 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (3.0.3.0)
-      sass (~> 3.2)
     buftok (0.2.0)
     builder (3.1.4)
     capybara (2.2.0)
@@ -314,7 +318,7 @@ DEPENDENCIES
   backbone-on-rails (= 1.1.0.0)
   better_errors
   binding_of_caller
-  bootstrap-sass (~> 3.0.3.0)
+  bootstrap-sass!
   capybara
   coffee-rails
   compass-rails
