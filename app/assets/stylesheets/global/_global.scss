@@ -1,4 +1,7 @@
 @import 'forms';
 @import 'footer';
 @import 'player';
-@import 'spinner';
+
+.spinner {
+  @include spinner-icon()
+}
