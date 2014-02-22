@@ -1,5 +1,5 @@
 MusicNews::Application.routes.draw do
-  root 'submissions#backbone'
+  root 'frontend#root'
 
   resources :submissions, except: [:edit, :update] do
     resource :publisher, only: [:show, :new, :create]
@@ -23,7 +23,7 @@ MusicNews::Application.routes.draw do
   get 'signout'   => 'sessions#destroy'
   get '/seainhd'  => redirect('http://www.seainhd.com')
 
-  # backbone redirects
-  get ':id' => 'submissions#backbone_redirect'
-  get '/song/:id' => 'songs#backbone_redirect'
+  # backbone catching
+  get ':id'      => 'frontend#root'
+  get ':id/:id'  => 'frontend#root'
 end

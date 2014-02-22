@@ -5,10 +5,6 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :logged_in?, :current_admin, :admin_user
 
-  def bb_submission_path(submission)
-    root_path(id: submission.id)
-  end
-
 private
   def logged_in?
     current_user

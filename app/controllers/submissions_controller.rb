@@ -1,22 +1,14 @@
 class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :destroy, :resolve]
 
-  def backbone
-    render :index
-  end
-
   def index
     @submissions = Submission.latest.includes(:songs).limit(50)
     render json: @submissions.to_json(include: [:songs])
   end
 
-  def backbone_redirect
-    redirect_to root_path(id: params[:id])
-  end
-
   def show
     @submission.increment!(:view_count)
-    redirect_to root_path(id: @submission.id)
+    render json: @submission.to_json(include: [:songs])
   end
 
   def resolve
@@ -24,7 +16,7 @@ class SubmissionsController < ApplicationController
       s.resolve
       sleep 1
     end
-    redirect_to bb_submission_path(@submission)
+    render json: @submission
   end
 
   def new
@@ -43,7 +35,7 @@ class SubmissionsController < ApplicationController
 
   def destroy
     @submission.destroy
-    redirect_to root_path
+    render json: @submission
   end
 
 private
