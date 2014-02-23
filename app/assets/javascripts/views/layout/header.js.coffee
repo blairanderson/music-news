@@ -22,8 +22,19 @@ class MusicNews.Views.Header extends Backbone.View
     this
 
   events: 
-    "click a" : "goTo"
+    'click a'               : 'goTo'
+    'submit form'           : 'submitSong'
+    'click [data-feature]'  : 'featureRequest'
 
+  featureRequest: (e) ->
+    name = $(e.currentTarget).data('feature')
+    debugger
+    request = new MusicNews.Models.FeatureRequest(name)
+    @modal = new Backbone.BootstrapModal(request.modalOptions()).open();
+
+  submitSong: (e) ->
+    e.preventDefault()
+    
   goTo: (e) ->
     e.preventDefault()
     $target = $(e.currentTarget)

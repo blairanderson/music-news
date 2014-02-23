@@ -23,9 +23,9 @@
       <% unless @session.isNew(): %>
         <form class="navbar-form navbar-right" role="add track">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Add a Track">
+            <input type="text" data-feature="submitSong" class="form-control" placeholder="Add a Track">
           </div>
-          <button type="submit" class="btn btn-default">Submit</button>
+          <button data-feature="submitSong" type="submit" class="btn btn-default">Submit</button>
         </form>
       <% end %>
     </div>
