@@ -11,8 +11,9 @@ class MusicNews.Router extends Backbone.Router
     @bind 'all', @_trackPageView
 
   routes:
-    ''        : -> @routePipeline 'submissions'
-    'greatest': -> @routePipeline 'greatest'
+    ''          : -> @routePipeline 'submissions'
+    'greatest'  : -> @routePipeline 'greatest'
+    'favorites' : -> @routePipeline 'favorites'
 
   routePipeline: (path) ->
     @beforeFilters(path)
@@ -32,12 +33,19 @@ class MusicNews.Router extends Backbone.Router
     @header.activate(path)
 
   submissions: ->
-    @submissions = @app.collections.submissions = new MusicNews.Collections.Submissions()
-    view = @app.views.submissions_index = new MusicNews.Views.SubmissionsIndex(collection: @submissions,app: @app)
+    @app.collections.latest_songs = new MusicNews.Collections.Songs()
+    submissions = @app.collections.submissions = new MusicNews.Collections.Submissions()
+    view = @app.views.submissions_index = new MusicNews.Views.SubmissionsIndex(collection: submissions, app: @app)
 
   greatest: ->
-    @songs = @app.collections.popular_songs = new MusicNews.Collections.Songs(sort: 'popular', fetch: true)
-    view = new MusicNews.Views.SongIndex(collection: @songs, app: @app)
+    songs = @app.collections.popular_songs = new MusicNews.Collections.Songs(sort: 'popular', fetch: true)
+    view = new MusicNews.Views.Songs(collection: songs, app: @app)
+
+  favorites: ->
+    # if session.isNew()
+    # redirect to root with alert "must be logged in"
+    songs = @app.collections.favorite_songs = new MusicNews.Collections.Songs(sort: 'popular', fetch: true)
+    view = new MusicNews.Views.Songs(collection: songs, app: @app)
 
   _trackPageView: ->
     url = Backbone.history.getFragment
