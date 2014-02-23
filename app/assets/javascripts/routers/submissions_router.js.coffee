@@ -10,21 +10,6 @@ class MusicNews.Routers.Submissions extends Backbone.Router
     ':id': 'show'
     'song/:id': 'songShow'
 
-    
-  popular: (data) ->
-    _target = @target
-    if @songs.length
-      _target.empty()
-      @songs.each (song) ->
-        view = new MusicNews.Views.SongPartial(model: song).render()
-        _target.append view.$el
-    else 
-      _target.empty()
-      _songs = @songs
-      @songs.fetch().done () ->
-        _songs.each (song) ->
-          view = new MusicNews.Views.SongPartial(model: song).render()
-          _target.append view.$el
           
   show: (data) -> 
     _target = @target

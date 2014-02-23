@@ -1,35 +1,44 @@
-class MusicNews.Routers.Router extends Backbone.Router
-  routes:
-    '': 'submissions'
+class MusicNews.Router extends Backbone.Router
 
-  initialize: ->
-    @header = new MusicNews.Views.Header(router: this)
-    $('#window').html(@header.render.el)
-    @target = $('<div id="target"/>')
-    $('#window').append(@target)
+  initialize: (options)->
+    @app = options.app
+    @target = @app.content_container
+    @app.router = this
 
+    @header = @app.views.header = new MusicNews.Views.Header(app: @app)
+    @app.header_container.replaceWith(@header.$el)
+    
     @bind 'all', @_trackPageView
 
-  beforeFilters: (routeHandler) ->
-    @handleRedirects()
+  routes:
+    ''        : -> @routePipeline 'submissions'
+    'greatest': -> @routePipeline 'greatest'
 
-  handleRedirects: ->
-    possibleShow = window.location.search.split('id=')[1]
-    if possibleShow
-      this.navigate(possibleShow, trigger: true)
-      return
-    # redirect to song-show
-    possibleSong = window.location.search.split('song=')[1]
-    if possibleSong
-      this.navigate('song/'+ possibleSong, trigger: true)
-      return
+  routePipeline: (path) ->
+    @beforeFilters(path)
+    @appendToTarget(path)
+    @afterFilters(path)
     
-  submissions: (data) ->
-    @submissions = new MusicNews.Collections.Submissions()
-    view = new MusicNews.Views.SubmissionsIndex(collection: @submissions).render()
+  beforeFilters: (path) ->
+    console.log 'before filters'
+    @target.html $('<div class="spinner"/>')
+
+  appendToTarget: (path) ->
+    view = @[path]()
     @target.html(view.$el)
-    
+
+  afterFilters: (path) ->
+    console.log('after filters')
+    @header.activate(path)
+
+  submissions: ->
+    @submissions = @app.collections.submissions = new MusicNews.Collections.Submissions()
+    view = @app.views.submissions_index = new MusicNews.Views.SubmissionsIndex(collection: @submissions,app: @app)
+
+  greatest: ->
+    @songs = @app.collections.popular_songs = new MusicNews.Collections.Songs(sort: 'popular', fetch: true)
+    view = new MusicNews.Views.SongIndex(collection: @songs, app: @app)
 
   _trackPageView: ->
     url = Backbone.history.getFragment
-    _gaq.push(['_trackPageView', url])
+    _gaq.push(['_trackPageView', url])  
