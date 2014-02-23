@@ -16,14 +16,22 @@ class MusicNews.Views.SongPartial extends Backbone.View
     this
 
   events:
-    "click a"       : "goToShow"
-    "click button"  : "buttonHandler"
+    'click a'       : 'goToShow'
+    'click button'  : 'buttonHandler'
 
   goToShow: (e) ->
     e.preventDefault()
     target = $(e.currentTarget).attr('href')
     @router.navigate(target, trigger: true)
-    
+
+  deactivate: ->
+    @$el.removeClass('active')
+    @$el.find('.pause').attr('class', 'play')
+
+  activate: ->
+    @$el.addClass('active')
+    @$el.find('.play').attr('class', 'pause')
+
   buttonHandler: (e) ->
     e.preventDefault()
     $action = $(e.currentTarget).attr('class')
