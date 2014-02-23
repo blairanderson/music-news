@@ -1,7 +1,8 @@
 @import 'forms';
+@import 'navbar';
 @import 'footer';
 @import 'player';
 
 .spinner {
-  @include spinner-icon()
+  @include spinner-icon($spinner_size: 75px);
 }
