@@ -20,24 +20,41 @@
 
   li {
 
-    display: inline-block;
-    $player-padding: 10px;
-    padding-left:   $player-padding;
-    padding-right:  $player-padding;
-    cursor: pointer;
-    @include shadow($shadow: -1px 0px 1px 0px #ccc);
+    &:first-child a{
+      border-left: 1px solid #272727;
+    }
 
+    &:last-child a{
+      padding-left: 30px;
+      border-right: none;
+    }
+    
     a {
 
-      text-decoration: none;
-      @extend .fa;
+      border-right: 1px solid #272727;
       color: #fff;
-      line-height: 30px;
-      height: 30px;
+      cursor: pointer;
+      display: block;
+      float: left;
+      font-size: 16px;
+      height: 34px;
+      line-height: 37px;
+      overflow: hidden;
+      padding: 0 10px 0 10px;
+      text-decoration: none;
+      top: 0;
+      &:hover {
+        color: $background-color;
+        font-weight: bold;
+      }
 
+      &:before {
+        @extend .fa;
+      }
     }
   }
 }
+      
 #play {@extend .fa-play;}
 #pause {@extend .fa-pause;}
 #previous {@extend .fa-step-backward;}
