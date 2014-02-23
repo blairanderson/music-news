@@ -35,22 +35,14 @@ window.MusicNews =
       window.open(url, name, "height=800,width=900")
 
     urlBase: ->
-      if this.env.prod()
-        "/"
-      else
-        "http://new.seainhd.com/"
-    env: {
+      if @env.prod() then "http://new.seainhd.com" else "localhost:3000"
+    env:
       prod: ->
-        if window.location.hostname == "0.0.0.0"
-          false
-        else
-          true
+        hostname = window.location.hostname
+        if hostname is "0.0.0.0" or 'localhost' then false else true
       dev: ->
-        if window.location.hostname == "0.0.0.0"
-          true
-        else
-          false
-    }
+        if !prod() then true else false
+
     runner: ->
       $item = $('li#move-me')
       $target = $('ul.nav#right-nav')
