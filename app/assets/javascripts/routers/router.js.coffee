@@ -10,7 +10,8 @@ class MusicNews.Router extends Backbone.Router
     @header = @app.views.header = new MusicNews.Views.Header(app: @app)
     @app.header_container.replaceWith(@header.$el)
 
-    @app.player_row.html @spinner
+    @app.content_container.html @spinner
+
     @player = @app.player = new MusicNews.Player(app: @app)
     @app.player_row.html @player.$el
 
