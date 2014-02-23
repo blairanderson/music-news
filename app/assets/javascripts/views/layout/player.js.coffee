@@ -1,24 +1,22 @@
-class MusicNews.Views.Player extends Backbone.View
+class MusicNews.Player extends Backbone.View
   id: 'music-player'
+
+  className: 'container'
+
   template: JST['shared/player']
+
   playlistSongTemplate: JST['shared/track']
 
   initialize: ->
-    _this = this
-    @songs = MusicNews.App.collections.songs
-    @songHistory = new MusicNews.Collections.Songs
-    MusicNews.App.views.submissions = []
     SC.initialize(client_id: "c024bdd48e9ecf014c71af406201f3a2");
-    SC.whenStreamingReady ->
+    SC.whenStreamingReady =>
+      @render()
       console.log 'streaming ready'
-      _this.updateCurrentTrack()
-      console.log( _this.currentTrack )
 
 
   render: ->
-    $(@el).html(this.template())
-    @playButton = this.$el.find('button[data-action="play-pause-button"]')
-
+    @$el.html @template()
+    @playButton = @$el.find('button[data-action="play-pause-button"]')
     this
 
   events:
@@ -34,6 +32,7 @@ class MusicNews.Views.Player extends Backbone.View
   goTo: (e) ->
     url = $(e.currentTarget).attr('href')
     MusicNews.Helpers.openWindow(url, 'Soundcloud')
+
   updateCurrentTrack: ->
     @currentSound = undefined
     @getCurrentTrack()

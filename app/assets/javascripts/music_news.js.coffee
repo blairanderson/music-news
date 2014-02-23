@@ -14,7 +14,7 @@ window.MusicNews =
     @header_container = $('#header')
     @header_container.html($spinner)
 
-    @player_container = $('#player')
+    @player_row = $('#player-row')
     @main_container = $('#container')
     @content_container = $('#content')
     @sidebar_container = $('#sidebar')

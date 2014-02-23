@@ -5,9 +5,15 @@ class MusicNews.Router extends Backbone.Router
     @target = @app.content_container
     @app.router = this
 
+    @spinner = $('<div class="spinner"/>')
+
     @header = @app.views.header = new MusicNews.Views.Header(app: @app)
     @app.header_container.replaceWith(@header.$el)
-    
+
+    @app.player_row.html @spinner
+    @player = @app.player = new MusicNews.Player(app: @app)
+    @app.player_row.html @player.$el
+
     @bind 'all', @_trackPageView
 
   routes:
@@ -22,7 +28,7 @@ class MusicNews.Router extends Backbone.Router
     
   beforeFilters: (path) ->
     console.log 'before filters'
-    @target.html $('<div class="spinner"/>')
+    @target.html @spinner
 
   appendToTarget: (path) ->
     view = @[path]()

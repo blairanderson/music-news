@@ -1,20 +1,9 @@
 <div id="player">
-  <button id="previous">
-    <i></i>
-   </button>
-
-  <button id="nolove">
-    <i></i>
-  </button>
-
-  <button id="play" data-action="play-pause-button">
-    <i></i>
-  </button>
-
-  <button id="next">
-    <i></i>
-  </button>
+  <a id="previous"></a>
+  <a id="nolove"></a>
+  <a id="play" data-action="play-pause-button"></a>
+  <a id="next"></a>
 </div>
 <br>
-<div id="playlist">
+<div id="current-song">
 </div>
