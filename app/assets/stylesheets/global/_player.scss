@@ -44,7 +44,12 @@
       text-decoration: none;
       top: 0;
       &:hover {
-        color: $background-color;
+        color: rgba(255, 0, 180, 1);
+        font-weight: bold;
+      }
+      &:active {
+        color: rgba(0, 0, 0, 1);
+        background-color: rgba(255, 255, 255, 1);
         font-weight: bold;
       }
 
@@ -54,14 +59,20 @@
     }
   }
 }
+@mixin icon-color($color: white) {
+  color: $color; 
+  &:hover, &:active{
+    color:$color;
+  }
+}
       
-#play {@extend .fa-play;}
-#pause {@extend .fa-pause;}
-#previous {@extend .fa-step-backward;}
-#next {@extend .fa-step-forward;}
-#nolove {@extend .fa-heart;}
-#love {@extend .fa-heart; color: red;}
-#like {@extend .fa-heart-o; color: red;}
+#play     {@extend .fa-play;          @include icon-color($color: white);}
+#pause    {@extend .fa-pause;         @include icon-color($color: white);}
+#previous {@extend .fa-step-backward; @include icon-color($color: white);}
+#next     {@extend .fa-step-forward;  @include icon-color($color: white);}
+#nolove   {@extend .fa-heart;         @include icon-color($color: white);}
+#love     {@extend .fa-heart;         @include icon-color($color: red);}
+#like     {@extend .fa-heart-o;       @include icon-color($color: red);}
 
 .current-song {
   border: none;
