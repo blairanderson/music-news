@@ -7,141 +7,149 @@ class MusicNews.Player extends Backbone.View
 
   playlistSongTemplate: JST['shared/track']
 
-  initialize: ->
-    SC.initialize(client_id: "c024bdd48e9ecf014c71af406201f3a2");
-    SC.whenStreamingReady =>
-      @render()
-      console.log 'streaming ready'
+  currentTrackIndex: 0
 
+  initialize: (options) ->
+    @app = options.app
+    $(document).on 'keydown', @keyBoardShortCuts
+
+    SC.initialize 
+      client_id: "c024bdd48e9ecf014c71af406201f3a2"
+      redirect_uri: "#{MusicNews.Helpers.urlBase()}/auth/soundcloud/callback"
+
+    SC.whenStreamingReady =>
+      @app.currentCollection.deferred.done =>
+        @setCurrentTrack()
+        @render()
 
   render: ->
-    @$el.html @template()
-    @playButton = @$el.find('button[data-action="play-pause-button"]')
+    $markup = @template
+      currentTrack: @currentTrack
+      currentSound: @currentSound
+    @$el.html $markup
+
+    @playPauseButton = @$el.find('[data-action="play-pause"]')
     this
 
   events:
-    "click button#play" : "playSong"
-    # TODO: update currentPlaylist
-    # TODO: change the currentTrack
-    # TODO:     @on 'change' event should re-render views:
-    # TODO:       player: status of relationship between user/song(favorite)
-    # TODO:       song_partial: should be highlighted. play should turn to pause
-    # TODO: update currentTrack
+    'click a#play'          : 'playCurrentSound'
+    'click a#pause'         : 'pauseSong'
+    'click a#next'          : 'nextSong'
+    'click a#previous'      : 'previousSong'
+    'click a#love'          : 'userFavorite'
+    'click a#like'          : 'userFavorite'
+    'click a#nolove'        : 'userFavorite'
+    'click a.current-song'  : (e) ->
+      e.preventDefault()
+      MusicNews.Helpers.openWindow $(e.currentTarget).attr('href') , 'Soundcloud'
 
-    "click button#pause" : "pauseSong"
-    # TODO: pause the current song, keep it playable.
-
-    "click button#next" : "nextSong"
-    # TODO: trigger 'stopCurrentSong'
-    # TODO: trigger 'getNextSong'
-    # TODO: trigger 'playSong'
-    # TODO:   on SC.song_finish we also need to trigger getTheNextSong
-
-    "click button#previous" : "previousSong"
-    # TODO: trigger 'stopCurrentSong'
-    # TODO: trigger 'getPreviousSong'
-    # TODO: trigger 'playSong'
-    # TODO:   on SC.song_finish we also need to trigger getTheNextSong
-
-    # TODO: basic link
-    "click a": "goTo"
-    # TODO: these all pertain to 'favoriting' functionality that does not exist yet.
-    "click button#nolove" : "noloveSong"
-    "click button#love" : "loveSong"
-    "click button#like" : "likeSong"
-    
-
-  goTo: (e) ->
-    url = $(e.currentTarget).attr('href')
-    MusicNews.Helpers.openWindow(url, 'Soundcloud')
-
-  updateCurrentTrack: ->
-    @currentSound = undefined
-    @getCurrentTrack()
-    if @currentTrack
-      markup = @playlistSongTemplate(song: @currentTrack )
-      $(@el).find('#playlist').html markup
-
-  getCurrentTrack: ->
-    @currentTrack ||= @songs.first()
-    @currentTrack
-
-  playSong: (e) ->
+  playCurrentSound: (e) ->
     e.preventDefault() if e
-    _this = this
-    @playButton.attr('id', 'pause')
-    @playOptions=
-      onfinish: ->
-        _this.nextSong()
-      onplay: ->
-        songs = MusicNews.App.views.main.body.find('div.song')
-        songs.removeClass "active"
-        songs.find('button.pause').removeClass('pause').addClass('play');
-
     if @currentSound
-      @currentSound.play(@playOptions) 
-      
+      @currentSound.play
+        onplay:       @_onplay
+        onpause:      @_onpause
+        onfinish:     @_onfinish
+        # whileplaying: @_whileplaying
     else
+      @setCurrentSound()
+      @playCurrentSound()
+
+  _onfinish: =>
+    @currentTrack.view.deactivate()
+    @playPauseButton.attr('id', 'play')
+    @nextSong()
+
+  _whileplaying: =>
+  #   debugger
+  #   console.log("sound #{this.id} playing, #{this.position} of #{this.durationEstimate}")
+
+  _onpause: =>
+    @playPauseButton.attr('id', 'play')
+    @currentTrack.view.deactivate()
+
+  _onplay: =>
+    $('.song').removeClass "active"
+    @playPauseButton.attr('id', 'pause')
+    @currentTrack.view.activate()
+
+  setCurrentSound: () ->
+    $stream_url = @streamUrl()
+    if $stream_url is null or undefined
+      @advanceTrackIndex()
+      @setCurrentSound()
+
+    SC.stream $stream_url, (sound) =>
+      @currentSound = sound
+
+  streamUrl: ->
+    if @currentTrack && @currentTrack.get('stream_url')
       $stream_url = @currentTrack.get('stream_url')
-      if $stream_url is null or undefined
-        _this.advanceTrack()
-        return
+    else
+      $stream_url = null  
+    $stream_url
 
-      SC.stream $stream_url, (sound) =>
-        @currentSound = sound
-        @currentSound.play(@playOptions)
-      
+  setCurrentTrack: ->
+    @currentSound = null
+    @currentTrack = @app.currentCollection.at(@currentTrackIndex)
 
-  pauseSong: (e) ->
-    e.preventDefault() if e
-    _this = this
-    @playButton.attr('id', 'play')
+  advanceTrackIndex: ->
+    @currentTrackIndex = @currentTrackIndex + 1
+    if @currentTrackIndex == @_currentCollectionLength()
+      @currentTrackIndex = 0
 
-    if @currentSound
-      @currentSound.pause()
+  revertTrackIndex: ->
+    @currentTrackIndex = @currentTrackIndex - 1
+    if @currentTrackIndex == -1
+      @currentTrackIndex = @_currentCollectionLength() - 1
+
+  _currentCollectionLength: ->
+    @app.currentCollection.length
 
   nextSong: (e) ->
     e.preventDefault() if e
     @pauseSong()
-    $song = @songs.shift()
-    @songHistory.unshift($song)
-
-    if @songs.length == 0
-      window.location.href = window.location.href
-      return
-    else
-      @currentTrack = undefined
-      @updateCurrentTrack()
-    @playSong()
+    @advanceTrackIndex()
+    @setCurrentTrack()
+    @render()
+    @playCurrentSound()
 
   previousSong: (e) ->
     e.preventDefault() if e
     @pauseSong()
-    $song = @songHistory.shift()
-    if !$song
-      return
-    @songs.unshift($song)
-    @currentTrack = undefined
-    @updateCurrentTrack()
-    @playSong()
+    @revertTrackIndex()
+    @setCurrentTrack()
+    @render()
+    @playCurrentSound()
 
-  noloveSong: (e) ->
+  pauseSong: (e) ->
     e.preventDefault() if e
+    @currentSound.pause() if @currentSound
+
+  keyBoardShortCuts: (e) =>
+    if e.keyCode == 32
+      e.preventDefault()
+      @playPauseButton.click()
+    if e.keyCode == 39
+      e.preventDefault()
+      @nextSong()
+    if e.keyCode == 37
+      e.preventDefault()
+      @previousSong()
+
+  userFavorite: (e) ->
+    e.preventDefault()
     $button = $(e.currentTarget)
+    @[$button.attr('id')]( $button )
+
+  nolove: ($button) ->
     # do stuff
-    $button.attr("id", "love")
-    console.log("no love button")
+    $button.attr('id', 'love')
     
-  loveSong: (e) ->
-    e.preventDefault() if e
-    $button = $(e.currentTarget)
+  love:   ($button) ->
     # do stuff
-    $button.attr("id", "like")
-    console.log("love button")
+    $button.attr('id', 'like')
 
-  likeSong: (e) ->
-    e.preventDefault() if e
-    $button = $(e.currentTarget)
+  like:   ($button) ->
     # do stuff
-    $button.attr("id", "nolove")
-    console.log("like button")
+    $button.attr('id', 'nolove')
