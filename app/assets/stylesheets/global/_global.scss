@@ -6,3 +6,16 @@
 .spinner {
   @include spinner-icon($spinner_size: 75px);
 }
+
+#container {
+  width: 100%;
+}
+
+#content{
+  min-height: 500px;
+  div#main{
+    @extend .col-xs-12;
+  }
+  div#sidebar{
+  }
+}

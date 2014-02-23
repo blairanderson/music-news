@@ -1,63 +1,48 @@
-div.player-container{
-  background: white;
-  color: #333333;
-  background-color: white;
-  border-top: #cccccc 1px solid;
-  border-bottom: #cccccc 1px solid;
+#player-row {
   width: 100%;
-  z-index: 2;
-  &.affix{
-    top: 0px;
+  background-color: #000;
+}
+#music-player{
+  // margin-left: auto;
+  // margin-right: auto;
+  // max-width: 1140px;
+  height: 28px;
+}
+
+#player{
+  a {
+    display: inline;
+    text-decoration: none;
+    padding: 0px;
+    padding-right: 30px;
+    @extend .fa;
+    color: #fff;
+    background-color: #000;
+    line-height: 2;
+
+    &:hover{
+      color: lighten(#000, 10%);
+      background-color: #fff;
+    }
   }
-  div#music-player{
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 440px;
-    #player{
-      width: 100%;
-      @extend .btn-group;
-      button{
-        @extend .btn;
-        @extend .btn-default;
-        @extend .btn-xs;
-        
-        width: 25%;
-        &:hover{
-          background-color: #fff;
-        }
-        > i{
-          @extend .fa;
-          @extend .fa-2x;
-          color: #000;
-          &:hover{
-            color: lighten(#000, 50%);
-          }
-        }
-      }
-      button#play > i{@extend .fa-play;}
-      button#pause > i{@extend .fa-pause;}
-      button#previous > i{@extend .fa-step-backward;}
-      button#next > i{@extend .fa-step-forward;}
-      button#nolove > i{@extend .fa-heart;}
-      button#love > i{
-        @extend .fa-heart;
-        color: red;
-      }
-      button#like > i{
-        @extend .fa-heart-o;
-        color: red;
-      }
-    }
-    div#playlist {
-      border: none;
-      text-align: center;
-      a{
-        font-size: 17px;
-        text-decoration: none;
-        border: none;
-        color: #000000;
-        font-weight: bold;
-      }
-    }
+}
+#play {@extend .fa-play;}
+#pause {@extend .fa-pause;}
+#previous {@extend .fa-step-backward;}
+#next {@extend .fa-step-forward;}
+#nolove {@extend .fa-heart;}
+#love {@extend .fa-heart; color: red;}
+#like {@extend .fa-heart-o; color: red;}
+
+#current-song {
+  border: none;
+  text-align: center;
+
+  a {
+    font-size: 17px;
+    text-decoration: none;
+    border: none;
+    color: #000000;
+    font-weight: bold;
   }
 }
