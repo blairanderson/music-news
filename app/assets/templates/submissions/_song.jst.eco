@@ -8,11 +8,6 @@
   <div>
     <a href="/song/<%= @song.get('id')%>"><%= @song.get('title') %></a>
   </div>
-  <div>
-    <span>
-     Purchase: (<a href="http://amzn.com">amazon</a>)(<a href="http://itunes.com">itunes</a>)
-    </span>
-  </div>
 </div>
 <div class="song-art">
   <img src="<%= @song.get('thumbnail_url')%>">
