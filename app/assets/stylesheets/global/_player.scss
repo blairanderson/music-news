@@ -59,20 +59,30 @@
     }
   }
 }
-@mixin icon-color($color: white) {
+@mixin icon-color($color) {
   color: $color; 
+  &:hover {
+    text-shadow:  1px 1px 0 rgba(255,0,180,0.5),
+                  2px 2px 0 rgba(255,0,180,0.5),
+                  3px 3px 0 rgba(255,0,180,0.5),
+                  4px 4px 0 rgba(255,0,180,0.5),
+                  5px 5px 0 rgba(255,0,180,0.5),
+                  6px 6px 0 rgba(255,0,180,0.5),
+                  7px 7px 0 rgba(255,0,180,0.5);
+  }
+
   &:hover, &:active{
-    color:$color;
+    color: $color;
   }
 }
       
-#play     {@extend .fa-play;          @include icon-color($color: white);}
-#pause    {@extend .fa-pause;         @include icon-color($color: white);}
-#previous {@extend .fa-step-backward; @include icon-color($color: white);}
-#next     {@extend .fa-step-forward;  @include icon-color($color: white);}
-#nolove   {@extend .fa-heart;         @include icon-color($color: white);}
-#love     {@extend .fa-heart;         @include icon-color($color: red);}
-#like     {@extend .fa-heart-o;       @include icon-color($color: red);}
+#play     {@extend .fa-play;          @include icon-color(white);}
+#pause    {@extend .fa-pause;         @include icon-color(white);}
+#previous {@extend .fa-step-backward; @include icon-color(white);}
+#next     {@extend .fa-step-forward;  @include icon-color(white);}
+#nolove   {@extend .fa-heart;         @include icon-color(white);}
+#love     {@extend .fa-heart;         @include icon-color(red);}
+#like     {@extend .fa-heart-o;       @include icon-color(red);}
 
 .current-song {
   border: none;
@@ -80,7 +90,7 @@
   background: black;
 
   &.title {
-
+    i.cloud {@include icon-cloud($font-size: 20px); @include icon-color(#ff7700);}
   }
 
   &.duration {
