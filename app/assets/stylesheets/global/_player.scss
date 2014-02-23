@@ -2,27 +2,39 @@
   width: 100%;
   background-color: #000;
 }
-#music-player{
-  // margin-left: auto;
-  // margin-right: auto;
-  // max-width: 1140px;
-  height: 28px;
+
+
+@mixin shadow($shadow: 1px 0px 1px 0px #ccc) {
+  box-shadow:         $shadow;
+  -moz-box-shadow:    $shadow;
+  -webkit-box-shadow: $shadow;
 }
 
-#player{
-  a {
-    display: inline;
-    text-decoration: none;
-    padding: 0px;
-    padding-right: 30px;
-    @extend .fa;
-    color: #fff;
-    background-color: #000;
-    line-height: 2;
 
-    &:hover{
-      color: lighten(#000, 10%);
-      background-color: #fff;
+.player{
+
+  list-style: none;
+  margin: 0px;
+  background-color: #000;
+  padding-left: 0;
+
+  li {
+
+    display: inline-block;
+    $player-padding: 10px;
+    padding-left:   $player-padding;
+    padding-right:  $player-padding;
+    cursor: pointer;
+    @include shadow($shadow: -1px 0px 1px 0px #ccc);
+
+    a {
+
+      text-decoration: none;
+      @extend .fa;
+      color: #fff;
+      line-height: 30px;
+      height: 30px;
+
     }
   }
 }
@@ -34,15 +46,29 @@
 #love {@extend .fa-heart; color: red;}
 #like {@extend .fa-heart-o; color: red;}
 
-#current-song {
+.current-song {
   border: none;
   text-align: center;
+  background: black;
+
+  &.title {
+
+  }
+
+  &.duration {
+    display: none;
+    width: 500px;
+    margin-left: 200px;
+  }
 
   a {
     font-size: 17px;
     text-decoration: none;
     border: none;
-    color: #000000;
+    color: #fff;
     font-weight: bold;
+    &:hover{
+      background-color: #000; 
+    }
   }
 }

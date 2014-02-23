@@ -1,9 +1,12 @@
 <div id="player">
-  <a id="previous"></a>
-  <a id="nolove"></a>
-  <a id="play" data-action="play-pause-button"></a>
-  <a id="next"></a>
+  <ul class="player">
+    <li><a id="previous"></a></li>
+    <li><a id="nolove"></a></li>
+    <li><a id="play" data-action="play-pause-button"></a></li>
+    <li><a id="next"></a></li>
+    <li><a class="current-song title">Some bullshit</a></li>
+  </ul>
 </div>
-<br>
-<div id="current-song">
+<div class="current-song duration">
+  <a href="some bullshit">some bullshit</a>
 </div>
