@@ -1,0 +1,50 @@
+@mixin color-and-hover($color: $font-color, $bg: $background-color, $inverse: false) {
+  @if $inverse {
+
+    color: $bg;
+    background-color: $color;
+    text-shadow: 8px 8px 0 rgba(255,0,180,0.5);
+    &:hover{
+      background-color: $color;
+    }
+
+  } @else {
+
+    color: $color;
+    background-color: $bg;
+    &:hover{
+      text-shadow: 8px 8px 0 rgba(255,0,180,0.5);
+    }
+  }
+}
+
+nav{
+  @extend .navbar;
+  @extend .navbar-default;
+  background-color: $background-color;
+  margin-bottom: 0px;
+
+  .navbar-header > a {
+    @extend .navbar-brand;
+    text-align: center;
+    text-transform: uppercase;
+    @include color-and-hover();
+  }
+
+  div.collapse{
+
+    @extend .navbar-collapse;
+
+    ul.nav{
+      @extend .navbar-nav;
+
+      li > a {
+        @include color-and-hover();
+      }
+      li.active > a {
+        @include color-and-hover($inverse: true);
+      }
+    }
+  }
+}
+
