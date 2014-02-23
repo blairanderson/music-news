@@ -2,11 +2,11 @@
   <ul class="player">
     <li><a id="previous"></a></li>
     <li><a id="nolove"></a></li>
-    <li><a id="play" data-action="play-pause-button"></a></li>
+    <li><a id="play" data-action="play-pause"></a></li>
     <li><a id="next"></a></li>
-    <li><a class="current-song title">Some bullshit</a></li>
+    <li><a class="current-song title" href="<%= @currentTrack.get('source_url')%>" data-external=true><%= @currentTrack.get('title') %><i class="cloud"></i></a></li>
   </ul>
 </div>
 <div class="current-song duration">
-  <a href="some bullshit">some bullshit</a>
+  <a class="current-song" href="/s/om/e/full/s/h/it" data-action="current-song-duration">loading...</a>
 </div>
