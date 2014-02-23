@@ -1,8 +1,14 @@
 @mixin color-and-hover($color: $font-color, $bg: $background-color, $inverse: false) {
   @if $inverse {
-    color: $bg;
-    background-color: $color;
-    text-shadow: 8px 8px 0 rgba(255,0,180,0.5);
+    color: white;
+    background-color: black;
+    text-shadow:  1px 1px 0 rgba(255,0,180,0.5),
+                  2px 2px 0 rgba(255,0,180,0.5),
+                  3px 3px 0 rgba(255,0,180,0.5),
+                  4px 4px 0 rgba(255,0,180,0.5),
+                  5px 5px 0 rgba(255,0,180,0.5),
+                  6px 6px 0 rgba(255,0,180,0.5),
+                  7px 7px 0 rgba(255,0,180,0.5);
     &:hover{
       background-color: $color;
     }
@@ -11,7 +17,13 @@
     color: $color;
     background-color: $bg;
     &:hover{
-      text-shadow: 8px 8px 0 rgba(255,0,180,0.5);
+      text-shadow:  1px 1px 0 rgba(255,0,180,0.5),
+                    2px 2px 0 rgba(255,0,180,0.5),
+                    3px 3px 0 rgba(255,0,180,0.5),
+                    4px 4px 0 rgba(255,0,180,0.5),
+                    5px 5px 0 rgba(255,0,180,0.5),
+                    6px 6px 0 rgba(255,0,180,0.5),
+                    7px 7px 0 rgba(255,0,180,0.5);
     }
   }
 }
