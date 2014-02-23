@@ -18,6 +18,7 @@
 //= require backbone
 //= require vendor/handlebars
 //= require vendor/backbone.localforage
+//= require vendor/backbone.stickit
 //= require music_news
 //= require_tree ../templates
 //= require_tree ./models
