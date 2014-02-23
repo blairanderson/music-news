@@ -29,20 +29,22 @@ class MusicNews.Router extends Backbone.Router
     
   beforeFilters: (path) ->
     console.log 'before filters'
+    $(document).scrollTop()
     @target.html @spinner
 
   appendToTarget: (path) ->
     view = @[path]()
     @target.html(view.$el)
+    @app.currentCollection = view.collection
 
   afterFilters: (path) ->
     console.log('after filters')
     @header.activate(path)
 
   submissions: ->
-    @app.collections.latest_songs = new MusicNews.Collections.Songs()
-    submissions = @app.collections.submissions = new MusicNews.Collections.Submissions()
-    view = @app.views.submissions_index = new MusicNews.Views.SubmissionsIndex(collection: submissions, app: @app)
+    songs = @app.collections.latest_songs = new MusicNews.Collections.Songs()
+    submissions = new MusicNews.Collections.Submissions()
+    view = new MusicNews.Views.SubmissionsIndex(submissions: submissions, collection: songs, app: @app)
 
   greatest: ->
     songs = @app.collections.popular_songs = new MusicNews.Collections.Songs(sort: 'popular', fetch: true)
