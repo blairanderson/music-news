@@ -21,13 +21,35 @@ class MusicNews.Player extends Backbone.View
 
   events:
     "click button#play" : "playSong"
+    # TODO: update currentPlaylist
+    # TODO: change the currentTrack
+    # TODO:     @on 'change' event should re-render views:
+    # TODO:       player: status of relationship between user/song(favorite)
+    # TODO:       song_partial: should be highlighted. play should turn to pause
+    # TODO: update currentTrack
+
     "click button#pause" : "pauseSong"
+    # TODO: pause the current song, keep it playable.
+
     "click button#next" : "nextSong"
+    # TODO: trigger 'stopCurrentSong'
+    # TODO: trigger 'getNextSong'
+    # TODO: trigger 'playSong'
+    # TODO:   on SC.song_finish we also need to trigger getTheNextSong
+
     "click button#previous" : "previousSong"
+    # TODO: trigger 'stopCurrentSong'
+    # TODO: trigger 'getPreviousSong'
+    # TODO: trigger 'playSong'
+    # TODO:   on SC.song_finish we also need to trigger getTheNextSong
+
+    # TODO: basic link
+    "click a": "goTo"
+    # TODO: these all pertain to 'favoriting' functionality that does not exist yet.
     "click button#nolove" : "noloveSong"
     "click button#love" : "loveSong"
     "click button#like" : "likeSong"
-    "click a": "goTo"
+    
 
   goTo: (e) ->
     url = $(e.currentTarget).attr('href')
