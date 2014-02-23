@@ -2,7 +2,8 @@ class SongSerializer < ActiveModel::Serializer
   # cached
   # delegate :cache_key, to: :object
   
-  attributes  :title,
+  attributes  :id,
+              :title,
               :source_url,
               :stream_url,
               :thumbnail_url,
