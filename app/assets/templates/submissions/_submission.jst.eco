@@ -2,7 +2,11 @@
   <div class="sub-gutter">
     <a href="<%= @submission.get('id')%>">
       <span><%= @submission.get('title')%></span>
-      <span><%= @submission.get('fromNow')%> on <%= @submission.get('calendar')%></span>
+      <div>submitted <%= @submission.fromNow() %></div>
+      <div>
+        <hr>
+        <p><%= @submission.get('body') %></p>
+      </div>
     </a>
   </div>
   <div class="sub-content">
