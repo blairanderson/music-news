@@ -4,7 +4,7 @@
     <li><a id="nolove"></a></li>
     <li><a id="play" data-action="play-pause"></a></li>
     <li><a id="next"></a></li>
-    <li><a class="current-song title" href="<%= @currentTrack.get('source_url')%>" data-external=true><%= @currentTrack.get('title') %><i class="cloud"></i></a></li>
+    <li><a target="_blank" class="current-song title" href="<%= @currentTrack.get('source_url')%>"><%= @currentTrack.get('title') %><i class="cloud"></i></a></li>
   </ul>
 </div>
 <div class="current-song duration">

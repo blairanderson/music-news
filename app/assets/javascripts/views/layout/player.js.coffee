@@ -39,9 +39,6 @@ class MusicNews.Player extends Backbone.View
     'click a#love'          : 'userFavorite'
     'click a#like'          : 'userFavorite'
     'click a#nolove'        : 'userFavorite'
-    'click a.current-song'  : (e) ->
-      e.preventDefault()
-      MusicNews.Helpers.openWindow $(e.currentTarget).attr('href') , 'Soundcloud'
 
   playCurrentSound: (e) ->
     e.preventDefault() if e
@@ -60,7 +57,7 @@ class MusicNews.Player extends Backbone.View
     @playPauseButton.attr('id', 'play')
     @nextSong()
 
-  _whileplaying: =>
+  # _whileplaying: =>
   #   debugger
   #   console.log("sound #{this.id} playing, #{this.position} of #{this.durationEstimate}")
 
