@@ -6,6 +6,15 @@ class MusicNews.Models.Submission extends Backbone.Model
   defaultThumbnail: ->
     "http://placehold.it/300x300"
 
+  parseDate:(date) ->
+    moment(date)
+
+  fromNow: ->
+    @parseDate( @get 'created_at' ).fromNow()
+
+  calendar: ->
+    @parseDate( @get 'created_at' ).calendar()
+
   parse: (data) ->
     @songs = new MusicNews.Collections.Songs()
     for song_data in data.songs 
