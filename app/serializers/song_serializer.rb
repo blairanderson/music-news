@@ -1,20 +1,25 @@
 class SongSerializer < ActiveModel::Serializer
   # cached
   # delegate :cache_key, to: :object
-  
   attributes  :id,
+              :uri,
+              :type,
+              :root,
               :title,
+              :active,
+              :resolve,
+              :play_count,
+              :submission_uri,
               :source_url,
               :stream_url,
               :thumbnail_url,
-              :play_count,
+              :submission_id,
               :comment_count,
               :download_count,
               :playback_count,
               :favoritings_count,
-              :submission,
-              :song,
-              :resolve
+              :updated_at,
+              :created_at
 
   def source_url
     object.url
@@ -24,11 +29,11 @@ class SongSerializer < ActiveModel::Serializer
     song_url(object) + '/resolve'
   end
 
-  def song
+  def uri
     song_url(object)
   end
 
-  def submission
+  def submission_uri
     submission_url(object.submission)
   end
 

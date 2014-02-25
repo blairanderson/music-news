@@ -3,12 +3,12 @@ class SubmissionsController < ApplicationController
 
   def index
     @submissions = Submission.latest.includes(:songs).limit(50)
-    render json: @submissions.to_json(include: [:songs])
+    render json: @submissions
   end
 
   def show
     @submission.increment!(:view_count)
-    render json: @submission.to_json(include: [:songs])
+    render json: @submission
   end
 
   def resolve
