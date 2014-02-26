@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def site_title
-    "SEAinHD"
+    "Wake and Shake"
   end
 
   def twitter_link(submission, options = {})
