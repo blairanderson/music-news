@@ -15,6 +15,7 @@
 //= require moment
 //= require bootstrap
 //= require underscore
+//= require vendor/underscore.string
 //= require backbone
 //= require vendor/handlebars
 //= require vendor/backbone.localforage
