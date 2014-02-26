@@ -2,29 +2,33 @@ class MusicNews.Router extends Backbone.Router
 
   initialize: (options)->
     @app = options.app
-    @target = @app.content_container
     @app.router = this
-
     @spinner = $('<div class="spinner"/>')
+
+    @target = @app.content_container
+    @target.html @spinner
 
     @header = @app.views.header = new MusicNews.Views.Header(app: @app)
     @app.header_container.replaceWith(@header.$el)
+    @playerDeferred = $.Deferred()
 
-    @app.content_container.html @spinner
-
-    @player = @app.player = new MusicNews.Player(app: @app)
-    @app.player_row.html @player.$el
+    @playerDeferred.done =>
+      @player = @app.player = new MusicNews.Player(app: @app)
+      @app.player_row.html @player.$el
 
     @bind 'all', @_trackPageView
 
   routes:
-    ''          : -> @routePipeline 'submissions'
-    'greatest'  : -> @routePipeline 'greatest'
-    'favorites' : -> @routePipeline 'favorites'
+    ''          :      -> @routePipeline 'submissions'
+    'greatest'  :      -> @routePipeline 'greatest'
+    'favorites' :      -> @routePipeline 'favorites'
+    ':id'       : (id) -> @routePipeline 'song', id
+    'sub/:id'   : (id) -> @routePipeline 'submission', id
 
-  routePipeline: (path) ->
+
+  routePipeline: (path, id) ->
     @beforeFilters(path)
-    @appendToTarget(path)
+    @initViewAndAppendToTarget(path, id)
     @afterFilters(path)
     
   beforeFilters: (path) ->
@@ -32,29 +36,44 @@ class MusicNews.Router extends Backbone.Router
     $(document).scrollTop()
     @target.html @spinner
 
-  appendToTarget: (path) ->
-    view = @[path]()
+  initViewAndAppendToTarget: (path, id) ->
+    id ||= null
+    view = @[path](id)
     @target.html(view.$el)
     @app.currentCollection = view.collection
+    @playerDeferred.resolve()
 
   afterFilters: (path) ->
     console.log('after filters')
     @header.activate(path)
 
+  submission: (id) ->
+    unless id?
+      @navigate('/')
+      return
+    submission = new MusicNews.Models.Submission(id: id, fetch: true)
+    @target.html @spinner
+    new MusicNews.Views.Submission(model: submission)
+
+  song: (id) ->
+    song = new MusicNews.Models.Song(id: id, fetch: true)
+    @target.html @spinner
+    new MusicNews.Views.Song(model: song)
+
   submissions: ->
     songs = @app.collections.latest_songs = new MusicNews.Collections.Songs()
     submissions = new MusicNews.Collections.Submissions()
-    view = new MusicNews.Views.SubmissionsIndex(submissions: submissions, collection: songs, app: @app)
+    new MusicNews.Views.SubmissionsIndex(submissions: submissions, collection: songs, app: @app)
 
   greatest: ->
     songs = @app.collections.popular_songs = new MusicNews.Collections.Songs(sort: 'popular', fetch: true)
-    view = new MusicNews.Views.Songs(collection: songs, app: @app)
+    new MusicNews.Views.Songs(collection: songs, app: @app)
 
   favorites: ->
     # if session.isNew()
     # redirect to root with alert "must be logged in"
     songs = @app.collections.favorite_songs = new MusicNews.Collections.Songs(sort: 'popular', fetch: true)
-    view = new MusicNews.Views.Songs(collection: songs, app: @app)
+    new MusicNews.Views.Songs(collection: songs, app: @app)
 
   _trackPageView: ->
     url = Backbone.history.getFragment
