@@ -34,7 +34,7 @@ class SongSerializer < ActiveModel::Serializer
   end
 
   def submission_uri
-    submission_url(object.submission)
+    submission_path(object.submission_id)
   end
 
   def root
