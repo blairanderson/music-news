@@ -1,42 +1,41 @@
 class MusicNews.Views.SongPartial extends Backbone.View
   className: 'song'
   template: JST['submissions/_song']
+
   initialize: (options) ->
-    @song = options.model
+    @app        = options.app
     @submission = options.submission
-    options.model.view = this
-    @player = MusicNews.App.views.player
-    @router = MusicNews.App.routers.submissions
-    MusicNews.App.title.text( this.model.get('title') )
+    @router     = @app.router
+    @player     = @app.player
 
   id: ->
     "song-#{@model.get('id')}"
 
   render: ->
-    markup = @template(song: @song)
-    this.$el.html(markup)
-    # $('[data-spy="scroll"]').each( -> $(this).scrollspy('refresh') )
-
-    # this should be the collections job!!!
-    # if @model == @player.currentTrack
-    #   @playPauseAddClass('play')
+    @$el.html(@template(song: @model))
     this
 
   events:
-    "click a"                         : "goToShow"
-    "click button.play, button.pause" : "buttonHandler"
-    "click button.facebook"           : "facebook"
-    "click button.twitter"            : "twitter"
+    'click a'       : 'goToShow'
+    'click button'  : 'buttonHandler'
 
   goToShow: (e) ->
     e.preventDefault()
     target = $(e.currentTarget).attr('href')
     @router.navigate(target, trigger: true)
+
+  deactivate: ->
+    @$el.removeClass('active')
+    @$el.find('.pause').attr('class', 'play')
+
+  activate: ->
+    @$el.addClass('active')
+    @$el.find('.play').attr('class', 'pause')
+
   buttonHandler: (e) ->
     e.preventDefault()
     $action = $(e.currentTarget).attr('class')
     this[$action]()
-    @playPauseAddClass($action)
 
   play: ->
     @player.pauseSong()
@@ -47,11 +46,15 @@ class MusicNews.Views.SongPartial extends Backbone.View
       markup = @player.playlistSongTemplate(song: @song )
       @player.$el.find('#playlist').html markup
     @player.playSong()
+    @playPauseAddClass("play")
     
   pause: ->
     @player.pauseSong()
+    @playPauseAddClass("pause")
+
   facebook: ->
     MusicNews.Helpers.openWindow(@submission.get('share'), "FACEBOOP DAT")
+
   twitter: ->
     MusicNews.Helpers.openWindow(@submission.get('tweet'), "TWOOT dat")
   

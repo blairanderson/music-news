@@ -1,0 +1,3 @@
+[submodule "gems/bootstrap-sass"]
+	path = gems/bootstrap-sass
+	url = git@github.com:blairanderson/bootstrap-sass.git

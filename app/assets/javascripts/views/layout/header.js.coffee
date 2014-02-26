@@ -1,23 +1,46 @@
 class MusicNews.Views.Header extends Backbone.View
+  initialize: (options) ->
+    @app      = options.app
+    @router   = @app.router
+    @session  = @app.session
+    @session.on "change", @render
+    @render()
+
   id: 'header'
+
+  className: 'full-width'
+
   template: JST['shared/header']
 
+  activate: (action) ->
+    @$el.find('li').removeClass('active')
+    @$el.find(".#{action}").parent().addClass('active')
+
   render: ->
-    $markup = $(this.template())
-    $(@el).html($markup)
+    $markup = @template(session: @session)
+    @$el.html($markup)
     this
 
   events: 
-    "click a" : "goTo"
+    'click a'               : 'goTo'
+    'submit form'           : 'submitSong'
+    'click [data-feature]'  : 'featureRequest'
 
+  featureRequest: (e) ->
+    name = $(e.currentTarget).data('feature')
+    debugger
+    request = new MusicNews.Models.FeatureRequest(name)
+    @modal = new Backbone.BootstrapModal(request.modalOptions()).open();
+
+  submitSong: (e) ->
+    e.preventDefault()
+    
   goTo: (e) ->
     e.preventDefault()
-    target = $(e.currentTarget).attr('href')
-    if target == '#tour'
-      @startTour(e)
-      return
-    MusicNews.App.routers.submissions.navigate(target, trigger:true)
-
-  startTour: (e)->
-    console.log 'start tour'
-    return
+    $target = $(e.currentTarget)
+    $route = $target.attr('href')
+    if $target.data('external')
+      url = "#{window.location.origin}#{$route}"
+      window.location.href = url
+    else
+      @router.navigate($route, trigger: true)

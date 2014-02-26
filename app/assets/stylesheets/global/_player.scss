@@ -1,0 +1,112 @@
+#player-row {
+  width: 100%;
+  background-color: #000;
+}
+
+
+@mixin shadow($shadow: 1px 0px 1px 0px #ccc) {
+  box-shadow:         $shadow;
+  -moz-box-shadow:    $shadow;
+  -webkit-box-shadow: $shadow;
+}
+
+
+.player{
+
+  list-style: none;
+  margin: 0px;
+  background-color: #000;
+  padding-left: 0;
+
+  li {
+
+    &:first-child a{
+      border-left: 1px solid #272727;
+    }
+
+    &:last-child a{
+      padding-left: 30px;
+      border-right: none;
+    }
+    
+    a {
+
+      border-right: 1px solid #272727;
+      color: #fff;
+      cursor: pointer;
+      display: block;
+      float: left;
+      font-size: 16px;
+      height: 34px;
+      line-height: 37px;
+      overflow: hidden;
+      padding: 0 10px 0 10px;
+      text-decoration: none;
+      top: 0;
+      &:hover {
+        color: rgba(255, 0, 180, 1);
+        font-weight: bold;
+      }
+      &:active {
+        color: rgba(0, 0, 0, 1);
+        background-color: rgba(255, 255, 255, 1);
+        font-weight: bold;
+      }
+
+      &:before {
+        @extend .fa;
+      }
+    }
+  }
+}
+@mixin icon-color($color) {
+  color: $color; 
+  &:hover {
+    text-shadow:  1px 1px 0 rgba(255,0,180,0.5),
+                  2px 2px 0 rgba(255,0,180,0.5),
+                  3px 3px 0 rgba(255,0,180,0.5),
+                  4px 4px 0 rgba(255,0,180,0.5),
+                  5px 5px 0 rgba(255,0,180,0.5),
+                  6px 6px 0 rgba(255,0,180,0.5),
+                  7px 7px 0 rgba(255,0,180,0.5);
+  }
+
+  &:hover, &:active{
+    color: $color;
+  }
+}
+      
+#play     {@extend .fa-play;          @include icon-color(white);}
+#pause    {@extend .fa-pause;         @include icon-color(white);}
+#previous {@extend .fa-step-backward; @include icon-color(white);}
+#next     {@extend .fa-step-forward;  @include icon-color(white);}
+#nolove   {@extend .fa-heart;         @include icon-color(white);}
+#love     {@extend .fa-heart;         @include icon-color(red);}
+#like     {@extend .fa-heart-o;       @include icon-color(red);}
+
+.current-song {
+  border: none;
+  text-align: center;
+  background: black;
+
+  &.title {
+    i.cloud {@include icon-cloud($font-size: 20px); @include icon-color(#ff7700);}
+  }
+
+  &.duration {
+    display: none;
+    width: 500px;
+    margin-left: 200px;
+  }
+
+  a {
+    font-size: 17px;
+    text-decoration: none;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    &:hover{
+      background-color: #000; 
+    }
+  }
+}

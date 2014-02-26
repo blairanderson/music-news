@@ -12,12 +12,15 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require validations
 //= require moment
 //= require bootstrap
-//= require bootstrap-tour
 //= require underscore
+//= require vendor/underscore.string
 //= require backbone
+//= require vendor/handlebars
+//= require vendor/backbone.localforage
+//= require vendor/backbone.stickit
+//= require vendor/backbone.bootstrap-modal
 //= require music_news
 //= require_tree ../templates
 //= require_tree ./models

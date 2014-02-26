@@ -1,20 +1,12 @@
 <div id="player">
-  <button id="previous">
-    <i></i>
-   </button>
-
-  <button id="nolove">
-    <i></i>
-  </button>
-
-  <button id="play" data-action="play-pause-button">
-    <i></i>
-  </button>
-
-  <button id="next">
-    <i></i>
-  </button>
+  <ul class="player">
+    <li><a id="previous"></a></li>
+    <li><a id="nolove"></a></li>
+    <li><a id="play" data-action="play-pause"></a></li>
+    <li><a id="next"></a></li>
+    <li><a target="_blank" class="current-song title" href="<%= @currentTrack.get('source_url')%>"><%= @currentTrack.get('title') %><i class="cloud"></i></a></li>
+  </ul>
 </div>
-<br>
-<div id="playlist">
+<div class="current-song duration">
+  <a class="current-song" href="/s/om/e/full/s/h/it" data-action="current-song-duration">loading...</a>
 </div>

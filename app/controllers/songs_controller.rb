@@ -1,18 +1,13 @@
 class SongsController < ApplicationController
-  before_action :set_song, only: [:show, :backbone_redirect]
+  before_action :set_song, only: [:show, :destroy]
 
   def index
     if params[:sort] == 'popular'
-      # sort this by the scorecard.
       @songs = Song.order("created_at DESC")
     else
       @songs = Song.order("created_at DESC")
     end
-    render json: @songs.to_json
-  end
-
-  def backbone_redirect
-    redirect_to root_path(song: params[:id])
+    render json: @songs
   end
 
   def show
@@ -21,9 +16,8 @@ class SongsController < ApplicationController
   end
 
   def destroy
-    binding.pry
     @song.destroy
-    render js: "window.location.href = window.location.origin;"
+    render json: @song
   end
 
   def set_song

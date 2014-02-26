@@ -1,14 +1,14 @@
 <% if @submission.songs.length: %>
-    <div class="sub-content">
-    </div>
-    <div class="sub-gutter">
-      <a href="/<%= @submission.get('id')%>">
-        <span><%= @submission.get('title')%></span>
-        <h6><%= @submission.get('fromNow')%> on <%= @submission.get('calendar')%></h6>
-        <div class="img">
-          <img src="<%= @submission.thumbnail_url %>" class="img-responsive">
-        </div>
-        <p class="lead"><%= @submission.get('body')%></p>
-      </a>
-    </div>
+  <div class="sub-gutter">
+    <a name="sub/<%= @submission.get('id')%>">
+      <span><%= @submission.get('title')%></span>
+      <div>submitted <%= @submission.fromNow() %></div>
+      <div>
+        <hr>
+        <p><%= @submission.get('body') %></p>
+      </div>
+    </a>
+  </div>
+  <div class="sub-content">
+  </div>
 <% end %>

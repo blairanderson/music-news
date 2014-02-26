@@ -1,7 +1,6 @@
 ruby '2.1.0'
 source 'https://rubygems.org'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.3'
 gem 'unicorn'
 gem 'simple_form'
@@ -18,6 +17,17 @@ gem 'omniauth-twitter'
 gem 'twitter'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'figaro'
+
+# assets
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
+gem 'jquery-rails'
+gem 'compass-rails'
+gem 'bootstrap-sass', path: './gems/bootstrap-sass'
+gem 'font-awesome-rails', git: 'https://github.com/blairanderson/font-awesome-rails'
+gem 'backbone-on-rails', '1.1.0.0'
+gem 'momentjs-rails', '2.4.0'
 
 group :production do
   gem 'pg'
@@ -42,13 +52,3 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
 end
-
-gem 'sass-rails'
-gem 'uglifier'
-gem 'coffee-rails'
-gem 'jquery-rails'
-gem 'compass-rails'
-gem 'bootstrap-sass', '~> 3.0.3.0'
-gem 'font-awesome-rails', git: 'https://github.com/blairanderson/font-awesome-rails'
-gem 'backbone-on-rails', '1.1.0.0'
-gem 'momentjs-rails', '2.4.0'

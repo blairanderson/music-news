@@ -1,35 +1,80 @@
-class MusicNews.Routers.Router extends Backbone.Router
-  routes:
-    '': 'submissions'
+class MusicNews.Router extends Backbone.Router
 
-  initialize: ->
-    @header = new MusicNews.Views.Header(router: this)
-    $('#window').html(@header.render.el)
-    @target = $('<div id="target"/>')
-    $('#window').append(@target)
+  initialize: (options)->
+    @app = options.app
+    @app.router = this
+    @spinner = $('<div class="spinner"/>')
+
+    @target = @app.content_container
+    @target.html @spinner
+
+    @header = @app.views.header = new MusicNews.Views.Header(app: @app)
+    @app.header_container.replaceWith(@header.$el)
+    @playerDeferred = $.Deferred()
+
+    @playerDeferred.done =>
+      @player = @app.player = new MusicNews.Player(app: @app)
+      @app.player_row.html @player.$el
 
     @bind 'all', @_trackPageView
 
-  beforeFilters: (routeHandler) ->
-    @handleRedirects()
+  routes:
+    ''          :      -> @routePipeline 'submissions'
+    'greatest'  :      -> @routePipeline 'greatest'
+    'favorites' :      -> @routePipeline 'favorites'
+    ':id'       : (id) -> @routePipeline 'song', id
+    'sub/:id'   : (id) -> @routePipeline 'submission', id
 
-  handleRedirects: ->
-    possibleShow = window.location.search.split('id=')[1]
-    if possibleShow
-      this.navigate(possibleShow, trigger: true)
-      return
-    # redirect to song-show
-    possibleSong = window.location.search.split('song=')[1]
-    if possibleSong
-      this.navigate('song/'+ possibleSong, trigger: true)
-      return
+
+  routePipeline: (path, id) ->
+    @beforeFilters(path)
+    @initViewAndAppendToTarget(path, id)
+    @afterFilters(path)
     
-  submissions: (data) ->
-    @submissions = new MusicNews.Collections.Submissions()
-    view = new MusicNews.Views.SubmissionsIndex(collection: @submissions).render()
+  beforeFilters: (path) ->
+    console.log 'before filters'
+    $(document).scrollTop()
+    @target.html @spinner
+
+  initViewAndAppendToTarget: (path, id) ->
+    id ||= null
+    view = @[path](id)
     @target.html(view.$el)
-    
+    @app.currentCollection = view.collection
+    @playerDeferred.resolve()
+
+  afterFilters: (path) ->
+    console.log('after filters')
+    @header.activate(path)
+
+  submission: (id) ->
+    unless id?
+      @navigate('/')
+      return
+    submission = new MusicNews.Models.Submission(id: id, fetch: true)
+    @target.html @spinner
+    new MusicNews.Views.Submission(model: submission)
+
+  song: (id) ->
+    song = new MusicNews.Models.Song(id: id, fetch: true)
+    @target.html @spinner
+    new MusicNews.Views.Song(model: song)
+
+  submissions: ->
+    songs = @app.collections.latest_songs = new MusicNews.Collections.Songs()
+    submissions = new MusicNews.Collections.Submissions()
+    new MusicNews.Views.SubmissionsIndex(submissions: submissions, collection: songs, app: @app)
+
+  greatest: ->
+    songs = @app.collections.popular_songs = new MusicNews.Collections.Songs(sort: 'popular', fetch: true)
+    new MusicNews.Views.Songs(collection: songs, app: @app)
+
+  favorites: ->
+    # if session.isNew()
+    # redirect to root with alert "must be logged in"
+    songs = @app.collections.favorite_songs = new MusicNews.Collections.Songs(sort: 'popular', fetch: true)
+    new MusicNews.Views.Songs(collection: songs, app: @app)
 
   _trackPageView: ->
     url = Backbone.history.getFragment
-    _gaq.push(['_trackPageView', url])
+    _gaq.push(['_trackPageView', url])  
