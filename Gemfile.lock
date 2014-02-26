@@ -1,4 +1,11 @@
 GIT
+  remote: git@github.com:blairanderson/bootstrap-sass.git
+  revision: 496a69c0f233c77cb2133740f956b2c19dc8d725
+  specs:
+    bootstrap-sass (3.1.0.1)
+      sass (~> 3.2)
+
+GIT
   remote: https://github.com/blairanderson/font-awesome-rails
   revision: af3685e91d147a930d593b56baa5020aa9e8654b
   specs:
@@ -18,12 +25,6 @@ GIT
   specs:
     wordpress (0.2.0)
       mechanize (~> 2.0)
-
-PATH
-  remote: ./gems/bootstrap-sass
-  specs:
-    bootstrap-sass (3.1.0.1)
-      sass (~> 3.2)
 
 GEM
   remote: https://rubygems.org/

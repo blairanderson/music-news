@@ -3,7 +3,7 @@ class SongsController < ApplicationController
 
   def index
     if params[:sort] == 'popular'
-      @songs = Song.order("created_at DESC")
+      @songs = Song.order("playback_count DESC")
     else
       @songs = Song.order("created_at DESC")
     end
