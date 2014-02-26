@@ -6,7 +6,7 @@
 </div>
 <div class="song-content">
   <div>
-    <a href="/song/<%= @song.get('id')%>"><%= @song.get('title') %></a>
+    <a name="/<%= @song.get('id')%>"><%= @song.get('title') %></a>
   </div>
 </div>
 <div class="song-art">

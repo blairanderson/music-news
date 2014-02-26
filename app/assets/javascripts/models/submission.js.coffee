@@ -1,7 +1,11 @@
 class MusicNews.Models.Submission extends Backbone.Model
 
   url: ->
-    "/s/#{this.id}/resolve"
+    "/submissions/#{@id}"
+
+  initialize: (options) ->
+    if options.fetch
+      @deferred = @fetch()
 
   defaultThumbnail: ->
     "http://placehold.it/300x300"

@@ -1,6 +1,6 @@
 <% if @submission.songs.length: %>
   <div class="sub-gutter">
-    <a href="<%= @submission.get('id')%>">
+    <a name="sub/<%= @submission.get('id')%>">
       <span><%= @submission.get('title')%></span>
       <div>submitted <%= @submission.fromNow() %></div>
       <div>

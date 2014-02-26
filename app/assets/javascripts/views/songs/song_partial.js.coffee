@@ -4,8 +4,8 @@ class MusicNews.Views.SongPartial extends Backbone.View
 
   initialize: (options) ->
     @app        = options.app
-    @router     = @app.router
     @submission = options.submission
+    @router     = @app.router
     @player     = @app.player
 
   id: ->

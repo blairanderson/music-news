@@ -13,7 +13,10 @@ class MusicNews.Views.SubmissionPartial extends Backbone.View
     
   render: ->
     @model.songs.each (song) =>
-      song.view = new MusicNews.Views.SongPartial(model: song, submission: @submission, app: @app)
+      song.view = new MusicNews.Views.SongPartial
+        model: song
+        submission: @submission
+        app: @app
       song.view.render()
       @target.append(song.view.$el)
     this
