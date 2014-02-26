@@ -1,11 +1,4 @@
 GIT
-  remote: git@github.com:blairanderson/bootstrap-sass.git
-  revision: 496a69c0f233c77cb2133740f956b2c19dc8d725
-  specs:
-    bootstrap-sass (3.1.0.1)
-      sass (~> 3.2)
-
-GIT
   remote: https://github.com/blairanderson/font-awesome-rails
   revision: af3685e91d147a930d593b56baa5020aa9e8654b
   specs:
@@ -68,6 +61,8 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-sass (3.0.3.0)
+      sass (~> 3.2)
     buftok (0.2.0)
     builder (3.1.4)
     capybara (2.2.0)
@@ -319,7 +314,7 @@ DEPENDENCIES
   backbone-on-rails (= 1.1.0.0)
   better_errors
   binding_of_caller
-  bootstrap-sass!
+  bootstrap-sass
   capybara
   coffee-rails
   compass-rails
