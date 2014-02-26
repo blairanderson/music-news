@@ -8,7 +8,7 @@ class SubmissionsController < ApplicationController
 
   def show
     @submission.increment!(:view_count)
-    render json: @submission
+    render json: @submission, root: false
   end
 
   def resolve
@@ -16,7 +16,7 @@ class SubmissionsController < ApplicationController
       s.resolve
       sleep 1
     end
-    render json: @submission
+    render json: @submission, root: false
   end
 
   def new
@@ -35,7 +35,7 @@ class SubmissionsController < ApplicationController
 
   def destroy
     @submission.destroy
-    render json: @submission
+    render json: @submission, root: false
   end
 
 private
