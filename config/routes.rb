@@ -11,7 +11,7 @@ MusicNews::Application.routes.draw do
     get :about
   end
 
-  resources :songs, only: [:index, :show, :destroy]
+  resources :songs, only: [:index, :show, :destroy, :update]
 
   resource :session, only: [:show, :create, :update, :destroy]
   match '/auth/:provider/callback' => 'sessions#create', via: [:get, :post]

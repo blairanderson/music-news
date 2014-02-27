@@ -3,11 +3,14 @@ class Song < ActiveRecord::Base
 
   belongs_to :submission, counter_cache: true
   scope :soundclouds, -> { where(type: "Soundcloud") }
+  scope :playable, -> { where.not(stream_url: nil) }
+  scope :greatest, -> { order(playback_count: :desc) }
+  scope :latest, -> { order(created_at: :desc) }
 
   validates :url, presence: true
 
   def has_details?
-     stream_url? && embed?
+     stream_url?
   end
 
   def need_details?
@@ -18,7 +21,7 @@ class Song < ActiveRecord::Base
     client = Soundcloud.new(:client_id => ENV['SOUNDCLOUD_ID'])
     begin
       track = client.get('/oembed', :url => url)
-      
+
       update(title: track.title)
       update(embed: track.html)
       update(active: "true")
