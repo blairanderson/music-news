@@ -47,7 +47,7 @@ class MusicNews.Views.SongPartial extends Backbone.View
       @player.$el.find('#playlist').html markup
     @player.playSong()
     @playPauseAddClass("play")
-    
+
   pause: ->
     @player.pauseSong()
     @playPauseAddClass("pause")
@@ -57,7 +57,7 @@ class MusicNews.Views.SongPartial extends Backbone.View
 
   twitter: ->
     MusicNews.Helpers.openWindow(@submission.get('tweet'), "TWOOT dat")
-  
+
   button: ->
     this.$el.find('button.play, button.pause')
 

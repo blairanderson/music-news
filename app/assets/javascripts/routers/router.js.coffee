@@ -25,12 +25,11 @@ class MusicNews.Router extends Backbone.Router
     ':id'       : (id) -> @routePipeline 'song', id
     'sub/:id'   : (id) -> @routePipeline 'submission', id
 
-
   routePipeline: (path, id) ->
     @beforeFilters(path)
     @initViewAndAppendToTarget(path, id)
     @afterFilters(path)
-    
+
   beforeFilters: (path) ->
     console.log 'before filters'
     $(document).scrollTop()
@@ -81,4 +80,4 @@ class MusicNews.Router extends Backbone.Router
 
   _trackPageView: ->
     url = Backbone.history.getFragment
-    _gaq.push(['_trackPageView', url])  
+    _gaq.push(['_trackPageView', url])

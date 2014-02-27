@@ -4,7 +4,7 @@ class MusicNews.Collections.Songs extends Backbone.Collection
   initialize: (options) ->
     options = options || {}
     filter_sort = {}
-    
+
     _.extend(filter_sort, sort: options.sort ) if options.sort
     _.extend(filter_sort, filter: options.filter ) if options.filter
 
@@ -16,7 +16,7 @@ class MusicNews.Collections.Songs extends Backbone.Collection
     else
       @deferred = $.Deferred().resolveWith()
 
-  parse: (response) -> 
+  parse: (response) ->
     response.songs
 
   url: ->

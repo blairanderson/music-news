@@ -1,6 +1,6 @@
 class MusicNews.Views.SubmissionsIndex extends Backbone.View
   className: 'submission-list'
-    
+
   initialize:(options) ->
     @collection   = options.collection
     @submissions  = options.submissions

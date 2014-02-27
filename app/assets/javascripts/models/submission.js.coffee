@@ -21,11 +21,11 @@ class MusicNews.Models.Submission extends Backbone.Model
 
   parse: (data) ->
     @songs = new MusicNews.Collections.Songs()
-    for song_data in data.songs 
+    for song_data in data.songs
       new_song = new MusicNews.Models.Song(song_data)
       @songs.add(new_song)
       MusicNews.collections.latest_songs.add(new_song)
-      
+
     firstSong = @songs.models[0]
     if firstSong && firstSong.get('thumbnail_url')
       data.thumbnail_url = firstSong.get('thumbnail_url')
@@ -36,13 +36,13 @@ class MusicNews.Models.Submission extends Backbone.Model
   facebookShare:(data)->
     base = "http://www.facebook.com/sharer/sharer.php?"
     _this = this
-    potentialShare = 
+    potentialShare =
       u:  _this.url
     data.share = base + $.param potentialShare
 
   twitterShare:(data) ->
     base = "https://twitter.com/intent/tweet?"
-    potentialTweet = 
+    potentialTweet =
       text: "@#{data.twitter} I love these songs! "
       url: window.location.href
       via: 'seainhd'

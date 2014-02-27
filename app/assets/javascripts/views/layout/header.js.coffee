@@ -21,7 +21,7 @@ class MusicNews.Views.Header extends Backbone.View
     @$el.html($markup)
     this
 
-  events: 
+  events:
     'click a'               : 'goTo'
     'submit form'           : 'submitSong'
     'click [data-feature]'  : 'featureRequest'
@@ -34,7 +34,7 @@ class MusicNews.Views.Header extends Backbone.View
 
   submitSong: (e) ->
     e.preventDefault()
-    
+
   goTo: (e) ->
     e.preventDefault()
     $target = $(e.currentTarget)

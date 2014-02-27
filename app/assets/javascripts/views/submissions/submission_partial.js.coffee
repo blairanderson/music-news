@@ -10,7 +10,7 @@ class MusicNews.Views.SubmissionPartial extends Backbone.View
 
   id: ->
     "submission-#{@model.get('id')}"
-    
+
   render: ->
     @model.songs.each (song) =>
       song.view = new MusicNews.Views.SongPartial

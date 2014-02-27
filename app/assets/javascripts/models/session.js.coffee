@@ -20,9 +20,9 @@ class MusicNews.Session extends Backbone.Model
 
     # replace the whole URL if supplied
     @url = options.url  unless _.isUndefined(options.url)
-    
+
     @deferred = @fetch()
-    
+
     # event binders
     @bind "change", @update
     @bind "error", @error
@@ -61,13 +61,13 @@ class MusicNews.Session extends Backbone.Model
       (((1 + Math.random()) * 0x10000) | 0).toString(16).substring 1
     delim = separator or "-"
     S4() + S4() + delim + S4() + delim + S4() + delim + S4() + delim + S4() + S4() + S4()
-    
+
   sessionStorage:
     get: (name) ->
       sessionStorage.getItem name
 
     set: (name, val) ->
-      
+
       # validation first?
       sessionStorage.setItem name, val
 
@@ -75,7 +75,7 @@ class MusicNews.Session extends Backbone.Model
       not sessionStorage.getItem(name)?
 
     clear: (name) ->
-      
+
       # actually just removing the session...
       sessionStorage.removeItem name
 
@@ -84,7 +84,7 @@ class MusicNews.Session extends Backbone.Model
       localStorage.getItem name
 
     set: (name, val) ->
-      
+
       # validation first?
       localStorage.setItem name, val
 
@@ -92,6 +92,6 @@ class MusicNews.Session extends Backbone.Model
       not localStorage.getItem(name)?
 
     clear: (name) ->
-      
+
       # actually just removing the session...
       localStorage.removeItem name

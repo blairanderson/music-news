@@ -4,7 +4,7 @@ class MusicNews.Collections.Submissions extends Backbone.Collection
 
   url: ->
     '/submissions'
-    
+
   model: MusicNews.Models.Submission
 
   parse: (response) ->
