@@ -1,12 +1,7 @@
 class MusicNews.Models.Song extends Backbone.Model
 
   url: ->
-    '/songs#{@id}'
-
-  initialize: (options)->
-    
-    if options.fetch
-      @deferred = @fetch()
+    "/songs/#{@id}"
 
   parseDate:(date) ->
     moment(date)

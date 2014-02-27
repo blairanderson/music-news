@@ -8,12 +8,13 @@ class MusicNews.Collections.Songs extends Backbone.Collection
     _.extend(filter_sort, sort: options.sort ) if options.sort
     _.extend(filter_sort, filter: options.filter ) if options.filter
 
-    if options.fetch  
-      @deferred = @fetch({data: $.param(filter_sort)})
+    if options.fetch
+      @deferred = @fetch
+        reset: true
+        data: $.param(filter_sort)
+        fetch: false
     else
-      @deferred = $.Deferred()
-      @deferred.resolve()
-
+      @deferred = $.Deferred().resolveWith()
 
   parse: (response) -> 
     response.songs

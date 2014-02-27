@@ -3,8 +3,9 @@ class MusicNews.Views.Song extends Backbone.View
 
   template: JST['songs/show']
 
-  initialize:(options) ->
-    @model.on 'reset', @render
+  initialize:() ->
+    @listenTo @model, 'change', @render
+    @model.fetch()
 
   render: ->
     @$el.html @template(song: @model)

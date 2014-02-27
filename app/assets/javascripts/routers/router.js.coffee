@@ -38,9 +38,10 @@ class MusicNews.Router extends Backbone.Router
 
   initViewAndAppendToTarget: (path, id) ->
     id ||= null
-    view = @[path](id)
-    @target.html(view.$el)
-    @app.currentCollection = view.collection
+    @currentView.remove() if @currentView
+    @currentView = @[path](id)
+    @target.html(@currentView.$el)
+    @app.currentCollection = @currentView.collection
     @playerDeferred.resolve()
 
   afterFilters: (path) ->
@@ -58,7 +59,10 @@ class MusicNews.Router extends Backbone.Router
   song: (id) ->
     song = new MusicNews.Models.Song(id: id, fetch: true)
     @target.html @spinner
-    new MusicNews.Views.Song(model: song)
+
+    new MusicNews.Views.Song
+      model: song
+      collection: new MusicNews.Collections.Songs([song], fetch: false)
 
   submissions: ->
     songs = @app.collections.latest_songs = new MusicNews.Collections.Songs()

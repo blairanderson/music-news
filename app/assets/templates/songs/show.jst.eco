@@ -1,0 +1,14 @@
+<div class="song-gutter">
+  <button class="play"><i></i></button>
+  <button class="heart"><i></i></button>
+  <button class="facebook" href="<%= @song.get('submission_url')%>"><i></i></button>
+  <button class="twitter"><i></i></button>
+</div>
+<div class="song-content">
+  <div>
+    <a href="/<%= @song.get('id')%>"><%= @song.get('title') %></a>
+  </div>
+</div>
+<div class="song-art">
+  <img src="<%= @song.get('thumbnail_url')%>">
+</div>

@@ -13,7 +13,7 @@ class MusicNews.Player extends Backbone.View
     @app = options.app
     $(document).on 'keydown', @keyBoardShortCuts
 
-    SC.initialize 
+    SC.initialize
       client_id: "c024bdd48e9ecf014c71af406201f3a2"
       redirect_uri: "#{MusicNews.Helpers.urlBase()}/auth/soundcloud/callback"
 
@@ -44,13 +44,22 @@ class MusicNews.Player extends Backbone.View
     e.preventDefault() if e
     if @currentSound
       @currentSound.play
+        onload:       @_onload
         onplay:       @_onplay
         onpause:      @_onpause
         onfinish:     @_onfinish
+        # ontimeout:    @_ontimeout
         # whileplaying: @_whileplaying
     else
       @setCurrentSound()
       @playCurrentSound()
+
+
+  _onload: (loaded) =>
+    if !loaded
+      @currentCollection.remove @currentTrack
+      @currentTrack.save invalid: true
+      @nextSong()
 
   _onfinish: =>
     @currentTrack.view.deactivate()
@@ -83,7 +92,7 @@ class MusicNews.Player extends Backbone.View
     if @currentTrack && @currentTrack.get('stream_url')
       $stream_url = @currentTrack.get('stream_url')
     else
-      $stream_url = null  
+      $stream_url = null
     $stream_url
 
   setCurrentTrack: ->
@@ -142,7 +151,7 @@ class MusicNews.Player extends Backbone.View
   nolove: ($button) ->
     # do stuff
     $button.attr('id', 'love')
-    
+
   love:   ($button) ->
     # do stuff
     $button.attr('id', 'like')
