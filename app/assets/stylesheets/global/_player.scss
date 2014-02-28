@@ -28,7 +28,7 @@
       padding-left: 30px;
       border-right: none;
     }
-    
+
     a {
 
       border-right: 1px solid #272727;
@@ -60,7 +60,7 @@
   }
 }
 @mixin icon-color($color) {
-  color: $color; 
+  color: $color;
   &:hover {
     text-shadow:  1px 1px 0 rgba(255,0,180,0.5),
                   2px 2px 0 rgba(255,0,180,0.5),
@@ -75,7 +75,7 @@
     color: $color;
   }
 }
-      
+
 #play     {@extend .fa-play;          @include icon-color(white);}
 #pause    {@extend .fa-pause;         @include icon-color(white);}
 #previous {@extend .fa-step-backward; @include icon-color(white);}
@@ -106,7 +106,7 @@
     color: #fff;
     font-weight: bold;
     &:hover{
-      background-color: #000; 
+      background-color: #000;
     }
   }
 }
