@@ -16,8 +16,9 @@ class MusicNews.Collections.Songs extends Backbone.Collection
     else
       @deferred = $.Deferred().resolveWith()
 
-  parse: (response) ->
-    response.songs
-
   url: ->
     'songs'
+
+  parse: (response) ->
+    @pagingData = response.pagingData
+    response.songs

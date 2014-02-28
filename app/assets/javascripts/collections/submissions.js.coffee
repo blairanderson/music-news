@@ -1,11 +1,12 @@
 class MusicNews.Collections.Submissions extends Backbone.Collection
+  model: MusicNews.Models.Submission
+
   initialize: ->
     @deferred = @fetch()
 
   url: ->
     '/submissions'
 
-  model: MusicNews.Models.Submission
-
   parse: (response) ->
+    @pagingData = response.pagingData
     response.submissions
