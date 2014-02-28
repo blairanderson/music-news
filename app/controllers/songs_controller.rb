@@ -1,12 +1,10 @@
 class SongsController < ApplicationController
+  include ApiHelper
   before_action :set_song, only: [:show, :destroy, :update]
 
   def index
-    @songs = Song.playable
-    @songs = @songs.greatest if params[:sort] == 'popular'
-    @songs = @songs.latest
-
-    render json: @songs
+    @songs = Song.playable.greatest.latest.page params[:page]
+    render json: @songs, meta: paginate(@songs), meta_key: 'pagingData'
   end
 
   def show
@@ -20,7 +18,7 @@ class SongsController < ApplicationController
   end
 
   def update
-    @song.destroy if song_invalidation_params[:invalid]
+    @song.inactive! if song_invalidation_params[:invalid]
     head :ok
   end
 

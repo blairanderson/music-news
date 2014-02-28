@@ -3,10 +3,17 @@ require 'spec_helper'
 describe SubmissionsController do
 
   describe 'GET show' do
+    before do
+      @submission = create_submission
+      get :show, id: @submission.id
+    end
+
     it 'should respond OK' do
-      submission = create_submission
-      get :show, id: submission.id
-      expect( response ).to redirect_to root_path(id: submission.id)
+      expect( response ).to be_ok
+    end
+
+    it 'should respond with JSON' do
+      expect( JSON.parse(response.body)['id'] ).to eq @submission.id
     end
   end
 

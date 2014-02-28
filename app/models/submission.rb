@@ -35,7 +35,7 @@ class Submission < ActiveRecord::Base
   end
 
   def to_param
-    "#{id}-#{title[0,20]}-#{body[0,40]}".parameterize
+    "#{id}-#{title[0,20]}".parameterize
   end
 
   def videos

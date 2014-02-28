@@ -6,19 +6,19 @@ class Publisher
     @body = args[:body]
   end
 
-  def self.build_article submission 
+  def self.build_article submission
     title = "Listen: Some Music from @#{submission.twitter}"
     body = ""
 
     submission.songs.each_with_index do |song, index|
-      unless song.active == "true"
+      unless song.active?
         song.resolve
       end
       body << "<h2>#{song.title}</h2>"
       body << "\n"
       body << "<br>"
       body << "\n"
-      body << song.embed
+      body << song.embed if song.embed
       body << "\n"
       body << "<br>"
       body << "\n"

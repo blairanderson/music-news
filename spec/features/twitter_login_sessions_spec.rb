@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "twitter auth and sessions" do 
+describe "twitter auth and sessions" do
   OmniAuth.config.test_mode = true
 
   auth_credentials = {
@@ -15,16 +15,10 @@ describe "twitter auth and sessions" do
       }
     }
   OmniAuth.config.mock_auth[:twitter] = OpenStruct.new(auth_credentials)
-  describe "creating an account" do 
-    it 'should create an account' do 
+  describe "creating an account" do
+    it 'should create an account' do
       visit "/auth/twitter"
       expect(User.count).to eq 1
-    end
-
-    it 'should find the created user' do 
-      create_admin
-      login_admin
-      expect( page ).to have_content "Sign Out"
     end
   end
 end

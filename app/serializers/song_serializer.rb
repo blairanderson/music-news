@@ -6,7 +6,7 @@ class SongSerializer < ActiveModel::Serializer
               :type,
               :root,
               :title,
-              :active,
+              :status,
               :resolve,
               :play_count,
               :submission_uri,

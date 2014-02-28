@@ -3,11 +3,12 @@ class Song < ActiveRecord::Base
 
   belongs_to :submission, counter_cache: true
   scope :soundclouds, -> { where(type: "Soundcloud") }
-  scope :playable, -> { where.not(stream_url: nil) }
-  scope :greatest, -> { order(playback_count: :desc) }
+  scope :playable, -> { where.not(stream_url: nil).where(status_cd: Song.active) }
+  scope :greatest, -> { order('coalesce(playback_count, -1) desc') }
   scope :latest, -> { order(created_at: :desc) }
-
   validates :url, presence: true
+
+  as_enum :status, [:active, :inactive, :deleted]
 
   def has_details?
      stream_url?
@@ -24,11 +25,16 @@ class Song < ActiveRecord::Base
 
       update(title: track.title)
       update(embed: track.html)
-      update(active: "true")
       update(thumbnail_url: track.thumbnail_url)
 
       track = client.get('/resolve', :url => url)
-      update(stream_url: track.stream_url)
+      if track.stream_url
+        update(stream_url: track.stream_url)
+        update(status: :active)
+      else
+        update(status: :inactive)
+      end
+
       update(comment_count: track.comment_count)
       update(download_count: track.download_count)
       update(playback_count: track.playback_count)

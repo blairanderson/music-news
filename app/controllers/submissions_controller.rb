@@ -1,9 +1,10 @@
 class SubmissionsController < ApplicationController
+  include ApiHelper
   before_action :set_submission, only: [:show, :destroy, :resolve]
 
   def index
-    @submissions = Submission.latest.includes(:songs).limit(50)
-    render json: @submissions
+    @submissions = Submission.latest.includes(:songs).page params[:page]
+    render json: @submissions, meta: paginate(@submissions), meta_key: 'pagingData'
   end
 
   def show
@@ -27,7 +28,7 @@ class SubmissionsController < ApplicationController
     @submission = Submission.new(submission_params)
 
     if @submission.save
-      redirect_to root_path(id: @submission.id), notice: 'Submission was successfully created.'
+      redirect_to root_path, notice: 'Submission was successfully created.'
     else
       render action: 'new'
     end
