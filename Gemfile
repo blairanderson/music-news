@@ -17,6 +17,8 @@ gem 'omniauth-twitter'
 gem 'twitter'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'figaro'
+gem 'simple_enum'
+gem 'kaminari'
 
 # assets
 gem 'sass-rails'
@@ -35,6 +37,8 @@ group :production do
 end
 
 group :test do
+  gem 'factory_girl_rails'
+  gem 'shoulda-matchers'
   gem 'vcr', '2.8.0'
   gem 'webmock', '1.16'
 end

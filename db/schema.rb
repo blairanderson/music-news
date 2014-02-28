@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131224053040) do
+ActiveRecord::Schema.define(version: 20140228040647) do
 
   create_table "keychains", force: true do |t|
     t.string   "api_secret"
@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(version: 20131224053040) do
     t.string   "title"
     t.string   "type"
     t.string   "url"
-    t.string   "active"
     t.integer  "submission_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -41,8 +40,10 @@ ActiveRecord::Schema.define(version: 20131224053040) do
     t.integer  "download_count",    default: 0
     t.integer  "playback_count",    default: 0
     t.integer  "favoritings_count", default: 0
+    t.integer  "status_cd",         default: 0, null: false
   end
 
+  add_index "songs", ["status_cd"], name: "index_songs_on_status_cd"
   add_index "songs", ["submission_id"], name: "index_songs_on_submission_id"
 
   create_table "submissions", force: true do |t|
