@@ -9,7 +9,6 @@ class MusicNews.Models.FeatureRequest extends Backbone.Model
 
   initialize: (@name) ->
     @name = @name || 'default'
-    debugger
     @content = @features[@name]['content']
     @title   = @features[@name]['title']
 

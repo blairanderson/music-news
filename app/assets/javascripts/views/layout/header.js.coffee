@@ -28,7 +28,6 @@ class MusicNews.Views.Header extends Backbone.View
 
   featureRequest: (e) ->
     name = $(e.currentTarget).data('feature')
-    debugger
     request = new MusicNews.Models.FeatureRequest(name)
     @modal = new Backbone.BootstrapModal(request.modalOptions()).open();
 
