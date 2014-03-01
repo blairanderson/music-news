@@ -88,15 +88,10 @@
   border: none;
   text-align: center;
   background: black;
+  width: 60%;
 
   &.title {
     i.cloud {@include icon-cloud($font-size: 20px); @include icon-color(#ff7700);}
-  }
-
-  &.duration {
-    display: none;
-    width: 500px;
-    margin-left: 200px;
   }
 
   a {

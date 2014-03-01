@@ -1,14 +1,60 @@
 @import 'forms';
 @import 'navbar';
-@import 'footer';
 @import 'player';
+@import 'footer';
 
 .spinner {
   @include spinner-icon($spinner_size: 75px);
 }
 
-#container {
+
+
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+ }
+
+body {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+}
+
+.full-width {
   width: 100%;
+}
+
+@mixin bar($zindex: 10) {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: $zindex;
+}
+
+#header {
+  @include bar();
+  top: 0;
+}
+
+#player-row {
+  @include bar();
+  top: 50px;
+}
+#container {
+  @include bar($zindex: 0);
+  top: 100px;
+  height: 90%;
+  overflow: scroll;
+  padding-bottom: 100px;
+}
+#footer {
+  @include bar();
+  bottom: 0;
+  height: 33px;
 }
 
 #content{
