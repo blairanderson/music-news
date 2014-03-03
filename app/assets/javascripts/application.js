@@ -21,7 +21,6 @@
 //= require vendor/backbone.localforage
 //= require vendor/backbone.stickit
 //= require vendor/backbone.bootstrap-modal
-//= require vendor/nprogress
 //= require music_news
 //= require_tree ../templates
 //= require_tree ./models
