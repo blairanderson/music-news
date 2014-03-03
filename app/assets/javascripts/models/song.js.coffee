@@ -1,4 +1,12 @@
 class MusicNews.Models.Song extends Backbone.Model
+  defaults:
+    percent: 0
+
+  progressPercent:->
+    "width: #{@get('percent')}%;"
+
+  progressPercentRound: ->
+    "#{Math.floor @get('percent')}%"
 
   url: ->
     "/songs/#{@id}"

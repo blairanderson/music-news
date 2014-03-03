@@ -4,6 +4,16 @@
     <li><a id="nolove"></a></li>
     <li><a id="play" data-action="play-pause"></a></li>
     <li><a id="next"></a></li>
-    <li><a target="_blank" class="current-song title" href="<%= @currentTrack.get('source_url')%>"><%= @currentTrack.get('title') %><i class="cloud"></i></a></li>
   </ul>
+</div>
+
+<div id="footer" class="full-width">
+  <div class="progress">
+    <div class="progress-bar" role="progressbar" style="width: 0%">
+      <a target="_blank" class="current-song" href="<%= @currentTrack.get('source_url')%>">
+        <i class="cloud"></i><%= @currentTrack.get('title') %>
+      </a>
+      <i class="clock"></i>
+    </div>
+  </div>
 </div>

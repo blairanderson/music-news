@@ -25,7 +25,6 @@ class MusicNews.Player extends Backbone.View
   render: ->
     $markup = @template
       currentTrack: @currentTrack
-      currentSound: @currentSound
     @$el.html $markup
 
     @playPauseButton = @$el.find('[data-action="play-pause"]')
@@ -44,12 +43,11 @@ class MusicNews.Player extends Backbone.View
     e.preventDefault() if e
     if @currentSound
       @currentSound.play
-        onload:       @_onload
-        onplay:       @_onplay
-        onpause:      @_onpause
         onfinish:     @_onfinish
-        # ontimeout:    @_ontimeout
-        # whileplaying: @_whileplaying
+        onload:       @_onload
+        onpause:      @_onpause
+        onplay:       @_onplay
+        whileplaying: @_whileplaying
     else
       @setCurrentSound()
       @playCurrentSound()
@@ -66,9 +64,9 @@ class MusicNews.Player extends Backbone.View
     @playPauseButton.attr('id', 'play')
     @nextSong()
 
-  # _whileplaying: =>
-  #   debugger
-  #   console.log("sound #{this.id} playing, #{this.position} of #{this.durationEstimate}")
+  _whileplaying: ->
+    percent = (this.position / this.durationEstimate) * 100
+    MusicNews.player.currentTrack.set('percent', percent)
 
   _onpause: =>
     @playPauseButton.attr('id', 'play')
@@ -97,7 +95,42 @@ class MusicNews.Player extends Backbone.View
 
   setCurrentTrack: ->
     @currentSound = null
+    @stopListening(@currentTrack)
     @currentTrack = @app.currentCollection.at(@currentTrackIndex)
+    @listenForChangeOn(@currentTrack)
+    # @listenTo(@currentTrack, 'change', @render);
+
+  bindings:
+    'i.clock' : 'percent'
+    '.progress-bar':
+      name: 'style',
+      observe: 'percent',
+      onGet: 'formatPercent'
+
+  formatPercent: (val) ->
+    "width: #{val}%"
+
+  updater: (args, model)->
+    selector = args[0]
+    options  = args[1]
+    if _.isString(options)
+      @$(selector).text(model.get(options))
+    else
+      modelAttrValue = model.get(options.observe)
+      formattedValue = this[options.onGet](modelAttrValue)
+      @$(selector).attr(options.name, formattedValue)
+
+  listenForChangeOn: (model, optionalBindings) ->
+    bindings = optionalBindings || @bindings
+    for selector_options in _.pairs(bindings)
+      selector = selector_options[0]
+      options = selector_options[1]
+      if _.isString(options)
+        @listenTo(model, "change:#{options}", =>
+          @updater(selector_options, model))
+      else
+        @listenTo(model, "change:#{options.observe}", =>
+          @updater(selector_options, model))
 
   advanceTrackIndex: ->
     @currentTrackIndex = @currentTrackIndex + 1
