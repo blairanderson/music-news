@@ -1,18 +1,41 @@
 #footer{
+  height: 30px;
   background: black;
-  padding: 3px;
-  font-size: 2rem;
 
-  p {
-    display: inline-block;
+  .progress {
+    height: 30px;
+    @include border-radius(0px);
 
-    a {
-      color: white;
+    .progress-bar {
+      @include progress-bar-variant($brand-blue);
+      span {
+      }
     }
   }
 }
 
+.current-song {
+  border: none;
+  position: absolute;
+  line-height: 30px;
+  color: black;
+  bottom: 0;
   left: 0;
   right: 0;
+  i.cloud {
+    @include icon-cloud($font-size: 20px);
+    @include icon-color(#ff7700);
+    padding-right: 5px;
+  }
 
+  a {
+    font-size: 17px;
+    text-decoration: none;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    &:hover{
+      background-color: #000;
+    }
+  }
 }

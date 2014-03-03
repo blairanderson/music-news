@@ -24,10 +24,7 @@
       border-left: 1px solid #272727;
     }
 
-    &:last-child a{
-      padding-left: 30px;
-      border-right: none;
-    }
+    &:last-child a {}
 
     a {
 
@@ -83,25 +80,3 @@
 #nolove   {@extend .fa-heart;         @include icon-color(white);}
 #love     {@extend .fa-heart;         @include icon-color(red);}
 #like     {@extend .fa-heart-o;       @include icon-color(red);}
-
-.current-song {
-  border: none;
-  text-align: center;
-  background: black;
-  width: 60%;
-
-  &.title {
-    i.cloud {@include icon-cloud($font-size: 20px); @include icon-color(#ff7700);}
-  }
-
-  a {
-    font-size: 17px;
-    text-decoration: none;
-    border: none;
-    color: #fff;
-    font-weight: bold;
-    &:hover{
-      background-color: #000;
-    }
-  }
-}
