@@ -20,4 +20,15 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  meta:
+    og:
+      title: 'Wake and Shake'
+      description: |+
+        Like Wake and Bake, except dancing.
+        It should be easy to create playlists.
+        Come listen to randomly submitted music, or stick to the top charts.
+        Find something you like on submit soundcloud tracks to your own playlists.
+      type: "music.radio_station"
+      image:
+      url: "http://new.seainhd.com"
+      music_creator: "http://blairanderson.co"
