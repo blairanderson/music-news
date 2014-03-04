@@ -12497,27 +12497,17 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     }
 }).call(this);
 /* ========================================================================
- * Bootstrap: affix.js v3.0.3
+ * Bootstrap: affix.js v3.1.0
  * http://getbootstrap.com/javascript/#affix
  * ========================================================================
- * Copyright 2013 Twitter, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright 2011-2014 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
 
 
-+function ($) { "use strict";
++function ($) {
+  'use strict';
 
   // AFFIX CLASS DEFINITION
   // ======================
@@ -12528,9 +12518,10 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       .on('scroll.bs.affix.data-api', $.proxy(this.checkPosition, this))
       .on('click.bs.affix.data-api',  $.proxy(this.checkPositionWithEventLoop, this))
 
-    this.$element = $(element)
-    this.affixed  =
-    this.unpin    = null
+    this.$element     = $(element)
+    this.affixed      =
+    this.unpin        =
+    this.pinnedOffset = null
 
     this.checkPosition()
   }
@@ -12539,6 +12530,14 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
   Affix.DEFAULTS = {
     offset: 0
+  }
+
+  Affix.prototype.getPinnedOffset = function () {
+    if (this.pinnedOffset) return this.pinnedOffset
+    this.$element.removeClass(Affix.RESET).addClass('affix')
+    var scrollTop = this.$window.scrollTop()
+    var position  = this.$element.offset()
+    return (this.pinnedOffset = position.top - scrollTop)
   }
 
   Affix.prototype.checkPositionWithEventLoop = function () {
@@ -12555,9 +12554,11 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     var offsetTop    = offset.top
     var offsetBottom = offset.bottom
 
+    if (this.affixed == 'top') position.top += scrollTop
+
     if (typeof offset != 'object')         offsetBottom = offsetTop = offset
-    if (typeof offsetTop == 'function')    offsetTop    = offset.top()
-    if (typeof offsetBottom == 'function') offsetBottom = offset.bottom()
+    if (typeof offsetTop == 'function')    offsetTop    = offset.top(this.$element)
+    if (typeof offsetBottom == 'function') offsetBottom = offset.bottom(this.$element)
 
     var affix = this.unpin   != null && (scrollTop + this.unpin <= position.top) ? false :
                 offsetBottom != null && (position.top + this.$element.height() >= scrollHeight - offsetBottom) ? 'bottom' :
@@ -12566,13 +12567,23 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     if (this.affixed === affix) return
     if (this.unpin) this.$element.css('top', '')
 
-    this.affixed = affix
-    this.unpin   = affix == 'bottom' ? position.top - scrollTop : null
+    var affixType = 'affix' + (affix ? '-' + affix : '')
+    var e         = $.Event(affixType + '.bs.affix')
 
-    this.$element.removeClass(Affix.RESET).addClass('affix' + (affix ? '-' + affix : ''))
+    this.$element.trigger(e)
+
+    if (e.isDefaultPrevented()) return
+
+    this.affixed = affix
+    this.unpin = affix == 'bottom' ? this.getPinnedOffset() : null
+
+    this.$element
+      .removeClass(Affix.RESET)
+      .addClass(affixType)
+      .trigger($.Event(affixType.replace('affix', 'affixed')))
 
     if (affix == 'bottom') {
-      this.$element.offset({ top: document.body.offsetHeight - offsetBottom - this.$element.height() })
+      this.$element.offset({ top: scrollHeight - offsetBottom - this.$element.height() })
     }
   }
 
@@ -12624,27 +12635,17 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
 }(jQuery);
 /* ========================================================================
- * Bootstrap: alert.js v3.0.3
+ * Bootstrap: alert.js v3.1.0
  * http://getbootstrap.com/javascript/#alerts
  * ========================================================================
- * Copyright 2013 Twitter, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright 2011-2014 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
 
 
-+function ($) { "use strict";
++function ($) {
+  'use strict';
 
   // ALERT CLASS DEFINITION
   // ======================
@@ -12723,34 +12724,25 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
 }(jQuery);
 /* ========================================================================
- * Bootstrap: button.js v3.0.3
+ * Bootstrap: button.js v3.1.0
  * http://getbootstrap.com/javascript/#buttons
  * ========================================================================
- * Copyright 2013 Twitter, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright 2011-2014 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
 
 
-+function ($) { "use strict";
++function ($) {
+  'use strict';
 
   // BUTTON PUBLIC CLASS DEFINITION
   // ==============================
 
   var Button = function (element, options) {
-    this.$element = $(element)
-    this.options  = $.extend({}, Button.DEFAULTS, options)
+    this.$element  = $(element)
+    this.options   = $.extend({}, Button.DEFAULTS, options)
+    this.isLoading = false
   }
 
   Button.DEFAULTS = {
@@ -12770,25 +12762,26 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     $el[val](data[state] || this.options[state])
 
     // push to event loop to allow forms to submit
-    setTimeout(function () {
-      state == 'loadingText' ?
-        $el.addClass(d).attr(d, d) :
-        $el.removeClass(d).removeAttr(d);
-    }, 0)
+    setTimeout($.proxy(function () {
+      if (state == 'loadingText') {
+        this.isLoading = true
+        $el.addClass(d).attr(d, d)
+      } else if (this.isLoading) {
+        this.isLoading = false
+        $el.removeClass(d).removeAttr(d)
+      }
+    }, this), 0)
   }
 
   Button.prototype.toggle = function () {
-    var $parent = this.$element.closest('[data-toggle="buttons"]')
     var changed = true
+    var $parent = this.$element.closest('[data-toggle="buttons"]')
 
     if ($parent.length) {
       var $input = this.$element.find('input')
-      if ($input.prop('type') === 'radio') {
-        // see if clicking on current one
-        if ($input.prop('checked') && this.$element.hasClass('active'))
-          changed = false
-        else
-          $parent.find('.active').removeClass('active')
+      if ($input.prop('type') == 'radio') {
+        if ($input.prop('checked') && this.$element.hasClass('active')) changed = false
+        else $parent.find('.active').removeClass('active')
       }
       if (changed) $input.prop('checked', !this.$element.hasClass('active')).trigger('change')
     }
@@ -12839,27 +12832,17 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
 }(jQuery);
 /* ========================================================================
- * Bootstrap: carousel.js v3.0.3
+ * Bootstrap: carousel.js v3.1.0
  * http://getbootstrap.com/javascript/#carousel
  * ========================================================================
- * Copyright 2013 Twitter, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright 2011-2014 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
 
 
-+function ($) { "use strict";
++function ($) {
+  'use strict';
 
   // CAROUSEL CLASS DEFINITION
   // =========================
@@ -12880,9 +12863,9 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
   }
 
   Carousel.DEFAULTS = {
-    interval: 5000
-  , pause: 'hover'
-  , wrap: true
+    interval: 5000,
+    pause: 'hover',
+    wrap: true
   }
 
   Carousel.prototype.cycle =  function (e) {
@@ -12919,7 +12902,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
   Carousel.prototype.pause = function (e) {
     e || (this.paused = true)
 
-    if (this.$element.find('.next, .prev').length && $.support.transition.end) {
+    if (this.$element.find('.next, .prev').length && $.support.transition) {
       this.$element.trigger($.support.transition.end)
       this.cycle(true)
     }
@@ -12952,13 +12935,15 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       $next = this.$element.find('.item')[fallback]()
     }
 
+    if ($next.hasClass('active')) return this.sliding = false
+
+    var e = $.Event('slide.bs.carousel', { relatedTarget: $next[0], direction: direction })
+    this.$element.trigger(e)
+    if (e.isDefaultPrevented()) return
+
     this.sliding = true
 
     isCycling && this.pause()
-
-    var e = $.Event('slide.bs.carousel', { relatedTarget: $next[0], direction: direction })
-
-    if ($next.hasClass('active')) return
 
     if (this.$indicators.length) {
       this.$indicators.find('.active').removeClass('active')
@@ -12969,8 +12954,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     }
 
     if ($.support.transition && this.$element.hasClass('slide')) {
-      this.$element.trigger(e)
-      if (e.isDefaultPrevented()) return
       $next.addClass(type)
       $next[0].offsetWidth // force reflow
       $active.addClass(direction)
@@ -12982,10 +12965,8 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
           that.sliding = false
           setTimeout(function () { that.$element.trigger('slid.bs.carousel') }, 0)
         })
-        .emulateTransitionEnd(600)
+        .emulateTransitionEnd($active.css('transition-duration').slice(0, -1) * 1000)
     } else {
-      this.$element.trigger(e)
-      if (e.isDefaultPrevented()) return
       $active.removeClass('active')
       $next.addClass('active')
       this.sliding = false
@@ -13057,27 +13038,17 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
 }(jQuery);
 /* ========================================================================
- * Bootstrap: collapse.js v3.0.3
+ * Bootstrap: collapse.js v3.1.0
  * http://getbootstrap.com/javascript/#collapse
  * ========================================================================
- * Copyright 2013 Twitter, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright 2011-2014 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
 
 
-+function ($) { "use strict";
++function ($) {
+  'use strict';
 
   // COLLAPSE PUBLIC CLASS DEFINITION
   // ================================
@@ -13128,7 +13099,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     var complete = function () {
       this.$element
         .removeClass('collapsing')
-        .addClass('in')
+        .addClass('collapse in')
         [dimension]('auto')
       this.transitioning = 0
       this.$element.trigger('shown.bs.collapse')
@@ -13196,6 +13167,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       var data    = $this.data('bs.collapse')
       var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
 
+      if (!data && options.toggle && option == 'show') option = !option
       if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
       if (typeof option == 'string') data[option]()
     })
@@ -13237,27 +13209,17 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
 }(jQuery);
 /* ========================================================================
- * Bootstrap: dropdown.js v3.0.3
+ * Bootstrap: dropdown.js v3.1.0
  * http://getbootstrap.com/javascript/#dropdowns
  * ========================================================================
- * Copyright 2013 Twitter, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright 2011-2014 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
 
 
-+function ($) { "use strict";
++function ($) {
+  'use strict';
 
   // DROPDOWN CLASS DEFINITION
   // =========================
@@ -13284,13 +13246,14 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
         $('<div class="dropdown-backdrop"/>').insertAfter($(this)).on('click', clearMenus)
       }
 
-      $parent.trigger(e = $.Event('show.bs.dropdown'))
+      var relatedTarget = { relatedTarget: this }
+      $parent.trigger(e = $.Event('show.bs.dropdown', relatedTarget))
 
       if (e.isDefaultPrevented()) return
 
       $parent
         .toggleClass('open')
-        .trigger('shown.bs.dropdown')
+        .trigger('shown.bs.dropdown', relatedTarget)
 
       $this.focus()
     }
@@ -13316,7 +13279,8 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       return $this.click()
     }
 
-    var $items = $('[role=menu] li:not(.divider):visible a', $parent)
+    var desc = ' li:not(.divider):visible a'
+    var $items = $parent.find('[role=menu]' + desc + ', [role=listbox]' + desc)
 
     if (!$items.length) return
 
@@ -13324,19 +13288,20 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
     if (e.keyCode == 38 && index > 0)                 index--                        // up
     if (e.keyCode == 40 && index < $items.length - 1) index++                        // down
-    if (!~index)                                      index=0
+    if (!~index)                                      index = 0
 
     $items.eq(index).focus()
   }
 
-  function clearMenus() {
+  function clearMenus(e) {
     $(backdrop).remove()
-    $(toggle).each(function (e) {
+    $(toggle).each(function () {
       var $parent = getParent($(this))
+      var relatedTarget = { relatedTarget: this }
       if (!$parent.hasClass('open')) return
-      $parent.trigger(e = $.Event('hide.bs.dropdown'))
+      $parent.trigger(e = $.Event('hide.bs.dropdown', relatedTarget))
       if (e.isDefaultPrevented()) return
-      $parent.removeClass('open').trigger('hidden.bs.dropdown')
+      $parent.removeClass('open').trigger('hidden.bs.dropdown', relatedTarget)
     })
   }
 
@@ -13345,7 +13310,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
     if (!selector) {
       selector = $this.attr('href')
-      selector = selector && /#/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') //strip for ie7
+      selector = selector && /#[A-Za-z]/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') //strip for ie7
     }
 
     var $parent = selector && $(selector)
@@ -13387,32 +13352,22 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
   $(document)
     .on('click.bs.dropdown.data-api', clearMenus)
     .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
-    .on('click.bs.dropdown.data-api'  , toggle, Dropdown.prototype.toggle)
-    .on('keydown.bs.dropdown.data-api', toggle + ', [role=menu]' , Dropdown.prototype.keydown)
+    .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
+    .on('keydown.bs.dropdown.data-api', toggle + ', [role=menu], [role=listbox]', Dropdown.prototype.keydown)
 
 }(jQuery);
 /* ========================================================================
- * Bootstrap: tab.js v3.0.3
+ * Bootstrap: tab.js v3.1.0
  * http://getbootstrap.com/javascript/#tabs
  * ========================================================================
- * Copyright 2013 Twitter, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright 2011-2014 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
 
 
-+function ($) { "use strict";
++function ($) {
+  'use strict';
 
   // TAB CLASS DEFINITION
   // ====================
@@ -13447,8 +13402,8 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     this.activate($this.parent('li'), $ul)
     this.activate($target, $target.parent(), function () {
       $this.trigger({
-        type: 'shown.bs.tab'
-      , relatedTarget: previous
+        type: 'shown.bs.tab',
+        relatedTarget: previous
       })
     })
   }
@@ -13528,27 +13483,17 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
 }(jQuery);
 /* ========================================================================
- * Bootstrap: transition.js v3.0.3
+ * Bootstrap: transition.js v3.1.0
  * http://getbootstrap.com/javascript/#transitions
  * ========================================================================
- * Copyright 2013 Twitter, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright 2011-2014 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
 
 
-+function ($) { "use strict";
++function ($) {
+  'use strict';
 
   // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
   // ============================================================
@@ -13557,10 +13502,10 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     var el = document.createElement('bootstrap')
 
     var transEndEventNames = {
-      'WebkitTransition' : 'webkitTransitionEnd'
-    , 'MozTransition'    : 'transitionend'
-    , 'OTransition'      : 'oTransitionEnd otransitionend'
-    , 'transition'       : 'transitionend'
+      'WebkitTransition' : 'webkitTransitionEnd',
+      'MozTransition'    : 'transitionend',
+      'OTransition'      : 'oTransitionEnd otransitionend',
+      'transition'       : 'transitionend'
     }
 
     for (var name in transEndEventNames) {
@@ -13568,6 +13513,8 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
         return { end: transEndEventNames[name] }
       }
     }
+
+    return false // explicit for ie8 (  ._.)
   }
 
   // http://blog.alexmaccaw.com/css-transitions
@@ -13585,27 +13532,17 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
 }(jQuery);
 /* ========================================================================
- * Bootstrap: scrollspy.js v3.0.3
+ * Bootstrap: scrollspy.js v3.1.0
  * http://getbootstrap.com/javascript/#scrollspy
  * ========================================================================
- * Copyright 2013 Twitter, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright 2011-2014 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
 
 
-+function ($) { "use strict";
++function ($) {
+  'use strict';
 
   // SCROLLSPY CLASS DEFINITION
   // ==========================
@@ -13645,10 +13582,11 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       .map(function () {
         var $el   = $(this)
         var href  = $el.data('target') || $el.attr('href')
-        var $href = /^#\w/.test(href) && $(href)
+        var $href = /^#./.test(href) && $(href)
 
         return ($href
           && $href.length
+          && $href.is(':visible')
           && [[ $href[offsetMethod]().top + (!$.isWindow(self.$scrollElement.get(0)) && self.$scrollElement.scrollTop()), href ]]) || null
       })
       .sort(function (a, b) { return a[0] - b[0] })
@@ -13671,6 +13609,10 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       return activeTarget != (i = targets.last()[0]) && this.activate(i)
     }
 
+    if (activeTarget && scrollTop <= offsets[0]) {
+      return activeTarget != (i = targets[0]) && this.activate(i)
+    }
+
     for (i = offsets.length; i--;) {
       activeTarget != targets[i]
         && scrollTop >= offsets[i]
@@ -13683,18 +13625,18 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     this.activeTarget = target
 
     $(this.selector)
-      .parents('.active')
+      .parentsUntil(this.options.target, '.active')
       .removeClass('active')
 
-    var selector = this.selector
-      + '[data-target="' + target + '"],'
-      + this.selector + '[href="' + target + '"]'
+    var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
 
     var active = $(selector)
       .parents('li')
       .addClass('active')
 
-    if (active.parent('.dropdown-menu').length)  {
+    if (active.parent('.dropdown-menu').length) {
       active = active
         .closest('li.dropdown')
         .addClass('active')
@@ -13744,27 +13686,17 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
 }(jQuery);
 /* ========================================================================
- * Bootstrap: modal.js v3.0.3
+ * Bootstrap: modal.js v3.1.0
  * http://getbootstrap.com/javascript/#modals
  * ========================================================================
- * Copyright 2013 Twitter, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright 2011-2014 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
 
 
-+function ($) { "use strict";
++function ($) {
+  'use strict';
 
   // MODAL CLASS DEFINITION
   // ======================
@@ -13775,13 +13707,19 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     this.$backdrop =
     this.isShown   = null
 
-    if (this.options.remote) this.$element.load(this.options.remote)
+    if (this.options.remote) {
+      this.$element
+        .find('.modal-content')
+        .load(this.options.remote, $.proxy(function () {
+          this.$element.trigger('loaded.bs.modal')
+        }, this))
+    }
   }
 
   Modal.DEFAULTS = {
-      backdrop: true
-    , keyboard: true
-    , show: true
+    backdrop: true,
+    keyboard: true,
+    show: true
   }
 
   Modal.prototype.toggle = function (_relatedTarget) {
@@ -13800,7 +13738,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
     this.escape()
 
-    this.$element.on('click.dismiss.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this))
+    this.$element.on('click.dismiss.bs.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this))
 
     this.backdrop(function () {
       var transition = $.support.transition && that.$element.hasClass('fade')
@@ -13809,7 +13747,9 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
         that.$element.appendTo(document.body) // don't move modals dom position
       }
 
-      that.$element.show()
+      that.$element
+        .show()
+        .scrollTop(0)
 
       if (transition) {
         that.$element[0].offsetWidth // force reflow
@@ -13851,7 +13791,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     this.$element
       .removeClass('in')
       .attr('aria-hidden', true)
-      .off('click.dismiss.modal')
+      .off('click.dismiss.bs.modal')
 
     $.support.transition && this.$element.hasClass('fade') ?
       this.$element
@@ -13895,7 +13835,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
   }
 
   Modal.prototype.backdrop = function (callback) {
-    var that    = this
     var animate = this.$element.hasClass('fade') ? 'fade' : ''
 
     if (this.isShown && this.options.backdrop) {
@@ -13904,7 +13843,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       this.$backdrop = $('<div class="modal-backdrop ' + animate + '" />')
         .appendTo(document.body)
 
-      this.$element.on('click.dismiss.modal', $.proxy(function (e) {
+      this.$element.on('click.dismiss.bs.modal', $.proxy(function (e) {
         if (e.target !== e.currentTarget) return
         this.options.backdrop == 'static'
           ? this.$element[0].focus.call(this.$element[0])
@@ -13926,7 +13865,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     } else if (!this.isShown && this.$backdrop) {
       this.$backdrop.removeClass('in')
 
-      $.support.transition && this.$element.hasClass('fade')?
+      $.support.transition && this.$element.hasClass('fade') ?
         this.$backdrop
           .one($.support.transition.end, callback)
           .emulateTransitionEnd(150) :
@@ -13974,9 +13913,9 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     var $this   = $(this)
     var href    = $this.attr('href')
     var $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))) //strip for ie7
-    var option  = $target.data('modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data())
+    var option  = $target.data('bs.modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data())
 
-    e.preventDefault()
+    if ($this.is('a')) e.preventDefault()
 
     $target
       .modal(option, this)
@@ -13986,33 +13925,23 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
   })
 
   $(document)
-    .on('show.bs.modal',  '.modal', function () { $(document.body).addClass('modal-open') })
+    .on('show.bs.modal', '.modal', function () { $(document.body).addClass('modal-open') })
     .on('hidden.bs.modal', '.modal', function () { $(document.body).removeClass('modal-open') })
 
 }(jQuery);
 /* ========================================================================
- * Bootstrap: tooltip.js v3.0.3
+ * Bootstrap: tooltip.js v3.1.0
  * http://getbootstrap.com/javascript/#tooltip
  * Inspired by the original jQuery.tipsy by Jason Frame
  * ========================================================================
- * Copyright 2013 Twitter, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright 2011-2014 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
 
 
-+function ($) { "use strict";
++function ($) {
+  'use strict';
 
   // TOOLTIP PUBLIC CLASS DEFINITION
   // ===============================
@@ -14029,15 +13958,15 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
   }
 
   Tooltip.DEFAULTS = {
-    animation: true
-  , placement: 'top'
-  , selector: false
-  , template: '<div class="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
-  , trigger: 'hover focus'
-  , title: ''
-  , delay: 0
-  , html: false
-  , container: false
+    animation: true,
+    placement: 'top',
+    selector: false,
+    template: '<div class="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',
+    trigger: 'hover focus',
+    title: '',
+    delay: 0,
+    html: false,
+    container: false
   }
 
   Tooltip.prototype.init = function (type, element, options) {
@@ -14054,8 +13983,8 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       if (trigger == 'click') {
         this.$element.on('click.' + this.type, this.options.selector, $.proxy(this.toggle, this))
       } else if (trigger != 'manual') {
-        var eventIn  = trigger == 'hover' ? 'mouseenter' : 'focus'
-        var eventOut = trigger == 'hover' ? 'mouseleave' : 'blur'
+        var eventIn  = trigger == 'hover' ? 'mouseenter' : 'focusin'
+        var eventOut = trigger == 'hover' ? 'mouseleave' : 'focusout'
 
         this.$element.on(eventIn  + '.' + this.type, this.options.selector, $.proxy(this.enter, this))
         this.$element.on(eventOut + '.' + this.type, this.options.selector, $.proxy(this.leave, this))
@@ -14076,8 +14005,8 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
     if (options.delay && typeof options.delay == 'number') {
       options.delay = {
-        show: options.delay
-      , hide: options.delay
+        show: options.delay,
+        hide: options.delay
       }
     }
 
@@ -14126,12 +14055,13 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
   }
 
   Tooltip.prototype.show = function () {
-    var e = $.Event('show.bs.'+ this.type)
+    var e = $.Event('show.bs.' + this.type)
 
     if (this.hasContent() && this.enabled) {
       this.$element.trigger(e)
 
       if (e.isDefaultPrevented()) return
+      var that = this;
 
       var $tip = this.tip()
 
@@ -14181,11 +14111,21 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       var calculatedOffset = this.getCalculatedOffset(placement, pos, actualWidth, actualHeight)
 
       this.applyPlacement(calculatedOffset, placement)
-      this.$element.trigger('shown.bs.' + this.type)
+      this.hoverState = null
+
+      var complete = function() {
+        that.$element.trigger('shown.bs.' + that.type)
+      }
+
+      $.support.transition && this.$tip.hasClass('fade') ?
+        $tip
+          .one($.support.transition.end, complete)
+          .emulateTransitionEnd(150) :
+        complete()
     }
   }
 
-  Tooltip.prototype.applyPlacement = function(offset, placement) {
+  Tooltip.prototype.applyPlacement = function (offset, placement) {
     var replace
     var $tip   = this.tip()
     var width  = $tip[0].offsetWidth
@@ -14202,9 +14142,18 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     offset.top  = offset.top  + marginTop
     offset.left = offset.left + marginLeft
 
-    $tip
-      .offset(offset)
-      .addClass('in')
+    // $.fn.offset doesn't round pixel values
+    // so we use setOffset directly with our own function B-0
+    $.offset.setOffset($tip[0], $.extend({
+      using: function (props) {
+        $tip.css({
+          top: Math.round(props.top),
+          left: Math.round(props.left)
+        })
+      }
+    }, offset), 0)
+
+    $tip.addClass('in')
 
     // check to see if placing tip in new offset caused the tip to resize itself
     var actualWidth  = $tip[0].offsetWidth
@@ -14236,8 +14185,8 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     if (replace) $tip.offset(offset)
   }
 
-  Tooltip.prototype.replaceArrow = function(delta, dimension, position) {
-    this.arrow().css(position, delta ? (50 * (1 - delta / dimension) + "%") : '')
+  Tooltip.prototype.replaceArrow = function (delta, dimension, position) {
+    this.arrow().css(position, delta ? (50 * (1 - delta / dimension) + '%') : '')
   }
 
   Tooltip.prototype.setContent = function () {
@@ -14255,6 +14204,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
     function complete() {
       if (that.hoverState != 'in') $tip.detach()
+      that.$element.trigger('hidden.bs.' + that.type)
     }
 
     this.$element.trigger(e)
@@ -14269,7 +14219,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
         .emulateTransitionEnd(150) :
       complete()
 
-    this.$element.trigger('hidden.bs.' + this.type)
+    this.hoverState = null
 
     return this
   }
@@ -14288,8 +14238,8 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
   Tooltip.prototype.getPosition = function () {
     var el = this.$element[0]
     return $.extend({}, (typeof el.getBoundingClientRect == 'function') ? el.getBoundingClientRect() : {
-      width: el.offsetWidth
-    , height: el.offsetHeight
+      width: el.offsetWidth,
+      height: el.offsetHeight
     }, this.$element.offset())
   }
 
@@ -14345,6 +14295,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
   }
 
   Tooltip.prototype.destroy = function () {
+    clearTimeout(this.timeout)
     this.hide().$element.off('.' + this.type).removeData('bs.' + this.type)
   }
 
@@ -14360,6 +14311,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       var data    = $this.data('bs.tooltip')
       var options = typeof option == 'object' && option
 
+      if (!data && option == 'destroy') return
       if (!data) $this.data('bs.tooltip', (data = new Tooltip(this, options)))
       if (typeof option == 'string') data[option]()
     })
@@ -14378,27 +14330,17 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
 }(jQuery);
 /* ========================================================================
- * Bootstrap: popover.js v3.0.3
+ * Bootstrap: popover.js v3.1.0
  * http://getbootstrap.com/javascript/#popovers
  * ========================================================================
- * Copyright 2013 Twitter, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright 2011-2014 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
 
 
-+function ($) { "use strict";
++function ($) {
+  'use strict';
 
   // POPOVER PUBLIC CLASS DEFINITION
   // ===============================
@@ -14409,11 +14351,11 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
   if (!$.fn.tooltip) throw new Error('Popover requires tooltip.js')
 
-  Popover.DEFAULTS = $.extend({} , $.fn.tooltip.Constructor.DEFAULTS, {
-    placement: 'right'
-  , trigger: 'click'
-  , content: ''
-  , template: '<div class="popover"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+  Popover.DEFAULTS = $.extend({}, $.fn.tooltip.Constructor.DEFAULTS, {
+    placement: 'right',
+    trigger: 'click',
+    content: '',
+    template: '<div class="popover"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
   })
 
 
@@ -14434,7 +14376,9 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     var content = this.getContent()
 
     $tip.find('.popover-title')[this.options.html ? 'html' : 'text'](title)
-    $tip.find('.popover-content')[this.options.html ? 'html' : 'text'](content)
+    $tip.find('.popover-content')[ // we use append for html objects to maintain js events
+      this.options.html ? (typeof content == 'string' ? 'html' : 'append') : 'text'
+    ](content)
 
     $tip.removeClass('fade top bottom left right in')
 
@@ -14478,6 +14422,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       var data    = $this.data('bs.popover')
       var options = typeof option == 'object' && option
 
+      if (!data && option == 'destroy') return
       if (!data) $this.data('bs.popover', (data = new Popover(this, options)))
       if (typeof option == 'string') data[option]()
     })
@@ -14507,678 +14452,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
 
 
-(function() {
-  (function($, window) {
-    var Tour, document;
-    document = window.document;
-    Tour = (function() {
-      function Tour(options) {
-        this._options = $.extend({
-          name: "tour",
-          container: "body",
-          keyboard: true,
-          storage: window.localStorage,
-          debug: false,
-          backdrop: false,
-          redirect: true,
-          orphan: false,
-          duration: false,
-          basePath: "",
-          template: "<div class='popover'>          <div class='arrow'></div>          <h3 class='popover-title'></h3>          <div class='popover-content'></div>          <div class='popover-navigation'>            <div class='btn-group'>              <button class='btn btn-sm btn-default' data-role='prev'>&laquo; Prev</button>              <button class='btn btn-sm btn-default' data-role='next'>Next &raquo;</button>              <button class='btn btn-sm btn-default' data-role='pause-resume'                data-pause-text='Pause'                data-resume-text='Resume'              >Pause</button>            </div>            <button class='btn btn-sm btn-default' data-role='end'>End tour</button>          </div>        </div>",
-          afterSetState: function(key, value) {},
-          afterGetState: function(key, value) {},
-          afterRemoveState: function(key) {},
-          onStart: function(tour) {},
-          onEnd: function(tour) {},
-          onShow: function(tour) {},
-          onShown: function(tour) {},
-          onHide: function(tour) {},
-          onHidden: function(tour) {},
-          onNext: function(tour) {},
-          onPrev: function(tour) {},
-          onPause: function(tour, duration) {},
-          onResume: function(tour, duration) {}
-        }, options);
-        this._force = false;
-        this._inited = false;
-        this._steps = [];
-        this.backdrop = {
-          overlay: null,
-          $element: null,
-          $background: null,
-          backgroundShown: false,
-          overlayElementShown: false
-        };
-      }
-
-      Tour.prototype.setState = function(key, value) {
-        var e, keyName;
-        if (this._options.storage) {
-          keyName = "" + this._options.name + "_" + key;
-          try {
-            this._options.storage.setItem(keyName, value);
-          } catch (_error) {
-            e = _error;
-            if (e.code === DOMException.QUOTA_EXCEEDED_ERR) {
-              this.debug("LocalStorage quota exceeded. setState failed.");
-            }
-          }
-          return this._options.afterSetState(keyName, value);
-        } else {
-          if (this._state == null) {
-            this._state = {};
-          }
-          return this._state[key] = value;
-        }
-      };
-
-      Tour.prototype.removeState = function(key) {
-        var keyName;
-        if (this._options.storage) {
-          keyName = "" + this._options.name + "_" + key;
-          this._options.storage.removeItem(keyName);
-          return this._options.afterRemoveState(keyName);
-        } else {
-          if (this._state != null) {
-            return delete this._state[key];
-          }
-        }
-      };
-
-      Tour.prototype.getState = function(key) {
-        var keyName, value;
-        if (this._options.storage) {
-          keyName = "" + this._options.name + "_" + key;
-          value = this._options.storage.getItem(keyName);
-        } else {
-          if (this._state != null) {
-            value = this._state[key];
-          }
-        }
-        if (value === void 0 || value === "null") {
-          value = null;
-        }
-        this._options.afterGetState(key, value);
-        return value;
-      };
-
-      Tour.prototype.addSteps = function(steps) {
-        var step, _i, _len, _results;
-        _results = [];
-        for (_i = 0, _len = steps.length; _i < _len; _i++) {
-          step = steps[_i];
-          _results.push(this.addStep(step));
-        }
-        return _results;
-      };
-
-      Tour.prototype.addStep = function(step) {
-        return this._steps.push(step);
-      };
-
-      Tour.prototype.getStep = function(i) {
-        if (this._steps[i] != null) {
-          return $.extend({
-            id: "step-" + i,
-            path: "",
-            placement: "right",
-            title: "",
-            content: "<p></p>",
-            next: i === this._steps.length - 1 ? -1 : i + 1,
-            prev: i - 1,
-            animation: true,
-            container: this._options.container,
-            backdrop: this._options.backdrop,
-            redirect: this._options.redirect,
-            orphan: this._options.orphan,
-            duration: this._options.duration,
-            template: this._options.template,
-            onShow: this._options.onShow,
-            onShown: this._options.onShown,
-            onHide: this._options.onHide,
-            onHidden: this._options.onHidden,
-            onNext: this._options.onNext,
-            onPrev: this._options.onPrev,
-            onPause: this._options.onPause,
-            onResume: this._options.onResume
-          }, this._steps[i]);
-        }
-      };
-
-      Tour.prototype.init = function(force) {
-        var _this = this;
-        this._force = force;
-        if (this.ended()) {
-          return this._debug("Tour ended, init prevented.");
-        }
-        this.setCurrentStep();
-        this._setupMouseNavigation();
-        this._setupKeyboardNavigation();
-        this._onResize(function() {
-          return _this.showStep(_this._current);
-        });
-        if (this._current !== null) {
-          this.showStep(this._current);
-        }
-        this._inited = true;
-        return this;
-      };
-
-      Tour.prototype.start = function(force) {
-        var promise;
-        if (force == null) {
-          force = false;
-        }
-        if (!this._inited) {
-          this.init(force);
-        }
-        if (this._current === null) {
-          promise = this._makePromise(this._options.onStart != null ? this._options.onStart(this) : void 0);
-          return this._callOnPromiseDone(promise, this.showStep, 0);
-        }
-      };
-
-      Tour.prototype.next = function() {
-        var promise;
-        if (this.ended()) {
-          return this._debug("Tour ended, next prevented.");
-        }
-        promise = this.hideStep(this._current);
-        return this._callOnPromiseDone(promise, this._showNextStep);
-      };
-
-      Tour.prototype.prev = function() {
-        var promise;
-        if (this.ended()) {
-          return this._debug("Tour ended, prev prevented.");
-        }
-        promise = this.hideStep(this._current);
-        return this._callOnPromiseDone(promise, this._showPrevStep);
-      };
-
-      Tour.prototype.goTo = function(i) {
-        var promise;
-        if (this.ended()) {
-          return this._debug("Tour ended, goTo prevented.");
-        }
-        promise = this.hideStep(this._current);
-        return this._callOnPromiseDone(promise, this.showStep, i);
-      };
-
-      Tour.prototype.end = function() {
-        var endHelper, promise,
-          _this = this;
-        endHelper = function(e) {
-          $(document).off("click.tour-" + _this._options.name);
-          $(document).off("keyup.tour-" + _this._options.name);
-          $(window).off("resize.tour-" + _this._options.name);
-          _this.setState("end", "yes");
-          _this._inited = false;
-          _this._force = false;
-          _this._clearTimer();
-          if (_this._options.onEnd != null) {
-            return _this._options.onEnd(_this);
-          }
-        };
-        promise = this.hideStep(this._current);
-        return this._callOnPromiseDone(promise, endHelper);
-      };
-
-      Tour.prototype.ended = function() {
-        return !this._force && !!this.getState("end");
-      };
-
-      Tour.prototype.restart = function() {
-        this.removeState("current_step");
-        this.removeState("end");
-        this.setCurrentStep(0);
-        return this.start();
-      };
-
-      Tour.prototype.pause = function() {
-        var step;
-        step = this.getStep(this._current);
-        if (!(step && step.duration)) {
-          return;
-        }
-        this._paused = true;
-        this._duration -= new Date().getTime() - this._start;
-        window.clearTimeout(this._timer);
-        this._debug("Paused/Stopped step " + (this._current + 1) + " timer (" + this._duration + " remaining).");
-        if (step.onPause != null) {
-          return step.onPause(this, this._duration);
-        }
-      };
-
-      Tour.prototype.resume = function() {
-        var step,
-          _this = this;
-        step = this.getStep(this._current);
-        if (!(step && step.duration)) {
-          return;
-        }
-        this._paused = false;
-        this._start = new Date().getTime();
-        this._duration = this._duration || step.duration;
-        this._timer = window.setTimeout(function() {
-          if (_this._isLast()) {
-            return _this.next();
-          } else {
-            return _this.end();
-          }
-        }, this._duration);
-        this._debug("Started step " + (this._current + 1) + " timer with duration " + this._duration);
-        if ((step.onResume != null) && this._duration !== step.duration) {
-          return step.onResume(this, this._duration);
-        }
-      };
-
-      Tour.prototype.hideStep = function(i) {
-        var hideStepHelper, promise, step,
-          _this = this;
-        step = this.getStep(i);
-        if (!step) {
-          return;
-        }
-        this._clearTimer();
-        promise = this._makePromise(step.onHide != null ? step.onHide(this, i) : void 0);
-        hideStepHelper = function(e) {
-          var $element;
-          $element = $(step.element);
-          if (!($element.data("bs.popover") || $element.data("popover"))) {
-            $element = $("body");
-          }
-          $element.popover("destroy");
-          if (step.reflex) {
-            $element.css("cursor", "").off("click.tour-" + _this._options.name);
-          }
-          if (step.backdrop) {
-            _this._hideBackdrop();
-          }
-          if (step.onHidden != null) {
-            return step.onHidden(_this);
-          }
-        };
-        this._callOnPromiseDone(promise, hideStepHelper);
-        return promise;
-      };
-
-      Tour.prototype.showStep = function(i) {
-        var promise, showStepHelper, skipToPrevious, step,
-          _this = this;
-        step = this.getStep(i);
-        if (!step) {
-          return;
-        }
-        skipToPrevious = i < this._current;
-        promise = this._makePromise(step.onShow != null ? step.onShow(this, i) : void 0);
-        showStepHelper = function(e) {
-          var current_path, path;
-          _this.setCurrentStep(i);
-          path = $.isFunction(step.path) ? step.path.call() : _this._options.basePath + step.path;
-          current_path = [document.location.pathname, document.location.hash].join("");
-          if (_this._isRedirect(path, current_path)) {
-            _this._redirect(step, path);
-            return;
-          }
-          if (_this._isOrphan(step)) {
-            if (!step.orphan) {
-              _this._debug("Skip the orphan step " + (_this._current + 1) + ". Orphan option is false and the element doesn't exist or is hidden.");
-              if (skipToPrevious) {
-                _this._showPrevStep();
-              } else {
-                _this._showNextStep();
-              }
-              return;
-            }
-            _this._debug("Show the orphan step " + (_this._current + 1) + ". Orphans option is true.");
-          }
-          if (step.backdrop) {
-            _this._showBackdrop(!_this._isOrphan(step) ? step.element : void 0);
-          }
-          _this._scrollIntoView(step.element, function() {
-            if ((step.element != null) && step.backdrop) {
-              _this._showOverlayElement(step.element);
-            }
-            _this._showPopover(step, i);
-            if (step.onShown != null) {
-              step.onShown(_this);
-            }
-            return _this._debug("Step " + (_this._current + 1) + " of " + _this._steps.length);
-          });
-          if (step.duration) {
-            return _this.resume();
-          }
-        };
-        this._callOnPromiseDone(promise, showStepHelper);
-        return promise;
-      };
-
-      Tour.prototype.setCurrentStep = function(value) {
-        if (value != null) {
-          this._current = value;
-          this.setState("current_step", value);
-        } else {
-          this._current = this.getState("current_step");
-          this._current = this._current === null ? null : parseInt(this._current, 10);
-        }
-        return this;
-      };
-
-      Tour.prototype._showNextStep = function() {
-        var promise, showNextStepHelper, step,
-          _this = this;
-        step = this.getStep(this._current);
-        showNextStepHelper = function(e) {
-          return _this.showStep(step.next);
-        };
-        promise = this._makePromise((step.onNext != null ? step.onNext(this) : void 0));
-        return this._callOnPromiseDone(promise, showNextStepHelper);
-      };
-
-      Tour.prototype._showPrevStep = function() {
-        var promise, showPrevStepHelper, step,
-          _this = this;
-        step = this.getStep(this._current);
-        showPrevStepHelper = function(e) {
-          return _this.showStep(step.prev);
-        };
-        promise = this._makePromise((step.onPrev != null ? step.onPrev(this) : void 0));
-        return this._callOnPromiseDone(promise, showPrevStepHelper);
-      };
-
-      Tour.prototype._debug = function(text) {
-        if (this._options.debug) {
-          return window.console.log("Bootstrap Tour '" + this._options.name + "' | " + text);
-        }
-      };
-
-      Tour.prototype._isRedirect = function(path, currentPath) {
-        return (path != null) && path !== "" && path.replace(/\?.*$/, "").replace(/\/?$/, "") !== currentPath.replace(/\/?$/, "");
-      };
-
-      Tour.prototype._redirect = function(step, path) {
-        if ($.isFunction(step.redirect)) {
-          return step.redirect.call(this, path);
-        } else if (step.redirect === true) {
-          this._debug("Redirect to " + path);
-          return document.location.href = path;
-        }
-      };
-
-      Tour.prototype._isOrphan = function(step) {
-        return (step.element == null) || !$(step.element).length || $(step.element).is(":hidden") && ($(step.element)[0].namespaceURI !== "http://www.w3.org/2000/svg");
-      };
-
-      Tour.prototype._isLast = function() {
-        return this._current < this._steps.length - 1;
-      };
-
-      Tour.prototype._showPopover = function(step, i) {
-        var $element, $navigation, $template, $tip, isOrphan, options,
-          _this = this;
-        options = $.extend({}, this._options);
-        $template = $.isFunction(step.template) ? $(step.template(i, step)) : $(step.template);
-        $navigation = $template.find(".popover-navigation");
-        isOrphan = this._isOrphan(step);
-        if (isOrphan) {
-          step.element = "body";
-          step.placement = "top";
-          $template = $template.addClass("orphan");
-        }
-        $element = $(step.element);
-        $template.addClass("tour-" + this._options.name);
-        if (step.options) {
-          $.extend(options, step.options);
-        }
-        if (step.reflex) {
-          $element.css("cursor", "pointer").on("click.tour-" + this._options.name, function() {
-            if (_this._isLast()) {
-              return _this.next();
-            } else {
-              return _this.end();
-            }
-          });
-        }
-        if (step.prev < 0) {
-          $navigation.find("*[data-role=prev]").addClass("disabled");
-        }
-        if (step.next < 0) {
-          $navigation.find("*[data-role=next]").addClass("disabled");
-        }
-        if (!step.duration) {
-          $navigation.find("*[data-role='pause-resume']").remove();
-        }
-        step.template = $template.clone().wrap("<div>").parent().html();
-        $element.popover({
-          placement: step.placement,
-          trigger: "manual",
-          title: step.title,
-          content: step.content,
-          html: true,
-          animation: step.animation,
-          container: step.container,
-          template: step.template,
-          selector: step.element
-        }).popover("show");
-        $tip = $element.data("bs.popover") ? $element.data("bs.popover").tip() : $element.data("popover").tip();
-        $tip.attr("id", step.id);
-        this._reposition($tip, step);
-        if (isOrphan) {
-          return this._center($tip);
-        }
-      };
-
-      Tour.prototype._reposition = function($tip, step) {
-        var offsetBottom, offsetHeight, offsetRight, offsetWidth, originalLeft, originalTop, tipOffset;
-        offsetWidth = $tip[0].offsetWidth;
-        offsetHeight = $tip[0].offsetHeight;
-        tipOffset = $tip.offset();
-        originalLeft = tipOffset.left;
-        originalTop = tipOffset.top;
-        offsetBottom = $(document).outerHeight() - tipOffset.top - $tip.outerHeight();
-        if (offsetBottom < 0) {
-          tipOffset.top = tipOffset.top + offsetBottom;
-        }
-        offsetRight = $("html").outerWidth() - tipOffset.left - $tip.outerWidth();
-        if (offsetRight < 0) {
-          tipOffset.left = tipOffset.left + offsetRight;
-        }
-        if (tipOffset.top < 0) {
-          tipOffset.top = 0;
-        }
-        if (tipOffset.left < 0) {
-          tipOffset.left = 0;
-        }
-        $tip.offset(tipOffset);
-        if (step.placement === "bottom" || step.placement === "top") {
-          if (originalLeft !== tipOffset.left) {
-            return this._replaceArrow($tip, (tipOffset.left - originalLeft) * 2, offsetWidth, "left");
-          }
-        } else {
-          if (originalTop !== tipOffset.top) {
-            return this._replaceArrow($tip, (tipOffset.top - originalTop) * 2, offsetHeight, "top");
-          }
-        }
-      };
-
-      Tour.prototype._center = function($tip) {
-        return $tip.css("top", $(window).outerHeight() / 2 - $tip.outerHeight() / 2);
-      };
-
-      Tour.prototype._replaceArrow = function($tip, delta, dimension, position) {
-        return $tip.find(".arrow").css(position, delta ? 50 * (1 - delta / dimension) + "%" : "");
-      };
-
-      Tour.prototype._scrollIntoView = function(element, callback) {
-        var $element, $window, offsetTop, scrollTop, windowHeight,
-          _this = this;
-        if (!element) {
-          return callback();
-        }
-        $element = $(element);
-        $window = $(window);
-        offsetTop = $element.offset().top;
-        windowHeight = $window.height();
-        scrollTop = Math.max(0, offsetTop - (windowHeight / 2));
-        this._debug("Scroll into view. ScrollTop: " + scrollTop + ". Element offset: " + offsetTop + ". Window height: " + windowHeight + ".");
-        return $("body").stop().animate({
-          scrollTop: Math.ceil(scrollTop)
-        }, function() {
-          callback();
-          return _this._debug("Scroll into view. Animation end element offset: " + ($element.offset().top) + ". Window height: " + ($window.height()) + ".");
-        });
-      };
-
-      Tour.prototype._onResize = function(callback, timeout) {
-        return $(window).on("resize.tour-" + this._options.name, function() {
-          clearTimeout(timeout);
-          return timeout = setTimeout(callback, 100);
-        });
-      };
-
-      Tour.prototype._setupMouseNavigation = function() {
-        var _this = this;
-        _this = this;
-        $(document).off("click.tour-" + this._options.name, ".popover.tour-" + this._options.name + " *[data-role=next]:not(.disabled)").on("click.tour-" + this._options.name, ".popover.tour-" + this._options.name + " *[data-role=next]:not(.disabled)", function(e) {
-          e.preventDefault();
-          return _this.next();
-        });
-        $(document).off("click.tour-" + this._options.name, ".popover.tour-" + this._options.name + " *[data-role=prev]:not(.disabled)").on("click.tour-" + this._options.name, ".popover.tour-" + this._options.name + " *[data-role=prev]:not(.disabled)", function(e) {
-          e.preventDefault();
-          return _this.prev();
-        });
-        $(document).off("click.tour-" + this._options.name, ".popover.tour-" + this._options.name + " *[data-role=end]").on("click.tour-" + this._options.name, ".popover.tour-" + this._options.name + " *[data-role=end]", function(e) {
-          e.preventDefault();
-          return _this.end();
-        });
-        return $(document).off("click.tour-" + this._options.name, ".popover.tour-" + this._options.name + " *[data-role=pause-resume]").on("click.tour-" + this._options.name, ".popover.tour-" + this._options.name + " *[data-role=pause-resume]", function(e) {
-          var $this;
-          e.preventDefault();
-          $this = $(this);
-          $this.text(_this._paused ? $this.data("pause-text") : $this.data("resume-text"));
-          if (_this._paused) {
-            return _this.resume();
-          } else {
-            return _this.pause();
-          }
-        });
-      };
-
-      Tour.prototype._setupKeyboardNavigation = function() {
-        var _this = this;
-        if (!this._options.keyboard) {
-          return;
-        }
-        return $(document).on("keyup.tour-" + this._options.name, function(e) {
-          if (!e.which) {
-            return;
-          }
-          switch (e.which) {
-            case 39:
-              e.preventDefault();
-              if (_this._isLast()) {
-                return _this.next();
-              } else {
-                return _this.end();
-              }
-              break;
-            case 37:
-              e.preventDefault();
-              if (_this._current > 0) {
-                return _this.prev();
-              }
-              break;
-            case 27:
-              e.preventDefault();
-              return _this.end();
-          }
-        });
-      };
-
-      Tour.prototype._makePromise = function(result) {
-        if (result && $.isFunction(result.then)) {
-          return result;
-        } else {
-          return null;
-        }
-      };
-
-      Tour.prototype._callOnPromiseDone = function(promise, cb, arg) {
-        var _this = this;
-        if (promise) {
-          return promise.then(function(e) {
-            return cb.call(_this, arg);
-          });
-        } else {
-          return cb.call(this, arg);
-        }
-      };
-
-      Tour.prototype._showBackdrop = function(element) {
-        if (this.backdrop.backgroundShown) {
-          return;
-        }
-        this.backdrop = $("<div/>", {
-          "class": "tour-backdrop"
-        });
-        this.backdrop.backgroundShown = true;
-        return $("body").append(this.backdrop);
-      };
-
-      Tour.prototype._hideBackdrop = function() {
-        this._hideOverlayElement();
-        return this._hideBackground();
-      };
-
-      Tour.prototype._hideBackground = function() {
-        this.backdrop.remove();
-        this.backdrop.overlay = null;
-        return this.backdrop.backgroundShown = false;
-      };
-
-      Tour.prototype._showOverlayElement = function(element) {
-        var $background, $element, offset;
-        if (this.backdrop.overlayElementShown) {
-          return;
-        }
-        this.backdrop.overlayElementShown = true;
-        $element = $(element);
-        $background = $("<div/>");
-        offset = $element.offset();
-        offset.top = offset.top;
-        offset.left = offset.left;
-        $background.width($element.innerWidth()).height($element.innerHeight()).addClass("tour-step-background").offset(offset);
-        $element.addClass("tour-step-backdrop");
-        $("body").append($background);
-        this.backdrop.$element = $element;
-        return this.backdrop.$background = $background;
-      };
-
-      Tour.prototype._hideOverlayElement = function() {
-        if (!this.backdrop.overlayElementShown) {
-          return;
-        }
-        this.backdrop.$element.removeClass("tour-step-backdrop");
-        this.backdrop.$background.remove();
-        this.backdrop.$element = null;
-        this.backdrop.$background = null;
-        return this.backdrop.overlayElementShown = false;
-      };
-
-      Tour.prototype._clearTimer = function() {
-        window.clearTimeout(this._timer);
-        this._timer = null;
-        return this._duration = null;
-      };
-
-      return Tour;
-
-    })();
-    return window.Tour = Tour;
-  })(jQuery, window);
-
-}).call(this);
 //     Underscore.js 1.5.2
 //     http://underscorejs.org
 //     (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -16455,6 +15728,606 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
   });
 
 }).call(this);
+//  Underscore.string
+//  (c) 2010 Esa-Matti Suuronen <esa-matti aet suuronen dot org>
+//  Underscore.string is freely distributable under the terms of the MIT license.
+//  Documentation: https://github.com/epeli/underscore.string
+//  Some code is borrowed from MooTools and Alexandru Marasteanu.
+//  Version '2.3.0'
+
+!function(root, String){
+  'use strict';
+
+  // Defining helper functions.
+
+  var nativeTrim = String.prototype.trim;
+  var nativeTrimRight = String.prototype.trimRight;
+  var nativeTrimLeft = String.prototype.trimLeft;
+
+  var parseNumber = function(source) { return source * 1 || 0; };
+
+  var strRepeat = function(str, qty){
+    if (qty < 1) return '';
+    var result = '';
+    while (qty > 0) {
+      if (qty & 1) result += str;
+      qty >>= 1, str += str;
+    }
+    return result;
+  };
+
+  var slice = [].slice;
+
+  var defaultToWhiteSpace = function(characters) {
+    if (characters == null)
+      return '\\s';
+    else if (characters.source)
+      return characters.source;
+    else
+      return '[' + _s.escapeRegExp(characters) + ']';
+  };
+
+  var escapeChars = {
+    lt: '<',
+    gt: '>',
+    quot: '"',
+    apos: "'",
+    amp: '&'
+  };
+
+  var reversedEscapeChars = {};
+  for(var key in escapeChars){ reversedEscapeChars[escapeChars[key]] = key; }
+
+  // sprintf() for JavaScript 0.7-beta1
+  // http://www.diveintojavascript.com/projects/javascript-sprintf
+  //
+  // Copyright (c) Alexandru Marasteanu <alexaholic [at) gmail (dot] com>
+  // All rights reserved.
+
+  var sprintf = (function() {
+    function get_type(variable) {
+      return Object.prototype.toString.call(variable).slice(8, -1).toLowerCase();
+    }
+
+    var str_repeat = strRepeat;
+
+    var str_format = function() {
+      if (!str_format.cache.hasOwnProperty(arguments[0])) {
+        str_format.cache[arguments[0]] = str_format.parse(arguments[0]);
+      }
+      return str_format.format.call(null, str_format.cache[arguments[0]], arguments);
+    };
+
+    str_format.format = function(parse_tree, argv) {
+      var cursor = 1, tree_length = parse_tree.length, node_type = '', arg, output = [], i, k, match, pad, pad_character, pad_length;
+      for (i = 0; i < tree_length; i++) {
+        node_type = get_type(parse_tree[i]);
+        if (node_type === 'string') {
+          output.push(parse_tree[i]);
+        }
+        else if (node_type === 'array') {
+          match = parse_tree[i]; // convenience purposes only
+          if (match[2]) { // keyword argument
+            arg = argv[cursor];
+            for (k = 0; k < match[2].length; k++) {
+              if (!arg.hasOwnProperty(match[2][k])) {
+                throw new Error(sprintf('[_.sprintf] property "%s" does not exist', match[2][k]));
+              }
+              arg = arg[match[2][k]];
+            }
+          } else if (match[1]) { // positional argument (explicit)
+            arg = argv[match[1]];
+          }
+          else { // positional argument (implicit)
+            arg = argv[cursor++];
+          }
+
+          if (/[^s]/.test(match[8]) && (get_type(arg) != 'number')) {
+            throw new Error(sprintf('[_.sprintf] expecting number but found %s', get_type(arg)));
+          }
+          switch (match[8]) {
+            case 'b': arg = arg.toString(2); break;
+            case 'c': arg = String.fromCharCode(arg); break;
+            case 'd': arg = parseInt(arg, 10); break;
+            case 'e': arg = match[7] ? arg.toExponential(match[7]) : arg.toExponential(); break;
+            case 'f': arg = match[7] ? parseFloat(arg).toFixed(match[7]) : parseFloat(arg); break;
+            case 'o': arg = arg.toString(8); break;
+            case 's': arg = ((arg = String(arg)) && match[7] ? arg.substring(0, match[7]) : arg); break;
+            case 'u': arg = Math.abs(arg); break;
+            case 'x': arg = arg.toString(16); break;
+            case 'X': arg = arg.toString(16).toUpperCase(); break;
+          }
+          arg = (/[def]/.test(match[8]) && match[3] && arg >= 0 ? '+'+ arg : arg);
+          pad_character = match[4] ? match[4] == '0' ? '0' : match[4].charAt(1) : ' ';
+          pad_length = match[6] - String(arg).length;
+          pad = match[6] ? str_repeat(pad_character, pad_length) : '';
+          output.push(match[5] ? arg + pad : pad + arg);
+        }
+      }
+      return output.join('');
+    };
+
+    str_format.cache = {};
+
+    str_format.parse = function(fmt) {
+      var _fmt = fmt, match = [], parse_tree = [], arg_names = 0;
+      while (_fmt) {
+        if ((match = /^[^\x25]+/.exec(_fmt)) !== null) {
+          parse_tree.push(match[0]);
+        }
+        else if ((match = /^\x25{2}/.exec(_fmt)) !== null) {
+          parse_tree.push('%');
+        }
+        else if ((match = /^\x25(?:([1-9]\d*)\$|\(([^\)]+)\))?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-fosuxX])/.exec(_fmt)) !== null) {
+          if (match[2]) {
+            arg_names |= 1;
+            var field_list = [], replacement_field = match[2], field_match = [];
+            if ((field_match = /^([a-z_][a-z_\d]*)/i.exec(replacement_field)) !== null) {
+              field_list.push(field_match[1]);
+              while ((replacement_field = replacement_field.substring(field_match[0].length)) !== '') {
+                if ((field_match = /^\.([a-z_][a-z_\d]*)/i.exec(replacement_field)) !== null) {
+                  field_list.push(field_match[1]);
+                }
+                else if ((field_match = /^\[(\d+)\]/.exec(replacement_field)) !== null) {
+                  field_list.push(field_match[1]);
+                }
+                else {
+                  throw new Error('[_.sprintf] huh?');
+                }
+              }
+            }
+            else {
+              throw new Error('[_.sprintf] huh?');
+            }
+            match[2] = field_list;
+          }
+          else {
+            arg_names |= 2;
+          }
+          if (arg_names === 3) {
+            throw new Error('[_.sprintf] mixing positional and named placeholders is not (yet) supported');
+          }
+          parse_tree.push(match);
+        }
+        else {
+          throw new Error('[_.sprintf] huh?');
+        }
+        _fmt = _fmt.substring(match[0].length);
+      }
+      return parse_tree;
+    };
+
+    return str_format;
+  })();
+
+
+
+  // Defining underscore.string
+
+  var _s = {
+
+    VERSION: '2.3.0',
+
+    isBlank: function(str){
+      if (str == null) str = '';
+      return (/^\s*$/).test(str);
+    },
+
+    stripTags: function(str){
+      if (str == null) return '';
+      return String(str).replace(/<\/?[^>]+>/g, '');
+    },
+
+    capitalize : function(str){
+      str = str == null ? '' : String(str);
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    },
+
+    chop: function(str, step){
+      if (str == null) return [];
+      str = String(str);
+      step = ~~step;
+      return step > 0 ? str.match(new RegExp('.{1,' + step + '}', 'g')) : [str];
+    },
+
+    clean: function(str){
+      return _s.strip(str).replace(/\s+/g, ' ');
+    },
+
+    count: function(str, substr){
+      if (str == null || substr == null) return 0;
+      return String(str).split(substr).length - 1;
+    },
+
+    chars: function(str) {
+      if (str == null) return [];
+      return String(str).split('');
+    },
+
+    swapCase: function(str) {
+      if (str == null) return '';
+      return String(str).replace(/\S/g, function(c){
+        return c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase();
+      });
+    },
+
+    escapeHTML: function(str) {
+      if (str == null) return '';
+      return String(str).replace(/[&<>"']/g, function(m){ return '&' + reversedEscapeChars[m] + ';'; });
+    },
+
+    unescapeHTML: function(str) {
+      if (str == null) return '';
+      return String(str).replace(/\&([^;]+);/g, function(entity, entityCode){
+        var match;
+
+        if (entityCode in escapeChars) {
+          return escapeChars[entityCode];
+        } else if (match = entityCode.match(/^#x([\da-fA-F]+)$/)) {
+          return String.fromCharCode(parseInt(match[1], 16));
+        } else if (match = entityCode.match(/^#(\d+)$/)) {
+          return String.fromCharCode(~~match[1]);
+        } else {
+          return entity;
+        }
+      });
+    },
+
+    escapeRegExp: function(str){
+      if (str == null) return '';
+      return String(str).replace(/([.*+?^=!:${}()|[\]\/\\])/g, '\\$1');
+    },
+
+    splice: function(str, i, howmany, substr){
+      var arr = _s.chars(str);
+      arr.splice(~~i, ~~howmany, substr);
+      return arr.join('');
+    },
+
+    insert: function(str, i, substr){
+      return _s.splice(str, i, 0, substr);
+    },
+
+    include: function(str, needle){
+      if (needle === '') return true;
+      if (str == null) return false;
+      return String(str).indexOf(needle) !== -1;
+    },
+
+    join: function() {
+      var args = slice.call(arguments),
+        separator = args.shift();
+
+      if (separator == null) separator = '';
+
+      return args.join(separator);
+    },
+
+    lines: function(str) {
+      if (str == null) return [];
+      return String(str).split("\n");
+    },
+
+    reverse: function(str){
+      return _s.chars(str).reverse().join('');
+    },
+
+    startsWith: function(str, starts){
+      if (starts === '') return true;
+      if (str == null || starts == null) return false;
+      str = String(str); starts = String(starts);
+      return str.length >= starts.length && str.slice(0, starts.length) === starts;
+    },
+
+    endsWith: function(str, ends){
+      if (ends === '') return true;
+      if (str == null || ends == null) return false;
+      str = String(str); ends = String(ends);
+      return str.length >= ends.length && str.slice(str.length - ends.length) === ends;
+    },
+
+    succ: function(str){
+      if (str == null) return '';
+      str = String(str);
+      return str.slice(0, -1) + String.fromCharCode(str.charCodeAt(str.length-1) + 1);
+    },
+
+    titleize: function(str){
+      if (str == null) return '';
+      return String(str).replace(/(?:^|\s)\S/g, function(c){ return c.toUpperCase(); });
+    },
+
+    camelize: function(str){
+      return _s.trim(str).replace(/[-_\s]+(.)?/g, function(match, c){ return c.toUpperCase(); });
+    },
+
+    underscored: function(str){
+      return _s.trim(str).replace(/([a-z\d])([A-Z]+)/g, '$1_$2').replace(/[-\s]+/g, '_').toLowerCase();
+    },
+
+    dasherize: function(str){
+      return _s.trim(str).replace(/([A-Z])/g, '-$1').replace(/[-_\s]+/g, '-').toLowerCase();
+    },
+
+    classify: function(str){
+      return _s.titleize(String(str).replace(/_/g, ' ')).replace(/\s/g, '');
+    },
+
+    humanize: function(str){
+      return _s.capitalize(_s.underscored(str).replace(/_id$/,'').replace(/_/g, ' '));
+    },
+
+    trim: function(str, characters){
+      if (str == null) return '';
+      if (!characters && nativeTrim) return nativeTrim.call(str);
+      characters = defaultToWhiteSpace(characters);
+      return String(str).replace(new RegExp('\^' + characters + '+|' + characters + '+$', 'g'), '');
+    },
+
+    ltrim: function(str, characters){
+      if (str == null) return '';
+      if (!characters && nativeTrimLeft) return nativeTrimLeft.call(str);
+      characters = defaultToWhiteSpace(characters);
+      return String(str).replace(new RegExp('^' + characters + '+'), '');
+    },
+
+    rtrim: function(str, characters){
+      if (str == null) return '';
+      if (!characters && nativeTrimRight) return nativeTrimRight.call(str);
+      characters = defaultToWhiteSpace(characters);
+      return String(str).replace(new RegExp(characters + '+$'), '');
+    },
+
+    truncate: function(str, length, truncateStr){
+      if (str == null) return '';
+      str = String(str); truncateStr = truncateStr || '...';
+      length = ~~length;
+      return str.length > length ? str.slice(0, length) + truncateStr : str;
+    },
+
+    /**
+     * _s.prune: a more elegant version of truncate
+     * prune extra chars, never leaving a half-chopped word.
+     * @author github.com/rwz
+     */
+    prune: function(str, length, pruneStr){
+      if (str == null) return '';
+
+      str = String(str); length = ~~length;
+      pruneStr = pruneStr != null ? String(pruneStr) : '...';
+
+      if (str.length <= length) return str;
+
+      var tmpl = function(c){ return c.toUpperCase() !== c.toLowerCase() ? 'A' : ' '; },
+        template = str.slice(0, length+1).replace(/.(?=\W*\w*$)/g, tmpl); // 'Hello, world' -> 'HellAA AAAAA'
+
+      if (template.slice(template.length-2).match(/\w\w/))
+        template = template.replace(/\s*\S+$/, '');
+      else
+        template = _s.rtrim(template.slice(0, template.length-1));
+
+      return (template+pruneStr).length > str.length ? str : str.slice(0, template.length)+pruneStr;
+    },
+
+    words: function(str, delimiter) {
+      if (_s.isBlank(str)) return [];
+      return _s.trim(str, delimiter).split(delimiter || /\s+/);
+    },
+
+    pad: function(str, length, padStr, type) {
+      str = str == null ? '' : String(str);
+      length = ~~length;
+
+      var padlen  = 0;
+
+      if (!padStr)
+        padStr = ' ';
+      else if (padStr.length > 1)
+        padStr = padStr.charAt(0);
+
+      switch(type) {
+        case 'right':
+          padlen = length - str.length;
+          return str + strRepeat(padStr, padlen);
+        case 'both':
+          padlen = length - str.length;
+          return strRepeat(padStr, Math.ceil(padlen/2)) + str
+                  + strRepeat(padStr, Math.floor(padlen/2));
+        default: // 'left'
+          padlen = length - str.length;
+          return strRepeat(padStr, padlen) + str;
+        }
+    },
+
+    lpad: function(str, length, padStr) {
+      return _s.pad(str, length, padStr);
+    },
+
+    rpad: function(str, length, padStr) {
+      return _s.pad(str, length, padStr, 'right');
+    },
+
+    lrpad: function(str, length, padStr) {
+      return _s.pad(str, length, padStr, 'both');
+    },
+
+    sprintf: sprintf,
+
+    vsprintf: function(fmt, argv){
+      argv.unshift(fmt);
+      return sprintf.apply(null, argv);
+    },
+
+    toNumber: function(str, decimals) {
+      if (str == null || str == '') return 0;
+      str = String(str);
+      var num = parseNumber(parseNumber(str).toFixed(~~decimals));
+      return num === 0 && !str.match(/^0+$/) ? Number.NaN : num;
+    },
+
+    numberFormat : function(number, dec, dsep, tsep) {
+      if (isNaN(number) || number == null) return '';
+
+      number = number.toFixed(~~dec);
+      tsep = tsep || ',';
+
+      var parts = number.split('.'), fnums = parts[0],
+        decimals = parts[1] ? (dsep || '.') + parts[1] : '';
+
+      return fnums.replace(/(\d)(?=(?:\d{3})+$)/g, '$1' + tsep) + decimals;
+    },
+
+    strRight: function(str, sep){
+      if (str == null) return '';
+      str = String(str); sep = sep != null ? String(sep) : sep;
+      var pos = !sep ? -1 : str.indexOf(sep);
+      return ~pos ? str.slice(pos+sep.length, str.length) : str;
+    },
+
+    strRightBack: function(str, sep){
+      if (str == null) return '';
+      str = String(str); sep = sep != null ? String(sep) : sep;
+      var pos = !sep ? -1 : str.lastIndexOf(sep);
+      return ~pos ? str.slice(pos+sep.length, str.length) : str;
+    },
+
+    strLeft: function(str, sep){
+      if (str == null) return '';
+      str = String(str); sep = sep != null ? String(sep) : sep;
+      var pos = !sep ? -1 : str.indexOf(sep);
+      return ~pos ? str.slice(0, pos) : str;
+    },
+
+    strLeftBack: function(str, sep){
+      if (str == null) return '';
+      str += ''; sep = sep != null ? ''+sep : sep;
+      var pos = str.lastIndexOf(sep);
+      return ~pos ? str.slice(0, pos) : str;
+    },
+
+    toSentence: function(array, separator, lastSeparator, serial) {
+      separator = separator || ', '
+      lastSeparator = lastSeparator || ' and '
+      var a = array.slice(), lastMember = a.pop();
+
+      if (array.length > 2 && serial) lastSeparator = _s.rtrim(separator) + lastSeparator;
+
+      return a.length ? a.join(separator) + lastSeparator + lastMember : lastMember;
+    },
+
+    toSentenceSerial: function() {
+      var args = slice.call(arguments);
+      args[3] = true;
+      return _s.toSentence.apply(_s, args);
+    },
+
+    slugify: function(str) {
+      if (str == null) return '';
+
+      var from  = "ąàáäâãåæćęèéëêìíïîłńòóöôõøùúüûñçżź",
+          to    = "aaaaaaaaceeeeeiiiilnoooooouuuunczz",
+          regex = new RegExp(defaultToWhiteSpace(from), 'g');
+
+      str = String(str).toLowerCase().replace(regex, function(c){
+        var index = from.indexOf(c);
+        return to.charAt(index) || '-';
+      });
+
+      return _s.dasherize(str.replace(/[^\w\s-]/g, ''));
+    },
+
+    surround: function(str, wrapper) {
+      return [wrapper, str, wrapper].join('');
+    },
+
+    quote: function(str) {
+      return _s.surround(str, '"');
+    },
+
+    exports: function() {
+      var result = {};
+
+      for (var prop in this) {
+        if (!this.hasOwnProperty(prop) || prop.match(/^(?:include|contains|reverse)$/)) continue;
+        result[prop] = this[prop];
+      }
+
+      return result;
+    },
+
+    repeat: function(str, qty, separator){
+      if (str == null) return '';
+
+      qty = ~~qty;
+
+      // using faster implementation if separator is not needed;
+      if (separator == null) return strRepeat(String(str), qty);
+
+      // this one is about 300x slower in Google Chrome
+      for (var repeat = []; qty > 0; repeat[--qty] = str) {}
+      return repeat.join(separator);
+    },
+
+    levenshtein: function(str1, str2) {
+      if (str1 == null && str2 == null) return 0;
+      if (str1 == null) return String(str2).length;
+      if (str2 == null) return String(str1).length;
+
+      str1 = String(str1); str2 = String(str2);
+
+      var current = [], prev, value;
+
+      for (var i = 0; i <= str2.length; i++)
+        for (var j = 0; j <= str1.length; j++) {
+          if (i && j)
+            if (str1.charAt(j - 1) === str2.charAt(i - 1))
+              value = prev;
+            else
+              value = Math.min(current[j], current[j - 1], prev) + 1;
+          else
+            value = i + j;
+
+          prev = current[j];
+          current[j] = value;
+        }
+
+      return current.pop();
+    }
+  };
+
+  // Aliases
+
+  _s.strip    = _s.trim;
+  _s.lstrip   = _s.ltrim;
+  _s.rstrip   = _s.rtrim;
+  _s.center   = _s.lrpad;
+  _s.rjust    = _s.lpad;
+  _s.ljust    = _s.rpad;
+  _s.contains = _s.include;
+  _s.q        = _s.quote;
+
+  // CommonJS module is defined
+  if (typeof exports !== 'undefined') {
+    if (typeof module !== 'undefined' && module.exports) {
+      // Export module
+      module.exports = _s;
+    }
+    exports._s = _s;
+
+  } else if (typeof define === 'function' && define.amd) {
+    // Register as a named module with AMD.
+    define('underscore.string', [], function() {
+      return _s;
+    });
+
+  } else {
+    // Integrate with Underscore.js if defined
+    // or create our own underscore object.
+    root._ = root._ || {};
+    root._.string = root._.str = _s;
+  }
+
+}(this, String);
 //     Backbone.js 1.1.0
 
 //     (c) 2010-2011 Jeremy Ashkenas, DocumentCloud Inc.
@@ -18036,37 +17909,3859 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
   };
 
 }).call(this);
+/*!
+
+ handlebars v1.3.0
+
+Copyright (C) 2011 by Yehuda Katz
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+@license
+*/
+/* exported Handlebars */
+
+var Handlebars = (function() {
+// handlebars/safe-string.js
+var __module4__ = (function() {
+  "use strict";
+  var __exports__;
+  // Build out our basic SafeString type
+  function SafeString(string) {
+    this.string = string;
+  }
+
+  SafeString.prototype.toString = function() {
+    return "" + this.string;
+  };
+
+  __exports__ = SafeString;
+  return __exports__;
+})();
+
+// handlebars/utils.js
+var __module3__ = (function(__dependency1__) {
+  "use strict";
+  var __exports__ = {};
+  /*jshint -W004 */
+  var SafeString = __dependency1__;
+
+  var escape = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#x27;",
+    "`": "&#x60;"
+  };
+
+  var badChars = /[&<>"'`]/g;
+  var possible = /[&<>"'`]/;
+
+  function escapeChar(chr) {
+    return escape[chr] || "&amp;";
+  }
+
+  function extend(obj, value) {
+    for(var key in value) {
+      if(Object.prototype.hasOwnProperty.call(value, key)) {
+        obj[key] = value[key];
+      }
+    }
+  }
+
+  __exports__.extend = extend;var toString = Object.prototype.toString;
+  __exports__.toString = toString;
+  // Sourced from lodash
+  // https://github.com/bestiejs/lodash/blob/master/LICENSE.txt
+  var isFunction = function(value) {
+    return typeof value === 'function';
+  };
+  // fallback for older versions of Chrome and Safari
+  if (isFunction(/x/)) {
+    isFunction = function(value) {
+      return typeof value === 'function' && toString.call(value) === '[object Function]';
+    };
+  }
+  var isFunction;
+  __exports__.isFunction = isFunction;
+  var isArray = Array.isArray || function(value) {
+    return (value && typeof value === 'object') ? toString.call(value) === '[object Array]' : false;
+  };
+  __exports__.isArray = isArray;
+
+  function escapeExpression(string) {
+    // don't escape SafeStrings, since they're already safe
+    if (string instanceof SafeString) {
+      return string.toString();
+    } else if (!string && string !== 0) {
+      return "";
+    }
+
+    // Force a string conversion as this will be done by the append regardless and
+    // the regex test will do this transparently behind the scenes, causing issues if
+    // an object's to string has escaped characters in it.
+    string = "" + string;
+
+    if(!possible.test(string)) { return string; }
+    return string.replace(badChars, escapeChar);
+  }
+
+  __exports__.escapeExpression = escapeExpression;function isEmpty(value) {
+    if (!value && value !== 0) {
+      return true;
+    } else if (isArray(value) && value.length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  __exports__.isEmpty = isEmpty;
+  return __exports__;
+})(__module4__);
+
+// handlebars/exception.js
+var __module5__ = (function() {
+  "use strict";
+  var __exports__;
+
+  var errorProps = ['description', 'fileName', 'lineNumber', 'message', 'name', 'number', 'stack'];
+
+  function Exception(message, node) {
+    var line;
+    if (node && node.firstLine) {
+      line = node.firstLine;
+
+      message += ' - ' + line + ':' + node.firstColumn;
+    }
+
+    var tmp = Error.prototype.constructor.call(this, message);
+
+    // Unfortunately errors are not enumerable in Chrome (at least), so `for prop in tmp` doesn't work.
+    for (var idx = 0; idx < errorProps.length; idx++) {
+      this[errorProps[idx]] = tmp[errorProps[idx]];
+    }
+
+    if (line) {
+      this.lineNumber = line;
+      this.column = node.firstColumn;
+    }
+  }
+
+  Exception.prototype = new Error();
+
+  __exports__ = Exception;
+  return __exports__;
+})();
+
+// handlebars/base.js
+var __module2__ = (function(__dependency1__, __dependency2__) {
+  "use strict";
+  var __exports__ = {};
+  var Utils = __dependency1__;
+  var Exception = __dependency2__;
+
+  var VERSION = "1.3.0";
+  __exports__.VERSION = VERSION;var COMPILER_REVISION = 4;
+  __exports__.COMPILER_REVISION = COMPILER_REVISION;
+  var REVISION_CHANGES = {
+    1: '<= 1.0.rc.2', // 1.0.rc.2 is actually rev2 but doesn't report it
+    2: '== 1.0.0-rc.3',
+    3: '== 1.0.0-rc.4',
+    4: '>= 1.0.0'
+  };
+  __exports__.REVISION_CHANGES = REVISION_CHANGES;
+  var isArray = Utils.isArray,
+      isFunction = Utils.isFunction,
+      toString = Utils.toString,
+      objectType = '[object Object]';
+
+  function HandlebarsEnvironment(helpers, partials) {
+    this.helpers = helpers || {};
+    this.partials = partials || {};
+
+    registerDefaultHelpers(this);
+  }
+
+  __exports__.HandlebarsEnvironment = HandlebarsEnvironment;HandlebarsEnvironment.prototype = {
+    constructor: HandlebarsEnvironment,
+
+    logger: logger,
+    log: log,
+
+    registerHelper: function(name, fn, inverse) {
+      if (toString.call(name) === objectType) {
+        if (inverse || fn) { throw new Exception('Arg not supported with multiple helpers'); }
+        Utils.extend(this.helpers, name);
+      } else {
+        if (inverse) { fn.not = inverse; }
+        this.helpers[name] = fn;
+      }
+    },
+
+    registerPartial: function(name, str) {
+      if (toString.call(name) === objectType) {
+        Utils.extend(this.partials,  name);
+      } else {
+        this.partials[name] = str;
+      }
+    }
+  };
+
+  function registerDefaultHelpers(instance) {
+    instance.registerHelper('helperMissing', function(arg) {
+      if(arguments.length === 2) {
+        return undefined;
+      } else {
+        throw new Exception("Missing helper: '" + arg + "'");
+      }
+    });
+
+    instance.registerHelper('blockHelperMissing', function(context, options) {
+      var inverse = options.inverse || function() {}, fn = options.fn;
+
+      if (isFunction(context)) { context = context.call(this); }
+
+      if(context === true) {
+        return fn(this);
+      } else if(context === false || context == null) {
+        return inverse(this);
+      } else if (isArray(context)) {
+        if(context.length > 0) {
+          return instance.helpers.each(context, options);
+        } else {
+          return inverse(this);
+        }
+      } else {
+        return fn(context);
+      }
+    });
+
+    instance.registerHelper('each', function(context, options) {
+      var fn = options.fn, inverse = options.inverse;
+      var i = 0, ret = "", data;
+
+      if (isFunction(context)) { context = context.call(this); }
+
+      if (options.data) {
+        data = createFrame(options.data);
+      }
+
+      if(context && typeof context === 'object') {
+        if (isArray(context)) {
+          for(var j = context.length; i<j; i++) {
+            if (data) {
+              data.index = i;
+              data.first = (i === 0);
+              data.last  = (i === (context.length-1));
+            }
+            ret = ret + fn(context[i], { data: data });
+          }
+        } else {
+          for(var key in context) {
+            if(context.hasOwnProperty(key)) {
+              if(data) { 
+                data.key = key; 
+                data.index = i;
+                data.first = (i === 0);
+              }
+              ret = ret + fn(context[key], {data: data});
+              i++;
+            }
+          }
+        }
+      }
+
+      if(i === 0){
+        ret = inverse(this);
+      }
+
+      return ret;
+    });
+
+    instance.registerHelper('if', function(conditional, options) {
+      if (isFunction(conditional)) { conditional = conditional.call(this); }
+
+      // Default behavior is to render the positive path if the value is truthy and not empty.
+      // The `includeZero` option may be set to treat the condtional as purely not empty based on the
+      // behavior of isEmpty. Effectively this determines if 0 is handled by the positive path or negative.
+      if ((!options.hash.includeZero && !conditional) || Utils.isEmpty(conditional)) {
+        return options.inverse(this);
+      } else {
+        return options.fn(this);
+      }
+    });
+
+    instance.registerHelper('unless', function(conditional, options) {
+      return instance.helpers['if'].call(this, conditional, {fn: options.inverse, inverse: options.fn, hash: options.hash});
+    });
+
+    instance.registerHelper('with', function(context, options) {
+      if (isFunction(context)) { context = context.call(this); }
+
+      if (!Utils.isEmpty(context)) return options.fn(context);
+    });
+
+    instance.registerHelper('log', function(context, options) {
+      var level = options.data && options.data.level != null ? parseInt(options.data.level, 10) : 1;
+      instance.log(level, context);
+    });
+  }
+
+  var logger = {
+    methodMap: { 0: 'debug', 1: 'info', 2: 'warn', 3: 'error' },
+
+    // State enum
+    DEBUG: 0,
+    INFO: 1,
+    WARN: 2,
+    ERROR: 3,
+    level: 3,
+
+    // can be overridden in the host environment
+    log: function(level, obj) {
+      if (logger.level <= level) {
+        var method = logger.methodMap[level];
+        if (typeof console !== 'undefined' && console[method]) {
+          console[method].call(console, obj);
+        }
+      }
+    }
+  };
+  __exports__.logger = logger;
+  function log(level, obj) { logger.log(level, obj); }
+
+  __exports__.log = log;var createFrame = function(object) {
+    var obj = {};
+    Utils.extend(obj, object);
+    return obj;
+  };
+  __exports__.createFrame = createFrame;
+  return __exports__;
+})(__module3__, __module5__);
+
+// handlebars/runtime.js
+var __module6__ = (function(__dependency1__, __dependency2__, __dependency3__) {
+  "use strict";
+  var __exports__ = {};
+  var Utils = __dependency1__;
+  var Exception = __dependency2__;
+  var COMPILER_REVISION = __dependency3__.COMPILER_REVISION;
+  var REVISION_CHANGES = __dependency3__.REVISION_CHANGES;
+
+  function checkRevision(compilerInfo) {
+    var compilerRevision = compilerInfo && compilerInfo[0] || 1,
+        currentRevision = COMPILER_REVISION;
+
+    if (compilerRevision !== currentRevision) {
+      if (compilerRevision < currentRevision) {
+        var runtimeVersions = REVISION_CHANGES[currentRevision],
+            compilerVersions = REVISION_CHANGES[compilerRevision];
+        throw new Exception("Template was precompiled with an older version of Handlebars than the current runtime. "+
+              "Please update your precompiler to a newer version ("+runtimeVersions+") or downgrade your runtime to an older version ("+compilerVersions+").");
+      } else {
+        // Use the embedded version info since the runtime doesn't know about this revision yet
+        throw new Exception("Template was precompiled with a newer version of Handlebars than the current runtime. "+
+              "Please update your runtime to a newer version ("+compilerInfo[1]+").");
+      }
+    }
+  }
+
+  __exports__.checkRevision = checkRevision;// TODO: Remove this line and break up compilePartial
+
+  function template(templateSpec, env) {
+    if (!env) {
+      throw new Exception("No environment passed to template");
+    }
+
+    // Note: Using env.VM references rather than local var references throughout this section to allow
+    // for external users to override these as psuedo-supported APIs.
+    var invokePartialWrapper = function(partial, name, context, helpers, partials, data) {
+      var result = env.VM.invokePartial.apply(this, arguments);
+      if (result != null) { return result; }
+
+      if (env.compile) {
+        var options = { helpers: helpers, partials: partials, data: data };
+        partials[name] = env.compile(partial, { data: data !== undefined }, env);
+        return partials[name](context, options);
+      } else {
+        throw new Exception("The partial " + name + " could not be compiled when running in runtime-only mode");
+      }
+    };
+
+    // Just add water
+    var container = {
+      escapeExpression: Utils.escapeExpression,
+      invokePartial: invokePartialWrapper,
+      programs: [],
+      program: function(i, fn, data) {
+        var programWrapper = this.programs[i];
+        if(data) {
+          programWrapper = program(i, fn, data);
+        } else if (!programWrapper) {
+          programWrapper = this.programs[i] = program(i, fn);
+        }
+        return programWrapper;
+      },
+      merge: function(param, common) {
+        var ret = param || common;
+
+        if (param && common && (param !== common)) {
+          ret = {};
+          Utils.extend(ret, common);
+          Utils.extend(ret, param);
+        }
+        return ret;
+      },
+      programWithDepth: env.VM.programWithDepth,
+      noop: env.VM.noop,
+      compilerInfo: null
+    };
+
+    return function(context, options) {
+      options = options || {};
+      var namespace = options.partial ? options : env,
+          helpers,
+          partials;
+
+      if (!options.partial) {
+        helpers = options.helpers;
+        partials = options.partials;
+      }
+      var result = templateSpec.call(
+            container,
+            namespace, context,
+            helpers,
+            partials,
+            options.data);
+
+      if (!options.partial) {
+        env.VM.checkRevision(container.compilerInfo);
+      }
+
+      return result;
+    };
+  }
+
+  __exports__.template = template;function programWithDepth(i, fn, data /*, $depth */) {
+    var args = Array.prototype.slice.call(arguments, 3);
+
+    var prog = function(context, options) {
+      options = options || {};
+
+      return fn.apply(this, [context, options.data || data].concat(args));
+    };
+    prog.program = i;
+    prog.depth = args.length;
+    return prog;
+  }
+
+  __exports__.programWithDepth = programWithDepth;function program(i, fn, data) {
+    var prog = function(context, options) {
+      options = options || {};
+
+      return fn(context, options.data || data);
+    };
+    prog.program = i;
+    prog.depth = 0;
+    return prog;
+  }
+
+  __exports__.program = program;function invokePartial(partial, name, context, helpers, partials, data) {
+    var options = { partial: true, helpers: helpers, partials: partials, data: data };
+
+    if(partial === undefined) {
+      throw new Exception("The partial " + name + " could not be found");
+    } else if(partial instanceof Function) {
+      return partial(context, options);
+    }
+  }
+
+  __exports__.invokePartial = invokePartial;function noop() { return ""; }
+
+  __exports__.noop = noop;
+  return __exports__;
+})(__module3__, __module5__, __module2__);
+
+// handlebars.runtime.js
+var __module1__ = (function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__) {
+  "use strict";
+  var __exports__;
+  /*globals Handlebars: true */
+  var base = __dependency1__;
+
+  // Each of these augment the Handlebars object. No need to setup here.
+  // (This is done to easily share code between commonjs and browse envs)
+  var SafeString = __dependency2__;
+  var Exception = __dependency3__;
+  var Utils = __dependency4__;
+  var runtime = __dependency5__;
+
+  // For compatibility and usage outside of module systems, make the Handlebars object a namespace
+  var create = function() {
+    var hb = new base.HandlebarsEnvironment();
+
+    Utils.extend(hb, base);
+    hb.SafeString = SafeString;
+    hb.Exception = Exception;
+    hb.Utils = Utils;
+
+    hb.VM = runtime;
+    hb.template = function(spec) {
+      return runtime.template(spec, hb);
+    };
+
+    return hb;
+  };
+
+  var Handlebars = create();
+  Handlebars.create = create;
+
+  __exports__ = Handlebars;
+  return __exports__;
+})(__module2__, __module4__, __module5__, __module3__, __module6__);
+
+// handlebars/compiler/ast.js
+var __module7__ = (function(__dependency1__) {
+  "use strict";
+  var __exports__;
+  var Exception = __dependency1__;
+
+  function LocationInfo(locInfo){
+    locInfo = locInfo || {};
+    this.firstLine   = locInfo.first_line;
+    this.firstColumn = locInfo.first_column;
+    this.lastColumn  = locInfo.last_column;
+    this.lastLine    = locInfo.last_line;
+  }
+
+  var AST = {
+    ProgramNode: function(statements, inverseStrip, inverse, locInfo) {
+      var inverseLocationInfo, firstInverseNode;
+      if (arguments.length === 3) {
+        locInfo = inverse;
+        inverse = null;
+      } else if (arguments.length === 2) {
+        locInfo = inverseStrip;
+        inverseStrip = null;
+      }
+
+      LocationInfo.call(this, locInfo);
+      this.type = "program";
+      this.statements = statements;
+      this.strip = {};
+
+      if(inverse) {
+        firstInverseNode = inverse[0];
+        if (firstInverseNode) {
+          inverseLocationInfo = {
+            first_line: firstInverseNode.firstLine,
+            last_line: firstInverseNode.lastLine,
+            last_column: firstInverseNode.lastColumn,
+            first_column: firstInverseNode.firstColumn
+          };
+          this.inverse = new AST.ProgramNode(inverse, inverseStrip, inverseLocationInfo);
+        } else {
+          this.inverse = new AST.ProgramNode(inverse, inverseStrip);
+        }
+        this.strip.right = inverseStrip.left;
+      } else if (inverseStrip) {
+        this.strip.left = inverseStrip.right;
+      }
+    },
+
+    MustacheNode: function(rawParams, hash, open, strip, locInfo) {
+      LocationInfo.call(this, locInfo);
+      this.type = "mustache";
+      this.strip = strip;
+
+      // Open may be a string parsed from the parser or a passed boolean flag
+      if (open != null && open.charAt) {
+        // Must use charAt to support IE pre-10
+        var escapeFlag = open.charAt(3) || open.charAt(2);
+        this.escaped = escapeFlag !== '{' && escapeFlag !== '&';
+      } else {
+        this.escaped = !!open;
+      }
+
+      if (rawParams instanceof AST.SexprNode) {
+        this.sexpr = rawParams;
+      } else {
+        // Support old AST API
+        this.sexpr = new AST.SexprNode(rawParams, hash);
+      }
+
+      this.sexpr.isRoot = true;
+
+      // Support old AST API that stored this info in MustacheNode
+      this.id = this.sexpr.id;
+      this.params = this.sexpr.params;
+      this.hash = this.sexpr.hash;
+      this.eligibleHelper = this.sexpr.eligibleHelper;
+      this.isHelper = this.sexpr.isHelper;
+    },
+
+    SexprNode: function(rawParams, hash, locInfo) {
+      LocationInfo.call(this, locInfo);
+
+      this.type = "sexpr";
+      this.hash = hash;
+
+      var id = this.id = rawParams[0];
+      var params = this.params = rawParams.slice(1);
+
+      // a mustache is an eligible helper if:
+      // * its id is simple (a single part, not `this` or `..`)
+      var eligibleHelper = this.eligibleHelper = id.isSimple;
+
+      // a mustache is definitely a helper if:
+      // * it is an eligible helper, and
+      // * it has at least one parameter or hash segment
+      this.isHelper = eligibleHelper && (params.length || hash);
+
+      // if a mustache is an eligible helper but not a definite
+      // helper, it is ambiguous, and will be resolved in a later
+      // pass or at runtime.
+    },
+
+    PartialNode: function(partialName, context, strip, locInfo) {
+      LocationInfo.call(this, locInfo);
+      this.type         = "partial";
+      this.partialName  = partialName;
+      this.context      = context;
+      this.strip = strip;
+    },
+
+    BlockNode: function(mustache, program, inverse, close, locInfo) {
+      LocationInfo.call(this, locInfo);
+
+      if(mustache.sexpr.id.original !== close.path.original) {
+        throw new Exception(mustache.sexpr.id.original + " doesn't match " + close.path.original, this);
+      }
+
+      this.type = 'block';
+      this.mustache = mustache;
+      this.program  = program;
+      this.inverse  = inverse;
+
+      this.strip = {
+        left: mustache.strip.left,
+        right: close.strip.right
+      };
+
+      (program || inverse).strip.left = mustache.strip.right;
+      (inverse || program).strip.right = close.strip.left;
+
+      if (inverse && !program) {
+        this.isInverse = true;
+      }
+    },
+
+    ContentNode: function(string, locInfo) {
+      LocationInfo.call(this, locInfo);
+      this.type = "content";
+      this.string = string;
+    },
+
+    HashNode: function(pairs, locInfo) {
+      LocationInfo.call(this, locInfo);
+      this.type = "hash";
+      this.pairs = pairs;
+    },
+
+    IdNode: function(parts, locInfo) {
+      LocationInfo.call(this, locInfo);
+      this.type = "ID";
+
+      var original = "",
+          dig = [],
+          depth = 0;
+
+      for(var i=0,l=parts.length; i<l; i++) {
+        var part = parts[i].part;
+        original += (parts[i].separator || '') + part;
+
+        if (part === ".." || part === "." || part === "this") {
+          if (dig.length > 0) {
+            throw new Exception("Invalid path: " + original, this);
+          } else if (part === "..") {
+            depth++;
+          } else {
+            this.isScoped = true;
+          }
+        } else {
+          dig.push(part);
+        }
+      }
+
+      this.original = original;
+      this.parts    = dig;
+      this.string   = dig.join('.');
+      this.depth    = depth;
+
+      // an ID is simple if it only has one part, and that part is not
+      // `..` or `this`.
+      this.isSimple = parts.length === 1 && !this.isScoped && depth === 0;
+
+      this.stringModeValue = this.string;
+    },
+
+    PartialNameNode: function(name, locInfo) {
+      LocationInfo.call(this, locInfo);
+      this.type = "PARTIAL_NAME";
+      this.name = name.original;
+    },
+
+    DataNode: function(id, locInfo) {
+      LocationInfo.call(this, locInfo);
+      this.type = "DATA";
+      this.id = id;
+    },
+
+    StringNode: function(string, locInfo) {
+      LocationInfo.call(this, locInfo);
+      this.type = "STRING";
+      this.original =
+        this.string =
+        this.stringModeValue = string;
+    },
+
+    IntegerNode: function(integer, locInfo) {
+      LocationInfo.call(this, locInfo);
+      this.type = "INTEGER";
+      this.original =
+        this.integer = integer;
+      this.stringModeValue = Number(integer);
+    },
+
+    BooleanNode: function(bool, locInfo) {
+      LocationInfo.call(this, locInfo);
+      this.type = "BOOLEAN";
+      this.bool = bool;
+      this.stringModeValue = bool === "true";
+    },
+
+    CommentNode: function(comment, locInfo) {
+      LocationInfo.call(this, locInfo);
+      this.type = "comment";
+      this.comment = comment;
+    }
+  };
+
+  // Must be exported as an object rather than the root of the module as the jison lexer
+  // most modify the object to operate properly.
+  __exports__ = AST;
+  return __exports__;
+})(__module5__);
+
+// handlebars/compiler/parser.js
+var __module9__ = (function() {
+  "use strict";
+  var __exports__;
+  /* jshint ignore:start */
+  /* Jison generated parser */
+  var handlebars = (function(){
+  var parser = {trace: function trace() { },
+  yy: {},
+  symbols_: {"error":2,"root":3,"statements":4,"EOF":5,"program":6,"simpleInverse":7,"statement":8,"openInverse":9,"closeBlock":10,"openBlock":11,"mustache":12,"partial":13,"CONTENT":14,"COMMENT":15,"OPEN_BLOCK":16,"sexpr":17,"CLOSE":18,"OPEN_INVERSE":19,"OPEN_ENDBLOCK":20,"path":21,"OPEN":22,"OPEN_UNESCAPED":23,"CLOSE_UNESCAPED":24,"OPEN_PARTIAL":25,"partialName":26,"partial_option0":27,"sexpr_repetition0":28,"sexpr_option0":29,"dataName":30,"param":31,"STRING":32,"INTEGER":33,"BOOLEAN":34,"OPEN_SEXPR":35,"CLOSE_SEXPR":36,"hash":37,"hash_repetition_plus0":38,"hashSegment":39,"ID":40,"EQUALS":41,"DATA":42,"pathSegments":43,"SEP":44,"$accept":0,"$end":1},
+  terminals_: {2:"error",5:"EOF",14:"CONTENT",15:"COMMENT",16:"OPEN_BLOCK",18:"CLOSE",19:"OPEN_INVERSE",20:"OPEN_ENDBLOCK",22:"OPEN",23:"OPEN_UNESCAPED",24:"CLOSE_UNESCAPED",25:"OPEN_PARTIAL",32:"STRING",33:"INTEGER",34:"BOOLEAN",35:"OPEN_SEXPR",36:"CLOSE_SEXPR",40:"ID",41:"EQUALS",42:"DATA",44:"SEP"},
+  productions_: [0,[3,2],[3,1],[6,2],[6,3],[6,2],[6,1],[6,1],[6,0],[4,1],[4,2],[8,3],[8,3],[8,1],[8,1],[8,1],[8,1],[11,3],[9,3],[10,3],[12,3],[12,3],[13,4],[7,2],[17,3],[17,1],[31,1],[31,1],[31,1],[31,1],[31,1],[31,3],[37,1],[39,3],[26,1],[26,1],[26,1],[30,2],[21,1],[43,3],[43,1],[27,0],[27,1],[28,0],[28,2],[29,0],[29,1],[38,1],[38,2]],
+  performAction: function anonymous(yytext,yyleng,yylineno,yy,yystate,$$,_$) {
+
+  var $0 = $$.length - 1;
+  switch (yystate) {
+  case 1: return new yy.ProgramNode($$[$0-1], this._$); 
+  break;
+  case 2: return new yy.ProgramNode([], this._$); 
+  break;
+  case 3:this.$ = new yy.ProgramNode([], $$[$0-1], $$[$0], this._$);
+  break;
+  case 4:this.$ = new yy.ProgramNode($$[$0-2], $$[$0-1], $$[$0], this._$);
+  break;
+  case 5:this.$ = new yy.ProgramNode($$[$0-1], $$[$0], [], this._$);
+  break;
+  case 6:this.$ = new yy.ProgramNode($$[$0], this._$);
+  break;
+  case 7:this.$ = new yy.ProgramNode([], this._$);
+  break;
+  case 8:this.$ = new yy.ProgramNode([], this._$);
+  break;
+  case 9:this.$ = [$$[$0]];
+  break;
+  case 10: $$[$0-1].push($$[$0]); this.$ = $$[$0-1]; 
+  break;
+  case 11:this.$ = new yy.BlockNode($$[$0-2], $$[$0-1].inverse, $$[$0-1], $$[$0], this._$);
+  break;
+  case 12:this.$ = new yy.BlockNode($$[$0-2], $$[$0-1], $$[$0-1].inverse, $$[$0], this._$);
+  break;
+  case 13:this.$ = $$[$0];
+  break;
+  case 14:this.$ = $$[$0];
+  break;
+  case 15:this.$ = new yy.ContentNode($$[$0], this._$);
+  break;
+  case 16:this.$ = new yy.CommentNode($$[$0], this._$);
+  break;
+  case 17:this.$ = new yy.MustacheNode($$[$0-1], null, $$[$0-2], stripFlags($$[$0-2], $$[$0]), this._$);
+  break;
+  case 18:this.$ = new yy.MustacheNode($$[$0-1], null, $$[$0-2], stripFlags($$[$0-2], $$[$0]), this._$);
+  break;
+  case 19:this.$ = {path: $$[$0-1], strip: stripFlags($$[$0-2], $$[$0])};
+  break;
+  case 20:this.$ = new yy.MustacheNode($$[$0-1], null, $$[$0-2], stripFlags($$[$0-2], $$[$0]), this._$);
+  break;
+  case 21:this.$ = new yy.MustacheNode($$[$0-1], null, $$[$0-2], stripFlags($$[$0-2], $$[$0]), this._$);
+  break;
+  case 22:this.$ = new yy.PartialNode($$[$0-2], $$[$0-1], stripFlags($$[$0-3], $$[$0]), this._$);
+  break;
+  case 23:this.$ = stripFlags($$[$0-1], $$[$0]);
+  break;
+  case 24:this.$ = new yy.SexprNode([$$[$0-2]].concat($$[$0-1]), $$[$0], this._$);
+  break;
+  case 25:this.$ = new yy.SexprNode([$$[$0]], null, this._$);
+  break;
+  case 26:this.$ = $$[$0];
+  break;
+  case 27:this.$ = new yy.StringNode($$[$0], this._$);
+  break;
+  case 28:this.$ = new yy.IntegerNode($$[$0], this._$);
+  break;
+  case 29:this.$ = new yy.BooleanNode($$[$0], this._$);
+  break;
+  case 30:this.$ = $$[$0];
+  break;
+  case 31:$$[$0-1].isHelper = true; this.$ = $$[$0-1];
+  break;
+  case 32:this.$ = new yy.HashNode($$[$0], this._$);
+  break;
+  case 33:this.$ = [$$[$0-2], $$[$0]];
+  break;
+  case 34:this.$ = new yy.PartialNameNode($$[$0], this._$);
+  break;
+  case 35:this.$ = new yy.PartialNameNode(new yy.StringNode($$[$0], this._$), this._$);
+  break;
+  case 36:this.$ = new yy.PartialNameNode(new yy.IntegerNode($$[$0], this._$));
+  break;
+  case 37:this.$ = new yy.DataNode($$[$0], this._$);
+  break;
+  case 38:this.$ = new yy.IdNode($$[$0], this._$);
+  break;
+  case 39: $$[$0-2].push({part: $$[$0], separator: $$[$0-1]}); this.$ = $$[$0-2]; 
+  break;
+  case 40:this.$ = [{part: $$[$0]}];
+  break;
+  case 43:this.$ = [];
+  break;
+  case 44:$$[$0-1].push($$[$0]);
+  break;
+  case 47:this.$ = [$$[$0]];
+  break;
+  case 48:$$[$0-1].push($$[$0]);
+  break;
+  }
+  },
+  table: [{3:1,4:2,5:[1,3],8:4,9:5,11:6,12:7,13:8,14:[1,9],15:[1,10],16:[1,12],19:[1,11],22:[1,13],23:[1,14],25:[1,15]},{1:[3]},{5:[1,16],8:17,9:5,11:6,12:7,13:8,14:[1,9],15:[1,10],16:[1,12],19:[1,11],22:[1,13],23:[1,14],25:[1,15]},{1:[2,2]},{5:[2,9],14:[2,9],15:[2,9],16:[2,9],19:[2,9],20:[2,9],22:[2,9],23:[2,9],25:[2,9]},{4:20,6:18,7:19,8:4,9:5,11:6,12:7,13:8,14:[1,9],15:[1,10],16:[1,12],19:[1,21],20:[2,8],22:[1,13],23:[1,14],25:[1,15]},{4:20,6:22,7:19,8:4,9:5,11:6,12:7,13:8,14:[1,9],15:[1,10],16:[1,12],19:[1,21],20:[2,8],22:[1,13],23:[1,14],25:[1,15]},{5:[2,13],14:[2,13],15:[2,13],16:[2,13],19:[2,13],20:[2,13],22:[2,13],23:[2,13],25:[2,13]},{5:[2,14],14:[2,14],15:[2,14],16:[2,14],19:[2,14],20:[2,14],22:[2,14],23:[2,14],25:[2,14]},{5:[2,15],14:[2,15],15:[2,15],16:[2,15],19:[2,15],20:[2,15],22:[2,15],23:[2,15],25:[2,15]},{5:[2,16],14:[2,16],15:[2,16],16:[2,16],19:[2,16],20:[2,16],22:[2,16],23:[2,16],25:[2,16]},{17:23,21:24,30:25,40:[1,28],42:[1,27],43:26},{17:29,21:24,30:25,40:[1,28],42:[1,27],43:26},{17:30,21:24,30:25,40:[1,28],42:[1,27],43:26},{17:31,21:24,30:25,40:[1,28],42:[1,27],43:26},{21:33,26:32,32:[1,34],33:[1,35],40:[1,28],43:26},{1:[2,1]},{5:[2,10],14:[2,10],15:[2,10],16:[2,10],19:[2,10],20:[2,10],22:[2,10],23:[2,10],25:[2,10]},{10:36,20:[1,37]},{4:38,8:4,9:5,11:6,12:7,13:8,14:[1,9],15:[1,10],16:[1,12],19:[1,11],20:[2,7],22:[1,13],23:[1,14],25:[1,15]},{7:39,8:17,9:5,11:6,12:7,13:8,14:[1,9],15:[1,10],16:[1,12],19:[1,21],20:[2,6],22:[1,13],23:[1,14],25:[1,15]},{17:23,18:[1,40],21:24,30:25,40:[1,28],42:[1,27],43:26},{10:41,20:[1,37]},{18:[1,42]},{18:[2,43],24:[2,43],28:43,32:[2,43],33:[2,43],34:[2,43],35:[2,43],36:[2,43],40:[2,43],42:[2,43]},{18:[2,25],24:[2,25],36:[2,25]},{18:[2,38],24:[2,38],32:[2,38],33:[2,38],34:[2,38],35:[2,38],36:[2,38],40:[2,38],42:[2,38],44:[1,44]},{21:45,40:[1,28],43:26},{18:[2,40],24:[2,40],32:[2,40],33:[2,40],34:[2,40],35:[2,40],36:[2,40],40:[2,40],42:[2,40],44:[2,40]},{18:[1,46]},{18:[1,47]},{24:[1,48]},{18:[2,41],21:50,27:49,40:[1,28],43:26},{18:[2,34],40:[2,34]},{18:[2,35],40:[2,35]},{18:[2,36],40:[2,36]},{5:[2,11],14:[2,11],15:[2,11],16:[2,11],19:[2,11],20:[2,11],22:[2,11],23:[2,11],25:[2,11]},{21:51,40:[1,28],43:26},{8:17,9:5,11:6,12:7,13:8,14:[1,9],15:[1,10],16:[1,12],19:[1,11],20:[2,3],22:[1,13],23:[1,14],25:[1,15]},{4:52,8:4,9:5,11:6,12:7,13:8,14:[1,9],15:[1,10],16:[1,12],19:[1,11],20:[2,5],22:[1,13],23:[1,14],25:[1,15]},{14:[2,23],15:[2,23],16:[2,23],19:[2,23],20:[2,23],22:[2,23],23:[2,23],25:[2,23]},{5:[2,12],14:[2,12],15:[2,12],16:[2,12],19:[2,12],20:[2,12],22:[2,12],23:[2,12],25:[2,12]},{14:[2,18],15:[2,18],16:[2,18],19:[2,18],20:[2,18],22:[2,18],23:[2,18],25:[2,18]},{18:[2,45],21:56,24:[2,45],29:53,30:60,31:54,32:[1,57],33:[1,58],34:[1,59],35:[1,61],36:[2,45],37:55,38:62,39:63,40:[1,64],42:[1,27],43:26},{40:[1,65]},{18:[2,37],24:[2,37],32:[2,37],33:[2,37],34:[2,37],35:[2,37],36:[2,37],40:[2,37],42:[2,37]},{14:[2,17],15:[2,17],16:[2,17],19:[2,17],20:[2,17],22:[2,17],23:[2,17],25:[2,17]},{5:[2,20],14:[2,20],15:[2,20],16:[2,20],19:[2,20],20:[2,20],22:[2,20],23:[2,20],25:[2,20]},{5:[2,21],14:[2,21],15:[2,21],16:[2,21],19:[2,21],20:[2,21],22:[2,21],23:[2,21],25:[2,21]},{18:[1,66]},{18:[2,42]},{18:[1,67]},{8:17,9:5,11:6,12:7,13:8,14:[1,9],15:[1,10],16:[1,12],19:[1,11],20:[2,4],22:[1,13],23:[1,14],25:[1,15]},{18:[2,24],24:[2,24],36:[2,24]},{18:[2,44],24:[2,44],32:[2,44],33:[2,44],34:[2,44],35:[2,44],36:[2,44],40:[2,44],42:[2,44]},{18:[2,46],24:[2,46],36:[2,46]},{18:[2,26],24:[2,26],32:[2,26],33:[2,26],34:[2,26],35:[2,26],36:[2,26],40:[2,26],42:[2,26]},{18:[2,27],24:[2,27],32:[2,27],33:[2,27],34:[2,27],35:[2,27],36:[2,27],40:[2,27],42:[2,27]},{18:[2,28],24:[2,28],32:[2,28],33:[2,28],34:[2,28],35:[2,28],36:[2,28],40:[2,28],42:[2,28]},{18:[2,29],24:[2,29],32:[2,29],33:[2,29],34:[2,29],35:[2,29],36:[2,29],40:[2,29],42:[2,29]},{18:[2,30],24:[2,30],32:[2,30],33:[2,30],34:[2,30],35:[2,30],36:[2,30],40:[2,30],42:[2,30]},{17:68,21:24,30:25,40:[1,28],42:[1,27],43:26},{18:[2,32],24:[2,32],36:[2,32],39:69,40:[1,70]},{18:[2,47],24:[2,47],36:[2,47],40:[2,47]},{18:[2,40],24:[2,40],32:[2,40],33:[2,40],34:[2,40],35:[2,40],36:[2,40],40:[2,40],41:[1,71],42:[2,40],44:[2,40]},{18:[2,39],24:[2,39],32:[2,39],33:[2,39],34:[2,39],35:[2,39],36:[2,39],40:[2,39],42:[2,39],44:[2,39]},{5:[2,22],14:[2,22],15:[2,22],16:[2,22],19:[2,22],20:[2,22],22:[2,22],23:[2,22],25:[2,22]},{5:[2,19],14:[2,19],15:[2,19],16:[2,19],19:[2,19],20:[2,19],22:[2,19],23:[2,19],25:[2,19]},{36:[1,72]},{18:[2,48],24:[2,48],36:[2,48],40:[2,48]},{41:[1,71]},{21:56,30:60,31:73,32:[1,57],33:[1,58],34:[1,59],35:[1,61],40:[1,28],42:[1,27],43:26},{18:[2,31],24:[2,31],32:[2,31],33:[2,31],34:[2,31],35:[2,31],36:[2,31],40:[2,31],42:[2,31]},{18:[2,33],24:[2,33],36:[2,33],40:[2,33]}],
+  defaultActions: {3:[2,2],16:[2,1],50:[2,42]},
+  parseError: function parseError(str, hash) {
+      throw new Error(str);
+  },
+  parse: function parse(input) {
+      var self = this, stack = [0], vstack = [null], lstack = [], table = this.table, yytext = "", yylineno = 0, yyleng = 0, recovering = 0, TERROR = 2, EOF = 1;
+      this.lexer.setInput(input);
+      this.lexer.yy = this.yy;
+      this.yy.lexer = this.lexer;
+      this.yy.parser = this;
+      if (typeof this.lexer.yylloc == "undefined")
+          this.lexer.yylloc = {};
+      var yyloc = this.lexer.yylloc;
+      lstack.push(yyloc);
+      var ranges = this.lexer.options && this.lexer.options.ranges;
+      if (typeof this.yy.parseError === "function")
+          this.parseError = this.yy.parseError;
+      function popStack(n) {
+          stack.length = stack.length - 2 * n;
+          vstack.length = vstack.length - n;
+          lstack.length = lstack.length - n;
+      }
+      function lex() {
+          var token;
+          token = self.lexer.lex() || 1;
+          if (typeof token !== "number") {
+              token = self.symbols_[token] || token;
+          }
+          return token;
+      }
+      var symbol, preErrorSymbol, state, action, a, r, yyval = {}, p, len, newState, expected;
+      while (true) {
+          state = stack[stack.length - 1];
+          if (this.defaultActions[state]) {
+              action = this.defaultActions[state];
+          } else {
+              if (symbol === null || typeof symbol == "undefined") {
+                  symbol = lex();
+              }
+              action = table[state] && table[state][symbol];
+          }
+          if (typeof action === "undefined" || !action.length || !action[0]) {
+              var errStr = "";
+              if (!recovering) {
+                  expected = [];
+                  for (p in table[state])
+                      if (this.terminals_[p] && p > 2) {
+                          expected.push("'" + this.terminals_[p] + "'");
+                      }
+                  if (this.lexer.showPosition) {
+                      errStr = "Parse error on line " + (yylineno + 1) + ":\n" + this.lexer.showPosition() + "\nExpecting " + expected.join(", ") + ", got '" + (this.terminals_[symbol] || symbol) + "'";
+                  } else {
+                      errStr = "Parse error on line " + (yylineno + 1) + ": Unexpected " + (symbol == 1?"end of input":"'" + (this.terminals_[symbol] || symbol) + "'");
+                  }
+                  this.parseError(errStr, {text: this.lexer.match, token: this.terminals_[symbol] || symbol, line: this.lexer.yylineno, loc: yyloc, expected: expected});
+              }
+          }
+          if (action[0] instanceof Array && action.length > 1) {
+              throw new Error("Parse Error: multiple actions possible at state: " + state + ", token: " + symbol);
+          }
+          switch (action[0]) {
+          case 1:
+              stack.push(symbol);
+              vstack.push(this.lexer.yytext);
+              lstack.push(this.lexer.yylloc);
+              stack.push(action[1]);
+              symbol = null;
+              if (!preErrorSymbol) {
+                  yyleng = this.lexer.yyleng;
+                  yytext = this.lexer.yytext;
+                  yylineno = this.lexer.yylineno;
+                  yyloc = this.lexer.yylloc;
+                  if (recovering > 0)
+                      recovering--;
+              } else {
+                  symbol = preErrorSymbol;
+                  preErrorSymbol = null;
+              }
+              break;
+          case 2:
+              len = this.productions_[action[1]][1];
+              yyval.$ = vstack[vstack.length - len];
+              yyval._$ = {first_line: lstack[lstack.length - (len || 1)].first_line, last_line: lstack[lstack.length - 1].last_line, first_column: lstack[lstack.length - (len || 1)].first_column, last_column: lstack[lstack.length - 1].last_column};
+              if (ranges) {
+                  yyval._$.range = [lstack[lstack.length - (len || 1)].range[0], lstack[lstack.length - 1].range[1]];
+              }
+              r = this.performAction.call(yyval, yytext, yyleng, yylineno, this.yy, action[1], vstack, lstack);
+              if (typeof r !== "undefined") {
+                  return r;
+              }
+              if (len) {
+                  stack = stack.slice(0, -1 * len * 2);
+                  vstack = vstack.slice(0, -1 * len);
+                  lstack = lstack.slice(0, -1 * len);
+              }
+              stack.push(this.productions_[action[1]][0]);
+              vstack.push(yyval.$);
+              lstack.push(yyval._$);
+              newState = table[stack[stack.length - 2]][stack[stack.length - 1]];
+              stack.push(newState);
+              break;
+          case 3:
+              return true;
+          }
+      }
+      return true;
+  }
+  };
+
+
+  function stripFlags(open, close) {
+    return {
+      left: open.charAt(2) === '~',
+      right: close.charAt(0) === '~' || close.charAt(1) === '~'
+    };
+  }
+
+  /* Jison generated lexer */
+  var lexer = (function(){
+  var lexer = ({EOF:1,
+  parseError:function parseError(str, hash) {
+          if (this.yy.parser) {
+              this.yy.parser.parseError(str, hash);
+          } else {
+              throw new Error(str);
+          }
+      },
+  setInput:function (input) {
+          this._input = input;
+          this._more = this._less = this.done = false;
+          this.yylineno = this.yyleng = 0;
+          this.yytext = this.matched = this.match = '';
+          this.conditionStack = ['INITIAL'];
+          this.yylloc = {first_line:1,first_column:0,last_line:1,last_column:0};
+          if (this.options.ranges) this.yylloc.range = [0,0];
+          this.offset = 0;
+          return this;
+      },
+  input:function () {
+          var ch = this._input[0];
+          this.yytext += ch;
+          this.yyleng++;
+          this.offset++;
+          this.match += ch;
+          this.matched += ch;
+          var lines = ch.match(/(?:\r\n?|\n).*/g);
+          if (lines) {
+              this.yylineno++;
+              this.yylloc.last_line++;
+          } else {
+              this.yylloc.last_column++;
+          }
+          if (this.options.ranges) this.yylloc.range[1]++;
+
+          this._input = this._input.slice(1);
+          return ch;
+      },
+  unput:function (ch) {
+          var len = ch.length;
+          var lines = ch.split(/(?:\r\n?|\n)/g);
+
+          this._input = ch + this._input;
+          this.yytext = this.yytext.substr(0, this.yytext.length-len-1);
+          //this.yyleng -= len;
+          this.offset -= len;
+          var oldLines = this.match.split(/(?:\r\n?|\n)/g);
+          this.match = this.match.substr(0, this.match.length-1);
+          this.matched = this.matched.substr(0, this.matched.length-1);
+
+          if (lines.length-1) this.yylineno -= lines.length-1;
+          var r = this.yylloc.range;
+
+          this.yylloc = {first_line: this.yylloc.first_line,
+            last_line: this.yylineno+1,
+            first_column: this.yylloc.first_column,
+            last_column: lines ?
+                (lines.length === oldLines.length ? this.yylloc.first_column : 0) + oldLines[oldLines.length - lines.length].length - lines[0].length:
+                this.yylloc.first_column - len
+            };
+
+          if (this.options.ranges) {
+              this.yylloc.range = [r[0], r[0] + this.yyleng - len];
+          }
+          return this;
+      },
+  more:function () {
+          this._more = true;
+          return this;
+      },
+  less:function (n) {
+          this.unput(this.match.slice(n));
+      },
+  pastInput:function () {
+          var past = this.matched.substr(0, this.matched.length - this.match.length);
+          return (past.length > 20 ? '...':'') + past.substr(-20).replace(/\n/g, "");
+      },
+  upcomingInput:function () {
+          var next = this.match;
+          if (next.length < 20) {
+              next += this._input.substr(0, 20-next.length);
+          }
+          return (next.substr(0,20)+(next.length > 20 ? '...':'')).replace(/\n/g, "");
+      },
+  showPosition:function () {
+          var pre = this.pastInput();
+          var c = new Array(pre.length + 1).join("-");
+          return pre + this.upcomingInput() + "\n" + c+"^";
+      },
+  next:function () {
+          if (this.done) {
+              return this.EOF;
+          }
+          if (!this._input) this.done = true;
+
+          var token,
+              match,
+              tempMatch,
+              index,
+              col,
+              lines;
+          if (!this._more) {
+              this.yytext = '';
+              this.match = '';
+          }
+          var rules = this._currentRules();
+          for (var i=0;i < rules.length; i++) {
+              tempMatch = this._input.match(this.rules[rules[i]]);
+              if (tempMatch && (!match || tempMatch[0].length > match[0].length)) {
+                  match = tempMatch;
+                  index = i;
+                  if (!this.options.flex) break;
+              }
+          }
+          if (match) {
+              lines = match[0].match(/(?:\r\n?|\n).*/g);
+              if (lines) this.yylineno += lines.length;
+              this.yylloc = {first_line: this.yylloc.last_line,
+                             last_line: this.yylineno+1,
+                             first_column: this.yylloc.last_column,
+                             last_column: lines ? lines[lines.length-1].length-lines[lines.length-1].match(/\r?\n?/)[0].length : this.yylloc.last_column + match[0].length};
+              this.yytext += match[0];
+              this.match += match[0];
+              this.matches = match;
+              this.yyleng = this.yytext.length;
+              if (this.options.ranges) {
+                  this.yylloc.range = [this.offset, this.offset += this.yyleng];
+              }
+              this._more = false;
+              this._input = this._input.slice(match[0].length);
+              this.matched += match[0];
+              token = this.performAction.call(this, this.yy, this, rules[index],this.conditionStack[this.conditionStack.length-1]);
+              if (this.done && this._input) this.done = false;
+              if (token) return token;
+              else return;
+          }
+          if (this._input === "") {
+              return this.EOF;
+          } else {
+              return this.parseError('Lexical error on line '+(this.yylineno+1)+'. Unrecognized text.\n'+this.showPosition(),
+                      {text: "", token: null, line: this.yylineno});
+          }
+      },
+  lex:function lex() {
+          var r = this.next();
+          if (typeof r !== 'undefined') {
+              return r;
+          } else {
+              return this.lex();
+          }
+      },
+  begin:function begin(condition) {
+          this.conditionStack.push(condition);
+      },
+  popState:function popState() {
+          return this.conditionStack.pop();
+      },
+  _currentRules:function _currentRules() {
+          return this.conditions[this.conditionStack[this.conditionStack.length-1]].rules;
+      },
+  topState:function () {
+          return this.conditionStack[this.conditionStack.length-2];
+      },
+  pushState:function begin(condition) {
+          this.begin(condition);
+      }});
+  lexer.options = {};
+  lexer.performAction = function anonymous(yy,yy_,$avoiding_name_collisions,YY_START) {
+
+
+  function strip(start, end) {
+    return yy_.yytext = yy_.yytext.substr(start, yy_.yyleng-end);
+  }
+
+
+  var YYSTATE=YY_START
+  switch($avoiding_name_collisions) {
+  case 0:
+                                     if(yy_.yytext.slice(-2) === "\\\\") {
+                                       strip(0,1);
+                                       this.begin("mu");
+                                     } else if(yy_.yytext.slice(-1) === "\\") {
+                                       strip(0,1);
+                                       this.begin("emu");
+                                     } else {
+                                       this.begin("mu");
+                                     }
+                                     if(yy_.yytext) return 14;
+                                   
+  break;
+  case 1:return 14;
+  break;
+  case 2:
+                                     this.popState();
+                                     return 14;
+                                   
+  break;
+  case 3:strip(0,4); this.popState(); return 15;
+  break;
+  case 4:return 35;
+  break;
+  case 5:return 36;
+  break;
+  case 6:return 25;
+  break;
+  case 7:return 16;
+  break;
+  case 8:return 20;
+  break;
+  case 9:return 19;
+  break;
+  case 10:return 19;
+  break;
+  case 11:return 23;
+  break;
+  case 12:return 22;
+  break;
+  case 13:this.popState(); this.begin('com');
+  break;
+  case 14:strip(3,5); this.popState(); return 15;
+  break;
+  case 15:return 22;
+  break;
+  case 16:return 41;
+  break;
+  case 17:return 40;
+  break;
+  case 18:return 40;
+  break;
+  case 19:return 44;
+  break;
+  case 20:// ignore whitespace
+  break;
+  case 21:this.popState(); return 24;
+  break;
+  case 22:this.popState(); return 18;
+  break;
+  case 23:yy_.yytext = strip(1,2).replace(/\\"/g,'"'); return 32;
+  break;
+  case 24:yy_.yytext = strip(1,2).replace(/\\'/g,"'"); return 32;
+  break;
+  case 25:return 42;
+  break;
+  case 26:return 34;
+  break;
+  case 27:return 34;
+  break;
+  case 28:return 33;
+  break;
+  case 29:return 40;
+  break;
+  case 30:yy_.yytext = strip(1,2); return 40;
+  break;
+  case 31:return 'INVALID';
+  break;
+  case 32:return 5;
+  break;
+  }
+  };
+  lexer.rules = [/^(?:[^\x00]*?(?=(\{\{)))/,/^(?:[^\x00]+)/,/^(?:[^\x00]{2,}?(?=(\{\{|\\\{\{|\\\\\{\{|$)))/,/^(?:[\s\S]*?--\}\})/,/^(?:\()/,/^(?:\))/,/^(?:\{\{(~)?>)/,/^(?:\{\{(~)?#)/,/^(?:\{\{(~)?\/)/,/^(?:\{\{(~)?\^)/,/^(?:\{\{(~)?\s*else\b)/,/^(?:\{\{(~)?\{)/,/^(?:\{\{(~)?&)/,/^(?:\{\{!--)/,/^(?:\{\{![\s\S]*?\}\})/,/^(?:\{\{(~)?)/,/^(?:=)/,/^(?:\.\.)/,/^(?:\.(?=([=~}\s\/.)])))/,/^(?:[\/.])/,/^(?:\s+)/,/^(?:\}(~)?\}\})/,/^(?:(~)?\}\})/,/^(?:"(\\["]|[^"])*")/,/^(?:'(\\[']|[^'])*')/,/^(?:@)/,/^(?:true(?=([~}\s)])))/,/^(?:false(?=([~}\s)])))/,/^(?:-?[0-9]+(?=([~}\s)])))/,/^(?:([^\s!"#%-,\.\/;->@\[-\^`\{-~]+(?=([=~}\s\/.)]))))/,/^(?:\[[^\]]*\])/,/^(?:.)/,/^(?:$)/];
+  lexer.conditions = {"mu":{"rules":[4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32],"inclusive":false},"emu":{"rules":[2],"inclusive":false},"com":{"rules":[3],"inclusive":false},"INITIAL":{"rules":[0,1,32],"inclusive":true}};
+  return lexer;})()
+  parser.lexer = lexer;
+  function Parser () { this.yy = {}; }Parser.prototype = parser;parser.Parser = Parser;
+  return new Parser;
+  })();__exports__ = handlebars;
+  /* jshint ignore:end */
+  return __exports__;
+})();
+
+// handlebars/compiler/base.js
+var __module8__ = (function(__dependency1__, __dependency2__) {
+  "use strict";
+  var __exports__ = {};
+  var parser = __dependency1__;
+  var AST = __dependency2__;
+
+  __exports__.parser = parser;
+
+  function parse(input) {
+    // Just return if an already-compile AST was passed in.
+    if(input.constructor === AST.ProgramNode) { return input; }
+
+    parser.yy = AST;
+    return parser.parse(input);
+  }
+
+  __exports__.parse = parse;
+  return __exports__;
+})(__module9__, __module7__);
+
+// handlebars/compiler/compiler.js
+var __module10__ = (function(__dependency1__) {
+  "use strict";
+  var __exports__ = {};
+  var Exception = __dependency1__;
+
+  function Compiler() {}
+
+  __exports__.Compiler = Compiler;// the foundHelper register will disambiguate helper lookup from finding a
+  // function in a context. This is necessary for mustache compatibility, which
+  // requires that context functions in blocks are evaluated by blockHelperMissing,
+  // and then proceed as if the resulting value was provided to blockHelperMissing.
+
+  Compiler.prototype = {
+    compiler: Compiler,
+
+    disassemble: function() {
+      var opcodes = this.opcodes, opcode, out = [], params, param;
+
+      for (var i=0, l=opcodes.length; i<l; i++) {
+        opcode = opcodes[i];
+
+        if (opcode.opcode === 'DECLARE') {
+          out.push("DECLARE " + opcode.name + "=" + opcode.value);
+        } else {
+          params = [];
+          for (var j=0; j<opcode.args.length; j++) {
+            param = opcode.args[j];
+            if (typeof param === "string") {
+              param = "\"" + param.replace("\n", "\\n") + "\"";
+            }
+            params.push(param);
+          }
+          out.push(opcode.opcode + " " + params.join(" "));
+        }
+      }
+
+      return out.join("\n");
+    },
+
+    equals: function(other) {
+      var len = this.opcodes.length;
+      if (other.opcodes.length !== len) {
+        return false;
+      }
+
+      for (var i = 0; i < len; i++) {
+        var opcode = this.opcodes[i],
+            otherOpcode = other.opcodes[i];
+        if (opcode.opcode !== otherOpcode.opcode || opcode.args.length !== otherOpcode.args.length) {
+          return false;
+        }
+        for (var j = 0; j < opcode.args.length; j++) {
+          if (opcode.args[j] !== otherOpcode.args[j]) {
+            return false;
+          }
+        }
+      }
+
+      len = this.children.length;
+      if (other.children.length !== len) {
+        return false;
+      }
+      for (i = 0; i < len; i++) {
+        if (!this.children[i].equals(other.children[i])) {
+          return false;
+        }
+      }
+
+      return true;
+    },
+
+    guid: 0,
+
+    compile: function(program, options) {
+      this.opcodes = [];
+      this.children = [];
+      this.depths = {list: []};
+      this.options = options;
+
+      // These changes will propagate to the other compiler components
+      var knownHelpers = this.options.knownHelpers;
+      this.options.knownHelpers = {
+        'helperMissing': true,
+        'blockHelperMissing': true,
+        'each': true,
+        'if': true,
+        'unless': true,
+        'with': true,
+        'log': true
+      };
+      if (knownHelpers) {
+        for (var name in knownHelpers) {
+          this.options.knownHelpers[name] = knownHelpers[name];
+        }
+      }
+
+      return this.accept(program);
+    },
+
+    accept: function(node) {
+      var strip = node.strip || {},
+          ret;
+      if (strip.left) {
+        this.opcode('strip');
+      }
+
+      ret = this[node.type](node);
+
+      if (strip.right) {
+        this.opcode('strip');
+      }
+
+      return ret;
+    },
+
+    program: function(program) {
+      var statements = program.statements;
+
+      for(var i=0, l=statements.length; i<l; i++) {
+        this.accept(statements[i]);
+      }
+      this.isSimple = l === 1;
+
+      this.depths.list = this.depths.list.sort(function(a, b) {
+        return a - b;
+      });
+
+      return this;
+    },
+
+    compileProgram: function(program) {
+      var result = new this.compiler().compile(program, this.options);
+      var guid = this.guid++, depth;
+
+      this.usePartial = this.usePartial || result.usePartial;
+
+      this.children[guid] = result;
+
+      for(var i=0, l=result.depths.list.length; i<l; i++) {
+        depth = result.depths.list[i];
+
+        if(depth < 2) { continue; }
+        else { this.addDepth(depth - 1); }
+      }
+
+      return guid;
+    },
+
+    block: function(block) {
+      var mustache = block.mustache,
+          program = block.program,
+          inverse = block.inverse;
+
+      if (program) {
+        program = this.compileProgram(program);
+      }
+
+      if (inverse) {
+        inverse = this.compileProgram(inverse);
+      }
+
+      var sexpr = mustache.sexpr;
+      var type = this.classifySexpr(sexpr);
+
+      if (type === "helper") {
+        this.helperSexpr(sexpr, program, inverse);
+      } else if (type === "simple") {
+        this.simpleSexpr(sexpr);
+
+        // now that the simple mustache is resolved, we need to
+        // evaluate it by executing `blockHelperMissing`
+        this.opcode('pushProgram', program);
+        this.opcode('pushProgram', inverse);
+        this.opcode('emptyHash');
+        this.opcode('blockValue');
+      } else {
+        this.ambiguousSexpr(sexpr, program, inverse);
+
+        // now that the simple mustache is resolved, we need to
+        // evaluate it by executing `blockHelperMissing`
+        this.opcode('pushProgram', program);
+        this.opcode('pushProgram', inverse);
+        this.opcode('emptyHash');
+        this.opcode('ambiguousBlockValue');
+      }
+
+      this.opcode('append');
+    },
+
+    hash: function(hash) {
+      var pairs = hash.pairs, pair, val;
+
+      this.opcode('pushHash');
+
+      for(var i=0, l=pairs.length; i<l; i++) {
+        pair = pairs[i];
+        val  = pair[1];
+
+        if (this.options.stringParams) {
+          if(val.depth) {
+            this.addDepth(val.depth);
+          }
+          this.opcode('getContext', val.depth || 0);
+          this.opcode('pushStringParam', val.stringModeValue, val.type);
+
+          if (val.type === 'sexpr') {
+            // Subexpressions get evaluated and passed in
+            // in string params mode.
+            this.sexpr(val);
+          }
+        } else {
+          this.accept(val);
+        }
+
+        this.opcode('assignToHash', pair[0]);
+      }
+      this.opcode('popHash');
+    },
+
+    partial: function(partial) {
+      var partialName = partial.partialName;
+      this.usePartial = true;
+
+      if(partial.context) {
+        this.ID(partial.context);
+      } else {
+        this.opcode('push', 'depth0');
+      }
+
+      this.opcode('invokePartial', partialName.name);
+      this.opcode('append');
+    },
+
+    content: function(content) {
+      this.opcode('appendContent', content.string);
+    },
+
+    mustache: function(mustache) {
+      this.sexpr(mustache.sexpr);
+
+      if(mustache.escaped && !this.options.noEscape) {
+        this.opcode('appendEscaped');
+      } else {
+        this.opcode('append');
+      }
+    },
+
+    ambiguousSexpr: function(sexpr, program, inverse) {
+      var id = sexpr.id,
+          name = id.parts[0],
+          isBlock = program != null || inverse != null;
+
+      this.opcode('getContext', id.depth);
+
+      this.opcode('pushProgram', program);
+      this.opcode('pushProgram', inverse);
+
+      this.opcode('invokeAmbiguous', name, isBlock);
+    },
+
+    simpleSexpr: function(sexpr) {
+      var id = sexpr.id;
+
+      if (id.type === 'DATA') {
+        this.DATA(id);
+      } else if (id.parts.length) {
+        this.ID(id);
+      } else {
+        // Simplified ID for `this`
+        this.addDepth(id.depth);
+        this.opcode('getContext', id.depth);
+        this.opcode('pushContext');
+      }
+
+      this.opcode('resolvePossibleLambda');
+    },
+
+    helperSexpr: function(sexpr, program, inverse) {
+      var params = this.setupFullMustacheParams(sexpr, program, inverse),
+          name = sexpr.id.parts[0];
+
+      if (this.options.knownHelpers[name]) {
+        this.opcode('invokeKnownHelper', params.length, name);
+      } else if (this.options.knownHelpersOnly) {
+        throw new Exception("You specified knownHelpersOnly, but used the unknown helper " + name, sexpr);
+      } else {
+        this.opcode('invokeHelper', params.length, name, sexpr.isRoot);
+      }
+    },
+
+    sexpr: function(sexpr) {
+      var type = this.classifySexpr(sexpr);
+
+      if (type === "simple") {
+        this.simpleSexpr(sexpr);
+      } else if (type === "helper") {
+        this.helperSexpr(sexpr);
+      } else {
+        this.ambiguousSexpr(sexpr);
+      }
+    },
+
+    ID: function(id) {
+      this.addDepth(id.depth);
+      this.opcode('getContext', id.depth);
+
+      var name = id.parts[0];
+      if (!name) {
+        this.opcode('pushContext');
+      } else {
+        this.opcode('lookupOnContext', id.parts[0]);
+      }
+
+      for(var i=1, l=id.parts.length; i<l; i++) {
+        this.opcode('lookup', id.parts[i]);
+      }
+    },
+
+    DATA: function(data) {
+      this.options.data = true;
+      if (data.id.isScoped || data.id.depth) {
+        throw new Exception('Scoped data references are not supported: ' + data.original, data);
+      }
+
+      this.opcode('lookupData');
+      var parts = data.id.parts;
+      for(var i=0, l=parts.length; i<l; i++) {
+        this.opcode('lookup', parts[i]);
+      }
+    },
+
+    STRING: function(string) {
+      this.opcode('pushString', string.string);
+    },
+
+    INTEGER: function(integer) {
+      this.opcode('pushLiteral', integer.integer);
+    },
+
+    BOOLEAN: function(bool) {
+      this.opcode('pushLiteral', bool.bool);
+    },
+
+    comment: function() {},
+
+    // HELPERS
+    opcode: function(name) {
+      this.opcodes.push({ opcode: name, args: [].slice.call(arguments, 1) });
+    },
+
+    declare: function(name, value) {
+      this.opcodes.push({ opcode: 'DECLARE', name: name, value: value });
+    },
+
+    addDepth: function(depth) {
+      if(depth === 0) { return; }
+
+      if(!this.depths[depth]) {
+        this.depths[depth] = true;
+        this.depths.list.push(depth);
+      }
+    },
+
+    classifySexpr: function(sexpr) {
+      var isHelper   = sexpr.isHelper;
+      var isEligible = sexpr.eligibleHelper;
+      var options    = this.options;
+
+      // if ambiguous, we can possibly resolve the ambiguity now
+      if (isEligible && !isHelper) {
+        var name = sexpr.id.parts[0];
+
+        if (options.knownHelpers[name]) {
+          isHelper = true;
+        } else if (options.knownHelpersOnly) {
+          isEligible = false;
+        }
+      }
+
+      if (isHelper) { return "helper"; }
+      else if (isEligible) { return "ambiguous"; }
+      else { return "simple"; }
+    },
+
+    pushParams: function(params) {
+      var i = params.length, param;
+
+      while(i--) {
+        param = params[i];
+
+        if(this.options.stringParams) {
+          if(param.depth) {
+            this.addDepth(param.depth);
+          }
+
+          this.opcode('getContext', param.depth || 0);
+          this.opcode('pushStringParam', param.stringModeValue, param.type);
+
+          if (param.type === 'sexpr') {
+            // Subexpressions get evaluated and passed in
+            // in string params mode.
+            this.sexpr(param);
+          }
+        } else {
+          this[param.type](param);
+        }
+      }
+    },
+
+    setupFullMustacheParams: function(sexpr, program, inverse) {
+      var params = sexpr.params;
+      this.pushParams(params);
+
+      this.opcode('pushProgram', program);
+      this.opcode('pushProgram', inverse);
+
+      if (sexpr.hash) {
+        this.hash(sexpr.hash);
+      } else {
+        this.opcode('emptyHash');
+      }
+
+      return params;
+    }
+  };
+
+  function precompile(input, options, env) {
+    if (input == null || (typeof input !== 'string' && input.constructor !== env.AST.ProgramNode)) {
+      throw new Exception("You must pass a string or Handlebars AST to Handlebars.precompile. You passed " + input);
+    }
+
+    options = options || {};
+    if (!('data' in options)) {
+      options.data = true;
+    }
+
+    var ast = env.parse(input);
+    var environment = new env.Compiler().compile(ast, options);
+    return new env.JavaScriptCompiler().compile(environment, options);
+  }
+
+  __exports__.precompile = precompile;function compile(input, options, env) {
+    if (input == null || (typeof input !== 'string' && input.constructor !== env.AST.ProgramNode)) {
+      throw new Exception("You must pass a string or Handlebars AST to Handlebars.compile. You passed " + input);
+    }
+
+    options = options || {};
+
+    if (!('data' in options)) {
+      options.data = true;
+    }
+
+    var compiled;
+
+    function compileInput() {
+      var ast = env.parse(input);
+      var environment = new env.Compiler().compile(ast, options);
+      var templateSpec = new env.JavaScriptCompiler().compile(environment, options, undefined, true);
+      return env.template(templateSpec);
+    }
+
+    // Template is only compiled on first use and cached after that point.
+    return function(context, options) {
+      if (!compiled) {
+        compiled = compileInput();
+      }
+      return compiled.call(this, context, options);
+    };
+  }
+
+  __exports__.compile = compile;
+  return __exports__;
+})(__module5__);
+
+// handlebars/compiler/javascript-compiler.js
+var __module11__ = (function(__dependency1__, __dependency2__) {
+  "use strict";
+  var __exports__;
+  var COMPILER_REVISION = __dependency1__.COMPILER_REVISION;
+  var REVISION_CHANGES = __dependency1__.REVISION_CHANGES;
+  var log = __dependency1__.log;
+  var Exception = __dependency2__;
+
+  function Literal(value) {
+    this.value = value;
+  }
+
+  function JavaScriptCompiler() {}
+
+  JavaScriptCompiler.prototype = {
+    // PUBLIC API: You can override these methods in a subclass to provide
+    // alternative compiled forms for name lookup and buffering semantics
+    nameLookup: function(parent, name /* , type*/) {
+      var wrap,
+          ret;
+      if (parent.indexOf('depth') === 0) {
+        wrap = true;
+      }
+
+      if (/^[0-9]+$/.test(name)) {
+        ret = parent + "[" + name + "]";
+      } else if (JavaScriptCompiler.isValidJavaScriptVariableName(name)) {
+        ret = parent + "." + name;
+      }
+      else {
+        ret = parent + "['" + name + "']";
+      }
+
+      if (wrap) {
+        return '(' + parent + ' && ' + ret + ')';
+      } else {
+        return ret;
+      }
+    },
+
+    compilerInfo: function() {
+      var revision = COMPILER_REVISION,
+          versions = REVISION_CHANGES[revision];
+      return "this.compilerInfo = ["+revision+",'"+versions+"'];\n";
+    },
+
+    appendToBuffer: function(string) {
+      if (this.environment.isSimple) {
+        return "return " + string + ";";
+      } else {
+        return {
+          appendToBuffer: true,
+          content: string,
+          toString: function() { return "buffer += " + string + ";"; }
+        };
+      }
+    },
+
+    initializeBuffer: function() {
+      return this.quotedString("");
+    },
+
+    namespace: "Handlebars",
+    // END PUBLIC API
+
+    compile: function(environment, options, context, asObject) {
+      this.environment = environment;
+      this.options = options || {};
+
+      log('debug', this.environment.disassemble() + "\n\n");
+
+      this.name = this.environment.name;
+      this.isChild = !!context;
+      this.context = context || {
+        programs: [],
+        environments: [],
+        aliases: { }
+      };
+
+      this.preamble();
+
+      this.stackSlot = 0;
+      this.stackVars = [];
+      this.registers = { list: [] };
+      this.hashes = [];
+      this.compileStack = [];
+      this.inlineStack = [];
+
+      this.compileChildren(environment, options);
+
+      var opcodes = environment.opcodes, opcode;
+
+      this.i = 0;
+
+      for(var l=opcodes.length; this.i<l; this.i++) {
+        opcode = opcodes[this.i];
+
+        if(opcode.opcode === 'DECLARE') {
+          this[opcode.name] = opcode.value;
+        } else {
+          this[opcode.opcode].apply(this, opcode.args);
+        }
+
+        // Reset the stripNext flag if it was not set by this operation.
+        if (opcode.opcode !== this.stripNext) {
+          this.stripNext = false;
+        }
+      }
+
+      // Flush any trailing content that might be pending.
+      this.pushSource('');
+
+      if (this.stackSlot || this.inlineStack.length || this.compileStack.length) {
+        throw new Exception('Compile completed with content left on stack');
+      }
+
+      return this.createFunctionContext(asObject);
+    },
+
+    preamble: function() {
+      var out = [];
+
+      if (!this.isChild) {
+        var namespace = this.namespace;
+
+        var copies = "helpers = this.merge(helpers, " + namespace + ".helpers);";
+        if (this.environment.usePartial) { copies = copies + " partials = this.merge(partials, " + namespace + ".partials);"; }
+        if (this.options.data) { copies = copies + " data = data || {};"; }
+        out.push(copies);
+      } else {
+        out.push('');
+      }
+
+      if (!this.environment.isSimple) {
+        out.push(", buffer = " + this.initializeBuffer());
+      } else {
+        out.push("");
+      }
+
+      // track the last context pushed into place to allow skipping the
+      // getContext opcode when it would be a noop
+      this.lastContext = 0;
+      this.source = out;
+    },
+
+    createFunctionContext: function(asObject) {
+      var locals = this.stackVars.concat(this.registers.list);
+
+      if(locals.length > 0) {
+        this.source[1] = this.source[1] + ", " + locals.join(", ");
+      }
+
+      // Generate minimizer alias mappings
+      if (!this.isChild) {
+        for (var alias in this.context.aliases) {
+          if (this.context.aliases.hasOwnProperty(alias)) {
+            this.source[1] = this.source[1] + ', ' + alias + '=' + this.context.aliases[alias];
+          }
+        }
+      }
+
+      if (this.source[1]) {
+        this.source[1] = "var " + this.source[1].substring(2) + ";";
+      }
+
+      // Merge children
+      if (!this.isChild) {
+        this.source[1] += '\n' + this.context.programs.join('\n') + '\n';
+      }
+
+      if (!this.environment.isSimple) {
+        this.pushSource("return buffer;");
+      }
+
+      var params = this.isChild ? ["depth0", "data"] : ["Handlebars", "depth0", "helpers", "partials", "data"];
+
+      for(var i=0, l=this.environment.depths.list.length; i<l; i++) {
+        params.push("depth" + this.environment.depths.list[i]);
+      }
+
+      // Perform a second pass over the output to merge content when possible
+      var source = this.mergeSource();
+
+      if (!this.isChild) {
+        source = this.compilerInfo()+source;
+      }
+
+      if (asObject) {
+        params.push(source);
+
+        return Function.apply(this, params);
+      } else {
+        var functionSource = 'function ' + (this.name || '') + '(' + params.join(',') + ') {\n  ' + source + '}';
+        log('debug', functionSource + "\n\n");
+        return functionSource;
+      }
+    },
+    mergeSource: function() {
+      // WARN: We are not handling the case where buffer is still populated as the source should
+      // not have buffer append operations as their final action.
+      var source = '',
+          buffer;
+      for (var i = 0, len = this.source.length; i < len; i++) {
+        var line = this.source[i];
+        if (line.appendToBuffer) {
+          if (buffer) {
+            buffer = buffer + '\n    + ' + line.content;
+          } else {
+            buffer = line.content;
+          }
+        } else {
+          if (buffer) {
+            source += 'buffer += ' + buffer + ';\n  ';
+            buffer = undefined;
+          }
+          source += line + '\n  ';
+        }
+      }
+      return source;
+    },
+
+    // [blockValue]
+    //
+    // On stack, before: hash, inverse, program, value
+    // On stack, after: return value of blockHelperMissing
+    //
+    // The purpose of this opcode is to take a block of the form
+    // `{{#foo}}...{{/foo}}`, resolve the value of `foo`, and
+    // replace it on the stack with the result of properly
+    // invoking blockHelperMissing.
+    blockValue: function() {
+      this.context.aliases.blockHelperMissing = 'helpers.blockHelperMissing';
+
+      var params = ["depth0"];
+      this.setupParams(0, params);
+
+      this.replaceStack(function(current) {
+        params.splice(1, 0, current);
+        return "blockHelperMissing.call(" + params.join(", ") + ")";
+      });
+    },
+
+    // [ambiguousBlockValue]
+    //
+    // On stack, before: hash, inverse, program, value
+    // Compiler value, before: lastHelper=value of last found helper, if any
+    // On stack, after, if no lastHelper: same as [blockValue]
+    // On stack, after, if lastHelper: value
+    ambiguousBlockValue: function() {
+      this.context.aliases.blockHelperMissing = 'helpers.blockHelperMissing';
+
+      var params = ["depth0"];
+      this.setupParams(0, params);
+
+      var current = this.topStack();
+      params.splice(1, 0, current);
+
+      this.pushSource("if (!" + this.lastHelper + ") { " + current + " = blockHelperMissing.call(" + params.join(", ") + "); }");
+    },
+
+    // [appendContent]
+    //
+    // On stack, before: ...
+    // On stack, after: ...
+    //
+    // Appends the string value of `content` to the current buffer
+    appendContent: function(content) {
+      if (this.pendingContent) {
+        content = this.pendingContent + content;
+      }
+      if (this.stripNext) {
+        content = content.replace(/^\s+/, '');
+      }
+
+      this.pendingContent = content;
+    },
+
+    // [strip]
+    //
+    // On stack, before: ...
+    // On stack, after: ...
+    //
+    // Removes any trailing whitespace from the prior content node and flags
+    // the next operation for stripping if it is a content node.
+    strip: function() {
+      if (this.pendingContent) {
+        this.pendingContent = this.pendingContent.replace(/\s+$/, '');
+      }
+      this.stripNext = 'strip';
+    },
+
+    // [append]
+    //
+    // On stack, before: value, ...
+    // On stack, after: ...
+    //
+    // Coerces `value` to a String and appends it to the current buffer.
+    //
+    // If `value` is truthy, or 0, it is coerced into a string and appended
+    // Otherwise, the empty string is appended
+    append: function() {
+      // Force anything that is inlined onto the stack so we don't have duplication
+      // when we examine local
+      this.flushInline();
+      var local = this.popStack();
+      this.pushSource("if(" + local + " || " + local + " === 0) { " + this.appendToBuffer(local) + " }");
+      if (this.environment.isSimple) {
+        this.pushSource("else { " + this.appendToBuffer("''") + " }");
+      }
+    },
+
+    // [appendEscaped]
+    //
+    // On stack, before: value, ...
+    // On stack, after: ...
+    //
+    // Escape `value` and append it to the buffer
+    appendEscaped: function() {
+      this.context.aliases.escapeExpression = 'this.escapeExpression';
+
+      this.pushSource(this.appendToBuffer("escapeExpression(" + this.popStack() + ")"));
+    },
+
+    // [getContext]
+    //
+    // On stack, before: ...
+    // On stack, after: ...
+    // Compiler value, after: lastContext=depth
+    //
+    // Set the value of the `lastContext` compiler value to the depth
+    getContext: function(depth) {
+      if(this.lastContext !== depth) {
+        this.lastContext = depth;
+      }
+    },
+
+    // [lookupOnContext]
+    //
+    // On stack, before: ...
+    // On stack, after: currentContext[name], ...
+    //
+    // Looks up the value of `name` on the current context and pushes
+    // it onto the stack.
+    lookupOnContext: function(name) {
+      this.push(this.nameLookup('depth' + this.lastContext, name, 'context'));
+    },
+
+    // [pushContext]
+    //
+    // On stack, before: ...
+    // On stack, after: currentContext, ...
+    //
+    // Pushes the value of the current context onto the stack.
+    pushContext: function() {
+      this.pushStackLiteral('depth' + this.lastContext);
+    },
+
+    // [resolvePossibleLambda]
+    //
+    // On stack, before: value, ...
+    // On stack, after: resolved value, ...
+    //
+    // If the `value` is a lambda, replace it on the stack by
+    // the return value of the lambda
+    resolvePossibleLambda: function() {
+      this.context.aliases.functionType = '"function"';
+
+      this.replaceStack(function(current) {
+        return "typeof " + current + " === functionType ? " + current + ".apply(depth0) : " + current;
+      });
+    },
+
+    // [lookup]
+    //
+    // On stack, before: value, ...
+    // On stack, after: value[name], ...
+    //
+    // Replace the value on the stack with the result of looking
+    // up `name` on `value`
+    lookup: function(name) {
+      this.replaceStack(function(current) {
+        return current + " == null || " + current + " === false ? " + current + " : " + this.nameLookup(current, name, 'context');
+      });
+    },
+
+    // [lookupData]
+    //
+    // On stack, before: ...
+    // On stack, after: data, ...
+    //
+    // Push the data lookup operator
+    lookupData: function() {
+      this.pushStackLiteral('data');
+    },
+
+    // [pushStringParam]
+    //
+    // On stack, before: ...
+    // On stack, after: string, currentContext, ...
+    //
+    // This opcode is designed for use in string mode, which
+    // provides the string value of a parameter along with its
+    // depth rather than resolving it immediately.
+    pushStringParam: function(string, type) {
+      this.pushStackLiteral('depth' + this.lastContext);
+
+      this.pushString(type);
+
+      // If it's a subexpression, the string result
+      // will be pushed after this opcode.
+      if (type !== 'sexpr') {
+        if (typeof string === 'string') {
+          this.pushString(string);
+        } else {
+          this.pushStackLiteral(string);
+        }
+      }
+    },
+
+    emptyHash: function() {
+      this.pushStackLiteral('{}');
+
+      if (this.options.stringParams) {
+        this.push('{}'); // hashContexts
+        this.push('{}'); // hashTypes
+      }
+    },
+    pushHash: function() {
+      if (this.hash) {
+        this.hashes.push(this.hash);
+      }
+      this.hash = {values: [], types: [], contexts: []};
+    },
+    popHash: function() {
+      var hash = this.hash;
+      this.hash = this.hashes.pop();
+
+      if (this.options.stringParams) {
+        this.push('{' + hash.contexts.join(',') + '}');
+        this.push('{' + hash.types.join(',') + '}');
+      }
+
+      this.push('{\n    ' + hash.values.join(',\n    ') + '\n  }');
+    },
+
+    // [pushString]
+    //
+    // On stack, before: ...
+    // On stack, after: quotedString(string), ...
+    //
+    // Push a quoted version of `string` onto the stack
+    pushString: function(string) {
+      this.pushStackLiteral(this.quotedString(string));
+    },
+
+    // [push]
+    //
+    // On stack, before: ...
+    // On stack, after: expr, ...
+    //
+    // Push an expression onto the stack
+    push: function(expr) {
+      this.inlineStack.push(expr);
+      return expr;
+    },
+
+    // [pushLiteral]
+    //
+    // On stack, before: ...
+    // On stack, after: value, ...
+    //
+    // Pushes a value onto the stack. This operation prevents
+    // the compiler from creating a temporary variable to hold
+    // it.
+    pushLiteral: function(value) {
+      this.pushStackLiteral(value);
+    },
+
+    // [pushProgram]
+    //
+    // On stack, before: ...
+    // On stack, after: program(guid), ...
+    //
+    // Push a program expression onto the stack. This takes
+    // a compile-time guid and converts it into a runtime-accessible
+    // expression.
+    pushProgram: function(guid) {
+      if (guid != null) {
+        this.pushStackLiteral(this.programExpression(guid));
+      } else {
+        this.pushStackLiteral(null);
+      }
+    },
+
+    // [invokeHelper]
+    //
+    // On stack, before: hash, inverse, program, params..., ...
+    // On stack, after: result of helper invocation
+    //
+    // Pops off the helper's parameters, invokes the helper,
+    // and pushes the helper's return value onto the stack.
+    //
+    // If the helper is not found, `helperMissing` is called.
+    invokeHelper: function(paramSize, name, isRoot) {
+      this.context.aliases.helperMissing = 'helpers.helperMissing';
+      this.useRegister('helper');
+
+      var helper = this.lastHelper = this.setupHelper(paramSize, name, true);
+      var nonHelper = this.nameLookup('depth' + this.lastContext, name, 'context');
+
+      var lookup = 'helper = ' + helper.name + ' || ' + nonHelper;
+      if (helper.paramsInit) {
+        lookup += ',' + helper.paramsInit;
+      }
+
+      this.push(
+        '('
+          + lookup
+          + ',helper '
+            + '? helper.call(' + helper.callParams + ') '
+            + ': helperMissing.call(' + helper.helperMissingParams + '))');
+
+      // Always flush subexpressions. This is both to prevent the compounding size issue that
+      // occurs when the code has to be duplicated for inlining and also to prevent errors
+      // due to the incorrect options object being passed due to the shared register.
+      if (!isRoot) {
+        this.flushInline();
+      }
+    },
+
+    // [invokeKnownHelper]
+    //
+    // On stack, before: hash, inverse, program, params..., ...
+    // On stack, after: result of helper invocation
+    //
+    // This operation is used when the helper is known to exist,
+    // so a `helperMissing` fallback is not required.
+    invokeKnownHelper: function(paramSize, name) {
+      var helper = this.setupHelper(paramSize, name);
+      this.push(helper.name + ".call(" + helper.callParams + ")");
+    },
+
+    // [invokeAmbiguous]
+    //
+    // On stack, before: hash, inverse, program, params..., ...
+    // On stack, after: result of disambiguation
+    //
+    // This operation is used when an expression like `{{foo}}`
+    // is provided, but we don't know at compile-time whether it
+    // is a helper or a path.
+    //
+    // This operation emits more code than the other options,
+    // and can be avoided by passing the `knownHelpers` and
+    // `knownHelpersOnly` flags at compile-time.
+    invokeAmbiguous: function(name, helperCall) {
+      this.context.aliases.functionType = '"function"';
+      this.useRegister('helper');
+
+      this.emptyHash();
+      var helper = this.setupHelper(0, name, helperCall);
+
+      var helperName = this.lastHelper = this.nameLookup('helpers', name, 'helper');
+
+      var nonHelper = this.nameLookup('depth' + this.lastContext, name, 'context');
+      var nextStack = this.nextStack();
+
+      if (helper.paramsInit) {
+        this.pushSource(helper.paramsInit);
+      }
+      this.pushSource('if (helper = ' + helperName + ') { ' + nextStack + ' = helper.call(' + helper.callParams + '); }');
+      this.pushSource('else { helper = ' + nonHelper + '; ' + nextStack + ' = typeof helper === functionType ? helper.call(' + helper.callParams + ') : helper; }');
+    },
+
+    // [invokePartial]
+    //
+    // On stack, before: context, ...
+    // On stack after: result of partial invocation
+    //
+    // This operation pops off a context, invokes a partial with that context,
+    // and pushes the result of the invocation back.
+    invokePartial: function(name) {
+      var params = [this.nameLookup('partials', name, 'partial'), "'" + name + "'", this.popStack(), "helpers", "partials"];
+
+      if (this.options.data) {
+        params.push("data");
+      }
+
+      this.context.aliases.self = "this";
+      this.push("self.invokePartial(" + params.join(", ") + ")");
+    },
+
+    // [assignToHash]
+    //
+    // On stack, before: value, hash, ...
+    // On stack, after: hash, ...
+    //
+    // Pops a value and hash off the stack, assigns `hash[key] = value`
+    // and pushes the hash back onto the stack.
+    assignToHash: function(key) {
+      var value = this.popStack(),
+          context,
+          type;
+
+      if (this.options.stringParams) {
+        type = this.popStack();
+        context = this.popStack();
+      }
+
+      var hash = this.hash;
+      if (context) {
+        hash.contexts.push("'" + key + "': " + context);
+      }
+      if (type) {
+        hash.types.push("'" + key + "': " + type);
+      }
+      hash.values.push("'" + key + "': (" + value + ")");
+    },
+
+    // HELPERS
+
+    compiler: JavaScriptCompiler,
+
+    compileChildren: function(environment, options) {
+      var children = environment.children, child, compiler;
+
+      for(var i=0, l=children.length; i<l; i++) {
+        child = children[i];
+        compiler = new this.compiler();
+
+        var index = this.matchExistingProgram(child);
+
+        if (index == null) {
+          this.context.programs.push('');     // Placeholder to prevent name conflicts for nested children
+          index = this.context.programs.length;
+          child.index = index;
+          child.name = 'program' + index;
+          this.context.programs[index] = compiler.compile(child, options, this.context);
+          this.context.environments[index] = child;
+        } else {
+          child.index = index;
+          child.name = 'program' + index;
+        }
+      }
+    },
+    matchExistingProgram: function(child) {
+      for (var i = 0, len = this.context.environments.length; i < len; i++) {
+        var environment = this.context.environments[i];
+        if (environment && environment.equals(child)) {
+          return i;
+        }
+      }
+    },
+
+    programExpression: function(guid) {
+      this.context.aliases.self = "this";
+
+      if(guid == null) {
+        return "self.noop";
+      }
+
+      var child = this.environment.children[guid],
+          depths = child.depths.list, depth;
+
+      var programParams = [child.index, child.name, "data"];
+
+      for(var i=0, l = depths.length; i<l; i++) {
+        depth = depths[i];
+
+        if(depth === 1) { programParams.push("depth0"); }
+        else { programParams.push("depth" + (depth - 1)); }
+      }
+
+      return (depths.length === 0 ? "self.program(" : "self.programWithDepth(") + programParams.join(", ") + ")";
+    },
+
+    register: function(name, val) {
+      this.useRegister(name);
+      this.pushSource(name + " = " + val + ";");
+    },
+
+    useRegister: function(name) {
+      if(!this.registers[name]) {
+        this.registers[name] = true;
+        this.registers.list.push(name);
+      }
+    },
+
+    pushStackLiteral: function(item) {
+      return this.push(new Literal(item));
+    },
+
+    pushSource: function(source) {
+      if (this.pendingContent) {
+        this.source.push(this.appendToBuffer(this.quotedString(this.pendingContent)));
+        this.pendingContent = undefined;
+      }
+
+      if (source) {
+        this.source.push(source);
+      }
+    },
+
+    pushStack: function(item) {
+      this.flushInline();
+
+      var stack = this.incrStack();
+      if (item) {
+        this.pushSource(stack + " = " + item + ";");
+      }
+      this.compileStack.push(stack);
+      return stack;
+    },
+
+    replaceStack: function(callback) {
+      var prefix = '',
+          inline = this.isInline(),
+          stack,
+          createdStack,
+          usedLiteral;
+
+      // If we are currently inline then we want to merge the inline statement into the
+      // replacement statement via ','
+      if (inline) {
+        var top = this.popStack(true);
+
+        if (top instanceof Literal) {
+          // Literals do not need to be inlined
+          stack = top.value;
+          usedLiteral = true;
+        } else {
+          // Get or create the current stack name for use by the inline
+          createdStack = !this.stackSlot;
+          var name = !createdStack ? this.topStackName() : this.incrStack();
+
+          prefix = '(' + this.push(name) + ' = ' + top + '),';
+          stack = this.topStack();
+        }
+      } else {
+        stack = this.topStack();
+      }
+
+      var item = callback.call(this, stack);
+
+      if (inline) {
+        if (!usedLiteral) {
+          this.popStack();
+        }
+        if (createdStack) {
+          this.stackSlot--;
+        }
+        this.push('(' + prefix + item + ')');
+      } else {
+        // Prevent modification of the context depth variable. Through replaceStack
+        if (!/^stack/.test(stack)) {
+          stack = this.nextStack();
+        }
+
+        this.pushSource(stack + " = (" + prefix + item + ");");
+      }
+      return stack;
+    },
+
+    nextStack: function() {
+      return this.pushStack();
+    },
+
+    incrStack: function() {
+      this.stackSlot++;
+      if(this.stackSlot > this.stackVars.length) { this.stackVars.push("stack" + this.stackSlot); }
+      return this.topStackName();
+    },
+    topStackName: function() {
+      return "stack" + this.stackSlot;
+    },
+    flushInline: function() {
+      var inlineStack = this.inlineStack;
+      if (inlineStack.length) {
+        this.inlineStack = [];
+        for (var i = 0, len = inlineStack.length; i < len; i++) {
+          var entry = inlineStack[i];
+          if (entry instanceof Literal) {
+            this.compileStack.push(entry);
+          } else {
+            this.pushStack(entry);
+          }
+        }
+      }
+    },
+    isInline: function() {
+      return this.inlineStack.length;
+    },
+
+    popStack: function(wrapped) {
+      var inline = this.isInline(),
+          item = (inline ? this.inlineStack : this.compileStack).pop();
+
+      if (!wrapped && (item instanceof Literal)) {
+        return item.value;
+      } else {
+        if (!inline) {
+          if (!this.stackSlot) {
+            throw new Exception('Invalid stack pop');
+          }
+          this.stackSlot--;
+        }
+        return item;
+      }
+    },
+
+    topStack: function(wrapped) {
+      var stack = (this.isInline() ? this.inlineStack : this.compileStack),
+          item = stack[stack.length - 1];
+
+      if (!wrapped && (item instanceof Literal)) {
+        return item.value;
+      } else {
+        return item;
+      }
+    },
+
+    quotedString: function(str) {
+      return '"' + str
+        .replace(/\\/g, '\\\\')
+        .replace(/"/g, '\\"')
+        .replace(/\n/g, '\\n')
+        .replace(/\r/g, '\\r')
+        .replace(/\u2028/g, '\\u2028')   // Per Ecma-262 7.3 + 7.8.4
+        .replace(/\u2029/g, '\\u2029') + '"';
+    },
+
+    setupHelper: function(paramSize, name, missingParams) {
+      var params = [],
+          paramsInit = this.setupParams(paramSize, params, missingParams);
+      var foundHelper = this.nameLookup('helpers', name, 'helper');
+
+      return {
+        params: params,
+        paramsInit: paramsInit,
+        name: foundHelper,
+        callParams: ["depth0"].concat(params).join(", "),
+        helperMissingParams: missingParams && ["depth0", this.quotedString(name)].concat(params).join(", ")
+      };
+    },
+
+    setupOptions: function(paramSize, params) {
+      var options = [], contexts = [], types = [], param, inverse, program;
+
+      options.push("hash:" + this.popStack());
+
+      if (this.options.stringParams) {
+        options.push("hashTypes:" + this.popStack());
+        options.push("hashContexts:" + this.popStack());
+      }
+
+      inverse = this.popStack();
+      program = this.popStack();
+
+      // Avoid setting fn and inverse if neither are set. This allows
+      // helpers to do a check for `if (options.fn)`
+      if (program || inverse) {
+        if (!program) {
+          this.context.aliases.self = "this";
+          program = "self.noop";
+        }
+
+        if (!inverse) {
+          this.context.aliases.self = "this";
+          inverse = "self.noop";
+        }
+
+        options.push("inverse:" + inverse);
+        options.push("fn:" + program);
+      }
+
+      for(var i=0; i<paramSize; i++) {
+        param = this.popStack();
+        params.push(param);
+
+        if(this.options.stringParams) {
+          types.push(this.popStack());
+          contexts.push(this.popStack());
+        }
+      }
+
+      if (this.options.stringParams) {
+        options.push("contexts:[" + contexts.join(",") + "]");
+        options.push("types:[" + types.join(",") + "]");
+      }
+
+      if(this.options.data) {
+        options.push("data:data");
+      }
+
+      return options;
+    },
+
+    // the params and contexts arguments are passed in arrays
+    // to fill in
+    setupParams: function(paramSize, params, useRegister) {
+      var options = '{' + this.setupOptions(paramSize, params).join(',') + '}';
+
+      if (useRegister) {
+        this.useRegister('options');
+        params.push('options');
+        return 'options=' + options;
+      } else {
+        params.push(options);
+        return '';
+      }
+    }
+  };
+
+  var reservedWords = (
+    "break else new var" +
+    " case finally return void" +
+    " catch for switch while" +
+    " continue function this with" +
+    " default if throw" +
+    " delete in try" +
+    " do instanceof typeof" +
+    " abstract enum int short" +
+    " boolean export interface static" +
+    " byte extends long super" +
+    " char final native synchronized" +
+    " class float package throws" +
+    " const goto private transient" +
+    " debugger implements protected volatile" +
+    " double import public let yield"
+  ).split(" ");
+
+  var compilerWords = JavaScriptCompiler.RESERVED_WORDS = {};
+
+  for(var i=0, l=reservedWords.length; i<l; i++) {
+    compilerWords[reservedWords[i]] = true;
+  }
+
+  JavaScriptCompiler.isValidJavaScriptVariableName = function(name) {
+    if(!JavaScriptCompiler.RESERVED_WORDS[name] && /^[a-zA-Z_$][0-9a-zA-Z_$]*$/.test(name)) {
+      return true;
+    }
+    return false;
+  };
+
+  __exports__ = JavaScriptCompiler;
+  return __exports__;
+})(__module2__, __module5__);
+
+// handlebars.js
+var __module0__ = (function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__) {
+  "use strict";
+  var __exports__;
+  /*globals Handlebars: true */
+  var Handlebars = __dependency1__;
+
+  // Compiler imports
+  var AST = __dependency2__;
+  var Parser = __dependency3__.parser;
+  var parse = __dependency3__.parse;
+  var Compiler = __dependency4__.Compiler;
+  var compile = __dependency4__.compile;
+  var precompile = __dependency4__.precompile;
+  var JavaScriptCompiler = __dependency5__;
+
+  var _create = Handlebars.create;
+  var create = function() {
+    var hb = _create();
+
+    hb.compile = function(input, options) {
+      return compile(input, options, hb);
+    };
+    hb.precompile = function (input, options) {
+      return precompile(input, options, hb);
+    };
+
+    hb.AST = AST;
+    hb.Compiler = Compiler;
+    hb.JavaScriptCompiler = JavaScriptCompiler;
+    hb.Parser = Parser;
+    hb.parse = parse;
+
+    return hb;
+  };
+
+  Handlebars = create();
+  Handlebars.create = create;
+
+  __exports__ = Handlebars;
+  return __exports__;
+})(__module1__, __module7__, __module8__, __module10__, __module11__);
+
+  return __module0__;
+})();
+// backbone.localforage allows users of Backbone.js to store their collections
+// entirely offline with no communication to a REST server. It uses IndexedDB
+// or localStorage (depending on availability) to store the data. This allows
+// apps on Chrome and Firefox to use async, offline storage, which is cool.
+//
+// Inspiration for this file comes from a few backbone.localstorage
+// implementations.
+(function() {
+    var Promise = window.Promise;
+
+    function S4() {
+        return ((1 + Math.random()) * 65536 | 0).toString(16).substring(1);
+    }
+
+    function guid() {
+        return S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4();
+    }
+
+    var OfflineStore = function(name) {
+        // Initialize data as null so we can test to see if it's been loaded
+        // from our data store later on.
+        this.data = null;
+        this.name = name;
+    };
+
+    _.extend(OfflineStore.prototype, {
+        save: function (callback) {
+            var _this = this;
+            return new Promise(function(resolve, reject) {
+                localforage.setItem(_this.name, JSON.stringify(_this.data), function(data) {
+                    if (callback) {
+                        callback(data);
+                    }
+
+                    resolve(data);
+                });
+            });
+        },
+
+        create: function(model, callbacks) {
+            var _this = this;
+            return new Promise(function(resolve, reject) {
+                if (_this.data) {
+                    if (!model.id) model.id = model.attributes.id = guid();
+                    _this.data[model.id] = model;
+                    _this.save(function() {
+                        if (callbacks.success) {
+                            callbacks.success(model);
+                        }
+
+                        resolve(model);
+                    });
+                } else {
+                    localforage.getItem(_this.name, function(data) {
+                        _this.data = JSON.parse(data) || {};
+
+                        if (!model.id) model.id = model.attributes.id = guid();
+                        _this.data[model.id] = model;
+                        _this.save(function() {
+                            if (callbacks.success) {
+                                callbacks.success(model);
+                            }
+
+                            resolve(model);
+                        });
+                    });
+                }
+            });
+        },
+
+        update: function(model, callbacks) {
+            var _this = this;
+            return new Promise(function(resolve, reject) {
+                if (_this.data) {
+                    _this.data[model.id] = model;
+                    _this.save(function() {
+                        if (callbacks.success) {
+                            callbacks.success(model);
+                        }
+
+                        resolve(model);
+                    });
+                } else {
+                    localforage.getItem(_this.name, function(data) {
+                        _this.data = JSON.parse(data) || {};
+
+                        _this.data[model.id] = model;
+                        _this.save(function() {
+                            if (callbacks.success) {
+                                callbacks.success(model);
+                            }
+
+                            resolve(model);
+                        });
+                    });
+                }
+            });
+        },
+
+        find: function(model, callbacks) {
+            var _this = this;
+            return new Promise(function(resolve, reject) {
+                if (_this.data) {
+                    if (callbacks.success) {
+                        callbacks.success(_this.data[model.id]);
+                    }
+
+                    resolve(_this.data[model.id]);
+                } else {
+                    localforage.getItem(_this.name, function(data) {
+                        _this.data = JSON.parse(data) || {};
+
+                        if (callbacks.success) {
+                            callbacks.success(_this.data[model.id]);
+                        }
+
+                        resolve(_this.data[model.id]);
+                    });
+                }
+            });
+        },
+
+        findAll: function(callbacks) {
+            var _this = this;
+            return new Promise(function(resolve, reject) {
+                if (_this.data) {
+                    if (callbacks.success) {
+                        callbacks.success(_.values(_this.data));
+                    }
+
+                    resolve(_.values(_this.data));
+                } else {
+                    localforage.getItem(_this.name, function(data) {
+                        _this.data = JSON.parse(data) || {};
+                        if (callbacks.success) {
+                            callbacks.success(_.values(_this.data));
+                        }
+
+                        resolve(_.values(_this.data));
+                    });
+                }
+            });
+        },
+
+        destroy: function(model, callbacks) {
+            var _this = this;
+            return new Promise(function(resolve, reject) {
+                if (_this.data) {
+                    delete _this.data[model.id];
+                    _this.save(function() {
+                        if (callbacks.success) {
+                            callbacks.success(model);
+                        }
+
+                        resolve(model);
+                    });
+                } else {
+                    localforage.getItem(__this.name, function(data) {
+                        _this.data = JSON.parse(data) || {};
+
+                        delete _this.data[model.id];
+                        _this.save(function() {
+                            if (callbacks.success) {
+                                callbacks.success(model);
+                            }
+
+                            resolve(model);
+                        });
+                    });
+                }
+            });
+        }
+    });
+
+    // Override Backbone.sync to call our custom offline sync only. Delegates to
+    // the original Backbone.sync if offlineStore isn't defined.
+    var superSync = Backbone.sync;
+    Backbone.sync = function(method, model, options) {
+        var store = model.offlineStore || (model.collection && model.collection.offlineStore);
+
+        if (store) {
+            switch (method) {
+                case "read":
+                    return model.id ? store.find(model, options) : store.findAll(options);
+                    break;
+                case "create":
+                    return store.create(model, options);
+                    break;
+                case "update":
+                    return store.update(model, options);
+                    break;
+                case "delete":
+                    return store.destroy(model, options);
+                    break;
+            }
+        }
+
+        return superSync.apply(this, arguments);
+    };
+
+    // For now, we aren't complicated: just set a property off Backbone to
+    // serve as our export point.
+    Backbone.localforage = OfflineStore;
+
+    return OfflineStore;
+}).call(this);
+// Backbone.Stickit v0.7.0, MIT Licensed
+// Copyright (c) 2012 The New York Times, CMS Group, Matthew DeLambo <delambo@gmail.com>
+
+(function (factory) {
+
+  // Set up Stickit appropriately for the environment. Start with AMD.
+  if (typeof define === 'function' && define.amd)
+    define(['underscore', 'backbone'], factory);
+
+  // Next for Node.js or CommonJS.
+  else if (typeof exports === 'object')
+    factory(require('underscore'), require('backbone'));
+
+  // Finally, as a browser global.
+  else
+    factory(_, Backbone);
+
+}(function (_, Backbone) {
+
+  // Backbone.Stickit Namespace
+  // --------------------------
+
+  Backbone.Stickit = {
+
+    _handlers: [],
+
+    addHandler: function(handlers) {
+      // Fill-in default values.
+      handlers = _.map(_.flatten([handlers]), function(handler) {
+        return _.extend({
+          updateModel: true,
+          updateView: true,
+          updateMethod: 'text'
+        }, handler);
+      });
+      this._handlers = this._handlers.concat(handlers);
+    }
+  };
+
+  // Backbone.View Mixins
+  // --------------------
+
+  _.extend(Backbone.View.prototype, {
+
+    // Collection of model event bindings.
+    //   [{model,event,fn,config}, ...]
+    _modelBindings: null,
+
+    // Unbind the model and event bindings from `this._modelBindings` and
+    // `this.$el`. If the optional `model` parameter is defined, then only
+    // delete bindings for the given `model` and its corresponding view events.
+    unstickit: function(model, bindingSelector) {
+      // Support bindings hash in place of selector.
+      if (_.isObject(bindingSelector)) {
+        _.each(_.keys(bindingSelector), function(selector) {
+          this.unstickit(model, selector);
+        }, this);
+      }
+
+      var models = [], destroyFns = [];
+      _.each(this._modelBindings, function(binding, i) {
+        if (model && binding.model !== model) return false;
+        if (bindingSelector && binding.config.selector != bindingSelector) return false;
+        destroyFns.push(binding.config._destroy);
+        binding.model.off(binding.event, binding.fn);
+        models.push(binding.model);
+        delete this._modelBindings[i];
+      }, this);
+
+      // Trigger an event for each model that was unbound.
+      _.invoke(_.uniq(models), 'trigger', 'stickit:unstuck', this.cid);
+      // Call `_destroy` on a unique list of the binding callbacks.
+      _.each(_.uniq(destroyFns), function(fn) { fn.call(this); }, this);
+      // Cleanup the null values.
+      this._modelBindings = _.compact(this._modelBindings);
+
+      this.$el.off('.stickit' + (model ? '.' + model.cid : ''), bindingSelector);
+    },
+
+    // Using `this.bindings` configuration or the `optionalBindingsConfig`, binds `this.model`
+    // or the `optionalModel` to elements in the view.
+    stickit: function(optionalModel, optionalBindingsConfig) {
+      var model = optionalModel || this.model,
+          bindings = optionalBindingsConfig || _.result(this, "bindings") || {};
+
+      this._modelBindings || (this._modelBindings = []);
+
+      // Iterate through the selectors in the bindings configuration and configure
+      // the various options for each field.
+      this.addBinding(model, bindings);
+
+      // Wrap `view.remove` to unbind stickit model and dom events.
+      var remove = this.remove;
+      if (!remove.stickitWrapped)
+        this.remove = function() {
+          var ret = this;
+          this.unstickit();
+          if (remove) ret = remove.apply(this, arguments);
+          return ret;
+        };
+      this.remove.stickitWrapped = true;
+    },
+
+    // Add a single model binding to the view
+    addBinding: function(optionalModel, second, binding) {
+      var $el, options, modelAttr, config, selector,
+        model = optionalModel || this.model,
+        namespace = '.stickit.' + model.cid,
+        binding = binding || {},
+        bindId = _.uniqueId();
+
+      // Allow jQuery-style {key: val} event maps
+      if (_.isString(second)) {
+        selector = second;
+      } else {
+        var bindings = second;
+        _.each(bindings, function(v, selector) {
+          this.addBinding(model, selector, bindings[selector]);
+        }, this);
+        return;
+      }
+
+      // Support ':el' selector - special case selector for the view managed delegate.
+      $el = selector === ':el' ? this.$el : this.$(selector);
+
+      this.unstickit(model, selector);
+
+      // Fail fast if the selector didn't match an element.
+      if (!$el.length) return;
+
+      // Allow shorthand setting of model attributes - `'selector':'observe'`.
+      if (_.isString(binding)) binding = {observe:binding};
+
+      // Handle case where `observe` is in the form of a function.
+      if (_.isFunction(binding.observe)) binding.observe = binding.observe.call(this);
+
+      config = getConfiguration($el, binding);
+      config.selector = selector;
+      modelAttr = config.observe;
+
+      // Create the model set options with a unique `bindId` so that we
+      // can avoid double-binding in the `change:attribute` event handler.
+      config.bindId = bindId;
+      
+      // Add a reference to the view for handlers of stickitChange events
+      config.view = this;
+      options = _.extend({stickitChange:config}, config.setOptions);
+      
+      // Add a `_destroy` callback to the configuration, in case `destroy`
+      // is a named function and we need a unique function when unsticking.
+      config._destroy = function() {
+        applyViewFn(this, config.destroy, $el, model, config);
+      };
+
+      initializeAttributes(this, $el, config, model, modelAttr);
+
+      initializeVisible(this, $el, config, model, modelAttr);
+
+      if (modelAttr) {
+        // Setup one-way, form element to model, bindings.
+        _.each(config.events, function(type) {
+          var event = type + namespace;
+          var method = function(event) {
+            var val = config.getVal.call(this, $el, event, config, _.rest(arguments));
+            // Don't update the model if false is returned from the `updateModel` configuration.
+            if (evaluateBoolean(this, config.updateModel, val, event, config))
+              setAttr(model, modelAttr, val, options, this, config);
+          };
+          method = _.bind(method, this);
+          if (selector === ':el') this.$el.on(event, method);
+          else this.$el.on(event, selector, method);
+        }, this);
+
+        // Setup a `change:modelAttr` observer to keep the view element in sync.
+        // `modelAttr` may be an array of attributes or a single string value.
+        _.each(_.flatten([modelAttr]), function(attr) {
+          observeModelEvent(model, this, 'change:'+attr, config, function(model, val, options) {
+            var changeId = options && options.stickitChange && options.stickitChange.bindId || null;
+            if (changeId !== bindId)
+              updateViewBindEl(this, $el, config, getAttr(model, modelAttr, config, this), model);
+          });
+        }, this);
+
+        updateViewBindEl(this, $el, config, getAttr(model, modelAttr, config, this), model, true);
+      }
+
+      // After each binding is setup, call the `initialize` callback.
+      applyViewFn(this, config.initialize, $el, model, config);
+    }
+  });
+
+  // Helpers
+  // -------
+
+  // Evaluates the given `path` (in object/dot-notation) relative to the given
+  // `obj`. If the path is null/undefined, then the given `obj` is returned.
+  var evaluatePath = function(obj, path) {
+    var parts = (path || '').split('.');
+    var result = _.reduce(parts, function(memo, i) { return memo[i]; }, obj);
+    return result == null ? obj : result;
+  };
+
+  // If the given `fn` is a string, then view[fn] is called, otherwise it is
+  // a function that should be executed.
+  var applyViewFn = function(view, fn) {
+    if (fn) return (_.isString(fn) ? evaluatePath(view,fn) : fn).apply(view, _.rest(arguments, 2));
+  };
+
+  var getSelectedOption = function($select) { return $select.find('option').not(function(){ return !this.selected; }); };
+
+  // Given a function, string (view function reference), or a boolean
+  // value, returns the truthy result. Any other types evaluate as false.
+  var evaluateBoolean = function(view, reference) {
+    if (_.isBoolean(reference)) return reference;
+    else if (_.isFunction(reference) || _.isString(reference))
+      return applyViewFn.apply(this, arguments);
+    return false;
+  };
+
+  // Setup a model event binding with the given function, and track the event
+  // in the view's _modelBindings.
+  var observeModelEvent = function(model, view, event, config, fn) {
+    model.on(event, fn, view);
+    view._modelBindings.push({model:model, event:event, fn:fn, config:config});
+  };
+
+  // Prepares the given `val`ue and sets it into the `model`.
+  var setAttr = function(model, attr, val, options, context, config) {
+    var value = {};
+    if (config.onSet)
+      val = applyViewFn(context, config.onSet, val, config);
+
+    if (config.set)
+      applyViewFn(context, config.set, attr, val, options, config);
+    else {
+      value[attr] = val;
+      // If `observe` is defined as an array and `onSet` returned
+      // an array, then map attributes to their values.
+      if (_.isArray(attr) && _.isArray(val)) {
+        value = _.reduce(attr, function(memo, attribute, index) {
+          memo[attribute] = _.has(val, index) ? val[index] : null;
+          return memo;
+        }, {});
+      }
+      model.set(value, options);
+    }
+  };
+
+  // Returns the given `attr`'s value from the `model`, escaping and
+  // formatting if necessary. If `attr` is an array, then an array of
+  // respective values will be returned.
+  var getAttr = function(model, attr, config, context) {
+    var val,
+      retrieveVal = function(field) {
+        return model[config.escape ? 'escape' : 'get'](field);
+      },
+      sanitizeVal = function(val) {
+        return val == null ? '' : val;
+      };
+    val = _.isArray(attr) ? _.map(attr, retrieveVal) : retrieveVal(attr);
+    if (config.onGet) val = applyViewFn(context, config.onGet, val, config);
+    return _.isArray(val) ? _.map(val, sanitizeVal) : sanitizeVal(val);
+  };
+
+  // Find handlers in `Backbone.Stickit._handlers` with selectors that match
+  // `$el` and generate a configuration by mixing them in the order that they
+  // were found with the given `binding`.
+  var getConfiguration = Backbone.Stickit.getConfiguration = function($el, binding) {
+    var handlers = [{
+      updateModel: false,
+      updateMethod: 'text',
+      update: function($el, val, m, opts) { if ($el[opts.updateMethod]) $el[opts.updateMethod](val); },
+      getVal: function($el, e, opts) { return $el[opts.updateMethod](); }
+    }];
+    handlers = handlers.concat(_.filter(Backbone.Stickit._handlers, function(handler) {
+      return $el.is(handler.selector);
+    }));
+    handlers.push(binding);
+    var config = _.extend.apply(_, handlers);
+    // `updateView` is defaulted to false for configutrations with
+    // `visible`; otherwise, `updateView` is defaulted to true.
+    if (config.visible && !_.has(config, 'updateView')) config.updateView = false;
+    else if (!_.has(config, 'updateView')) config.updateView = true;
+    return config;
+  };
+
+  // Setup the attributes configuration - a list that maps an attribute or
+  // property `name`, to an `observe`d model attribute, using an optional
+  // `onGet` formatter.
+  //
+  //     attributes: [{
+  //       name: 'attributeOrPropertyName',
+  //       observe: 'modelAttrName'
+  //       onGet: function(modelAttrVal, modelAttrName) { ... }
+  //     }, ...]
+  //
+  var initializeAttributes = function(view, $el, config, model, modelAttr) {
+    var props = ['autofocus', 'autoplay', 'async', 'checked', 'controls', 'defer', 'disabled', 'hidden', 'indeterminate', 'loop', 'multiple', 'open', 'readonly', 'required', 'scoped', 'selected'];
+
+    _.each(config.attributes || [], function(attrConfig) {
+      var lastClass = '', observed, updateAttr;
+      attrConfig = _.clone(attrConfig);
+      observed = attrConfig.observe || (attrConfig.observe = modelAttr),
+      updateAttr = function() {
+        var updateType = _.indexOf(props, attrConfig.name, true) > -1 ? 'prop' : 'attr',
+          val = getAttr(model, observed, attrConfig, view);
+        // If it is a class then we need to remove the last value and add the new.
+        if (attrConfig.name === 'class') {
+          $el.removeClass(lastClass).addClass(val);
+          lastClass = val;
+        }
+        else $el[updateType](attrConfig.name, val);
+      };
+      _.each(_.flatten([observed]), function(attr) {
+        observeModelEvent(model, view, 'change:' + attr, config, updateAttr);
+      });
+      updateAttr();
+    });
+  };
+
+  // If `visible` is configured, then the view element will be shown/hidden
+  // based on the truthiness of the modelattr's value or the result of the
+  // given callback. If a `visibleFn` is also supplied, then that callback
+  // will be executed to manually handle showing/hiding the view element.
+  //
+  //     observe: 'isRight',
+  //     visible: true, // or function(val, options) {}
+  //     visibleFn: function($el, isVisible, options) {} // optional handler
+  //
+  var initializeVisible = function(view, $el, config, model, modelAttr) {
+    if (config.visible == null) return;
+    var visibleCb = function() {
+      var visible = config.visible,
+          visibleFn = config.visibleFn,
+          val = getAttr(model, modelAttr, config, view),
+          isVisible = !!val;
+      // If `visible` is a function then it should return a boolean result to show/hide.
+      if (_.isFunction(visible) || _.isString(visible)) isVisible = !!applyViewFn(view, visible, val, config);
+      // Either use the custom `visibleFn`, if provided, or execute the standard show/hide.
+      if (visibleFn) applyViewFn(view, visibleFn, $el, isVisible, config);
+      else {
+        $el.toggle(isVisible);
+      }
+    };
+    _.each(_.flatten([modelAttr]), function(attr) {
+      observeModelEvent(model, view, 'change:' + attr, config, visibleCb);
+    });
+    visibleCb();
+  };
+
+  // Update the value of `$el` using the given configuration and trigger the
+  // `afterUpdate` callback. This action may be blocked by `config.updateView`.
+  //
+  //     update: function($el, val, model, options) {},  // handler for updating
+  //     updateView: true, // defaults to true
+  //     afterUpdate: function($el, val, options) {} // optional callback
+  //
+  var updateViewBindEl = function(view, $el, config, val, model, isInitializing) {
+    if (!evaluateBoolean(view, config.updateView, val, config)) return;
+    applyViewFn(view, config.update, $el, val, model, config);
+    if (!isInitializing) applyViewFn(view, config.afterUpdate, $el, val, config);
+  };
+
+  // Default Handlers
+  // ----------------
+
+  Backbone.Stickit.addHandler([{
+    selector: '[contenteditable="true"]',
+    updateMethod: 'html',
+    events: ['input', 'change']
+  }, {
+    selector: 'input',
+    events: ['propertychange', 'input', 'change'],
+    update: function($el, val) { $el.val(val); },
+    getVal: function($el) {
+      return $el.val();
+    }
+  }, {
+    selector: 'textarea',
+    events: ['propertychange', 'input', 'change'],
+    update: function($el, val) { $el.val(val); },
+    getVal: function($el) { return $el.val(); }
+  }, {
+    selector: 'input[type="radio"]',
+    events: ['change'],
+    update: function($el, val) {
+      $el.filter('[value="'+val+'"]').prop('checked', true);
+    },
+    getVal: function($el) {
+      return $el.filter(':checked').val();
+    }
+  }, {
+    selector: 'input[type="checkbox"]',
+    events: ['change'],
+    update: function($el, val, model, options) {
+      if ($el.length > 1) {
+        // There are multiple checkboxes so we need to go through them and check
+        // any that have value attributes that match what's in the array of `val`s.
+        val || (val = []);
+        $el.each(function(i, el) {
+          var checkbox = Backbone.$(el);
+          var checked = _.indexOf(val, checkbox.val()) > -1;
+          checkbox.prop('checked', checked);
+        });
+      } else {
+        var checked = _.isBoolean(val) ? val : val === $el.val();
+        $el.prop('checked', checked);
+      }
+    },
+    getVal: function($el) {
+      var val;
+      if ($el.length > 1) {
+        val = _.reduce($el, function(memo, el) {
+          var checkbox = Backbone.$(el);
+          if (checkbox.prop('checked')) memo.push(checkbox.val());
+          return memo;
+        }, []);
+      } else {
+        val = $el.prop('checked');
+        // If the checkbox has a value attribute defined, then
+        // use that value. Most browsers use "on" as a default.
+        var boxval = $el.val();
+        if (boxval !== 'on' && boxval != null) {
+          val = val ? $el.val() : null;
+        }
+      }
+      return val;
+    }
+  }, {
+    selector: 'select',
+    events: ['change'],
+    update: function($el, val, model, options) {
+      var optList,
+        selectConfig = options.selectOptions,
+        list = selectConfig && selectConfig.collection || undefined,
+        isMultiple = $el.prop('multiple');
+
+      // If there are no `selectOptions` then we assume that the `<select>`
+      // is pre-rendered and that we need to generate the collection.
+      if (!selectConfig) {
+        selectConfig = {};
+        var getList = function($el) {
+          return $el.map(function() {
+            return {value:this.value, label:this.text};
+          }).get();
+        };
+        if ($el.find('optgroup').length) {
+          list = {opt_labels:[]};
+          // Search for options without optgroup
+          if ($el.find('> option').length) {
+            list.opt_labels.push(undefined);
+            _.each($el.find('> option'), function(el) {
+              list[undefined] = getList(Backbone.$(el));
+            });
+          }
+          _.each($el.find('optgroup'), function(el) {
+            var label = Backbone.$(el).attr('label');
+            list.opt_labels.push(label);
+            list[label] = getList(Backbone.$(el).find('option'));
+          });
+        } else {
+          list = getList($el.find('option'));
+        }
+      }
+
+      // Fill in default label and path values.
+      selectConfig.valuePath = selectConfig.valuePath || 'value';
+      selectConfig.labelPath = selectConfig.labelPath || 'label';
+
+      var addSelectOptions = function(optList, $el, fieldVal) {
+        _.each(optList, function(obj) {
+          var option = Backbone.$('<option/>'), optionVal = obj;
+
+          var fillOption = function(text, val) {
+            option.text(text);
+            optionVal = val;
+            // Save the option value as data so that we can reference it later.
+            option.data('stickit_bind_val', optionVal);
+            if (!_.isArray(optionVal) && !_.isObject(optionVal)) option.val(optionVal);
+          };
+
+          if (obj === '__default__')
+            fillOption(selectConfig.defaultOption.label, selectConfig.defaultOption.value);
+          else
+            fillOption(evaluatePath(obj, selectConfig.labelPath), evaluatePath(obj, selectConfig.valuePath));
+
+          // Determine if this option is selected.
+          if (!isMultiple && optionVal != null && fieldVal != null && optionVal === fieldVal || (_.isObject(fieldVal) && _.isEqual(optionVal, fieldVal)))
+            option.prop('selected', true);
+          else if (isMultiple && _.isArray(fieldVal)) {
+            _.each(fieldVal, function(val) {
+              if (_.isObject(val)) val = evaluatePath(val, selectConfig.valuePath);
+              if (val === optionVal || (_.isObject(val) && _.isEqual(optionVal, val)))
+                option.prop('selected', true);
+            });
+          }
+
+          $el.append(option);
+        });
+      };
+
+      $el.html('');
+
+      // The `list` configuration is a function that returns the options list or a string
+      // which represents the path to the list relative to `window` or the view/`this`.
+      var evaluate = function(view, list) {
+        var context = window;
+        if (list.indexOf('this.') === 0) context = view;
+        list = list.replace(/^[a-z]*\.(.+)$/, '$1');
+        return evaluatePath(context, list);
+      };
+      if (_.isString(list)) optList = evaluate(this, list);
+      else if (_.isFunction(list)) optList = applyViewFn(this, list, $el, options);
+      else optList = list;
+
+      // Support Backbone.Collection and deserialize.
+      if (optList instanceof Backbone.Collection) optList = optList.toJSON();
+
+      if (selectConfig.defaultOption) {
+        addSelectOptions(["__default__"], $el);
+      }
+
+      if (_.isArray(optList)) {
+        addSelectOptions(optList, $el, val);
+      } else if (optList.opt_labels) {
+        // To define a select with optgroups, format selectOptions.collection as an object
+        // with an 'opt_labels' property, as in the following:
+        //
+        //     {
+        //       'opt_labels': ['Looney Tunes', 'Three Stooges'],
+        //       'Looney Tunes': [{id: 1, name: 'Bugs Bunny'}, {id: 2, name: 'Donald Duck'}],
+        //       'Three Stooges': [{id: 3, name : 'moe'}, {id: 4, name : 'larry'}, {id: 5, name : 'curly'}]
+        //     }
+        //
+        _.each(optList.opt_labels, function(label) {
+          var $group = Backbone.$('<optgroup/>').attr('label', label);
+          addSelectOptions(optList[label], $group, val);
+          $el.append($group);
+        });
+        // With no 'opt_labels' parameter, the object is assumed to be a simple value-label map.
+        // Pass a selectOptions.comparator to override the default order of alphabetical by label.
+      } else {
+        var opts = [], opt;
+        for (var i in optList) {
+          opt = {};
+          opt[selectConfig.valuePath] = i;
+          opt[selectConfig.labelPath] = optList[i];
+          opts.push(opt);
+        }
+        addSelectOptions(_.sortBy(opts, selectConfig.comparator || selectConfig.labelPath), $el, val);
+      }
+    },
+    getVal: function($el) {
+      var val;
+      if ($el.prop('multiple')) {
+        val = Backbone.$(getSelectedOption($el).map(function() {
+          return Backbone.$(this).data('stickit_bind_val');
+        })).get();
+      } else {
+        val = getSelectedOption($el).data('stickit_bind_val');
+      }
+      return val;
+    }
+  }]);
+
+}));
+/**
+ * Bootstrap Modal wrapper for use with Backbone.
+ *
+ * Takes care of instantiation, manages multiple modals,
+ * adds several options and removes the element from the DOM when closed
+ *
+ * @author Charles Davison <charlie@powmedia.co.uk>
+ *
+ * Events:
+ * shown: Fired when the modal has finished animating in
+ * hidden: Fired when the modal has finished animating out
+ * cancel: The user dismissed the modal
+ * ok: The user clicked OK
+ */
+
+(function($, _, Backbone) {
+
+  //Set custom template settings
+  var _interpolateBackup = _.templateSettings;
+  _.templateSettings = {
+    interpolate: /\{\{(.+?)\}\}/g,
+    evaluate: /<%([\s\S]+?)%>/g
+  };
+
+  var template = _.template('\
+    <div class="modal-dialog"><div class="modal-content">\
+    <% if (title) { %>\
+      <div class="modal-header">\
+        <% if (allowCancel) { %>\
+          <a class="close">&times;</a>\
+        <% } %>\
+        <h4>{{title}}</h4>\
+      </div>\
+    <% } %>\
+    <div class="modal-body">{{content}}</div>\
+    <% if (showFooter) { %>\
+      <div class="modal-footer">\
+        <% if (allowCancel) { %>\
+          <% if (cancelText) { %>\
+            <a href="#" class="btn cancel">{{cancelText}}</a>\
+          <% } %>\
+        <% } %>\
+        <a href="#" class="btn ok btn-primary">{{okText}}</a>\
+      </div>\
+    <% } %>\
+    </div></div>\
+  ');
+
+  //Reset to users' template settings
+  _.templateSettings = _interpolateBackup;
+
+
+  var Modal = Backbone.View.extend({
+
+    className: 'modal',
+
+    events: {
+      'click .close': function(event) {
+        event.preventDefault();
+
+        this.trigger('cancel');
+
+        if (this.options.content && this.options.content.trigger) {
+          this.options.content.trigger('cancel', this);
+        }
+      },
+      'click .cancel': function(event) {
+        event.preventDefault();
+
+        this.trigger('cancel');
+
+        if (this.options.content && this.options.content.trigger) {
+          this.options.content.trigger('cancel', this);
+        }
+      },
+      'click .ok': function(event) {
+        event.preventDefault();
+
+        this.trigger('ok');
+
+        if (this.options.content && this.options.content.trigger) {
+          this.options.content.trigger('ok', this);
+        }
+
+        if (this.options.okCloses) {
+          this.close();
+        }
+      },
+      'keypress': function(event) {
+        if (this.options.enterTriggersOk && event.which == 13) {
+          event.preventDefault();
+
+          this.trigger('ok');
+
+          if (this.options.content && this.options.content.trigger) {
+            this.options.content.trigger('ok', this);
+          }
+
+          if (this.options.okCloses) {
+            this.close();
+          }
+        }
+      }
+    },
+
+    /**
+     * Creates an instance of a Bootstrap Modal
+     *
+     * @see http://twitter.github.com/bootstrap/javascript.html#modals
+     *
+     * @param {Object} options
+     * @param {String|View} [options.content]     Modal content. Default: none
+     * @param {String} [options.title]            Title. Default: none
+     * @param {String} [options.okText]           Text for the OK button. Default: 'OK'
+     * @param {String} [options.cancelText]       Text for the cancel button. Default: 'Cancel'. If passed a falsey value, the button will be removed
+     * @param {Boolean} [options.allowCancel      Whether the modal can be closed, other than by pressing OK. Default: true
+     * @param {Boolean} [options.escape]          Whether the 'esc' key can dismiss the modal. Default: true, but false if options.cancellable is true
+     * @param {Boolean} [options.animate]         Whether to animate in/out. Default: false
+     * @param {Function} [options.template]       Compiled underscore template to override the default one
+     * @param {Boolean} [options.enterTriggersOk] Whether the 'enter' key will trigger OK. Default: false
+     */
+    initialize: function(options) {
+      this.options = _.extend({
+        title: null,
+        okText: 'OK',
+        focusOk: true,
+        okCloses: true,
+        cancelText: 'Cancel',
+        showFooter: true,
+        allowCancel: true,
+        escape: true,
+        animate: false,
+        template: template,
+        enterTriggersOk: false
+      }, options);
+    },
+
+    /**
+     * Creates the DOM element
+     *
+     * @api private
+     */
+    render: function() {
+      var $el = this.$el,
+          options = this.options,
+          content = options.content;
+
+      //Create the modal container
+      $el.html(options.template(options));
+
+      var $content = this.$content = $el.find('.modal-body')
+
+      //Insert the main content if it's a view
+      if (content.$el) {
+        content.render();
+        $el.find('.modal-body').html(content.$el);
+      }
+
+      if (options.animate) $el.addClass('fade');
+
+      this.isRendered = true;
+
+      return this;
+    },
+
+    /**
+     * Renders and shows the modal
+     *
+     * @param {Function} [cb]     Optional callback that runs only when OK is pressed.
+     */
+    open: function(cb) {
+      if (!this.isRendered) this.render();
+
+      var self = this,
+          $el = this.$el;
+
+      //Create it
+      $el.modal(_.extend({
+        keyboard: this.options.allowCancel,
+        backdrop: this.options.allowCancel ? true : 'static'
+      }, this.options.modalOptions));
+
+      //Focus OK button
+      $el.one('shown.bs.modal', function() {
+        if (self.options.focusOk) {
+          $el.find('.btn.ok').focus();
+        }
+
+        if (self.options.content && self.options.content.trigger) {
+          self.options.content.trigger('shown', self);
+        }
+
+        self.trigger('shown');
+      });
+
+      //Adjust the modal and backdrop z-index; for dealing with multiple modals
+      var numModals = Modal.count,
+          $backdrop = $('.modal-backdrop:eq('+numModals+')'),
+          backdropIndex = parseInt($backdrop.css('z-index'),10),
+          elIndex = parseInt($backdrop.css('z-index'), 10);
+
+      $backdrop.css('z-index', backdropIndex + numModals);
+      this.$el.css('z-index', elIndex + numModals);
+
+      if (this.options.allowCancel) {
+        $backdrop.one('click', function() {
+          if (self.options.content && self.options.content.trigger) {
+            self.options.content.trigger('cancel', self);
+          }
+
+          self.trigger('cancel');
+        });
+
+        $(document).one('keyup.dismiss.modal', function (e) {
+          e.which == 27 && self.trigger('cancel');
+
+          if (self.options.content && self.options.content.trigger) {
+            e.which == 27 && self.options.content.trigger('shown', self);
+          }
+        });
+      }
+
+      this.on('cancel', function() {
+        self.close();
+      });
+
+      Modal.count++;
+
+      //Run callback on OK if provided
+      if (cb) {
+        self.on('ok', cb);
+      }
+
+      return this;
+    },
+
+    /**
+     * Closes the modal
+     */
+    close: function() {
+      var self = this,
+          $el = this.$el;
+
+      //Check if the modal should stay open
+      if (this._preventClose) {
+        this._preventClose = false;
+        return;
+      }
+
+      $el.one('hidden.bs.modal', function onHidden(e) {
+        // Ignore events propagated from interior objects, like bootstrap tooltips
+        if(e.target !== e.currentTarget){
+          return $el.one('hidden', onHidden);
+        }
+        self.remove();
+
+        if (self.options.content && self.options.content.trigger) {
+          self.options.content.trigger('hidden', self);
+        }
+
+        self.trigger('hidden');
+      });
+
+      $el.modal('hide');
+
+      Modal.count--;
+    },
+
+    /**
+     * Stop the modal from closing.
+     * Can be called from within a 'close' or 'ok' event listener.
+     */
+    preventClose: function() {
+      this._preventClose = true;
+    }
+  }, {
+    //STATICS
+
+    //The number of modals on display
+    count: 0
+  });
+
+
+  //EXPORTS
+  //CommonJS
+  if (typeof require == 'function' && typeof module !== 'undefined' && exports) {
+    module.exports = Modal;
+  }
+
+  //AMD / RequireJS
+  if (typeof define === 'function' && define.amd) {
+    return define(function() {
+      Backbone.BootstrapModal = Modal;
+    })
+  }
+
+  //Regular; add to Backbone.Bootstrap.Modal
+  else {
+    Backbone.BootstrapModal = Modal;
+  }
+
+})(jQuery, _, Backbone);
 (function() {
   window.MusicNews = {
-    App: {
-      models: {},
-      collections: {},
-      views: {},
-      routers: {}
-    },
     Models: {},
+    models: {},
     Collections: {},
+    collections: {},
     Views: {},
+    views: {},
     Routers: {},
     initialize: function() {
-      var $body, $target;
-      MusicNews.App.collections.submissions = new MusicNews.Collections.Submissions();
-      MusicNews.App.collections.songs = new MusicNews.Collections.Songs();
-      this.App.title = $('title');
-      $target = $('#window');
-      MusicNews.App.views.layout = new MusicNews.Views.Layout().render();
-      $target.append(MusicNews.App.views.layout.$el);
-      $target = $('#window');
-      $body = $('<section/>', {
-        "class": "content"
-      });
-      $target.append($body);
-      MusicNews.App.views.main = new MusicNews.Views.Main().render();
-      MusicNews.App.views.sidebar = new MusicNews.Views.Sidebar().render();
-      $body.append(MusicNews.App.views.sidebar.$el);
-      $body.append(MusicNews.App.views.main.$el);
-      return Backbone.history.start({
-        pushState: true
+      var $spinner,
+        _this = this;
+      this.title = $('title');
+      $spinner = $('<div class="spinner"/>');
+      this.header_container = $('#header');
+      this.header_container.html($spinner);
+      this.player_row = $('#player-row');
+      this.main_container = $('#container');
+      this.content_container = $('#content');
+      this.sidebar_container = $('#sidebar');
+      this.footer_container = $('#footer');
+      this.sidebar = new MusicNews.Views.Sidebar().render();
+      this.sidebar_container.replaceWith(this.sidebar.$el);
+      this.player = {};
+      this.session = new MusicNews.Session();
+      return this.session.deferred.done(function() {
+        _this.router = new MusicNews.Router({
+          app: _this
+        });
+        return Backbone.history.start({
+          pushState: true
+        });
       });
     },
     Helpers: {
@@ -18075,21 +21770,23 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       },
       urlBase: function() {
         if (this.env.prod()) {
-          return "/";
+          return "http://new.seainhd.com";
         } else {
-          return "http://new.seainhd.com/";
+          return "localhost:3000";
         }
       },
       env: {
         prod: function() {
-          if (window.location.hostname === "0.0.0.0") {
+          var hostname;
+          hostname = window.location.hostname;
+          if (hostname === "0.0.0.0" || 'localhost') {
             return false;
           } else {
             return true;
           }
         },
         dev: function() {
-          if (window.location.hostname === "0.0.0.0") {
+          if (!prod()) {
             return true;
           } else {
             return false;
@@ -18111,7 +21808,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
   });
 
 }).call(this);
-(function() { this.JST || (this.JST = {}); this.JST["shared/layout"] = function(__obj) {
+(function() { this.JST || (this.JST = {}); this.JST["shared/header"] = function(__obj) {
     if (!__obj) __obj = {};
     var __out = [], __capture = function(callback) {
       var out = __out, result;
@@ -18150,55 +21847,21 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     }
     (function() {
       (function() {
-        __out.push('<nav role="navigation">\n  <div class="container">\n  <!-- Brand and toggle get grouped for better mobile display -->\n    <div class="navbar-header">\n      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse-1">\n        <span class="sr-only">Toggle navigation</span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n      </button>\n      <a href="/">The Newest Music.</a>\n    </div>\n    <div class="collapse" id="collapse-1">\n      <ul class="nav" id="nav">\n        <li><a href="/">Latest.</a></li>\n        <li><a href="/popular">Popular.</a></li>\n        <li><a href="#tour" class="tour">Tour.</a></li>\n      </ul>\n      <ul class="nav" id="right-nav">\n      </ul>\n    </div>\n  </div>\n  <div class="player-container" id="player-container">\n  </div>\n</nav>\n');
+        __out.push('<nav role="navigation">\n  <div class="container">\n    <div class="navbar-header">\n      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse-1">\n        <span class="sr-only">Toggle navigation</span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n      </button>\n      <a href="/">Wake and Shake.</a>\n    </div>\n    <div class="collapse" id="collapse-1">\n      <ul class="nav" id="nav">\n        <li><a href="/" class=\'submissions\'>Latest.</a></li>\n        <li><a href="/greatest" class="greatest">Greatest.</a></li>\n        ');
       
-      }).call(this);
+        if (this.session.isNew()) {
+          __out.push('\n          <li><a href="/auth/twitter" data-external=true><i class="fa fa-sign-in"></i> Sign In.</a></li>\n        ');
+        } else {
+          __out.push('\n          <li><a href="/favorites" class="favorites">Favorites.</a></li>\n          <li><a href="/signout" class="signout" data-external=true>Signout.</a></li>\n        ');
+        }
       
-    }).call(__obj);
-    __obj.safe = __objSafe, __obj.escape = __escape;
-    return __out.join('');
-  };
-}).call(this);
-(function() { this.JST || (this.JST = {}); this.JST["shared/main"] = function(__obj) {
-    if (!__obj) __obj = {};
-    var __out = [], __capture = function(callback) {
-      var out = __out, result;
-      __out = [];
-      callback.call(this);
-      result = __out.join('');
-      __out = out;
-      return __safe(result);
-    }, __sanitize = function(value) {
-      if (value && value.ecoSafe) {
-        return value;
-      } else if (typeof value !== 'undefined' && value != null) {
-        return __escape(value);
-      } else {
-        return '';
-      }
-    }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
-    __safe = __obj.safe = function(value) {
-      if (value && value.ecoSafe) {
-        return value;
-      } else {
-        if (!(typeof value !== 'undefined' && value != null)) value = '';
-        var result = new String(value);
-        result.ecoSafe = true;
-        return result;
-      }
-    };
-    if (!__escape) {
-      __escape = __obj.escape = function(value) {
-        return ('' + value)
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;');
-      };
-    }
-    (function() {
-      (function() {
-        __out.push('<div class="hero">\n</div>\n\n<div class="body">\n</div>\n');
+        __out.push('\n      </ul>\n      ');
+      
+        if (!this.session.isNew()) {
+          __out.push('\n        <form class="navbar-form navbar-right" role="add track">\n          <div class="form-group">\n            <input type="text" data-feature="submitSong" class="form-control" placeholder="Add a Track">\n          </div>\n          <button data-feature="submitSong" type="submit" class="btn btn-default">Submit</button>\n        </form>\n      ');
+        }
+      
+        __out.push('\n    </div>\n  </div>\n</nav>\n');
       
       }).call(this);
       
@@ -18246,7 +21909,15 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     }
     (function() {
       (function() {
-        __out.push('<div id="player">\n  <button id="previous">\n    <i></i>\n   </button>\n\n  <button id="nolove">\n    <i></i>\n  </button>\n\n  <button id="play" data-action="play-pause-button">\n    <i></i>\n  </button>\n\n  <button id="next">\n    <i></i>\n  </button>\n</div>\n<br>\n<div id="playlist">\n</div>\n');
+        __out.push('<div id="player">\n  <ul class="player">\n    <li><a id="previous"></a></li>\n    <li><a id="nolove"></a></li>\n    <li><a id="play" data-action="play-pause"></a></li>\n    <li><a id="next"></a></li>\n  </ul>\n</div>\n\n<div id="footer" class="full-width">\n  <div class="progress">\n    <div class="progress-bar" role="progressbar" style="width: 0%">\n      <a target="_blank" class="current-song" href="');
+      
+        __out.push(__sanitize(this.currentTrack.get('source_url')));
+      
+        __out.push('">\n        <i class="cloud"></i>');
+      
+        __out.push(__sanitize(this.currentTrack.get('title')));
+      
+        __out.push('\n      </a>\n      <i class="clock"></i>\n    </div>\n  </div>\n</div>\n');
       
       }).call(this);
       
@@ -18359,6 +22030,70 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     return __out.join('');
   };
 }).call(this);
+(function() { this.JST || (this.JST = {}); this.JST["songs/show"] = function(__obj) {
+    if (!__obj) __obj = {};
+    var __out = [], __capture = function(callback) {
+      var out = __out, result;
+      __out = [];
+      callback.call(this);
+      result = __out.join('');
+      __out = out;
+      return __safe(result);
+    }, __sanitize = function(value) {
+      if (value && value.ecoSafe) {
+        return value;
+      } else if (typeof value !== 'undefined' && value != null) {
+        return __escape(value);
+      } else {
+        return '';
+      }
+    }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
+    __safe = __obj.safe = function(value) {
+      if (value && value.ecoSafe) {
+        return value;
+      } else {
+        if (!(typeof value !== 'undefined' && value != null)) value = '';
+        var result = new String(value);
+        result.ecoSafe = true;
+        return result;
+      }
+    };
+    if (!__escape) {
+      __escape = __obj.escape = function(value) {
+        return ('' + value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      };
+    }
+    (function() {
+      (function() {
+        __out.push('<div class="song-gutter">\n  <button class="play"><i></i></button>\n  <button class="heart"><i></i></button>\n  <button class="facebook" href="');
+      
+        __out.push(__sanitize(this.song.get('submission_url')));
+      
+        __out.push('"><i></i></button>\n  <button class="twitter"><i></i></button>\n</div>\n<div class="song-content">\n  <div>\n    <a href="/');
+      
+        __out.push(__sanitize(this.song.get('id')));
+      
+        __out.push('">');
+      
+        __out.push(__sanitize(this.song.get('title')));
+      
+        __out.push('</a>\n  </div>\n</div>\n<div class="song-art">\n  <img src="');
+      
+        __out.push(__sanitize(this.song.get('thumbnail_url')));
+      
+        __out.push('">\n</div>\n');
+      
+      }).call(this);
+      
+    }).call(__obj);
+    __obj.safe = __objSafe, __obj.escape = __escape;
+    return __out.join('');
+  };
+}).call(this);
 (function() { this.JST || (this.JST = {}); this.JST["submissions/_song"] = function(__obj) {
     if (!__obj) __obj = {};
     var __out = [], __capture = function(callback) {
@@ -18402,7 +22137,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       
         __out.push(__sanitize(this.song.get('submission_url')));
       
-        __out.push('"><i></i></button>\n  <button class="twitter"><i></i></button>\n</div>\n<div class="song-content">\n  <div>\n    <a href="/song/');
+        __out.push('"><i></i></button>\n  <button class="twitter"><i></i></button>\n</div>\n<div class="song-content">\n  <div>\n    <a href="/');
       
         __out.push(__sanitize(this.song.get('id')));
       
@@ -18410,7 +22145,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       
         __out.push(__sanitize(this.song.get('title')));
       
-        __out.push('</a>\n  </div>\n  <div>\n    <span>\n     Purchase: (<a href="http://amzn.com">amazon</a>)(<a href="http://itunes.com">itunes</a>)\n    </span>\n  </div>\n</div>\n<div class="song-art">\n  <img src="');
+        __out.push('</a>\n  </div>\n</div>\n<div class="song-art">\n  <img src="');
       
         __out.push(__sanitize(this.song.get('thumbnail_url')));
       
@@ -18463,19 +22198,15 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     (function() {
       (function() {
         if (this.submission.songs.length) {
-          __out.push('\n    <div class="sub-content">\n    </div>\n    <div class="sub-gutter">\n      <a href="/');
+          __out.push('\n  <div class="sub-gutter">\n    <a name="sub/');
           __out.push(__sanitize(this.submission.get('id')));
-          __out.push('">\n        <span>');
+          __out.push('">\n      <span>');
           __out.push(__sanitize(this.submission.get('title')));
-          __out.push('</span>\n        <h6>');
-          __out.push(__sanitize(this.submission.get('fromNow')));
-          __out.push(' on ');
-          __out.push(__sanitize(this.submission.get('calendar')));
-          __out.push('</h6>\n        <div class="img">\n          <img src="');
-          __out.push(__sanitize(this.submission.thumbnail_url));
-          __out.push('" class="img-responsive">\n        </div>\n        <p class="lead">');
+          __out.push('</span>\n      <div>submitted ');
+          __out.push(__sanitize(this.submission.fromNow()));
+          __out.push('</div>\n      <div>\n        <hr>\n        <p>');
           __out.push(__sanitize(this.submission.get('body')));
-          __out.push('</p>\n      </a>\n    </div>\n');
+          __out.push('</p>\n      </div>\n    </a>\n  </div>\n  <div class="sub-content">\n  </div>\n');
         }
       
         __out.push('\n');
@@ -18572,6 +22303,184 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
+  MusicNews.Models.FeatureRequest = (function(_super) {
+    __extends(FeatureRequest, _super);
+
+    function FeatureRequest() {
+      _ref = FeatureRequest.__super__.constructor.apply(this, arguments);
+      return _ref;
+    }
+
+    FeatureRequest.prototype.features = {
+      'default': {
+        'content': "This isn't available yet, but we put it here to see if people are interested in it. ",
+        'title': 'Are you interested in this feature?'
+      },
+      'submitSong': {
+        'content': 'Would you like to submit a song?',
+        'title': 'Interested in Submitting a song?'
+      }
+    };
+
+    FeatureRequest.prototype.initialize = function(name) {
+      this.name = name;
+      this.name = this.name || 'default';
+      this.content = this.features[this.name]['content'];
+      return this.title = this.features[this.name]['title'];
+    };
+
+    FeatureRequest.prototype.modalOptions = function() {
+      var options;
+      options = {
+        content: this.content,
+        title: this.title,
+        okText: 'GREAT!',
+        cancelText: 'Nevermind...',
+        animate: true
+      };
+      return options;
+    };
+
+    return FeatureRequest;
+
+  })(Backbone.Model);
+
+}).call(this);
+(function() {
+  var _ref,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  MusicNews.Session = (function(_super) {
+    __extends(Session, _super);
+
+    function Session() {
+      _ref = Session.__super__.constructor.apply(this, arguments);
+      return _ref;
+    }
+
+    Session.prototype.url = function() {
+      return this.options.host + "/session";
+    };
+
+    Session.prototype.defaults = {
+      auth: 0,
+      updated: 0
+    };
+
+    Session.prototype.state = false;
+
+    Session.prototype.options = {
+      local: true,
+      remote: true,
+      persist: false,
+      host: ""
+    };
+
+    Session.prototype.initialize = function(model, options) {
+      _.bindAll(this, "logout", "update");
+      options = options || {};
+      this.options = _.extend(this.options, options);
+      if (!_.isUndefined(options.url)) {
+        this.url = options.url;
+      }
+      this.deferred = this.fetch();
+      this.bind("change", this.update);
+      this.bind("error", this.error);
+      return this.on("logout", this.logout);
+    };
+
+    Session.prototype.parse = function(data) {
+      if (!data.id) {
+        data.uid = this._generateUid();
+      }
+      return data;
+    };
+
+    Session.prototype.update = function() {
+      if (!this.state) {
+        this.state = true;
+        return this.trigger("loaded");
+      }
+    };
+
+    Session.prototype.logout = function(options) {
+      var self;
+      self = this;
+      options = options || {};
+      this.store.clear("session");
+      return this.destroy({
+        wait: true,
+        success: function(model, resp) {
+          model.clear();
+          model.id = null;
+          self.set({
+            auth: false
+          });
+          if (resp && resp._csrf) {
+            self.set({
+              _csrf: resp._csrf
+            });
+          }
+          if (options.reload) {
+            return window.location.reload();
+          }
+        },
+        error: function(model, req, options, error) {
+          return console.log(req);
+        }
+      });
+    };
+
+    Session.prototype._generateUid = function(separator) {
+      var S4, delim;
+      S4 = function() {
+        return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+      };
+      delim = separator || "-";
+      return S4() + S4() + delim + S4() + delim + S4() + delim + S4() + delim + S4() + S4() + S4();
+    };
+
+    Session.prototype.sessionStorage = {
+      get: function(name) {
+        return sessionStorage.getItem(name);
+      },
+      set: function(name, val) {
+        return sessionStorage.setItem(name, val);
+      },
+      check: function(name) {
+        return sessionStorage.getItem(name) == null;
+      },
+      clear: function(name) {
+        return sessionStorage.removeItem(name);
+      }
+    };
+
+    Session.prototype.localStorage = {
+      get: function(name) {
+        return localStorage.getItem(name);
+      },
+      set: function(name, val) {
+        return localStorage.setItem(name, val);
+      },
+      check: function(name) {
+        return localStorage.getItem(name) == null;
+      },
+      clear: function(name) {
+        return localStorage.removeItem(name);
+      }
+    };
+
+    return Session;
+
+  })(Backbone.Model);
+
+}).call(this);
+(function() {
+  var _ref,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
   MusicNews.Models.Song = (function(_super) {
     __extends(Song, _super);
 
@@ -18580,8 +22489,32 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       return _ref;
     }
 
-    Song.prototype.parse = function(data) {
-      return data;
+    Song.prototype.defaults = {
+      percent: 0
+    };
+
+    Song.prototype.progressPercent = function() {
+      return "width: " + (this.get('percent')) + "%;";
+    };
+
+    Song.prototype.progressPercentRound = function() {
+      return "" + (Math.floor(this.get('percent'))) + "%";
+    };
+
+    Song.prototype.url = function() {
+      return "/songs/" + this.id;
+    };
+
+    Song.prototype.parseDate = function(date) {
+      return moment(date);
+    };
+
+    Song.prototype.fromNow = function() {
+      return this.parseDate(this.get('created_at')).fromNow();
+    };
+
+    Song.prototype.calendar = function() {
+      return this.parseDate(this.get('created_at')).calendar();
     };
 
     return Song;
@@ -18603,46 +22536,51 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     }
 
     Submission.prototype.url = function() {
-      return "/s/" + this.id + "/resolve";
+      return "/submissions/" + this.id;
+    };
+
+    Submission.prototype.initialize = function(options) {
+      if (options.fetch) {
+        return this.deferred = this.fetch();
+      }
     };
 
     Submission.prototype.defaultThumbnail = function() {
       return "http://placehold.it/300x300";
     };
 
+    Submission.prototype.parseDate = function(date) {
+      return moment(date);
+    };
+
+    Submission.prototype.fromNow = function() {
+      return this.parseDate(this.get('created_at')).fromNow();
+    };
+
+    Submission.prototype.calendar = function() {
+      return this.parseDate(this.get('created_at')).calendar();
+    };
+
     Submission.prototype.parse = function(data) {
-      var firstSong, new_song, song_data, _i, _len, _ref1, _this;
-      this.url = window.location.href;
-      this.parseDates(data);
-      this.parseTweet(data);
-      this.parseShare(data);
+      var firstSong, new_song, song_data, _i, _len, _ref1;
       this.songs = new MusicNews.Collections.Songs();
-      _this = this;
       _ref1 = data.songs;
       for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
         song_data = _ref1[_i];
         new_song = new MusicNews.Models.Song(song_data);
-        new_song.set("submission_url", "" + window.location.origin + "/" + (new_song.get('submission_id')));
-        MusicNews.App.collections.songs.add(new_song);
-        _this.songs.add(new_song);
+        this.songs.add(new_song);
+        MusicNews.collections.latest_songs.add(new_song);
       }
       firstSong = this.songs.models[0];
       if (firstSong && firstSong.get('thumbnail_url')) {
-        this.thumbnail_url = firstSong.get('thumbnail_url');
+        data.thumbnail_url = firstSong.get('thumbnail_url');
       } else {
-        this.thumbnail_url = this.defaultThumbnail();
+        data.thumbnail_url = this.defaultThumbnail();
       }
       return data;
     };
 
-    Submission.prototype.parseDates = function(data) {
-      var date;
-      date = moment(data.created_at);
-      data.fromNow = date.fromNow();
-      return data.calendar = date.calendar();
-    };
-
-    Submission.prototype.parseShare = function(data) {
+    Submission.prototype.facebookShare = function(data) {
       var base, potentialShare, _this;
       base = "http://www.facebook.com/sharer/sharer.php?";
       _this = this;
@@ -18652,7 +22590,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       return data.share = base + $.param(potentialShare);
     };
 
-    Submission.prototype.parseTweet = function(data) {
+    Submission.prototype.twitterShare = function(data) {
       var base, potentialTweet;
       base = "https://twitter.com/intent/tweet?";
       potentialTweet = {
@@ -18682,12 +22620,40 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       return _ref;
     }
 
-    Songs.prototype.url = 'songs';
-
     Songs.prototype.model = MusicNews.Models.Song;
 
-    Songs.prototype.comparator = function(song) {
-      return -song.get('playback_count');
+    Songs.prototype.initialize = function(options) {
+      var filter_sort;
+      options = options || {};
+      filter_sort = {};
+      if (options.sort) {
+        _.extend(filter_sort, {
+          sort: options.sort
+        });
+      }
+      if (options.filter) {
+        _.extend(filter_sort, {
+          filter: options.filter
+        });
+      }
+      if (options.fetch) {
+        return this.deferred = this.fetch({
+          reset: true,
+          data: $.param(filter_sort),
+          fetch: false
+        });
+      } else {
+        return this.deferred = $.Deferred().resolveWith();
+      }
+    };
+
+    Songs.prototype.url = function() {
+      return 'songs';
+    };
+
+    Songs.prototype.parse = function(response) {
+      this.pagingData = response.pagingData;
+      return response.songs;
     };
 
     return Songs;
@@ -18708,14 +22674,20 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       return _ref;
     }
 
-    Submissions.prototype.url = function() {
-      var url;
-      url = window.location.origin + '/submissions';
-      console.log('url', url);
-      return url;
+    Submissions.prototype.model = MusicNews.Models.Submission;
+
+    Submissions.prototype.initialize = function() {
+      return this.deferred = this.fetch();
     };
 
-    Submissions.prototype.model = MusicNews.Models.Submission;
+    Submissions.prototype.url = function() {
+      return '/submissions';
+    };
+
+    Submissions.prototype.parse = function(response) {
+      this.pagingData = response.pagingData;
+      return response.submissions;
+    };
 
     return Submissions;
 
@@ -18727,273 +22699,355 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  MusicNews.Views.Layout = (function(_super) {
-    __extends(Layout, _super);
+  MusicNews.Views.Header = (function(_super) {
+    __extends(Header, _super);
 
-    function Layout() {
-      _ref = Layout.__super__.constructor.apply(this, arguments);
+    function Header() {
+      _ref = Header.__super__.constructor.apply(this, arguments);
       return _ref;
     }
 
-    Layout.prototype.id = 'header';
-
-    Layout.prototype.template = JST['shared/layout'];
-
-    Layout.prototype.render = function() {
-      var $markup, $playerContainer;
-      $markup = $(this.template());
-      $playerContainer = $markup.find('div#player-container');
-      MusicNews.App.views.player = new MusicNews.Views.Player().render();
-      $playerContainer.html(MusicNews.App.views.player.$el);
-      $playerContainer.affix();
-      $(this.el).html($markup);
-      return this;
+    Header.prototype.initialize = function(options) {
+      this.app = options.app;
+      this.router = this.app.router;
+      this.session = this.app.session;
+      this.session.on("change", this.render);
+      return this.render();
     };
 
-    Layout.prototype.events = {
-      "click a": "goTo"
+    Header.prototype.id = 'header';
+
+    Header.prototype.className = 'full-width';
+
+    Header.prototype.template = JST['shared/header'];
+
+    Header.prototype.activate = function(action) {
+      this.$el.find('li').removeClass('active');
+      return this.$el.find("." + action).parent().addClass('active');
     };
 
-    Layout.prototype.goTo = function(e) {
-      var target;
-      e.preventDefault();
-      target = $(e.currentTarget).attr('href');
-      if (target === '#tour') {
-        this.startTour(e);
-        return;
-      }
-      return MusicNews.App.routers.submissions.navigate(target, {
-        trigger: true
+    Header.prototype.render = function() {
+      var $markup;
+      $markup = this.template({
+        session: this.session
       });
-    };
-
-    Layout.prototype.startTour = function(e) {
-      console.log('start tour');
-    };
-
-    return Layout;
-
-  })(Backbone.View);
-
-}).call(this);
-(function() {
-  var _ref,
-    __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
-  MusicNews.Views.Main = (function(_super) {
-    __extends(Main, _super);
-
-    function Main() {
-      _ref = Main.__super__.constructor.apply(this, arguments);
-      return _ref;
-    }
-
-    Main.prototype.id = 'main';
-
-    Main.prototype.template = JST['shared/main'];
-
-    Main.prototype.initialize = function() {
-      this.router = new MusicNews.Routers.Submissions;
-      return MusicNews.App.routers.submissions = this.router;
-    };
-
-    Main.prototype.render = function() {
-      $(this.el).html(this.template());
-      this.hero = $(this.el).find('div.hero');
-      this.body = $(this.el).find('div.body');
-      this.router.target = this.body;
+      this.$el.html($markup);
       return this;
     };
 
-    return Main;
+    Header.prototype.events = {
+      'click a': 'goTo',
+      'submit form': 'submitSong',
+      'click [data-feature]': 'featureRequest'
+    };
+
+    Header.prototype.featureRequest = function(e) {
+      var name, request;
+      name = $(e.currentTarget).data('feature');
+      request = new MusicNews.Models.FeatureRequest(name);
+      return this.modal = new Backbone.BootstrapModal(request.modalOptions()).open();
+    };
+
+    Header.prototype.submitSong = function(e) {
+      return e.preventDefault();
+    };
+
+    Header.prototype.goTo = function(e) {
+      var $route, $target, url;
+      e.preventDefault();
+      $target = $(e.currentTarget);
+      $route = $target.attr('href');
+      if ($target.data('external')) {
+        url = "" + window.location.origin + $route;
+        return window.location.href = url;
+      } else {
+        return this.router.navigate($route, {
+          trigger: true
+        });
+      }
+    };
+
+    return Header;
 
   })(Backbone.View);
 
 }).call(this);
 (function() {
   var _ref,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  MusicNews.Views.Player = (function(_super) {
+  MusicNews.Player = (function(_super) {
     __extends(Player, _super);
 
     function Player() {
+      this.keyBoardShortCuts = __bind(this.keyBoardShortCuts, this);
+      this._onplay = __bind(this._onplay, this);
+      this._onpause = __bind(this._onpause, this);
+      this._onfinish = __bind(this._onfinish, this);
+      this._onload = __bind(this._onload, this);
       _ref = Player.__super__.constructor.apply(this, arguments);
       return _ref;
     }
 
     Player.prototype.id = 'music-player';
 
+    Player.prototype.className = 'container';
+
     Player.prototype.template = JST['shared/player'];
 
     Player.prototype.playlistSongTemplate = JST['shared/track'];
 
-    Player.prototype.initialize = function() {
-      var _this;
-      _this = this;
-      this.songs = MusicNews.App.collections.songs;
-      this.songHistory = new MusicNews.Collections.Songs;
-      MusicNews.App.views.submissions = [];
+    Player.prototype.currentTrackIndex = 0;
+
+    Player.prototype.initialize = function(options) {
+      var _this = this;
+      this.app = options.app;
+      $(document).on('keydown', this.keyBoardShortCuts);
       SC.initialize({
-        client_id: "c024bdd48e9ecf014c71af406201f3a2"
+        client_id: "c024bdd48e9ecf014c71af406201f3a2",
+        redirect_uri: "" + (MusicNews.Helpers.urlBase()) + "/auth/soundcloud/callback"
       });
       return SC.whenStreamingReady(function() {
-        console.log('streaming ready');
-        _this.updateCurrentTrack();
-        return console.log(_this.currentTrack);
+        return _this.app.currentCollection.deferred.done(function() {
+          _this.setCurrentTrack();
+          return _this.render();
+        });
       });
     };
 
     Player.prototype.render = function() {
-      $(this.el).html(this.template());
-      this.playButton = this.$el.find('button[data-action="play-pause-button"]');
+      var $markup;
+      $markup = this.template({
+        currentTrack: this.currentTrack
+      });
+      this.$el.html($markup);
+      this.playPauseButton = this.$el.find('[data-action="play-pause"]');
       return this;
     };
 
     Player.prototype.events = {
-      "click button#play": "playSong",
-      "click button#pause": "pauseSong",
-      "click button#next": "nextSong",
-      "click button#previous": "previousSong",
-      "click button#nolove": "noloveSong",
-      "click button#love": "loveSong",
-      "click button#like": "likeSong",
-      "click a": "goTo"
+      'click a#play': 'playCurrentSound',
+      'click a#pause': 'pauseSong',
+      'click a#next': 'nextSong',
+      'click a#previous': 'previousSong',
+      'click a#love': 'userFavorite',
+      'click a#like': 'userFavorite',
+      'click a#nolove': 'userFavorite'
     };
 
-    Player.prototype.goTo = function(e) {
-      var url;
-      url = $(e.currentTarget).attr('href');
-      return MusicNews.Helpers.openWindow(url, 'Soundcloud');
-    };
-
-    Player.prototype.updateCurrentTrack = function() {
-      var markup;
-      this.currentSound = void 0;
-      this.getCurrentTrack();
-      if (this.currentTrack) {
-        markup = this.playlistSongTemplate({
-          song: this.currentTrack
-        });
-        return $(this.el).find('#playlist').html(markup);
-      }
-    };
-
-    Player.prototype.getCurrentTrack = function() {
-      this.currentTrack || (this.currentTrack = this.songs.first());
-      return this.currentTrack;
-    };
-
-    Player.prototype.playSong = function(e) {
-      var $stream_url,
-        _this = this;
+    Player.prototype.playCurrentSound = function(e) {
       if (e) {
         e.preventDefault();
       }
-      _this = this;
-      this.playButton.attr('id', 'pause');
-      this.playOptions = {
-        onfinish: function() {
-          return _this.nextSong();
-        },
-        onplay: function() {
-          var songs;
-          songs = MusicNews.App.views.main.body.find('div.song');
-          songs.removeClass("active");
-          return songs.find('button.pause').removeClass('pause').addClass('play');
-        }
-      };
       if (this.currentSound) {
-        return this.currentSound.play(this.playOptions);
-      } else {
-        $stream_url = this.currentTrack.get('stream_url');
-        if ($stream_url === null || void 0) {
-          _this.advanceTrack();
-          return;
-        }
-        return SC.stream($stream_url, function(sound) {
-          _this.currentSound = sound;
-          return _this.currentSound.play(_this.playOptions);
+        return this.currentSound.play({
+          onfinish: this._onfinish,
+          onload: this._onload,
+          onpause: this._onpause,
+          onplay: this._onplay,
+          whileplaying: this._whileplaying
         });
+      } else {
+        this.setCurrentSound();
+        return this.playCurrentSound();
       }
+    };
+
+    Player.prototype._onload = function(loaded) {
+      if (!loaded) {
+        this.currentCollection.remove(this.currentTrack);
+        this.currentTrack.save({
+          invalid: true
+        });
+        return this.nextSong();
+      }
+    };
+
+    Player.prototype._onfinish = function() {
+      this.currentTrack.view.deactivate();
+      this.playPauseButton.attr('id', 'play');
+      return this.nextSong();
+    };
+
+    Player.prototype._whileplaying = function() {
+      var percent;
+      percent = (this.position / this.durationEstimate) * 100;
+      return MusicNews.player.currentTrack.set('percent', percent);
+    };
+
+    Player.prototype._onpause = function() {
+      this.playPauseButton.attr('id', 'play');
+      return this.currentTrack.view.deactivate();
+    };
+
+    Player.prototype._onplay = function() {
+      $('.song').removeClass("active");
+      this.playPauseButton.attr('id', 'pause');
+      return this.currentTrack.view.activate();
+    };
+
+    Player.prototype.setCurrentSound = function() {
+      var $stream_url,
+        _this = this;
+      $stream_url = this.streamUrl();
+      if ($stream_url === null || void 0) {
+        this.advanceTrackIndex();
+        this.setCurrentSound();
+      }
+      return SC.stream($stream_url, function(sound) {
+        return _this.currentSound = sound;
+      });
+    };
+
+    Player.prototype.streamUrl = function() {
+      var $stream_url;
+      if (this.currentTrack && this.currentTrack.get('stream_url')) {
+        $stream_url = this.currentTrack.get('stream_url');
+      } else {
+        $stream_url = null;
+      }
+      return $stream_url;
+    };
+
+    Player.prototype.setCurrentTrack = function() {
+      this.currentSound = null;
+      this.stopListening(this.currentTrack);
+      this.currentTrack = this.app.currentCollection.at(this.currentTrackIndex);
+      return this.listenForChangeOn(this.currentTrack);
+    };
+
+    Player.prototype.bindings = {
+      'i.clock': 'percent',
+      '.progress-bar': {
+        name: 'style',
+        observe: 'percent',
+        onGet: 'formatPercent'
+      }
+    };
+
+    Player.prototype.formatPercent = function(val) {
+      return "width: " + val + "%";
+    };
+
+    Player.prototype.updater = function(args, model) {
+      var formattedValue, modelAttrValue, options, selector;
+      selector = args[0];
+      options = args[1];
+      if (_.isString(options)) {
+        return this.$(selector).text(model.get(options));
+      } else {
+        modelAttrValue = model.get(options.observe);
+        formattedValue = this[options.onGet](modelAttrValue);
+        return this.$(selector).attr(options.name, formattedValue);
+      }
+    };
+
+    Player.prototype.listenForChangeOn = function(model, optionalBindings) {
+      var bindings, options, selector, selector_options, _i, _len, _ref1, _results,
+        _this = this;
+      bindings = optionalBindings || this.bindings;
+      _ref1 = _.pairs(bindings);
+      _results = [];
+      for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+        selector_options = _ref1[_i];
+        selector = selector_options[0];
+        options = selector_options[1];
+        if (_.isString(options)) {
+          _results.push(this.listenTo(model, "change:" + options, function() {
+            return _this.updater(selector_options, model);
+          }));
+        } else {
+          _results.push(this.listenTo(model, "change:" + options.observe, function() {
+            return _this.updater(selector_options, model);
+          }));
+        }
+      }
+      return _results;
+    };
+
+    Player.prototype.advanceTrackIndex = function() {
+      this.currentTrackIndex = this.currentTrackIndex + 1;
+      if (this.currentTrackIndex === this._currentCollectionLength()) {
+        return this.currentTrackIndex = 0;
+      }
+    };
+
+    Player.prototype.revertTrackIndex = function() {
+      this.currentTrackIndex = this.currentTrackIndex - 1;
+      if (this.currentTrackIndex === -1) {
+        return this.currentTrackIndex = this._currentCollectionLength() - 1;
+      }
+    };
+
+    Player.prototype._currentCollectionLength = function() {
+      return this.app.currentCollection.length;
+    };
+
+    Player.prototype.nextSong = function(e) {
+      if (e) {
+        e.preventDefault();
+      }
+      this.pauseSong();
+      this.advanceTrackIndex();
+      this.setCurrentTrack();
+      this.render();
+      return this.playCurrentSound();
+    };
+
+    Player.prototype.previousSong = function(e) {
+      if (e) {
+        e.preventDefault();
+      }
+      this.pauseSong();
+      this.revertTrackIndex();
+      this.setCurrentTrack();
+      this.render();
+      return this.playCurrentSound();
     };
 
     Player.prototype.pauseSong = function(e) {
-      var _this;
       if (e) {
         e.preventDefault();
       }
-      _this = this;
-      this.playButton.attr('id', 'play');
       if (this.currentSound) {
         return this.currentSound.pause();
       }
     };
 
-    Player.prototype.nextSong = function(e) {
-      var $song;
-      if (e) {
+    Player.prototype.keyBoardShortCuts = function(e) {
+      if (e.keyCode === 32) {
         e.preventDefault();
+        this.playPauseButton.click();
       }
-      this.pauseSong();
-      $song = this.songs.shift();
-      this.songHistory.unshift($song);
-      if (this.songs.length === 0) {
-        window.location.href = window.location.href;
-        return;
-      } else {
-        this.currentTrack = void 0;
-        this.updateCurrentTrack();
+      if (e.keyCode === 39) {
+        e.preventDefault();
+        this.nextSong();
       }
-      return this.playSong();
+      if (e.keyCode === 37) {
+        e.preventDefault();
+        return this.previousSong();
+      }
     };
 
-    Player.prototype.previousSong = function(e) {
-      var $song;
-      if (e) {
-        e.preventDefault();
-      }
-      this.pauseSong();
-      $song = this.songHistory.shift();
-      if (!$song) {
-        return;
-      }
-      this.songs.unshift($song);
-      this.currentTrack = void 0;
-      this.updateCurrentTrack();
-      return this.playSong();
-    };
-
-    Player.prototype.noloveSong = function(e) {
+    Player.prototype.userFavorite = function(e) {
       var $button;
-      if (e) {
-        e.preventDefault();
-      }
+      e.preventDefault();
       $button = $(e.currentTarget);
-      $button.attr("id", "love");
-      return console.log("no love button");
+      return this[$button.attr('id')]($button);
     };
 
-    Player.prototype.loveSong = function(e) {
-      var $button;
-      if (e) {
-        e.preventDefault();
-      }
-      $button = $(e.currentTarget);
-      $button.attr("id", "like");
-      return console.log("love button");
+    Player.prototype.nolove = function($button) {
+      return $button.attr('id', 'love');
     };
 
-    Player.prototype.likeSong = function(e) {
-      var $button;
-      if (e) {
-        e.preventDefault();
-      }
-      $button = $(e.currentTarget);
-      $button.attr("id", "nolove");
-      return console.log("like button");
+    Player.prototype.love = function($button) {
+      return $button.attr('id', 'like');
+    };
+
+    Player.prototype.like = function($button) {
+      return $button.attr('id', 'nolove');
     };
 
     return Player;
@@ -19033,6 +23087,40 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
+  MusicNews.Views.Song = (function(_super) {
+    __extends(Song, _super);
+
+    function Song() {
+      _ref = Song.__super__.constructor.apply(this, arguments);
+      return _ref;
+    }
+
+    Song.prototype.className = 'song-show';
+
+    Song.prototype.template = JST['songs/show'];
+
+    Song.prototype.initialize = function() {
+      this.listenTo(this.model, 'change', this.render);
+      return this.model.fetch();
+    };
+
+    Song.prototype.render = function() {
+      this.$el.html(this.template({
+        song: this.model
+      }));
+      return this;
+    };
+
+    return Song;
+
+  })(Backbone.View);
+
+}).call(this);
+(function() {
+  var _ref,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
   MusicNews.Views.SongPartial = (function(_super) {
     __extends(SongPartial, _super);
 
@@ -19046,35 +23134,26 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     SongPartial.prototype.template = JST['submissions/_song'];
 
     SongPartial.prototype.initialize = function(options) {
-      this.song = options.model;
+      this.app = options.app;
       this.submission = options.submission;
-      options.model.view = this;
-      this.player = MusicNews.App.views.player;
-      this.router = MusicNews.App.routers.submissions;
-      return MusicNews.App.title.text(this.model.get('title'));
+      this.router = this.app.router;
+      return this.player = this.app.player;
+    };
+
+    SongPartial.prototype.id = function() {
+      return "song-" + (this.model.get('id'));
     };
 
     SongPartial.prototype.render = function() {
-      var markup;
-      markup = this.template({
-        song: this.song
-      });
-      this.$el.html(markup);
-      this.$el.attr('id', "song-" + (this.song.get('id')));
-      $('[data-spy="scroll"]').each(function() {
-        return $(this).scrollspy('refresh');
-      });
-      if (this.song === this.player.currentTrack) {
-        this.playPauseAddClass('play');
-      }
+      this.$el.html(this.template({
+        song: this.model
+      }));
       return this;
     };
 
     SongPartial.prototype.events = {
-      "click a": "goToShow",
-      "click button.play, button.pause": "buttonHandler",
-      "click button.facebook": "facebook",
-      "click button.twitter": "twitter"
+      'click a': 'goToShow',
+      'click button': 'buttonHandler'
     };
 
     SongPartial.prototype.goToShow = function(e) {
@@ -19086,12 +23165,21 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       });
     };
 
+    SongPartial.prototype.deactivate = function() {
+      this.$el.removeClass('active');
+      return this.$el.find('.pause').attr('class', 'play');
+    };
+
+    SongPartial.prototype.activate = function() {
+      this.$el.addClass('active');
+      return this.$el.find('.play').attr('class', 'pause');
+    };
+
     SongPartial.prototype.buttonHandler = function(e) {
       var $action;
       e.preventDefault();
       $action = $(e.currentTarget).attr('class');
-      this[$action]();
-      return this.playPauseAddClass($action);
+      return this[$action]();
     };
 
     SongPartial.prototype.play = function() {
@@ -19105,11 +23193,13 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
         });
         this.player.$el.find('#playlist').html(markup);
       }
-      return this.player.playSong();
+      this.player.playSong();
+      return this.playPauseAddClass("play");
     };
 
     SongPartial.prototype.pause = function() {
-      return this.player.pauseSong();
+      this.player.pauseSong();
+      return this.playPauseAddClass("pause");
     };
 
     SongPartial.prototype.facebook = function() {
@@ -19146,6 +23236,49 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
+  MusicNews.Views.Songs = (function(_super) {
+    __extends(Songs, _super);
+
+    function Songs() {
+      _ref = Songs.__super__.constructor.apply(this, arguments);
+      return _ref;
+    }
+
+    Songs.prototype.className = 'song-list';
+
+    Songs.prototype.initialize = function(options) {
+      var _this = this;
+      this.collection = options.collection;
+      this.app = options.app;
+      this.target = this.$el;
+      return this.collection.deferred.done(function() {
+        return _this.render();
+      });
+    };
+
+    Songs.prototype.render = function() {
+      var _this = this;
+      this.collection.each(function(item) {
+        item.view = new MusicNews.Views.SongPartial({
+          model: item,
+          app: _this.app
+        });
+        item.view.render();
+        return _this.target.append(item.view.$el);
+      });
+      return this;
+    };
+
+    return Songs;
+
+  })(Backbone.View);
+
+}).call(this);
+(function() {
+  var _ref,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
   MusicNews.Views.Submission = (function(_super) {
     __extends(Submission, _super);
 
@@ -19159,12 +23292,14 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     Submission.prototype.className = 'submission-show';
 
     Submission.prototype.initialize = function() {
-      return this.router = MusicNews.App.routers.submissions;
+      var _this = this;
+      return this.model.deferred.done(function() {
+        return _this.render();
+      });
     };
 
     Submission.prototype.render = function() {
-      var $target, markup, _this;
-      _this = this;
+      var $target, markup;
       markup = this.template({
         submission: this.model
       });
@@ -19174,9 +23309,11 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
         var view;
         view = new MusicNews.Views.SongPartial({
           model: song,
-          submission: _this.model
-        }).render().$el;
-        return $target.append(view);
+          submission: this.model,
+          app: this.app
+        });
+        view.render();
+        return $target.append(view.$el);
       });
       return this;
     };
@@ -19214,39 +23351,35 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     SubmissionPartial.prototype.template = JST['submissions/_submission'];
 
     SubmissionPartial.prototype.initialize = function(options) {
-      this.submission = options.model;
-      options.model.view = this;
-      this.router = MusicNews.App.routers.submissions;
-      return this.player = MusicNews.App.views.player;
+      this.app = options.app;
+      this.router = this.app.router;
+      this.player = this.app.player;
+      this.$el.html(this.template({
+        submission: this.model
+      }));
+      return this.target = this.$el.find('div.sub-content');
+    };
+
+    SubmissionPartial.prototype.id = function() {
+      return "submission-" + (this.model.get('id'));
     };
 
     SubmissionPartial.prototype.render = function() {
-      var markup;
-      markup = this.template({
-        submission: this.submission
+      var _this = this;
+      this.model.songs.each(function(song) {
+        song.view = new MusicNews.Views.SongPartial({
+          model: song,
+          submission: _this.submission,
+          app: _this.app
+        });
+        song.view.render();
+        return _this.target.append(song.view.$el);
       });
-      this.$el.html(markup);
-      this.$el.attr('id', "submission-" + (this.submission.get('id')));
-      this.setSongViews();
       return this;
     };
 
-    SubmissionPartial.prototype.setSongViews = function() {
-      var _this;
-      _this = this;
-      return this.submission.songs.each(function(song) {
-        var view;
-        view = new MusicNews.Views.SongPartial({
-          model: song,
-          submission: _this.submission
-        }).render().$el;
-        return _this.$el.find('div.sub-content').append(view);
-      });
-    };
-
     SubmissionPartial.prototype.events = {
-      "click a": "goToShow",
-      "click button.play": "playSong"
+      "click a": "goToShow"
     };
 
     SubmissionPartial.prototype.goToShow = function(e) {
@@ -19256,10 +23389,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       return this.router.navigate(target, {
         trigger: true
       });
-    };
-
-    SubmissionPartial.prototype.playSong = function(e) {
-      return e.preventDefault();
     };
 
     return SubmissionPartial;
@@ -19282,21 +23411,26 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
     SubmissionsIndex.prototype.className = 'submission-list';
 
-    SubmissionsIndex.prototype.initialize = function() {
-      this.router = MusicNews.App.routers.submissions;
-      return this.collection = MusicNews.App.collections.submissions;
+    SubmissionsIndex.prototype.initialize = function(options) {
+      var _this = this;
+      this.collection = options.collection;
+      this.submissions = options.submissions;
+      this.app = options.app;
+      this.target = this.$el;
+      return this.submissions.deferred.done(function() {
+        return _this.render();
+      });
     };
 
     SubmissionsIndex.prototype.render = function() {
-      var _this;
-      _this = this;
-      this.collection.each(function(submission) {
-        var view;
-        view = new MusicNews.Views.SubmissionPartial({
-          model: submission
-        }).render().$el;
-        MusicNews.App.views.submissions.push(view);
-        return _this.$el.append(view);
+      var _this = this;
+      this.submissions.each(function(item) {
+        item.view = new MusicNews.Views.SubmissionPartial({
+          model: item,
+          app: _this.app
+        });
+        item.view.render();
+        return _this.target.append(item.view.$el);
       });
       return this;
     };
@@ -19311,7 +23445,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  MusicNews.Routers.Router = (function(_super) {
+  MusicNews.Router = (function(_super) {
     __extends(Router, _super);
 
     function Router() {
@@ -19319,156 +23453,146 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       return _ref;
     }
 
-    Router.prototype.routes = {
-      '': 'layout'
-    };
-
-    Router.prototype.layout = function() {
-      alert('inside the router');
-      return this.App.layout = new MusicNews.Views.layout();
-    };
-
-    return Router;
-
-  })(Backbone.Router);
-
-}).call(this);
-(function() {
-  var _ref,
-    __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
-  MusicNews.Routers.Submissions = (function(_super) {
-    __extends(Submissions, _super);
-
-    function Submissions() {
-      _ref = Submissions.__super__.constructor.apply(this, arguments);
-      return _ref;
-    }
-
-    Submissions.prototype.initialize = function() {
-      this.collection = MusicNews.App.collections.submissions;
-      this.songs = MusicNews.App.collections.songs;
-      MusicNews.App.views.submissions = [];
+    Router.prototype.initialize = function(options) {
+      var _this = this;
+      this.app = options.app;
+      this.app.router = this;
+      this.spinner = $('<div class="spinner"/>');
+      this.target = this.app.content_container;
+      this.target.html(this.spinner);
+      this.header = this.app.views.header = new MusicNews.Views.Header({
+        app: this.app
+      });
+      this.app.header_container.replaceWith(this.header.$el);
+      this.playerDeferred = $.Deferred();
+      this.playerDeferred.done(function() {
+        _this.player = _this.app.player = new MusicNews.Player({
+          app: _this.app
+        });
+        return _this.app.player_row.html(_this.player.$el);
+      });
       return this.bind('all', this._trackPageView);
     };
 
-    Submissions.prototype.routes = {
-      '': 'index',
-      'popular': 'popular',
-      ':id': 'show',
-      'song/:id': 'songShow'
+    Router.prototype.routes = {
+      '': function() {
+        return this.routePipeline('submissions');
+      },
+      'greatest': function() {
+        return this.routePipeline('greatest');
+      },
+      'favorites': function() {
+        return this.routePipeline('favorites');
+      },
+      ':id': function(id) {
+        return this.routePipeline('song', id);
+      },
+      'sub/:id': function(id) {
+        return this.routePipeline('submission', id);
+      }
     };
 
-    Submissions.prototype.index = function(data) {
-      var possibleShow, possibleSong, _target, _view;
-      possibleShow = window.location.search.split('id=')[1];
-      if (possibleShow) {
-        this.navigate(possibleShow, {
-          trigger: true
-        });
+    Router.prototype.routePipeline = function(path, id) {
+      this.beforeFilters(path);
+      this.initViewAndAppendToTarget(path, id);
+      return this.afterFilters(path);
+    };
+
+    Router.prototype.beforeFilters = function(path) {
+      console.log('before filters');
+      $(document).scrollTop();
+      return this.target.html(this.spinner);
+    };
+
+    Router.prototype.initViewAndAppendToTarget = function(path, id) {
+      id || (id = null);
+      if (this.currentView) {
+        this.currentView.remove();
+      }
+      this.currentView = this[path](id);
+      this.target.html(this.currentView.$el);
+      this.app.currentCollection = this.currentView.collection;
+      return this.playerDeferred.resolve();
+    };
+
+    Router.prototype.afterFilters = function(path) {
+      console.log('after filters');
+      return this.header.activate(path);
+    };
+
+    Router.prototype.submission = function(id) {
+      var submission;
+      if (id == null) {
+        this.navigate('/');
         return;
       }
-      possibleSong = window.location.search.split('song=')[1];
-      if (possibleSong) {
-        this.navigate('song/' + possibleSong, {
-          trigger: true
-        });
-        return;
-      }
-      _target = this.target;
-      _view = new MusicNews.Views.SubmissionsIndex();
-      if (this.collection.length) {
-        return _target.html(_view.render().$el);
-      } else {
-        return this.collection.fetch().done(function() {
-          return _target.html(_view.render().$el);
-        });
-      }
+      submission = new MusicNews.Models.Submission({
+        id: id,
+        fetch: true
+      });
+      this.target.html(this.spinner);
+      return new MusicNews.Views.Submission({
+        model: submission
+      });
     };
 
-    Submissions.prototype.popular = function(data) {
-      var _songs, _target;
-      _target = this.target;
-      if (this.songs.length) {
-        _target.empty();
-        return this.songs.each(function(song) {
-          var view;
-          view = new MusicNews.Views.SongPartial({
-            model: song
-          }).render();
-          return _target.append(view.$el);
-        });
-      } else {
-        _target.empty();
-        _songs = this.songs;
-        return this.songs.fetch().done(function() {
-          return _songs.each(function(song) {
-            var view;
-            view = new MusicNews.Views.SongPartial({
-              model: song
-            }).render();
-            return _target.append(view.$el);
-          });
-        });
-      }
+    Router.prototype.song = function(id) {
+      var song;
+      song = new MusicNews.Models.Song({
+        id: id,
+        fetch: true
+      });
+      this.target.html(this.spinner);
+      return new MusicNews.Views.Song({
+        model: song,
+        collection: new MusicNews.Collections.Songs([song], {
+          fetch: false
+        })
+      });
     };
 
-    Submissions.prototype.show = function(data) {
-      var submission, view, _target;
-      _target = this.target;
-      if (this.collection.length) {
-        submission = MusicNews.App.collections.submissions.findWhere({
-          id: parseInt(data)
-        });
-        view = new MusicNews.Views.Submission({
-          model: submission
-        }).render();
-        return _target.html(view.$el);
-      } else {
-        return this.collection.fetch().done(function() {
-          submission = MusicNews.App.collections.submissions.findWhere({
-            id: parseInt(data)
-          });
-          view = new MusicNews.Views.Submission({
-            model: submission
-          }).render();
-          return _target.html(view.$el);
-        });
-      }
+    Router.prototype.submissions = function() {
+      var songs, submissions;
+      songs = this.app.collections.latest_songs = new MusicNews.Collections.Songs();
+      submissions = new MusicNews.Collections.Submissions();
+      return new MusicNews.Views.SubmissionsIndex({
+        submissions: submissions,
+        collection: songs,
+        app: this.app
+      });
     };
 
-    Submissions.prototype.songShow = function(data) {
-      var song, _target;
-      _target = this.target;
-      if (this.songs.length) {
-        song = this.songs.findWhere({
-          id: parseInt(data)
-        });
-        this.currentSong = new MusicNews.Views.SongPartial({
-          model: song
-        }).render();
-        return _target.html(this.currentSong.$el);
-      } else {
-        return this.collection.fetch().done(function() {
-          song = MusicNews.App.collections.songs.findWhere({
-            id: parseInt(data)
-          });
-          this.currentSong = new MusicNews.Views.SongPartial({
-            model: song
-          }).render();
-          return _target.html(this.currentSong.$el);
-        });
-      }
+    Router.prototype.greatest = function() {
+      var songs;
+      songs = this.app.collections.popular_songs = new MusicNews.Collections.Songs({
+        sort: 'popular',
+        fetch: true
+      });
+      return new MusicNews.Views.Songs({
+        collection: songs,
+        app: this.app
+      });
     };
 
-    Submissions.prototype._trackPageView = function() {
+    Router.prototype.favorites = function() {
+      var songs;
+      songs = this.app.collections.favorite_songs = new MusicNews.Collections.Songs({
+        sort: 'popular',
+        fetch: true
+      });
+      return new MusicNews.Views.Songs({
+        collection: songs,
+        app: this.app
+      });
+    };
+
+    Router.prototype._trackPageView = function() {
       var url;
       url = Backbone.history.getFragment;
       return _gaq.push(['_trackPageView', url]);
     };
 
-    return Submissions;
+    return Router;
 
   })(Backbone.Router);
 
@@ -19485,6 +23609,9 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
+
+
+
 
 
 
