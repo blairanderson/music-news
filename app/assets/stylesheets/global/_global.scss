@@ -40,16 +40,25 @@ body {
   top: 0;
 }
 
+
+
 #player-row {
   @include bar();
-  top: 50px;
+  @media (min-width: $screen-lg-min) {top: 50px;}
+  @media (max-width: $screen-md-max) {bottom: 30px;}
 }
+
 #container {
   @include bar($zindex: 0);
-  top: 84px;
   height: 97%;
   overflow: scroll;
   padding-bottom: 100px;
+  @media (min-width: $screen-lg-min) {
+    top: 84px;
+  }
+  @media (max-width: $screen-md-max) {
+    top: 50px;
+  }
 }
 #footer {
   @include bar();
