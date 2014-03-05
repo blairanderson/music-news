@@ -48,7 +48,7 @@ describe SubmissionsController do
         post :create, params
         target = assigns(:submission)
 
-        expect(response).to redirect_to root_path(id: target.id)
+        expect(response).to redirect_to root_path
 
         expect(Submission.count).to eq 1
         expect(Song.count).to eq 1

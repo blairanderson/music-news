@@ -25,7 +25,7 @@ module ObjectCreationMethods
       songs_attributes: {"0"=>{url: "https://soundcloud.com/furns/sparks"}}
     }
 
-
+    Submission.any_instance.stub(:resolve).and_return( true )
     Submission.create!(defaults.merge(overrides))
   end
 
