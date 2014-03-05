@@ -31,6 +31,7 @@ window.MusicNews =
       Backbone.history.start({pushState: true})
 
   Helpers: {
+    title: "Wake and Shake."
     openWindow: (url, name) ->
       window.open(url, name, "height=800,width=900")
 
@@ -47,7 +48,7 @@ window.MusicNews =
       $item = $('li#move-me')
       $target = $('ul.nav#right-nav')
       $target.append($item)
-  } 
+  }
 
 
 $(document).ready ->

@@ -31,6 +31,8 @@ class MusicNews.Views.SongPartial extends Backbone.View
   activate: ->
     @$el.addClass('active')
     @$el.find('.play').attr('class', 'pause')
+    title = "►#{@model.get('title')} #{MusicNews.Helpers.title}"
+    $('title').text(title)
 
   buttonHandler: (e) ->
     e.preventDefault()
