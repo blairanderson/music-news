@@ -42,7 +42,6 @@ class Song < ActiveRecord::Base
 
       track
     rescue
-      update(active: "false")
     end
   end
 end

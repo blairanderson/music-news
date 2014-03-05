@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140228040647) do
+ActiveRecord::Schema.define(version: 20140305145644) do
 
   create_table "keychains", force: true do |t|
     t.string   "api_secret"
@@ -59,6 +59,25 @@ ActiveRecord::Schema.define(version: 20140228040647) do
   end
 
   add_index "submissions", ["user_id"], name: "index_submissions_on_user_id"
+
+  create_table "tags", force: true do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_song_tags", force: true do |t|
+    t.integer  "user_id",    default: 0, null: false
+    t.integer  "song_id",    default: 0, null: false
+    t.integer  "tag_id",     default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_song_tags", ["song_id"], name: "index_user_song_tags_on_song_id"
+  add_index "user_song_tags", ["tag_id", "user_id", "song_id"], name: "index_user_song_tags_on_tag_id_and_user_id_and_song_id", unique: true
+  add_index "user_song_tags", ["tag_id"], name: "index_user_song_tags_on_tag_id"
+  add_index "user_song_tags", ["user_id"], name: "index_user_song_tags_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "provider"
