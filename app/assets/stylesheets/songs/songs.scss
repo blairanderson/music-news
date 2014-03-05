@@ -1,6 +1,70 @@
 $pink: #FF1493;
+$heart: red;
+$facebook: #3B5999;
+$twitter: #4099FF;
+$icons: "heart", "facebook", "twitter";
+$things: $heart, $facebook, $twitter;
 
-.song{
+
+.song-content{
+  @extend .col-xs-7;
+  min-width: 210px;
+  padding-top: 15px;
+  form{
+    input[type="text"]{
+      height: 22px;
+      @extend .col-lg-6;
+      @extend .col-xs-12;
+    }
+  }
+  p > a {
+    font-size: 1.5em;
+    font-family: 'Roboto', sans-serif;
+    span{
+      a{
+        font-family: 'Open Sans', sans-serif;
+      }
+    }
+  }
+}
+.song-art{
+  @extend .col-xs-9;
+  @extend .col-sm-2;
+  img {
+     @extend .img-responsive;
+     @extend .img-rounded;
+  }
+}
+
+.song-gutter{
+  @extend .col-xs-3;
+  max-width: 120px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  button{
+    @extend .btn;
+    @extend .btn-default;
+    width: 40px;
+    height: 38px;
+    margin-bottom: 2px;
+  }
+  button{
+    > i{@extend .fa;}
+    &.pause > i {@extend .fa-pause;}
+    &.play > i {@extend .fa-play;color: $pink;}
+    &.play:hover{background-color: white;border-color: $pink;box-shadow: 0 0 20px $pink;}
+    @for $i from 1 through length($things) {
+      &.#{nth($icons, $i)} {border-color: nth($things, $i);}
+      &.#{nth($icons, $i)} > i {color: nth($things, $i);}
+    }
+    @each $icon in $icons {
+      &.#{$icon}, &.#{$icon} > i {visibility: hidden;}
+      &.#{$icon} > i {@extend .fa-#{$icon};}
+    }
+
+  }
+}
+.song, .song-show{
   @extend .row;
   margin-bottom: 10px 0px;
   -webkit-border-radius: 5px;
@@ -10,99 +74,11 @@ $pink: #FF1493;
   &.active{
     background-color: #FFC;
   }
-  .song-content{
-    @extend .col-xs-7;
-    min-width: 210px;
-    padding-top: 15px;
-    form{
-      input[type="text"]{
-        height: 22px;
-        @extend .col-lg-6;
-        @extend .col-xs-12;
-      }
-    }
-    p > a {
-      font-size: 1.5em;
-      font-family: 'Roboto', sans-serif;
-      span{
-        a{
-          font-family: 'Open Sans', sans-serif;
-        }
-      }
-    }
-  }
-  .song-art{
-    @extend .col-xs-9;
-    @extend .col-sm-2;
-    img {
-       @extend .img-responsive;
-       @extend .img-rounded;
-    }
-  }
-  .song-gutter{
-    @extend .col-xs-3;
-    max-width: 120px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    button{
-      @extend .btn;
-      @extend .btn-default;
-      width: 40px;
-      height: 38px;
-      margin-bottom: 2px;
-    }
-  }
-  $heart: red;
-  $facebook: #3B5999;
-  $twitter: #4099FF;
-  $icons: "heart", "facebook", "twitter";
-  $things: $heart, $facebook, $twitter;
-  button{
-    > i{
-      @extend .fa;
-    }
-    &.pause > i {
-      @extend .fa-pause;
-    }
-    &.play > i {
-      color: $pink;
-      @extend .fa-play;
-    }
-    &.play:hover{
-      background-color: white;
-      border-color: $pink;
-      box-shadow: 0 0 20px $pink;
-    }
-    @for $i from 1 through length($things) {
-      &.#{nth($icons, $i)} {
-        border-color: nth($things, $i);
-
-      }
-      &.#{nth($icons, $i)} > i {
-        color: nth($things, $i);
-      }
-    }
-    @each $icon in $icons {
-      &.#{$icon}, &.#{$icon} > i {
-        visibility: hidden
-      }
-      &.#{$icon} > i {
-        @extend .fa-#{$icon};
-      }
-    }
-
-  }
   &:hover{
     background-color: darken(#FFFFFF, 3%);
     button{
-      @each $icon in $icons {
-        &.#{$icon}, &.#{$icon} > i {
-          visibility: visible;
-        }
-      }
-      &.heart > i {
-        color: red;
-      }
+      @each $icon in $icons {&.#{$icon}, &.#{$icon} > i {visibility: visible;}}
+      &.heart > i {color: red;}
       &.heart:hover{
         background-color: white;
         border-color: red;
@@ -112,9 +88,7 @@ $pink: #FF1493;
         border-color: lighten(#3B5999, 10%);
         background-color: #fff;
         box-shadow: 0 0 20px lighten(#3B5999, 20%);
-        > i {
-          color: #3B5999;
-        }
+        > i {color: #3B5999;}
       }
       &.twitter:hover{
         background-color: #fff;
