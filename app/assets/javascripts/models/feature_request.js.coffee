@@ -6,6 +6,9 @@ class MusicNews.Models.FeatureRequest extends Backbone.Model
     'submitSong':
       'content': 'Would you like to submit a song?'
       'title' : 'Interested in Submitting a song?'
+    'loginRequired':
+      'content': 'WOOOT, Sorry, you must login for that!'
+      'title' : 'Login Required!'
 
   initialize: (@name) ->
     @name = @name || 'default'
