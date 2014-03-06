@@ -204,12 +204,13 @@ class MusicNews.Player extends Backbone.View
       success: ->
         $button.attr('id', 'love')
 
-  love:   ($button) ->
-    $button.attr('id', 'like')
     # change from love to like
+  love:   ($button) ->
+    $button.attr('id', 'nolove')
+    # remove the favorite!
     debugger
 
-  like:   ($button) ->
-    $button.attr('id', 'nolove')
-    # delete the favorite
-    debugger
+  # like:   ($button) ->
+  #   $button.attr('id', 'nolove')
+  #   # delete the favorite
+  #   debugger
