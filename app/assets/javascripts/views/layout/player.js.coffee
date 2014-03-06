@@ -52,7 +52,6 @@ class MusicNews.Player extends Backbone.View
       @setCurrentSound()
       @playCurrentSound()
 
-
   _onload: (loaded) =>
     if !loaded
       @currentCollection.remove @currentTrack
@@ -176,19 +175,41 @@ class MusicNews.Player extends Backbone.View
       e.preventDefault()
       @previousSong()
 
+  session: ->
+    MusicNews.session
+
+  _canFavorite: ->
+    @session() && !@session().isNew()
+
   userFavorite: (e) ->
     e.preventDefault()
-    $button = $(e.currentTarget)
-    @[$button.attr('id')]( $button )
+    if @_canFavorite()
+      @favorites ||= new MusicNews.Collections.Favorites()
+      @api_secret ||= {}
+      _.extend(@api_secret, api_token: @session().get('api_token') ) if @session().get('api_token')
+      _.extend(@api_secret, api_secret: @session().get('api_secret') ) if @session().get('api_secret')
+      $button = $(e.currentTarget)
+      @[$button.attr('id')]( $button )
+    else
+      request = new MusicNews.Models.FeatureRequest("loginRequired")
+      @modal = new Backbone.BootstrapModal(request.modalOptions()).open()
 
   nolove: ($button) ->
-    # do stuff
-    $button.attr('id', 'love')
+    favorite = new MusicNews.Models.Favorite
+      tag: 'love'
+      song_id: @currentTrack.get('id')
+    @favorites.create favorite,
+      wait: true
+      data: $.param _.extend @api_secret, {user_song_tag: favorite.attributes}
+      success: ->
+        $button.attr('id', 'love')
 
   love:   ($button) ->
-    # do stuff
     $button.attr('id', 'like')
+    # change from love to like
+    debugger
 
   like:   ($button) ->
-    # do stuff
     $button.attr('id', 'nolove')
+    # delete the favorite
+    debugger
