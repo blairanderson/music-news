@@ -17,5 +17,7 @@ describe UserSongTag do
 
     it { should validate_presence_of     :tag_id }
     it { should validate_numericality_of :tag_id }
+
+    it { should validate_uniqueness_of(:user_id).scoped_to([:tag_id, :song_id]) }
   end
 end
