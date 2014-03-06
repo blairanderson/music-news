@@ -5,6 +5,13 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :logged_in?, :current_admin, :admin_user
 
+  def require_login
+    unless logged_in?
+      head :unprocessable_entity, json: {errors: "You do not belong there" }
+      return
+    end
+  end
+
 private
   def logged_in?
     current_user

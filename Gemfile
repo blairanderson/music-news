@@ -37,6 +37,7 @@ group :production do
 end
 
 group :test do
+  gem 'faker'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'vcr', '2.8.0'
