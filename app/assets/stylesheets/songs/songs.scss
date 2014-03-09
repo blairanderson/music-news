@@ -41,29 +41,29 @@ $things: $heart, $facebook, $twitter;
   max-width: 120px;
   padding-top: 15px;
   padding-bottom: 15px;
-  button{
-    @extend .btn;
-    @extend .btn-default;
-    width: 40px;
-    height: 38px;
-    margin-bottom: 2px;
+}
+button{
+  @extend .btn;
+  @extend .btn-default;
+  width: 40px;
+  height: 38px;
+  margin-bottom: 2px;
+}
+button{
+  > i{@extend .fa;}
+  &.pause > i {@extend .fa-pause;}
+  &.play > i {@extend .fa-play;color: $pink;}
+  &.play:hover{background-color: white;border-color: $pink;box-shadow: 0 0 20px $pink;}
+  @for $i from 1 through length($things) {
+    &.#{nth($icons, $i)} {border-color: nth($things, $i);}
+    &.#{nth($icons, $i)} > i {color: nth($things, $i);}
   }
-  button{
-    > i{@extend .fa;}
-    &.pause > i {@extend .fa-pause;}
-    &.play > i {@extend .fa-play;color: $pink;}
-    &.play:hover{background-color: white;border-color: $pink;box-shadow: 0 0 20px $pink;}
-    @for $i from 1 through length($things) {
-      &.#{nth($icons, $i)} {border-color: nth($things, $i);}
-      &.#{nth($icons, $i)} > i {color: nth($things, $i);}
-    }
-    @each $icon in $icons {
-      &.#{$icon}, &.#{$icon} > i {visibility: hidden;}
-      &.#{$icon} > i {@extend .fa-#{$icon};}
-    }
-
+  @each $icon in $icons {
+    &.#{$icon}, &.#{$icon} > i {visibility: hidden;}
+    &.#{$icon} > i {@extend .fa-#{$icon};}
   }
 }
+
 .song, .song-show{
   @extend .row;
   margin-bottom: 10px 0px;
