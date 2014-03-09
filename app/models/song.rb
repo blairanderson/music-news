@@ -2,11 +2,13 @@ class Song < ActiveRecord::Base
   self.inheritance_column = :_type_disabled
 
   belongs_to :submission, counter_cache: true
+
+  validates :url, presence: true
+
   scope :soundclouds, -> { where(type: "Soundcloud") }
   scope :playable, -> { where.not(stream_url: nil).where(status_cd: Song.active) }
   scope :greatest, -> { order('coalesce(playback_count, -1) desc') }
   scope :latest, -> { order(created_at: :desc) }
-  validates :url, presence: true
 
   as_enum :status, [:active, :inactive, :deleted]
 

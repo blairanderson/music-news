@@ -5,12 +5,10 @@ class UserSongTag < ActiveRecord::Base
   belongs_to :tag
 
   validates :song_id, presence: true, numericality: true
-  validates :tag_id, presence: true, numericality: true
-  validates :user_id,
-    presence: true,
-    numericality: true,
-    uniqueness: {
-      scope: [:tag_id, :song_id],
-      message: "user song tag already exists"
-    }
+  validates_associated :song
+
+  validates :tag_id, presence: true, uniqueness: {scope: [:user_id, :song_id], message: "cannot create duplicate tag"}
+  validates_associated :tag
+
+  validates :user_id, presence: true
 end

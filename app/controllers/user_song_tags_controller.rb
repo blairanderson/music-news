@@ -1,15 +1,13 @@
 class UserSongTagsController < ApplicationController
+  before_action :set_keychain
   before_action :set_user
-  before_action :set_tag
+  before_action :set_tag, only: [:create]
+
 
   def create
-    @favorite = UserSongTag.new(valid_favorite)
-
-    if @favorite.save
-      render json: @favorite
-    else
-      head :unprocessable_entity,  json: {errors: @favorite.errors.full_messages }
-    end
+    @favorite = UserSongTag.where(valid_favorite).first_or_initialize
+    @favorite.save
+    render json: @favorite
   end
 
   def destroy
@@ -25,13 +23,17 @@ private
     params.require(:user_song_tag).permit(:song_id, :tag)
   end
 
+  def set_keychain
+    @keychain = Keychain.where(api_token: params[:api_token], api_secret: params[:api_secret]).first
+    unless @keychain
+      head :unprocessable_entity, json: {errors: "bad request, missing keychain"}
+    end
+  end
+
   def set_user
-    keychain = Keychain.where(api_token: params[:api_token], api_secret: params[:api_secret]).first
-    user = keychain.user
-    if user
-      @user = user
-    else
-      head :unprocessable_entity, json: {errors: "bad request"}
+    @user = @keychain.user
+    unless @user
+      head :unprocessable_entity, json: {errors: "bad request, missing user"}
     end
   end
 
