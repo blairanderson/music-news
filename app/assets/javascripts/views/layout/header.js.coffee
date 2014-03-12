@@ -28,8 +28,7 @@ class MusicNews.Views.Header extends Backbone.View
 
   featureRequest: (e) ->
     name = $(e.currentTarget).data('feature')
-    request = new MusicNews.Models.FeatureRequest(name)
-    @modal = new Backbone.BootstrapModal(request.modalOptions()).open();
+    new MusicNews.Models.FeatureRequest(name)
 
   submitSong: (e) ->
     e.preventDefault()

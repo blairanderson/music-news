@@ -14,6 +14,7 @@ class MusicNews.Models.FeatureRequest extends Backbone.Model
     @name = @name || 'default'
     @content = @features[@name]['content']
     @title   = @features[@name]['title']
+    new Backbone.BootstrapModal(@modalOptions()).open();
 
   modalOptions: ->
     options =
