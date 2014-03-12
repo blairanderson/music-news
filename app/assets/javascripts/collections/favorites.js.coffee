@@ -6,15 +6,21 @@ class MusicNews.Collections.Favorites extends Backbone.Collection
 
   initialize: (options) ->
     options = options || {}
-    filter_sort = {}
 
-    _.extend(filter_sort, sort: options.sort ) if options.sort
-    _.extend(filter_sort, filter: options.filter ) if options.filter
+    @session = options.session
+    @api_secret_token = {api_token: @session.get('api_token'), api_secret: @session.get('api_secret')}
 
     if options.fetch
       @deferred = @fetch
+        data: $.param @api_secret_token
         reset: true
-        data: $.param(filter_sort)
         fetch: false
     else
       @deferred = $.Deferred().resolveWith()
+
+  create: (model, options) ->
+    options ||= {}
+    new_options = _.extend options,
+      wait: true,
+      data: $.param _.extend @api_secret_token, {user_song_tag: model.attributes}
+    super(model, new_options)

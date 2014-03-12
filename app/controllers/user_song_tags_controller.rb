@@ -18,9 +18,9 @@ class UserSongTagsController < ApplicationController
     favorite = @user.user_song_tags.where(id: params[:id]).first
     if favorite
       favorite.destroy
-      head :ok
+      render json: {success: "favorite deleted"}
     else
-      head :unprocessable_entity
+      render :unprocessable_entity
     end
   end
 

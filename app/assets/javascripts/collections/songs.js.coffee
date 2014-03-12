@@ -1,6 +1,9 @@
 class MusicNews.Collections.Songs extends Backbone.Collection
   model: MusicNews.Models.Song
 
+  url: ->
+    'songs'
+
   initialize: (options) ->
     options = options || {}
     filter_sort = {}
@@ -15,9 +18,6 @@ class MusicNews.Collections.Songs extends Backbone.Collection
         fetch: false
     else
       @deferred = $.Deferred().resolveWith()
-
-  url: ->
-    'songs'
 
   parse: (response) ->
     @pagingData = response.pagingData

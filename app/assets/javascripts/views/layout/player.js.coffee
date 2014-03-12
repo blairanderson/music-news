@@ -11,15 +11,16 @@ class MusicNews.Player extends Backbone.View
 
   initialize: (options) ->
     @app = options.app
-    $(document).on 'keydown', @keyBoardShortCuts
 
+    $(document).on 'keydown', @keyBoardShortCuts
     SC.initialize
       client_id: "c024bdd48e9ecf014c71af406201f3a2"
       redirect_uri: "#{MusicNews.Helpers.urlBase()}/auth/soundcloud/callback"
-
     SC.whenStreamingReady =>
       @app.currentCollection.deferred.done =>
         @setCurrentTrack()
+        if @canFavorite()
+          @favorites = new MusicNews.Collections.Favorites(session: @session(), fetch: true)
         @render()
 
   render: ->
@@ -81,7 +82,6 @@ class MusicNews.Player extends Backbone.View
     if $stream_url is null or undefined
       @advanceTrackIndex()
       @setCurrentSound()
-
     SC.stream $stream_url, (sound) =>
       @currentSound = sound
 
@@ -105,10 +105,10 @@ class MusicNews.Player extends Backbone.View
       name: 'style',
       observe: 'percent',
       onGet: 'formatPercent'
-
   formatPercent: (val) ->
     "width: #{val}%"
 
+# TODO MODEL BINDING UPDATER
   updater: (args, model)->
     selector = args[0]
     options  = args[1]
@@ -119,6 +119,7 @@ class MusicNews.Player extends Backbone.View
       formattedValue = this[options.onGet](modelAttrValue)
       @$(selector).attr(options.name, formattedValue)
 
+# TODO MODEL BINDING.
   listenForChangeOn: (model, optionalBindings) ->
     bindings = optionalBindings || @bindings
     for selector_options in _.pairs(bindings)
@@ -178,39 +179,32 @@ class MusicNews.Player extends Backbone.View
   session: ->
     MusicNews.session
 
-  _canFavorite: ->
+  canFavorite: ->
     @session() && !@session().isNew()
 
   userFavorite: (e) ->
     e.preventDefault()
-    if @_canFavorite()
-      @favorites ||= new MusicNews.Collections.Favorites()
-      @api_secret ||= {}
-      _.extend(@api_secret, api_token: @session().get('api_token') ) if @session().get('api_token')
-      _.extend(@api_secret, api_secret: @session().get('api_secret') ) if @session().get('api_secret')
+    if @canFavorite()
+#     TODO: find the user favorite in the collection, if it exists, render the button as playing.
+#     TODO: if they hit a favorite button. Create a favorite for it. we would not need the love or no-love buttons.
       $button = $(e.currentTarget)
       @[$button.attr('id')]( $button )
     else
-      request = new MusicNews.Models.FeatureRequest("loginRequired")
-      @modal = new Backbone.BootstrapModal(request.modalOptions()).open()
+      new MusicNews.Models.FeatureRequest("loginRequired")
 
   nolove: ($button) ->
     favorite = new MusicNews.Models.Favorite
-      tag: 'love'
       song_id: @currentTrack.get('id')
+      tag: 'love'
     @favorites.create favorite,
-      wait: true
-      data: $.param _.extend @api_secret, {user_song_tag: favorite.attributes}
       success: ->
         $button.attr('id', 'love')
 
-    # change from love to like
-  love:   ($button) ->
-    $button.attr('id', 'nolove')
-    # remove the favorite!
-    debugger
-
-  # like:   ($button) ->
-  #   $button.attr('id', 'nolove')
-  #   # delete the favorite
-  #   debugger
+  love:  ($button) ->
+    @api_secret_token = {api_token: @session().get('api_token'), api_secret: @session().get('api_secret')}
+    favorite = @favorites.findWhere( song_id: @currentTrack.get("id") )
+    favorite.destroy
+      data: $.param _.extend @api_secret_token, {id: favorite.get('id')}
+      success: (model, response, body) ->
+#         update a model, it should re-render itself
+        $button.attr('id', 'nolove')
