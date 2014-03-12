@@ -73,6 +73,35 @@ describe UserSongTagsController do
   end
 
   describe 'GET #index' do
-    it 'lists all favorites for a given user'
+    it 'requires a keychain' do
+      get :index
+      expect(response.status).to eq 422
+
+      body = JSON.parse(response.body)
+      expect(body.keys).to include 'errors'
+      expect(body.values).to include 'bad request, missing keychain'
+    end
+
+    let(:keychain) { FactoryGirl.create(:keychain) }
+    it 'requires a user' do
+      get :index, keychain.attributes.slice('api_token', 'api_secret')
+      expect(response.status).to eq 422
+
+      body = JSON.parse(response.body)
+      expect(body.keys).to include 'errors'
+      expect(body.values).to include 'bad request, missing user'
+    end
+
+
+    it 'lists all favorites for a given user' do
+      user = FactoryGirl.create(:user)
+      song = FactoryGirl.create(:song)
+      tag =  FactoryGirl.create(:tag)
+      user_song_tag = FactoryGirl.create(:user_song_tag, user: user, song: song, tag: tag)
+
+      User.any_instance.should_receive(:songs)
+      get :index, user.keychain.attributes.slice('api_token', 'api_secret')
+      expect(response.status).to eq 200
+    end
   end
 end

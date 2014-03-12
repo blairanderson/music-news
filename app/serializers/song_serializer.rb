@@ -9,7 +9,6 @@ class SongSerializer < ActiveModel::Serializer
               :status,
               :resolve,
               :play_count,
-              :submission_uri,
               :source_url,
               :stream_url,
               :thumbnail_url,
@@ -31,10 +30,6 @@ class SongSerializer < ActiveModel::Serializer
 
   def uri
     song_url(object)
-  end
-
-  def submission_uri
-    submission_path(object.submission_id)
   end
 
   def root

@@ -2,8 +2,6 @@
 
 FactoryGirl.define do
   factory :tag, :class => 'Tag' do
-    provider "MyString"
-    uid "MyString"
-    name "MyString"
+    name {Faker::Lorem.word.downcase}
   end
 end
