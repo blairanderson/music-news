@@ -17,7 +17,7 @@ class MusicNews.Player extends Backbone.View
       client_id: "c024bdd48e9ecf014c71af406201f3a2"
       redirect_uri: "#{MusicNews.Helpers.urlBase()}/auth/soundcloud/callback"
     SC.whenStreamingReady =>
-      @app.currentCollection.deferred.done =>
+      @app.currentCollection?.deferred.done =>
         @setCurrentTrack()
         if @canFavorite()
           @favorites = new MusicNews.Collections.Favorites(session: @session(), fetch: true)
