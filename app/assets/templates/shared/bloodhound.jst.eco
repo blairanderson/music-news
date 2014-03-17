@@ -1,0 +1,7 @@
+<form role="form">
+  <div class="input">
+    <input type="url" class="bloodhound" id="target-url" placeholder="Soundcloud or Blog URL">
+  </div>
+</form>
+<div class="results"></div>
+<span id="embedResult"></span>

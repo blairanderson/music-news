@@ -20,6 +20,7 @@ class MusicNews.Router extends Backbone.Router
 
   routes:
     ''          :      -> @routePipeline 'submissions'
+    'bloodhound':      -> @routePipeline 'bloodhound'
     'greatest'  :      -> @routePipeline 'greatest'
     'favorites' :      -> @routePipeline 'favorites'
     ':id'       : (id) -> @routePipeline 'song', id
@@ -55,6 +56,10 @@ class MusicNews.Router extends Backbone.Router
     @target.html @spinner
     new MusicNews.Views.Submission(model: submission)
 
+  bloodhound: ->
+    new MusicNews.Views.Bloodhound
+      app: @app
+
   song: (id) ->
     song = new MusicNews.Models.Song(id: id, fetch: true)
     @target.html @spinner
@@ -73,8 +78,6 @@ class MusicNews.Router extends Backbone.Router
     new MusicNews.Views.Songs(collection: songs, app: @app)
 
   favorites: ->
-    # if session.isNew()
-    # redirect to root with alert "must be logged in"
     songs = @app.collections.favorite_songs = new MusicNews.Collections.Songs(sort: 'popular', fetch: true)
     new MusicNews.Views.Songs(collection: songs, app: @app)
 
