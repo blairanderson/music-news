@@ -37,6 +37,7 @@ group :production do
 end
 
 group :test do
+  gem 'sqlite3'
   gem 'faker'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
@@ -47,13 +48,14 @@ end
 group :test, :development do
   gem 'dotenv-rails'
   gem 'guard-rspec'
-  gem 'sqlite3'
   gem 'capybara'
   gem 'rspec-rails', '~> 2.0'
   gem 'launchy'
 end
 
 group :development do
+  # gem 'sqlite3'
+  gem 'pg'
   gem 'better_errors'
   gem 'binding_of_caller'
 end
