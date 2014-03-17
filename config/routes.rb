@@ -16,15 +16,16 @@ MusicNews::Application.routes.draw do
 
   resource :session, only: [:show, :create, :update, :destroy]
   match '/auth/:provider/callback' => 'sessions#create', via: [:get, :post]
+  resource :bloodhound, only: [:create, :new]
 
-  #vanity-URLS
+#vanity-URLS
   get 'new'       => 'submissions#new'
   get 'feed'      => 'submissions#feed'
   get 'logout'    => 'sessions#destroy'
   get 'signout'   => 'sessions#destroy'
   get '/seainhd'  => redirect('http://www.seainhd.com')
 
-  # backbone catching
+#backbone routing
   get ':id'      => 'frontend#root'
   get ':id/:id'  => 'frontend#root'
 end
