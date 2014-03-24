@@ -28,22 +28,22 @@ gem 'bootstrap-sass', git: 'https://github.com/blairanderson/bootstrap-sass.git'
 gem 'font-awesome-rails', git: 'https://github.com/blairanderson/font-awesome-rails'
 gem 'backbone-on-rails', '1.1.0.0'
 gem 'momentjs-rails', '2.4.0'
+gem 'pg'
 
 group :production do
   gem 'unicorn'
-  gem 'pg'
   gem 'rails_12factor'
   gem 'newrelic_rpm'
 end
 
 group :test do
-  gem 'sqlite3'
   gem 'faker'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'vcr', '2.8.0'
   gem 'webmock', '1.16'
   gem 'simplecov', '~> 0.7.1', :require => false, :group => :test
+  gem 'coveralls', require: false
 end
 
 group :test, :development do
@@ -55,8 +55,6 @@ group :test, :development do
 end
 
 group :development do
-  # gem 'sqlite3'
-  gem 'pg'
   gem 'better_errors'
   gem 'binding_of_caller'
 end

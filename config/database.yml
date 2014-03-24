@@ -17,8 +17,8 @@ development:
 test:
   adapter: sqlite3
   database: db/test.sqlite3
-  # adapter: postgresql
-  # database: music_news_test
+  adapter: postgresql
+  database: music_news_test
   pool: 5
   timeout: 5000
 
