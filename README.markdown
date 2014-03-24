@@ -1,5 +1,6 @@
 [![Code Climate](https://codeclimate.com/github/blairanderson/music-news.png)](https://codeclimate.com/github/blairanderson/music-news)
 [![Build Status](https://travis-ci.org/blairanderson/music-news.svg?branch=master)](https://travis-ci.org/blairanderson/music-news)
+[![Coverage Status](https://coveralls.io/repos/blairanderson/shoe-shop/badge.png)](https://coveralls.io/r/blairanderson/shoe-shop)
 
 Music Submission App.
 ========  
