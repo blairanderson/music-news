@@ -273,6 +273,10 @@ GEM
       actionpack (>= 4.0.0, < 4.1)
       activemodel (>= 4.0.0, < 4.1)
     simple_oauth (0.2.0)
+    simplecov (0.7.1)
+      multi_json (~> 1.0)
+      simplecov-html (~> 0.7.1)
+    simplecov-html (0.7.1)
     slop (3.4.7)
     soundcloud (0.3.2)
       hashie (~> 2.0)
@@ -362,6 +366,7 @@ DEPENDENCIES
   shoulda-matchers
   simple_enum
   simple_form
+  simplecov (~> 0.7.1)
   soundcloud
   sqlite3
   twitter
