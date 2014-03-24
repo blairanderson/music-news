@@ -2,11 +2,9 @@ ruby '2.1.0'
 source 'https://rubygems.org'
 
 gem 'rails', '4.0.3'
-gem 'unicorn'
 gem 'simple_form'
 gem 'haml-rails'
 gem 'haml'
-gem 'newrelic_rpm'
 gem 'wordpress', git: 'https://github.com/jordandobson/wordpress'
 gem 'raredio', git: 'https://github.com/blairanderson/rawrdio-rb'
 gem 'soundcloud'
@@ -32,8 +30,10 @@ gem 'backbone-on-rails', '1.1.0.0'
 gem 'momentjs-rails', '2.4.0'
 
 group :production do
+  gem 'unicorn'
   gem 'pg'
   gem 'rails_12factor'
+  gem 'newrelic_rpm'
 end
 
 group :test do
