@@ -24,4 +24,36 @@ Currently it only supports Soundcloud. I'd like to extend to youtube and bandcam
 
 [ ] should be able to view an "artists" page with a bunch of their music available.
 
-[ ] artist page should include youtube/bandcamp if available. 
+[ ] artist page should include youtube/bandcamp if available.
+
+## Getting Started
+
+
+`git clone git@github.com:blairanderson/music-news.git`
+
+`bundle install`
+
+`rake db:migrate db:test:prepare`
+
+`rake` to run the tests
+
+update environment variables
+
+```bash
+
+SOUNDCLOUD_ID:              <get this from soundcloud>
+SOUNDCLOUD_SECRET:          <get this from soundcloud>
+TWITTER_CONSUMER_KEY:       <get this from twitter>
+TWITTER_CONSUMER_SECRET:    <get this from twitter>
+
+```
+
+if you have a wordpress blog that you'd like to publish to, then you can set these as well(would love to know a better way to do this...)
+
+```bash
+
+WORDPRESS_URL:              http://wordpressmusicblog.com/wp-login.php
+WORDPRESS_USERNAME:         admin
+WORDPRESS_PASSWORD:         passw0rt
+
+```
