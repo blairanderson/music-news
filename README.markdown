@@ -2,21 +2,26 @@
 [![Build Status](https://travis-ci.org/blairanderson/music-news.svg?branch=master)](https://travis-ci.org/blairanderson/music-news)
 [![Coverage Status](https://coveralls.io/repos/blairanderson/shoe-shop/badge.png)](https://coveralls.io/r/blairanderson/shoe-shop)
 
-Music Submission App.
-========  
+#Music Blog Submission(and music player) App.
 
-It should be super easy to add a song to a list. Like form any page with a soundcloud track.
+##Summary
+I have a music blog, and i was tired of receiving emails from bands and DJs in all random styles so i created this repo. You should be able to begin accepting music from bands with very little work.
+Currently it only supports Soundcloud. I'd like to extend to youtube and bandcamp as well but the player only works with soundcloud.
 
-hype machine system(music playing site). but it uses tags instead of hearts.
 
-You will always have Hearted songs, but you'll be able to add tags to songs.
+##Goals
+[ ] It should be super easy to add a song to a list
 
-Then click on a tag to see your songs with the same tag.
+[ ] Should be super easy to listen to music
 
-click on popular to see the most popular songs right now.
+[ ] Songs should be taggable
 
-click a tag on popular to see the most popular songs with the given tag.
+[ ] Should have playlists for latest/greatest/favorites
 
-I want to be able to choose a single genre.
+[ ] Should be able to view playlists for specific tags
 
-It should be able to listen to the current song being played and add something to the list.
+[ ] should be able to create a blog post very simply from viewing any view
+
+[ ] should be able to view an "artists" page with a bunch of their music available.
+
+[ ] artist page should include youtube/bandcamp if available. 
