@@ -1,10 +1,12 @@
 require 'spec_helper'
 
 describe SubmissionsController do
+  before do
+    Song.any_instance.stub(:resolve)
+  end
 
   describe 'GET show' do
     before do
-      Song.any_instance.stub(:resolve)
       @submission = create_submission
       get :show, id: @submission.id
     end
