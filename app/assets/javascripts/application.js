@@ -18,10 +18,9 @@
 //= require underscore
 //= require vendor/underscore.string
 //= require backbone
-//= require vendor/handlebars
 //= require vendor/backbone.localforage
-//= require vendor/backbone.stickit
 //= require vendor/backbone.bootstrap-modal
+//= require vendor/q
 //= require music_news
 //= require_tree ../templates
 //= require_tree ./models
