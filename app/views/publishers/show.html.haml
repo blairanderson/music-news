@@ -18,9 +18,9 @@
   = text_area_tag :title, nil, placeholder: "put some body here", cols: 200
   %br
   = submit_tag :submit, class: "btn"
-%hr          
+%hr
 %ol
-- @submission.soundclouds.each do |song|
+- @submission.songs.each do |song|
   %li
     =song.title
     |
@@ -31,4 +31,3 @@
 .row-fluid
   .span12#on-prepare
 = button_to "Publish to SEAINHD", submission_publisher_path(@submission), id: "confirm-publish", remote: :true, class: "btn btn-block btn-large btn-danger"
-    
