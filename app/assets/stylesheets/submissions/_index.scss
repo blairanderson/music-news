@@ -9,6 +9,7 @@
     .sub-gutter{
       @extend .col-md-4;
       @extend .col-sm-12;
+      pointer-events: none;
       .img {
         padding: 10px;
         background-color: #fff;
@@ -20,7 +21,6 @@
       img{
       }
       a{
-        font-family: Oswald;
         span{
           font-size: 3em;
           line-height: 1em;
@@ -29,6 +29,9 @@
         p{
           font-size: 2em;
           line-height: 1em;
+          max-height: 8em;
+          overflow: hidden;
+          font-weight: 100;
         }
         h6{
           float: right;
