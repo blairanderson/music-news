@@ -2,7 +2,7 @@ class MusicNews.Router extends Backbone.Router
 
   initialize: (options)->
     @app = options.app
-    @app.router = this
+    @app.router = @
     @spinner = $('<div class="spinner"/>')
 
     @target = @app.content_container

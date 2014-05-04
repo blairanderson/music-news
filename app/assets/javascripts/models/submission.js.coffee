@@ -35,9 +35,8 @@ class MusicNews.Models.Submission extends Backbone.Model
 
   facebookShare:(data)->
     base = "http://www.facebook.com/sharer/sharer.php?"
-    _this = this
     potentialShare =
-      u:  _this.url
+      u:  @url
     data.share = base + $.param potentialShare
 
   twitterShare:(data) ->

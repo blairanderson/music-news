@@ -25,7 +25,6 @@
           <div class="form-group">
             <input type="text" data-feature="submitSong" class="form-control" placeholder="Add a Track">
           </div>
-          <button data-feature="submitSong" type="submit" class="btn btn-default">Submit</button>
         </form>
       <% end %>
     </div>

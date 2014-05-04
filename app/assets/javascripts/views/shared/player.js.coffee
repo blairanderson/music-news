@@ -24,12 +24,9 @@ class MusicNews.Player extends Backbone.View
         @render()
 
   render: ->
-    $markup = @template
-      currentTrack: @currentTrack
-    @$el.html $markup
-
-    @playPauseButton = @$el.find('[data-action="play-pause"]')
-    this
+    @$el.html(@template(currentTrack: @currentTrack))
+    @playPauseButton = @$('[data-action="play-pause"]')
+    @
 
   events:
     'click a#play'          : 'playCurrentSound'

@@ -27,7 +27,7 @@ window.MusicNews =
     @session = new MusicNews.Session();
     # loading screen
     @session.deferred.done =>
-      @router = new MusicNews.Router(app: this)
+      @router = new MusicNews.Router(app: @)
       Backbone.history.start({pushState: true})
 
   Helpers: {

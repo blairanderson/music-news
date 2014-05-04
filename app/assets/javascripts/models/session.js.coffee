@@ -14,7 +14,6 @@ class MusicNews.Session extends Backbone.Model
     host: ""
 
   initialize: (model, options) ->
-    _.bindAll this, "logout", "update"
     options = options or {}
     @options = _.extend(@options, options)
 
@@ -36,12 +35,12 @@ class MusicNews.Session extends Backbone.Model
       delete user.keychain
     user || data
 
-  update: ->
+  update: =>
     unless @state
       @state = true
       @trigger "loaded"
 
-  logout: (options) ->
+  logout: (options) =>
     self = this
     options = options or {}
     # delete local version
