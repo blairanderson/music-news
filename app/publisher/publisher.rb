@@ -6,7 +6,7 @@ class Publisher
     @body = args[:body]
   end
 
-  def self.build_article submission
+  def self.from_submission submission
     title = "Listen: Some Music from @#{submission.twitter}"
     body = ""
 

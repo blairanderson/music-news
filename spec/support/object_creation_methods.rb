@@ -20,8 +20,8 @@ module ObjectCreationMethods
     defaults = {
       title: "Valid Band Title",
       body: "Valid Band Bio",
-      twitter: "seainhd",
-      email: "example@example.com",
+      twitter: "",
+      email: "",
       songs_attributes: {"0"=>{url: "https://soundcloud.com/furns/sparks"}}
     }
 

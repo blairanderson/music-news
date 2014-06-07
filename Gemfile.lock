@@ -383,5 +383,5 @@ DEPENDENCIES
   uglifier
   unicorn
   vcr (= 2.8.0)
-  webmock (= 1.16)
+  webmock
   wordpress!

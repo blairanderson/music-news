@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Publisher do
 
-  let(:submission) {create_submission}
+  let(:submission) {create_submission(twitter: "seainhd", email: "example@example.com")}
   let(:song) {create_song(submission_id: submission.id)}
 
   before :each do
@@ -15,10 +15,13 @@ describe Publisher do
     end
   end
 
-  describe '.build_article' do
-    it 'should create a thing that is ready to be published'
-      # article = Publisher.build_article(submission)
-      # expect(article.title).to eq "Listen: Some Music from @seainhd"
-      # expect(article.body).to eq "<h2>Echoes by Yuni in Taxco</h2>\n<br>\n<iframe width=\"100%\" height=\"166\" scrolling=\"no\" frameborder=\"no\" src=\"https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F45368100&show_artwork=true&client_id=c024bdd48e9ecf014c71af406201f3a2\"></iframe>\n<br>\n<img width=\"100%\" src=\"http://i1.sndcdn.com/artworks-000022810909-5axxr4-t500x500.jpg?d53bf9f\">\n<br>\n"
+  describe '.from_submission' do
+    it 'should create a thing that is ready to be published' do
+      article = Publisher.from_submission(submission)
+      expect(article.title).to eq "Listen: Some Music from @seainhd"
+      expect(article.twitter).to eq "seainhd"
+      expect(article.email).to eq "example@example.com"
+      expect(article.body).to eq "<h2>Echoes by Yuni in Taxco</h2>\n<br>\n<iframe width=\"100%\" height=\"166\" scrolling=\"no\" frameborder=\"no\" src=\"https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F45368100&show_artwork=true&client_id=c024bdd48e9ecf014c71af406201f3a2\"></iframe>\n<br>\n<img width=\"100%\" src=\"http://i1.sndcdn.com/artworks-000022810909-5axxr4-t500x500.jpg?d53bf9f\">\n<br>\n"
+    end
   end
 end

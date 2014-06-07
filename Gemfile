@@ -1,4 +1,4 @@
-ruby '2.1.0'
+ruby '2.1.1'
 source 'https://rubygems.org'
 
 gem 'rails', '4.0.3'
@@ -41,7 +41,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'vcr', '2.8.0'
-  gem 'webmock', '1.16'
+  gem 'webmock'
   gem 'simplecov', '~> 0.7.1', :require => false, :group => :test
   gem 'coveralls', require: false
 end

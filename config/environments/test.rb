@@ -1,4 +1,5 @@
 MusicNews::Application.configure do
+  I18n.enforce_available_locales = false
   # Settings specified here will take precedence over those in config/application.rb.
   OmniAuth.config.test_mode = true
   OmniAuth.config.mock_auth[:twitter] = {:provider => 'twitter', :uid => '14828267'}
