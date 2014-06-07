@@ -1,9 +1,10 @@
-class SubmissionsController < ApplicationController
+class SubmissionsController < BaseApiController
   include ApiHelper
   before_action :set_submission, only: [:show, :destroy, :resolve]
 
   def index
     @submissions = Submission.latest.includes(:songs).page params[:page]
+    render json: @submissions, meta: paginate(@submissions), meta_key: 'pagingData'
   end
 
   def show

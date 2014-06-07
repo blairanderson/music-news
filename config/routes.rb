@@ -1,5 +1,5 @@
 MusicNews::Application.routes.draw do
-  root 'frontend#root'
+  root 'submissions#index'
 
   resources :submissions, except: [:edit, :update] do
     resource :publisher, only: [:show, :new, :create]

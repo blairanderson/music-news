@@ -1,14 +1,20 @@
 form{
   div.input{
     @extend .form-group;
-    textarea, input[type='text'], input[type='email'], input[type='url']{
+    textarea, input[type='text'], input[type='password'], input[type='email'], input[type='url']{
       @extend .form-control;
     }
   }
-  textarea, input[type='text'], input[type='email']{
+  textarea, input[type='text'], input[type='email'], input[type='password']{
     @extend .form-control;
   }
   input.soundcloud{
     margin-bottom: 25px;
+  }
+  .form-actions {
+    input.button[type="submit"] {
+      @extend .btn;
+      @extend .btn-default;
+    }
   }
 }

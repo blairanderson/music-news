@@ -1,0 +1,25 @@
+%nav{:role => "navigation"}
+  .container
+    .navbar-header
+      %button.navbar-toggle{"data-target" => "#collapse-1", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a{:href => "/"} Wake and Shake.
+    #collapse-1.collapse
+      %ul#nav.nav
+        %li= link_to 'Latest.', root_path, class: 'submissions'
+        %li= link_to 'Greatest.', songs_path, class: 'greatest'
+        - if current_user
+          %li= link_to 'Favorite.', user_path(current_user), class: "favorite"
+          %li= link_to "Signout.", signout_path, class: "signout"
+        - else
+          %li
+            %a{"data-external" => "true", :href => "/auth/twitter"}
+              %i.fa.fa-sign-in
+              Sign In.
+      - if current_user
+        %form.navbar-form.navbar-right{:role => "add track"}
+          .form-group
+            %input.form-control{"data-feature" => "submitSong", :placeholder => "Add a Track", :type => "text"}
