@@ -11,15 +11,18 @@
       %ul#nav.nav
         %li= link_to 'Latest.', root_path, class: 'submissions'
         %li= link_to 'Greatest.', songs_path, class: 'greatest'
-        - if current_user
-          %li= link_to 'Favorite.', user_path(current_user), class: "favorite"
+        - if account_signed_in?
+          %li= link_to 'Favorite.', user_path(current_member.user), class: "favorite"
           %li= link_to "Signout.", signout_path, class: "signout"
-        - else
+
+        - unless account_signed_in?
           %li
-            %a{"data-external" => "true", :href => "/auth/twitter"}
-              %i.fa.fa-sign-in
-              Sign In.
-      - if current_user
+            = link_to account_omniauth_authorize_path(:twitter) do
+              %i.fa.fa-twitter
+          %li
+            = link_to "/auth/github" do
+              %i.fa.fa-github
+      - if current_account
         %form.navbar-form.navbar-right{:role => "add track"}
           .form-group
             %input.form-control{"data-feature" => "submitSong", :placeholder => "Add a Track", :type => "text"}
