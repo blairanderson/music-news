@@ -1,4 +1,5 @@
 MusicNews::Application.routes.draw do
+  devise_for :accounts
   root 'submissions#index'
 
   resources :submissions, except: [:edit, :update] do

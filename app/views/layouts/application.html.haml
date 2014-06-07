@@ -1,0 +1,28 @@
+!!!
+%html
+  %head
+    %title Wake and Shake.
+    %meta{content: "yes", name: "apple-mobile-web-app-capable"}/
+    %meta{content: "black", name: "apple-mobile-web-app-status-bar-style"}/
+    %meta{content: "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible"}/
+    %meta{content: "initial-scale=1, maximum-scale=1, user-scalable=no", name: "viewport"}/
+    %meta{content: "yes", name: "apple-mobile-web-app-capable"}/
+    %meta{content: "black", name: "apple-mobile-web-app-status-bar-style"}/
+    = tag :meta, content: t('meta.og.title'), property: "og:title"
+    = tag :meta, content: t('meta.og.description'), property: "og:description"
+    = tag :meta, content: t('meta.og.type'), property: "og:type"
+    %meta{content: "", property: "og:image"}/
+    %meta{content: "http://new.seainhd.com", property: "og:url"}/
+    %meta{content: "http://blairanderson.co", property: "og:music:creator"}/
+    = stylesheet_link_tag "application"
+    = javascript_include_tag "application", "//connect.soundcloud.com/sdk.js"
+    = csrf_meta_tags
+  %body
+    = render 'shared/navigation'
+    .container
+      - if notice
+        %p.notice= notice
+      - if alert
+        %p.alert= alert
+      = yield
+    = render 'shared/footer'

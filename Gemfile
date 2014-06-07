@@ -2,6 +2,7 @@ ruby '2.1.1'
 source 'https://rubygems.org'
 
 gem 'rails', '4.0.3'
+gem 'devise'
 gem 'simple_form'
 gem 'haml-rails'
 gem 'haml'
