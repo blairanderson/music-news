@@ -11,8 +11,7 @@ gem 'raredio', git: 'https://github.com/blairanderson/rawrdio-rb'
 gem 'soundcloud'
 gem 'active_model_serializers'
 
-gem 'omniauth'
-gem 'omniauth-twitter'
+gem 'omniauth-twitter' #https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview
 gem 'twitter'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'figaro'
