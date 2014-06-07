@@ -1,0 +1,32 @@
+.row.panel#submission
+  .col-xs-12
+    .row
+      .col-xs-5
+        .panel.panel-primary
+          .panel-heading
+            %h1= @submission.title
+            = content_tag :span, class: "label" do
+              = "Posted #{time_ago_in_words(@submission.created_at)} ago..."
+          .panel-body
+            =image_tag @submission.songs.first.thumbnail_url, class: "img-responsive img-rounded"
+            %p.lead= @submission.body
+      .col-xs-7
+        - @submission.songs.each do |song|
+          .soundcloud.panel.panel-default{data:{url: song.url }}
+            .panel-heading
+              = link_to song.url, song.url
+            .panel-body
+              - if song.embed.present?
+                = raw song.embed
+              - else
+                :javascript
+                  $(document).ready(function(){
+                    var url = "#{song.url}";
+                    var url2 = "#{song_url(song)}";
+                    console.log(url)
+                    console.log(url2)
+                    // do some cleanup of this track???
+                  });
+        .row
+          .col-xs-12
+            = render partial: "shared/comments", locals: {item: @submission}

@@ -11,10 +11,10 @@ SimpleCov.start do
   add_filter "config/"
   add_filter "app/views"
   add_group "Models", "app/models"
-  add_group "Concerns", "app/models/concerns"
-  add_group "Controllers", "app/controllers"
-  add_group "Helpers", "app/helpers"
-  add_group "Serializers", "app/serializers"
+  # add_group "Concerns", "app/models/concerns"
+  # add_group "Controllers", "app/controllers"
+  # add_group "Helpers", "app/helpers"
+  # add_group "Serializers", "app/serializers"
 end
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'

@@ -7,14 +7,11 @@ class SubmissionsController < ApplicationController
   end
 
   def show
-    @submission.increment!(:view_count)
-    render json: @submission, root: false
   end
 
   def resolve
     @submission.songs.each do |s|
       s.resolve
-      sleep 1
     end
     render json: @submission, root: false
   end

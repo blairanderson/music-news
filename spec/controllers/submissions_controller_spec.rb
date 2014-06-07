@@ -6,27 +6,21 @@ describe SubmissionsController do
   end
 
   describe 'GET show' do
-    before do
-      @submission = create_submission
-      get :show, id: @submission.id
-    end
-
     it 'should respond OK' do
+      submission = create_submission(twitter: "taco", email: "email@eamil.com")
+      get :show, id: submission.id
       expect( response ).to be_ok
-    end
-
-    it 'should respond with JSON' do
-      expect( JSON.parse(response.body)['id'] ).to eq @submission.id
+      expect( response ).to render_template :show
     end
   end
 
   describe 'GET index' do
     it 'should respond OK' do
-      submission0 = create_submission
-      submission1 = create_submission(title: "second sub", body: "second body")
+      submission0 = create_submission(twitter: "taco", email: "email@eamil.com")
+      submission1 = create_submission(title: "second sub", body: "second body", twitter: "taco2", email: "email@eamil.com")
       get :index
       expect( response ).to be_success
-      expect( response.content_type ).to eq("application/json")
+      expect( response ).to render_template :index
       expect( assigns(:submissions) ).to eq [submission1, submission0]
     end
   end

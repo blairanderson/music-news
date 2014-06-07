@@ -52,6 +52,8 @@ group :test do
 end
 
 group :test, :development do
+  gem 'rspec'
+  gem 'guard'
   gem 'dotenv-rails'
   gem 'guard-rspec'
   gem 'capybara'

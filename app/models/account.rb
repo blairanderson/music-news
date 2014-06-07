@@ -18,6 +18,7 @@ class Account < ActiveRecord::Base
           # :omniauth_providers => [:twitter, :github, :soundcloud]
           :omniauth_providers => [:twitter, :github]
 
+  # http://sourcey.com/rails-4-omniauth-using-devise-with-twitter-facebook-and-linkedin/
   def self.find_for_oauth(auth, signed_in_resource = nil)
     identity = Identity.find_for_oauth(auth)
 
@@ -45,6 +46,16 @@ class Account < ActiveRecord::Base
       identity.save!
     end
     account
+  end
+
+  def self.new_with_session(params, session)
+    # define a pattern to get the email from different providers
+    super.tap do |user|
+      # github pattern
+      if data = session["devise.github_data"] && session["devise.github_data"]["info"]
+        user.email = data["email"] if user.email.blank?
+      end
+    end
   end
 
   def email_verified?

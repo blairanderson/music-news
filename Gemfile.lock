@@ -387,6 +387,7 @@ DEPENDENCIES
   faker
   figaro
   font-awesome-rails!
+  guard
   guard-rspec
   haml
   haml-rails
@@ -404,6 +405,7 @@ DEPENDENCIES
   rack-cors
   rails (= 4.0.3)
   rails_12factor
+  rspec
   rspec-rails (~> 2.0)
   sass-rails
   shoulda-matchers
