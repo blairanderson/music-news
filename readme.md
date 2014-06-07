@@ -10,6 +10,13 @@
 	$ heroku pg:pull HEROKU_POSTGRESQL_<COLOR> <your_dev_db> --account personal
 	```
 
+```bash
+
+bash -c 'echo "POSTMARK_API_KEY=`heroku config:get POSTMARK_API_KEY --account personal`" >> .env'
+bash -c 'echo "POSTMARK_SMTP_SERVER=`heroku config:get POSTMARK_SMTP_SERVER --account personal`" >> .env'
+bash -c 'echo "POSTMARK_INBOUND_ADDRESS=`heroku config:get POSTMARK_INBOUND_ADDRESS --account personal`" >> .env'
+
+```
 
 ##Goals
 [ ] It should be super easy to add a song to a list

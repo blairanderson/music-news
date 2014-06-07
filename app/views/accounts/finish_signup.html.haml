@@ -1,0 +1,17 @@
+#add-email.container
+  %h1 Add Email?
+  = form_for(current_account, as: 'account', url: finish_signup_path(current_account), html: { role: 'form'}) do |f|
+    - if @show_errors && current_account.errors.any?
+      #error_explanation
+        - current_account.errors.full_messages.each do |msg|
+          = msg
+    .form-group
+      = f.label :email
+      .controls
+        = f.email_field :email, :autofocus => true, :value => '', class: 'form-control input-lg', placeholder: 'Example: email@me.com'
+        %p.help-block Please confirm your email address. No spam.
+    .row
+      .col-xs-6
+        = f.submit 'Verify Email', class: 'btn btn-primary btn-block'
+      .col-xs-6
+        = link_to "No Thanks", root_path, class:'btn btn-warning btn-block'

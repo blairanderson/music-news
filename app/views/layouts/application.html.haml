@@ -19,10 +19,8 @@
     = csrf_meta_tags
   %body
     = render 'shared/navigation'
+    #player-row
     .container
-      - if notice
-        %p.notice= notice
-      - if alert
-        %p.alert= alert
+      = render 'shared/notices'
       = yield
     = render 'shared/footer'
