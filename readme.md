@@ -18,25 +18,33 @@ bash -c 'echo "POSTMARK_INBOUND_ADDRESS=`heroku config:get POSTMARK_INBOUND_ADDR
 
 ```
 
-##Goals
-[ ] It should be super easy to add a song to a list
+## TODOs
 
-[ ] Should be super easy to listen to music
+- [ ] user should be able to add a song
 
-[ ] Songs should be taggable
+- [ ] `/latest` should show all the most recent submissions
 
-[ ] Should have playlists for latest/greatest/favorites
+- [ ] `/popular` should show songs with the most favorites that have been given in the last X days
 
-[ ] Should be able to view playlists for specific tags
+- [ ] `/favorites` should show the users favorite songs.
 
-[ ] should be able to create a blog post very simply from viewing any view
+- [ ] It should be super easy to add a song to a list
 
-[ ] should be able to view an "artists" page with a bunch of their music available.
+- [ ] Should be super easy to listen to music
 
-[ ] artist page should include youtube/bandcamp if available.
+- [ ] Songs should be taggable
+
+- [ ] Should have playlists for latest/greatest/favorites
+
+- [ ] Should be able to view playlists for specific tags
+
+- [ ] should be able to create a blog post very simply from viewing any view
+
+- [ ] should be able to view an "artists" page with a bunch of their music available.
+
+- [ ] artist page should include youtube/bandcamp if available.
 
 ## Getting Started
-
 
 `git clone git@github.com:blairanderson/music-news.git`
 
