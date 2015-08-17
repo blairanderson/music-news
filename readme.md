@@ -5,9 +5,9 @@
 
 
 	```
-	$ heroku pgbackups:capture --expire --account personal
+	$ heroku pgbackups:capture --expire
 	$ dropdb <your_dev_db>
-	$ heroku pg:pull HEROKU_POSTGRESQL_<COLOR> <your_dev_db> --account personal
+	$ heroku pg:pull HEROKU_POSTGRESQL_<COLOR> <your_dev_db>
 	```
 
 ```bash

@@ -22,23 +22,7 @@
   %body
     = render 'blog/navigation'
     #player-row
-    - if content_for :sidebar
-      .container
-        .row
-          .col-xs-12
-            = render 'blog/notices'
-        .row
-          .col-xs-12.col-sm-8
-            = yield
-          .col-xs-12.col-sm-4
-            = yield :sidebar
-    - else
-      .row
-        = render 'blog/notices'
-        .col-xs-12
-          = yield
-
     .container
-      .row
-        .col-xs-12
-          = render 'blog/footer'
+      = render 'blog/notices'
+      = yield
+    = render 'blog/footer'

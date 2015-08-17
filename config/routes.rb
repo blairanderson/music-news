@@ -1,5 +1,9 @@
 MusicNews::Application.routes.draw do
-  root 'submissions#index'
+
+  root 'posts#index'
+  get '/popular' => 'posts#index', as: :popular
+  get '/greatest' => 'posts#index', as: :greatest
+  get '/latest' => 'submissions#index', as: :latest
 
   # login / omniauth routes
   devise_for :accounts, :controllers => { :omniauth_callbacks => "accounts/omniauth_callbacks" }
@@ -24,16 +28,20 @@ MusicNews::Application.routes.draw do
     get :about
   end
 
+  resources :webhooks, only: [:create]
+  resources :posts, only: [:index, :show]
+  get 'posts/:resource_id(/:slug)' => 'posts#show'
+
   resources :songs, only: [:index, :show, :destroy, :update]
   resources :user_song_tags, only: [:index, :create, :destroy]
 
   resource :bloodhound, only: [:create, :new]
 
-#vanity-URLS
+  #vanity-URLS
   get 'new'       => 'submissions#new'
   get 'feed'      => 'submissions#feed'
 
-#backbone routing
+  #backbone routing
   get ':id'      => 'frontend#root'
   get ':id/:id'  => 'frontend#root'
 end

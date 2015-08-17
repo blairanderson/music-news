@@ -1,0 +1,5 @@
+<%= render @posts %>
+
+<% content_for :sidebar do %>
+  <%= render partial: "posts/submission", collection: @submissions %>
+<% end %>

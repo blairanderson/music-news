@@ -1,0 +1,13 @@
+.row.panel.submission{id: "submission-#{submission.id}"}
+  .col-xs-12
+    %p.lead= link_to submission.title, submission
+    %h5= submission.body[0,200]
+    = link_to "Comments", submission_path(submission, anchor: 'disqus_thread'), class: "label"
+    = link_to "posted #{time_ago_in_words(submission.created_at)} ago", submission_path(submission), class: "label"
+    = link_to "by #{submission.twitter.to_s}", '#', class: "label"
+    = content_tag :span, class: "label" do
+      PageViews:
+      = submission.view_count
+    - song = submission.songs.first
+    .soundcloud{data:{url: song.url }}
+      =song.url

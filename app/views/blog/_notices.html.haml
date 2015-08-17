@@ -1,0 +1,11 @@
+- if notice
+  .alert.alert-warning.alert-dismissable
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} &#215;
+    %strong Notice:
+    = notice
+
+- if alert
+  .alert.alert-danger.alert-dismissable
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} &#215;
+    %strong Alert:
+    = alert

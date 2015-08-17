@@ -1,0 +1,41 @@
+// Place all the styles related to the posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans|Open+Sans|Roboto|Oswald);
+@import "variables";
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+article.post {
+  .post-header {
+    background-color: rgb(55, 60, 76);
+    color: white;
+    padding: 50px;
+  }
+
+  .post-details, .post-title {
+    text-align: center;
+    font-weight: bolder;
+  }
+
+  .post-title {
+    margin: 0;
+    padding: 50px;
+    font-size: 50px;
+    text-transform: uppercase;
+  }
+
+  .post-details span {
+    font-size: 18px;
+    vertical-align: bottom;
+    line-height: 25px;
+  }
+
+  .post-content {
+    padding-top: 50px;
+  }
+}
+

@@ -17,7 +17,7 @@ class Submission < ActiveRecord::Base
     !(/\A(?:https?:\/\/soundcloud\.com)\/.+\/.+/ === attributes['url']) && !attributes['url'].include?('/sets/')
   end
 
-  scope :latest, -> { order("created_at DESC") }
+  scope :latest, -> { order("created_at DESC").includes(:songs) }
   scope :soundclouds, -> { where(type: :Soundcloud) }
   scope :bandcamps, -> { where(type: :Bandcamp) }
 

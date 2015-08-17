@@ -16,14 +16,3 @@
 //= require moment
 //= require bootstrap
 //= require underscore
-//= require vendor/underscore.string
-//= require backbone
-//= require vendor/backbone.localforage
-//= require vendor/backbone.bootstrap-modal
-//= require vendor/q
-//= require music_news
-//= require_tree ../templates
-//= require_tree ./models
-//= require_tree ./collections
-//= require_tree ./views
-//= require_tree ./routers

@@ -22,6 +22,8 @@ gem 'omniauth-github'
 gem 'twitter'
 gem 'soundcloud'
 gem 'wordpress', git: 'https://github.com/jordandobson/wordpress'
+gem 'activeresource'
+gem 'httparty'
 
 # assets
 gem 'sass-rails'

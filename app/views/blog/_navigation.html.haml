@@ -1,0 +1,25 @@
+%nav{:role => "navigation"}
+  .container
+    .navbar-header
+      %button.navbar-toggle{"data-target" => "#collapse-1", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a{:href => "/"}= site_title
+    #collapse-1.collapse
+      %ul#nav.nav
+        %li= link_to 'Latest.', latest_path, class: 'submissions'
+        %li= link_to 'Greatest.', greatest_path, class: 'greatest'
+        - if account_signed_in?
+          %li= link_to 'Favorites.', profile_path, class: 'favorite'
+          %li= link_to 'Signout.', sign_out_path, class: 'signout'
+        - unless account_signed_in?
+          %li
+            = link_to account_omniauth_authorize_path(:twitter) do
+              %i.fa.fa-twitter
+          %li
+            = link_to account_omniauth_authorize_path(:github) do
+              %i.fa.fa-github
+      %ul#nav.nav.navbar-right{:role => 'add track'}
+        %li= link_to 'Submit Music.', new_submission_path

@@ -3,7 +3,7 @@ class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :destroy, :resolve]
 
   def index
-    @submissions = Submission.latest.includes(:songs).page params[:page]
+    @submissions = Submission.latest.page(params[:page])
   end
 
   def show
