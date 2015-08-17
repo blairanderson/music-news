@@ -1,4 +1,4 @@
-class SubmissionsController < BaseApiController
+class Api::SubmissionsController < BaseApiController
   include ApiHelper
   before_action :set_submission, only: [:show, :destroy, :resolve]
 
