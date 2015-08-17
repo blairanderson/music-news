@@ -29,6 +29,7 @@ class WordpressSync
       post.raw_data = resource
       post.title = resource["title"]
       post.status = resource["status"]
+      post.slug = resource["slug"]
       post.resource_type = resource["type"]
       post.author = resource["author"]
       post.published = DateTime.parse(resource["date"])

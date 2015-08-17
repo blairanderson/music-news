@@ -40,8 +40,4 @@ MusicNews::Application.routes.draw do
   #vanity-URLS
   get 'new'       => 'submissions#new'
   get 'feed'      => 'submissions#feed'
-
-  #backbone routing
-  get ':id'      => 'frontend#root'
-  get ':id/:id'  => 'frontend#root'
 end
