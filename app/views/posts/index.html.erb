@@ -1,5 +1,24 @@
 <%= render @posts %>
 
 <% content_for :sidebar do %>
-  <%= render partial: "posts/submission", collection: @submissions %>
+  <style>
+    .list-group-item {  padding: 0px;  }
+    .list-group-item h3 {
+      color: white;
+      text-shadow:
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;
+      text-overflow: ellipsis;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      margin: 100px 0px 0px;
+      background-color: rgba(255, 255, 255, 0.77);
+    }
+  </style>
+  <ul class="list-group">
+    <%= render partial: "posts/song", collection: @songs %>
+  </ul>
 <% end %>
