@@ -17,7 +17,7 @@
     = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Open+Sans:400,800'
     = stylesheet_link_tag "application"
     = stylesheet_link_tag "blog"
-    = javascript_include_tag "blog", "https://connect.soundcloud.com/sdk.js"
+    = javascript_include_tag "application", "https://connect.soundcloud.com/sdk.js"
     = csrf_meta_tags
   %body
     = render 'blog/navigation'
@@ -27,7 +27,7 @@
         .row
           .col-xs-12
             = render 'blog/notices'
-        .row
+        .row.no-gutters
           .col-xs-12.col-sm-8
             = yield
           .col-xs-12.col-sm-4
