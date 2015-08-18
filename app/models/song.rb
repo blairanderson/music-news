@@ -6,7 +6,7 @@ class Song < ActiveRecord::Base
   validates :url, presence: true
 
   scope :soundclouds, -> { where(type: "Soundcloud") }
-  scope :playable, -> { where.not(stream_url: nil).where(status_cd: Song.active) }
+  scope :playable, -> { where.not(stream_url: nil).where(status_cd: Song.statuses[:active]) }
   scope :greatest, -> { order('coalesce(playback_count, -1) desc') }
   scope :latest, -> { order(created_at: :desc) }
 

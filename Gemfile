@@ -1,7 +1,7 @@
 ruby '2.2.2'
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.3'
+gem 'rails', '4.2.3'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'figaro'
 gem 'devise'
@@ -64,6 +64,7 @@ group :test, :development do
 end
 
 group :development do
+  gem 'web-console', '~> 2.0'
   gem 'better_errors'
   gem 'binding_of_caller'
 end
