@@ -11,7 +11,7 @@ class Post < ActiveRecord::Base
   end
 
   def to_param
-    "#{resource_id}/#{slug}"
+    "#{resource_id}-#{slug}"
   end
 
   def author_name

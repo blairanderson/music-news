@@ -1,7 +1,7 @@
 <%= div_for(post, class: "color-#{post.id%20}") do %>
   <div class="post-header">
     <div class="post-title">
-      <%= link_to post.title.html_safe, post %>
+      <%= link_to post.title.html_safe, post_path(post) %>
     </div>
   </div>
 <% end %>

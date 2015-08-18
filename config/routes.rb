@@ -30,7 +30,6 @@ MusicNews::Application.routes.draw do
 
   resources :webhooks, only: [:create]
   resources :posts, only: [:index, :show]
-  get 'posts/:resource_id(/:slug)' => 'posts#show'
 
   resources :songs, only: [:index, :show, :destroy, :update]
   resources :user_song_tags, only: [:index, :create, :destroy]
