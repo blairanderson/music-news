@@ -15,9 +15,8 @@
     %meta{content: "http://new.seainhd.com", property: "og:url"}/
     %meta{content: "http://blairanderson.co", property: "og:music:creator"}/
     = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Open+Sans:400,800'
-    = stylesheet_link_tag "application"
-    = stylesheet_link_tag "blog"
-    = javascript_include_tag "application", "https://connect.soundcloud.com/sdk.js"
+    = stylesheet_link_tag 'application'
+    = stylesheet_link_tag 'blog'
     = csrf_meta_tags
   %body
     = render 'blog/navigation'
@@ -42,3 +41,4 @@
       .row
         .col-xs-12
           = render 'blog/footer'
+  = javascript_include_tag 'application', 'https://connect.soundcloud.com/sdk.js'

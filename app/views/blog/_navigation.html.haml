@@ -9,7 +9,7 @@
       %a{:href => "/"}= site_title
     #collapse-1.collapse
       %ul#nav.nav
-        %li= link_to 'Latest.', latest_path, class: 'submissions'
+        -#%li= link_to 'Latest.', latest_path, class: 'submissions'
         %li= link_to 'Greatest.', greatest_path, class: 'greatest'
         - if account_signed_in?
           %li= link_to 'Favorites.', profile_path, class: 'favorite'

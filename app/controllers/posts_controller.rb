@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = Post.published.limit(10)
-    @songs = Song.playable.latest.limit(50)
+    @posts = Post.published.limit(30)
+    @songs = Song.playable.latest.limit(@posts.count)
   end
 
   def show
